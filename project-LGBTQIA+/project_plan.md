@@ -296,3 +296,38 @@ Portal digital dedicado a informação, cultura, saúde, direitos e comunidade p
 ### Phase 11: SEO, Acessibilidade e Otimização
 - **Goal:** Finalizar SEO, acessibilidade (WCAG), performance, testes e ajustes finais.
 - **Deliverable:** Portal pronto para produção.
+
+---
+
+## 7. Agente de Eventos Autônomo
+
+### Descrição
+Agente automatizado que busca, processa e publica eventos LGBTQIA+ semanalmente no portal, sem necessidade de intervenção manual.
+
+### Funcionalidades
+- **Web Scraping Multi-Fonte**: Google Search, Eventbrite, Sympla, Instagram, Facebook
+- **Enriquecimento com IA**: Usa OpenAI para melhorar títulos, descrições e categorização
+- **Publicação Automática**: Publica até 10 eventos por semana no Firebase Firestore
+- **Execução Agendada**: Roda automaticamente toda segunda-feira via GitHub Actions
+
+### Estrutura
+```
+agent/
+├── src/
+│   ├── scrapers/       # Módulos de scraping (5 fontes)
+│   ├── processors/      # Processamento com IA
+│   ├── publishers/     # Publicação no Firebase
+│   ├── cli/            # Interface CLI
+│   ├── types.ts
+│   └── index.ts
+├── .github/workflows/   # GitHub Actions
+└── README.md
+```
+
+### Configuração
+1. Configurar variáveis de ambiente (`.env`)
+2. Configurar Firebase Admin SDK
+3. Configurar GitHub Secrets
+4. O agente executa automaticamente toda semana
+
+### Status: ✅ Implementado

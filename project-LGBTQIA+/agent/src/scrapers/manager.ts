@@ -7,6 +7,7 @@ import { EventbriteScraper } from './eventbrite.js';
 import { SymplaScraper } from './sympla.js';
 import { InstagramScraper } from './instagram.js';
 import { FacebookScraper } from './facebook.js';
+import { MeetupScraper } from './meetup.js';
 import { RawEvent, EventSource, AgentConfig } from '../types.js';
 
 export class ScraperManager {
@@ -45,6 +46,11 @@ export class ScraperManager {
     // Facebook
     if (sources.includes('facebook') || sources.length === 0) {
       this.scrapers.set('facebook', new FacebookScraper(cityFocus, stateFocus));
+    }
+
+    // Meetup
+    if (sources.includes('meetup') || sources.length === 0) {
+      this.scrapers.set('meetup', new MeetupScraper(cityFocus, stateFocus));
     }
 
     console.log(`📡 Inicializados ${this.scrapers.size} scrapers`);

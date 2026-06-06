@@ -16,21 +16,30 @@ export class GoogleSearchScraper extends BaseScraper {
 
     // Queries otimizadas para buscar eventos LGBTQIA+ em Fortaleza
     this.searchQueries = [
-      `eventos LGBTQIA+ Fortaleza 2026`,
-      `eventos LGBT Fortaleza ${new Date().getFullYear()}`,
-      `parada orgulho gay Fortaleza`,
+      // Portuguese queries - main focus
+      `eventos LGBTQIA+ Fortaleza ${new Date().getFullYear()}`,
+      `eventos LGBT Fortaleza`,
+      `parada orgulho gay Fortaleza 2026`,
       `eventos drag show Fortaleza`,
       `festa LGBTQIA+ Ceará`,
       `encontro LGBT Ceará`,
+      `marcha orgulho Fortaleza`,
+      `balada LGBT Fortaleza`,
       `eventos orgulho transgender Fortaleza`,
       `cinema queer Fortaleza eventos`,
       `saúde LGBTQIA+ eventos Ceará`,
       `cultura drag Ceará eventos`,
-      `marcha orgulho Fortaleza`,
-      `festa pride Nordeste`,
-      `eventos comunidade LGBTQIA+ Ceará`,
-      `balada LGBT Fortaleza`,
       `workshop LGBTQIA+ Ceará`,
+      `eventos diversidade Fortaleza`,
+      `festa pride Nordeste`,
+      // English queries for international events
+      `pride Fortaleza Brazil events`,
+      `LGBTQ events Fortaleza Brazil`,
+      `drag queen show Fortaleza`,
+      // Specific searches for known venues
+      `bares LGBT Fortaleza`,
+      `baladas gay Fortaleza`,
+      `festa corporativa LGBTQIA+ Ceará`,
     ];
   }
 

@@ -55,6 +55,7 @@ export type EventSource =
   | 'eventbrite'
   | 'sympla'
   | 'google_search'
+  | 'meetup'
   | 'manual';
 
 export type EventCategory =

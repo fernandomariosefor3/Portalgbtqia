@@ -141,14 +141,24 @@ const config = {
 
 ## 📅 Execução Automática
 
-O agente está configurado para rodar via GitHub Actions:
+O agente está configurado para rodar via GitHub Actions E cron job local:
 
 - **Segunda-feira 8h (BRT)**: Execução completa (scrape + process + publish)
 - **A cada 3 dias**: Apenas scraping (para coleta de dados)
 
+### Cron Job (Execução Automática Semanal)
+
+O agente está configurado para executar automaticamente toda semana:
+
+1. **Acesse o Dashboard de Tarefas Agendadas**
+2. **Configure a tarefa** com:
+   - **Frequência**: `0 8 * * 1` (Toda segunda-feira às 8h)
+   - **Script**: `cd /caminho/para/projeto/agent && npm run start`
+
 ### Executar manualmente
 
-Vá em **Actions > Event Scraper Agent > Run workflow**
+- **GitHub Actions**: Vá em **Actions > Event Scraper Agent > Run workflow**
+- **Local**: `npm run start`
 
 ## 🔒 Segurança
 

@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-const SUPABASE_URL = import.meta.env.VITE_PUBLIC_SUPABASE_URL;
+import {
+  createEvent,
+  generateSlug,
+  generateShortDescription,
+  autoCategorize,
+  autoTags,
+  checkEventSlugExists,
+} from '@/lib/firestore';
 
 export default function EventSubmitPage() {
   const [form, setForm] = useState({
@@ -22,61 +28,16 @@ export default function EventSubmitPage() {
     contact_phone: '',
     price_info: 'Gratuito',
   });
-  const [scrapeUrl, setScrapeUrl] = useState('');
-  const [scraping, setScraping] = useState(false);
-  const [scrapeError, setScrapeError] = useState('');
-  const [scrapeSuccess, setScrapeSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{
     success: boolean;
-    event?: Record<string, unknown>;
+    event?: { slug: string };
     ai_actions?: Record<string, unknown>;
     error?: string;
   } | null>(null);
 
   const handleChange = (field: string, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const handleScrape = async () => {
-    if (!scrapeUrl.trim()) return;
-    setScraping(true);
-    setScrapeError('');
-    setScrapeSuccess(false);
-
-    try {
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/process-event`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ source_url: scrapeUrl.trim(), auto_scrape: true }),
-      });
-      const data = await res.json();
-
-      if (!res.ok) {
-        setScrapeError(data.error || 'Não foi possível analisar este link.');
-      } else if (data.scraped && data.data) {
-        const d = data.data as Record<string, string | undefined>;
-        setForm((prev) => ({
-          ...prev,
-          title: d.title || prev.title,
-          description: d.description || prev.description,
-          image_url: d.image_url || prev.image_url,
-          source_url: d.source_url || prev.source_url,
-          start_date: d.start_date || prev.start_date,
-          end_date: d.end_date || prev.end_date,
-          start_time: d.start_time || prev.start_time,
-          end_time: d.end_time || prev.end_time,
-          city: d.city || prev.city,
-          state: d.state || prev.state,
-          location: d.location || prev.location,
-        }));
-        setScrapeSuccess(true);
-      }
-    } catch (err) {
-      setScrapeError(err instanceof Error ? err.message : 'Erro de conexão');
-    } finally {
-      setScraping(false);
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -87,57 +48,81 @@ export default function EventSubmitPage() {
     setResult(null);
 
     try {
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/process-event`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: form.title.trim(),
-          description: form.description.trim() || undefined,
-          location: form.location.trim() || undefined,
-          address: form.address.trim() || undefined,
-          city: form.city.trim() || undefined,
-          state: form.state.trim() || undefined,
-          start_date: form.start_date || undefined,
-          end_date: form.end_date || undefined,
-          start_time: form.start_time || undefined,
-          end_time: form.end_time || undefined,
-          image_url: form.image_url.trim() || undefined,
-          source_url: form.source_url.trim() || undefined,
-          organizer: form.organizer.trim() || undefined,
-          contact_email: form.contact_email.trim() || undefined,
-          contact_phone: form.contact_phone.trim() || undefined,
-          price_info: form.price_info.trim() || undefined,
-        }),
+      const finalTitle = form.title.trim();
+      const finalDescription = form.description.trim();
+
+      // Generate slug and check for duplicates
+      let slug = generateSlug(finalTitle);
+      let slugExists = await checkEventSlugExists(slug);
+      let counter = 1;
+      while (slugExists) {
+        slug = `${generateSlug(finalTitle)}-${counter}`;
+        slugExists = await checkEventSlugExists(slug);
+        counter++;
+      }
+
+      const shortDescription = generateShortDescription(finalDescription);
+      const category = autoCategorize(finalTitle, finalDescription);
+      const tags = autoTags(finalTitle, finalDescription);
+
+      const eventId = await createEvent({
+        title: finalTitle,
+        slug,
+        description: finalDescription || undefined,
+        short_description: shortDescription || undefined,
+        category,
+        location: form.location.trim() || undefined,
+        address: form.address.trim() || undefined,
+        city: form.city.trim() || undefined,
+        state: form.state.trim() || undefined,
+        start_date: form.start_date || undefined,
+        end_date: form.end_date || undefined,
+        start_time: form.start_time || undefined,
+        end_time: form.end_time || undefined,
+        image_url: form.image_url.trim() || undefined,
+        source_url: form.source_url.trim() || undefined,
+        status: 'approved',
+        organizer: form.organizer.trim() || undefined,
+        contact_email: form.contact_email.trim() || undefined,
+        contact_phone: form.contact_phone.trim() || undefined,
+        price_info: form.price_info.trim() || undefined,
+        tags,
       });
 
-      const data = await res.json();
+      setResult({
+        success: true,
+        event: { slug },
+        ai_actions: {
+          slug_generated: true,
+          short_description_generated: !!shortDescription,
+          category_detected: category,
+          tags_extracted: tags,
+        },
+      });
 
-      if (!res.ok) {
-        setResult({ success: false, error: data.error || 'Erro ao processar evento' });
-      } else {
-        setResult({ success: true, event: data.event, ai_actions: data.ai_actions });
-        setForm({
-          title: '',
-          description: '',
-          location: '',
-          address: '',
-          city: 'Fortaleza',
-          state: 'CE',
-          start_date: '',
-          end_date: '',
-          start_time: '',
-          end_time: '',
-          image_url: '',
-          source_url: '',
-          organizer: '',
-          contact_email: '',
-          contact_phone: '',
-          price_info: 'Gratuito',
-        });
-        setScrapeUrl('');
-      }
+      setForm({
+        title: '',
+        description: '',
+        location: '',
+        address: '',
+        city: 'Fortaleza',
+        state: 'CE',
+        start_date: '',
+        end_date: '',
+        start_time: '',
+        end_time: '',
+        image_url: '',
+        source_url: '',
+        organizer: '',
+        contact_email: '',
+        contact_phone: '',
+        price_info: 'Gratuito',
+      });
     } catch (err) {
-      setResult({ success: false, error: err instanceof Error ? err.message : 'Erro de conexão' });
+      setResult({
+        success: false,
+        error: err instanceof Error ? err.message : 'Erro de conexão',
+      });
     } finally {
       setLoading(false);
     }
@@ -158,46 +143,8 @@ export default function EventSubmitPage() {
             Indicar um evento
           </h1>
           <p className="mt-2 text-sm md:text-base text-dark-500">
-            Cole o link do Instagram, Facebook ou X e nossa IA extrai automaticamente as informações. Você pode revisar e completar antes de publicar.
+            Preencha os dados do evento abaixo. Após enviar, processaremos automaticamente as informações para melhorar a visibilidade do seu evento.
           </p>
-
-          {/* Link scraper */}
-          <div className="mt-8 bg-dark-50 rounded-xl p-5 border border-dark-100">
-            <label className="block text-sm font-medium text-dark-700 mb-2">
-              <i className="ri-link mr-1"></i> Link do evento (Instagram, Facebook, X, site)
-            </label>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="url"
-                value={scrapeUrl}
-                onChange={(e) => setScrapeUrl(e.target.value)}
-                placeholder="https://instagram.com/p/..."
-                className="flex-1 px-4 py-2.5 text-sm border border-dark-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-300"
-              />
-              <button
-                onClick={handleScrape}
-                disabled={scraping || !scrapeUrl.trim()}
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg bg-dark-700 text-white hover:bg-dark-800 transition-colors disabled:opacity-50 whitespace-nowrap"
-              >
-                {scraping ? (
-                  <><i className="ri-loader-4-line animate-spin"></i> Analisando...</>
-                ) : (
-                  <><i className="ri-magic-line"></i> Analisar link</>
-                )}
-              </button>
-            </div>
-            {scrapeError && (
-              <p className="mt-2 text-xs text-rose-600">{scrapeError}</p>
-            )}
-            {scrapeSuccess && (
-              <p className="mt-2 text-xs text-emerald-600 flex items-center gap-1">
-                <i className="ri-checkbox-circle-line"></i> Dados extraídos com sucesso! Revise abaixo antes de publicar.
-              </p>
-            )}
-            <p className="mt-2 text-xs text-dark-400">
-              Funciona com posts públicos. Para links privados, preencha manualmente.
-            </p>
-          </div>
 
           {result && (
             <div className={`mt-6 rounded-xl p-5 ${result.success ? 'bg-emerald-50 border border-emerald-200' : 'bg-rose-50 border border-rose-200'}`}>

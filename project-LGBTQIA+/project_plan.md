@@ -200,11 +200,11 @@ Portal digital dedicado a informação, cultura, saúde, direitos e comunidade p
 
 ## 5. Backend / Third-party Integration Plan
 
-- **Supabase:** Sim. Banco de dados PostgreSQL para todas as tabelas acima, autenticação nativa, e Edge Functions para lógica de backend.
+- **Firebase:** Sim. Banco de dados Firestore para todas as collections acima, autenticação (Email + Google), Storage para imagens, e Cloud Functions para lógica de backend.
 - **Shopify:** Não necessário. Não há vendas de produtos.
 - **Stripe:** Não necessário no MVP. Monetização via anúncios e doações (futuro).
 - **Google Maps:** Sim. Embed de mapa na seção Guia Fortaleza para exibir espaços seguros.
-- **Email service:** Futuro, para newsletter. Usar Supabase + serviço de e-mail transacional.
+- **Email service:** Futuro, para newsletter. Usar Firebase Functions + serviço de e-mail transacional.
 
 ## 6. Development Phase Plan
 
@@ -236,17 +236,17 @@ Portal digital dedicado a informação, cultura, saúde, direitos e comunidade p
 
 ### Fase 4: Eventos & Agenda (Com IA Automática)
 - **Status:** ✅ Concluído
-- **Goal:** Criar seção de eventos com submissão inteligente via Edge Function que processa e publica automaticamente.
-- **Deliverable:** Páginas `/eventos`, `/eventos/submeter`, `/eventos/:slug` com backend real no Supabase.
+- **Goal:** Criar seção de eventos com submissão inteligente via Cloud Function que processa e publica automaticamente.
+- **Deliverable:** Páginas `/eventos`, `/eventos/submeter`, `/eventos/:slug` com backend real no Firebase.
 - **Features entregues:**
-  - Tabela `events` no Supabase com schema completo (título, slug, descrição, categoria, local, data, tags, status, etc.)
-  - Edge Function `process-event` que enriquece automaticamente: gera slug, detecta categoria por palavras-chave, extrai tags, gera resumo, verifica duplicidade e publica com status `approved`
+  - Collection `events` no Firestore com schema completo (título, slug, descrição, categoria, local, data, tags, status, etc.)
+  - Função de enriquecimento automático: gera slug, detecta categoria por palavras-chave, extrai tags, gera resumo, verifica duplicidade e publica com status `approved`
   - Página de listagem `/eventos` com hero editorial, filtros por categoria, cidade, período e ordenação, busca em tempo real
   - Cards de evento em duas variantes: featured (vertical com imagem) e default (horizontal compacto)
   - Página de submissão `/eventos/submeter` com formulário completo, feedback visual de sucesso mostrando ações da IA, sem alerts
   - Página de detalhe `/eventos/:slug` com hero cinematográfico, informações completas (data, hora, local, preço, organizador), compartilhamento social e eventos relacionados
   - 12 eventos mock realistas de Fortaleza, Recife e Salvador (paradas, festas drag, cine queer, workshops de saúde, encontros de famílias, capacitações, rodas de conversa)
-  - Client Supabase singleton configurado no frontend
+  - Client Firebase singleton configurado no frontend
   - Navbar e Footer atualizados com links para Eventos
 
 ### Fase 5: Saúde e Família
@@ -289,9 +289,9 @@ Portal digital dedicado a informação, cultura, saúde, direitos e comunidade p
 - **Goal:** Sistema completo de cadastro, login, perfil de usuário e chat seguro.
 - **Deliverable:** Páginas `/cadastro`, `/login`, `/perfil`, `/comunidade/chat`.
 
-### Fase 10: Integração com Supabase
-- **Goal:** Conectar ao backend real, substituir mock data por dados do banco, ativar autenticação real, RLS policies.
-- **Deliverable:** Todas as páginas usando dados reais do Supabase.
+### Fase 10: Integração com Firebase
+- **Goal:** Conectar ao backend real, substituir mock data por dados do banco, ativar autenticação real, security rules.
+- **Deliverable:** Todas as páginas usando dados reais do Firebase Firestore.
 
 ### Phase 11: SEO, Acessibilidade e Otimização
 - **Goal:** Finalizar SEO, acessibilidade (WCAG), performance, testes e ajustes finais.

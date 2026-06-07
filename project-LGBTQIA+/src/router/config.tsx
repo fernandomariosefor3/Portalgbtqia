@@ -2,6 +2,7 @@ import type { RouteObject } from "react-router-dom";
 import NotFound from "../pages/NotFound";
 import AboutPage from "../pages/about/page";
 import CommunityPage from "../pages/community/page";
+import AdminPage from "../pages/admin/page";
 import CultureCategoryPage from "../pages/culture-category/page";
 import CultureDetailPage from "../pages/culture-detail/page";
 import CulturePage from "../pages/culture/page";
@@ -113,6 +114,10 @@ const routes: RouteObject[] = [
   },
   {
     path: "/comunidade",
+  },
+  {
+    path: "/admin",
+    element: <AdminPage />,
     element: <CommunityPage />,
   },
   {

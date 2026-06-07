@@ -1,7 +1,14 @@
-import { useState } from "react";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { collection, addDoc, deleteDoc, doc, getDocs, query, orderBy, serverTimestamp } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 import { useAuth } from "../../lib/auth";
+
+interface ArticleItem {
+  id: string;
+  title: string;
+  category: string;
+  published_at: any;
+}
 
 const ADMIN_EMAIL = "fernandomariodasmartins@gmail.com";
 
@@ -15,6 +22,28 @@ export default function AdminPage() {
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("artigos");
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [articles, setArticles] = useState<ArticleItem[]>([]);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const loadArticles = async () => {
+    const q = query(collection(db, "articles"), orderBy("published_at", "desc"));
+    const snap = await getDocs(q);
+    setArticles(snap.docs.map((d) => ({ id: d.id, ...d.data() } as ArticleItem)));
+  };
+
+  useEffect(() => { loadArticles(); }, []);
+
+  const deleteArticle = async (id: string) => {
+    if (!confirm("Apagar este artigo?")) return;
+    setDeletingId(id);
+    try {
+      await deleteDoc(doc(db, "articles", id));
+      setArticles((prev) => prev.filter((a) => a.id !== id));
+    } catch (e: any) {
+      alert("Erro ao apagar: " + e.message);
+    }
+    setDeletingId(null);
+  };
 
   if (loading) return <div className="flex justify-center items-center min-h-screen">Carregando...</div>;
   if (!user || user.email !== ADMIN_EMAIL) {
@@ -187,6 +216,34 @@ export default function AdminPage() {
         >
           {isPublishing ? "Publicando..." : "Publicar artigo"}
         </button>
+      </div>
+
+      {/* Lista de artigos publicados */}
+      <div className="mt-10">
+        <h2 className="text-xl font-bold mb-4">Artigos publicados ({articles.length})</h2>
+        {articles.length === 0 ? (
+          <p className="text-gray-400 text-sm">Nenhum artigo ainda.</p>
+        ) : (
+          <div className="space-y-2">
+            {articles.map((a) => (
+              <div key={a.id} className="flex items-center justify-between gap-3 bg-white border rounded-lg px-4 py-3 shadow-sm">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-gray-800 truncate">{a.title || "(sem título)"}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">
+                    {a.category} · {a.published_at?.toDate?.()?.toLocaleDateString("pt-BR") ?? ""}
+                  </p>
+                </div>
+                <button
+                  onClick={() => deleteArticle(a.id)}
+                  disabled={deletingId === a.id}
+                  className="flex-shrink-0 px-3 py-1.5 text-xs font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50"
+                >
+                  {deletingId === a.id ? "Apagando..." : "Apagar"}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );

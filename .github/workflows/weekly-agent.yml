@@ -35,6 +35,12 @@ jobs:
         working-directory: project-LGBTQIA+/agent
         run: npm install
 
+      - name: Verificar secrets configurados
+        run: |
+          echo "PROJECT_ID vazio? ${{ secrets.FIREBASE_PROJECT_ID == '' }}"
+          echo "CLIENT_EMAIL vazio? ${{ secrets.FIREBASE_CLIENT_EMAIL == '' }}"
+          echo "PRIVATE_KEY vazio? ${{ secrets.FIREBASE_PRIVATE_KEY == '' }}"
+
       - name: Executar agente de eventos
         working-directory: project-LGBTQIA+/agent
         run: npx tsx src/run-agent.ts

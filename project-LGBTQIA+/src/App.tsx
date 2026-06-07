@@ -4,6 +4,7 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
 import Navbar from "./components/feature/Navbar";
 import Footer from "./components/feature/Footer";
+import MusicPlayer from "./components/feature/MusicPlayer";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <AppRoutes />
           </div>
           <Footer />
+          <MusicPlayer />
         </div>
       </BrowserRouter>
     </I18nextProvider>

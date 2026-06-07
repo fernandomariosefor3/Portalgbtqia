@@ -5,14 +5,10 @@
 
 import { createAgent } from './index.js';
 import * as dotenv from 'dotenv';
-import { readFileSync } from 'fs';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { resolve } from 'path';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-// Carrega variáveis de ambiente
-dotenv.config({ path: resolve(__dirname, '.env') });
+// Tenta carregar .env local (desenvolvimento), mas env vars do sistema têm prioridade
+dotenv.config({ path: resolve(process.cwd(), '.env'), override: false });
 
 async function main() {
   console.log('='.repeat(60));

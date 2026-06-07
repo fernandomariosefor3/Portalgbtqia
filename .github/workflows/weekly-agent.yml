@@ -35,27 +35,9 @@ jobs:
         working-directory: project-LGBTQIA+/agent
         run: npm install
 
-      - name: Criar arquivo .env do agente
-        working-directory: project-LGBTQIA+/agent
-        env:
-          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
-          FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
-          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          # Converte \n literais em quebras de linha reais na chave privada
-          FIXED_KEY=$(echo "$FIREBASE_PRIVATE_KEY" | sed 's/\\n/\n/g')
-          printf 'FIREBASE_PROJECT_ID=%s\n' "$FIREBASE_PROJECT_ID" > .env
-          printf 'FIREBASE_CLIENT_EMAIL=%s\n' "$FIREBASE_CLIENT_EMAIL" >> .env
-          printf 'OPENAI_API_KEY=%s\n' "$OPENAI_API_KEY" >> .env
-          printf 'EVENTS_LIMIT_PER_WEEK=10\n' >> .env
-          printf 'CITY_FOCUS=Fortaleza\n' >> .env
-          printf 'STATE_FOCUS=CE\n' >> .env
-          printf 'FIREBASE_PRIVATE_KEY="%s"\n' "$FIXED_KEY" >> .env
-
       - name: Executar agente de eventos
         working-directory: project-LGBTQIA+/agent
-        run: npx tsx --tsconfig tsconfig.json src/run-agent.ts
+        run: npx tsx src/run-agent.ts
         env:
           FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
           FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}

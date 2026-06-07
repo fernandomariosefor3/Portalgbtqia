@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth, signInWithGoogle, signOut } from '../../lib/auth';
+
+const ADMIN_EMAIL = "fernandomariodasmartins@gmail.com";
 
 const navLinks = [
   { label: 'Artigos', path: '/artigos' },
@@ -17,11 +20,11 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user } = useAuth();
+  const isAdmin = user?.email === ADMIN_EMAIL;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -29,9 +32,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm'
-          : 'bg-transparent'
+        scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent'
       }`}
     >
       <nav className="flex items-center justify-between px-4 md:px-6 lg:px-10 h-16 md:h-20">
@@ -65,20 +66,47 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <button
             className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
-              scrolled
-                ? 'text-dark-600 hover:bg-dark-50'
-                : 'text-white/90 hover:bg-white/10'
+              scrolled ? 'text-dark-600 hover:bg-dark-50' : 'text-white/90 hover:bg-white/10'
             }`}
             aria-label="Buscar"
           >
             <i className="ri-search-line text-lg"></i>
           </button>
-          <Link
-            to="/comunidade"
-            className="px-5 py-2 text-sm font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap"
-          >
-            Comunidade
-          </Link>
+
+          {isAdmin ? (
+            <div className="flex items-center gap-2">
+              <Link
+                to="/admin"
+                className="px-4 py-2 text-sm font-medium rounded-full bg-green-600 text-white hover:bg-green-700 transition-colors"
+              >
+                Admin
+              </Link>
+              <button
+                onClick={() => signOut()}
+                className={`px-3 py-2 text-sm font-medium rounded-full transition-colors ${
+                  scrolled ? 'text-dark-600 hover:bg-dark-50' : 'text-white/80 hover:bg-white/10'
+                }`}
+              >
+                Sair
+              </button>
+            </div>
+          ) : user ? (
+            <button
+              onClick={() => signOut()}
+              className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+                scrolled ? 'text-dark-600 hover:bg-dark-50 border border-dark-200' : 'text-white/80 hover:bg-white/10 border border-white/20'
+              }`}
+            >
+              Sair
+            </button>
+          ) : (
+            <button
+              onClick={() => signInWithGoogle()}
+              className="px-5 py-2 text-sm font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap"
+            >
+              Entrar
+            </button>
+          )}
         </div>
 
         <button
@@ -106,13 +134,30 @@ export default function Navbar() {
               </Link>
             ))}
             <hr className="my-2 border-dark-100" />
-            <Link
-              to="/comunidade"
-              onClick={() => setMobileOpen(false)}
-              className="px-3 py-3 text-sm font-medium text-primary-400 hover:bg-primary-50 rounded-md transition-colors"
-            >
-              Comunidade
-            </Link>
+            {isAdmin && (
+              <Link
+                to="/admin"
+                onClick={() => setMobileOpen(false)}
+                className="px-3 py-3 text-sm font-medium text-green-600 hover:bg-green-50 rounded-md transition-colors"
+              >
+                Admin
+              </Link>
+            )}
+            {user ? (
+              <button
+                onClick={() => { signOut(); setMobileOpen(false); }}
+                className="px-3 py-3 text-sm font-medium text-left text-dark-600 hover:bg-dark-50 rounded-md transition-colors"
+              >
+                Sair
+              </button>
+            ) : (
+              <button
+                onClick={() => { signInWithGoogle(); setMobileOpen(false); }}
+                className="px-3 py-3 text-sm font-medium text-left text-primary-400 hover:bg-primary-50 rounded-md transition-colors"
+              >
+                Entrar com Google
+              </button>
+            )}
           </div>
         </div>
       )}

@@ -53,13 +53,17 @@ jobs:
           STATE_FOCUS=CE
           EOF
 
-      - name: Compilar TypeScript
-        working-directory: project-LGBTQIA+/agent
-        run: npm run build
-
       - name: Executar agente de eventos
         working-directory: project-LGBTQIA+/agent
-        run: npm run start
+        run: npx tsx --tsconfig tsconfig.json src/run-agent.ts
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
+          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          EVENTS_LIMIT_PER_WEEK: ${{ github.event.inputs.limit || '10' }}
+          CITY_FOCUS: ${{ github.event.inputs.city || 'Fortaleza' }}
+          STATE_FOCUS: CE
 
       - name: Resultado
         if: always()

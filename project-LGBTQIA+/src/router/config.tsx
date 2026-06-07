@@ -1,4 +1,6 @@
 import type { RouteObject } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../lib/auth";
 import NotFound from "../pages/NotFound";
 import AboutPage from "../pages/about/page";
 import AdminPage from "../pages/admin/page";
@@ -18,6 +20,13 @@ import Home from "../pages/home/page";
 import ArticlePage from "../pages/article/page";
 import ArticlesPage from "../pages/articles/page";
 import ParadesPage from "../pages/parades/page";
+
+function AdminRoute({ children }: { children: React.ReactNode }) {
+  const { user, loading } = useAuth();
+  if (loading) return null;
+  if (!user) return <Navigate to="/" replace />;
+  return <>{children}</>;
+}
 
 const routes: RouteObject[] = [
   { path: "/", element: <Home /> },
@@ -44,7 +53,7 @@ const routes: RouteObject[] = [
   { path: "/paradas", element: <ParadesPage /> },
   { path: "/educacao", element: <EducationPage /> },
   { path: "/comunidade", element: <CommunityPage /> },
-  { path: "/admin", element: <AdminPage /> },
+  { path: "/admin", element: <AdminRoute><AdminPage /></AdminRoute> },
   { path: "*", element: <NotFound /> },
 ];
 

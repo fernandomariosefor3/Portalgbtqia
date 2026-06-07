@@ -1,0 +1,73 @@
+name: Agente de Eventos LGBTQIA+
+
+on:
+  # Toda segunda-feira às 8h (horário de Brasília = 11h UTC)
+  schedule:
+    - cron: '0 11 * * 1'
+
+  # Execução manual pelo GitHub
+  workflow_dispatch:
+    inputs:
+      city:
+        description: 'Cidade foco'
+        required: false
+        default: 'Fortaleza'
+      limit:
+        description: 'Limite de eventos por semana'
+        required: false
+        default: '10'
+
+jobs:
+  run-agent:
+    name: Buscar e Publicar Eventos
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: project-LGBTQIA+/agent/package-lock.json
+
+      - name: Instalar dependências do agente
+        working-directory: project-LGBTQIA+/agent
+        run: npm ci
+
+      - name: Criar arquivo .env do agente
+        working-directory: project-LGBTQIA+/agent
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
+          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          cat > .env << EOF
+          FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+          FIREBASE_CLIENT_EMAIL=${FIREBASE_CLIENT_EMAIL}
+          FIREBASE_PRIVATE_KEY=${FIREBASE_PRIVATE_KEY}
+          OPENAI_API_KEY=${OPENAI_API_KEY}
+          EVENTS_LIMIT_PER_WEEK=${{ github.event.inputs.limit || '10' }}
+          CITY_FOCUS=${{ github.event.inputs.city || 'Fortaleza' }}
+          STATE_FOCUS=CE
+          EOF
+
+      - name: Compilar TypeScript
+        working-directory: project-LGBTQIA+/agent
+        run: npm run build
+
+      - name: Executar agente de eventos
+        working-directory: project-LGBTQIA+/agent
+        run: npm run start
+
+      - name: Resultado
+        if: always()
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "✅ Agente executado com sucesso em $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          else
+            echo "❌ Agente falhou em $(date -u +%Y-%m-%dT%H:%M:%SZ) — verifique os logs acima"
+          fi

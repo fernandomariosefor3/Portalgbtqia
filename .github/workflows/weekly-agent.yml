@@ -30,12 +30,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: project-LGBTQIA+/agent/package-lock.json
 
       - name: Instalar dependências do agente
         working-directory: project-LGBTQIA+/agent
-        run: npm ci
+        run: npm install
 
       - name: Criar arquivo .env do agente
         working-directory: project-LGBTQIA+/agent

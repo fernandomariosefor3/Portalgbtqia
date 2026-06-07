@@ -1,0 +1,100 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Função helper - verifica se é admin
+    function isAdmin() {
+      return request.auth != null && 
+             exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // ========== USERS ==========
+    match /users/{userId} {
+      allow read: if true; // Perfil público
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ========== ARTICLES ==========
+    match /articles/{articleId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ========== EVENTS ==========
+    match /events/{eventId} {
+      // Leitura pública para eventos aprovados
+      allow read: if resource.data.status == 'approved' || isAdmin();
+      
+      // Criação apenas pelo agent (via Admin SDK) ou admin
+      allow create: if isAdmin() || 
+                    (isSignedIn() && request.resource.data.publishedBy == 'agent');
+      
+      allow update, delete: if isAdmin();
+    }
+
+    // ========== SAFE SPACES ==========
+    match /safe_spaces/{spaceId} {
+      allow read: if true;
+      allow create, update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ========== FORUM TOPICS ==========
+    match /forum_topics/{topicId} {
+      allow read: if true;
+      allow create: if isSignedIn();
+      allow update: if isOwner(resource.data.author_id) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ========== FORUM REPLIES ==========
+    match /forum_replies/{replyId} {
+      allow read: if true;
+      allow create: if isSignedIn();
+      allow update: if isOwner(resource.data.author_id) || isAdmin();
+      allow delete: if isOwner(resource.data.author_id) || isAdmin();
+    }
+
+    // ========== MENTORSHIP ==========
+    match /mentorship/{mentorshipId} {
+      allow read: if isSignedIn() && 
+                  (resource.data.mentor_id == request.auth.uid || 
+                   resource.data.mentee_id == request.auth.uid || 
+                   isAdmin());
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() && 
+                   (resource.data.mentor_id == request.auth.uid || 
+                    resource.data.mentee_id == request.auth.uid || 
+                    isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // ========== AGENT LOGS (apenas Admin SDK) ==========
+    match /agentLogs/{logId} {
+      allow read: if isAdmin();
+      allow write: if false; // Apenas via Admin SDK
+    }
+    
+    match /agentReports/{reportId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // ========== COLUMNISTS ==========
+    match /columnists/{columnistId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}

@@ -43,15 +43,15 @@ jobs:
           FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          cat > .env << EOF
-          FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
-          FIREBASE_CLIENT_EMAIL=${FIREBASE_CLIENT_EMAIL}
-          FIREBASE_PRIVATE_KEY=${FIREBASE_PRIVATE_KEY}
-          OPENAI_API_KEY=${OPENAI_API_KEY}
-          EVENTS_LIMIT_PER_WEEK=${{ github.event.inputs.limit || '10' }}
-          CITY_FOCUS=${{ github.event.inputs.city || 'Fortaleza' }}
-          STATE_FOCUS=CE
-          EOF
+          # Converte \n literais em quebras de linha reais na chave privada
+          FIXED_KEY=$(echo "$FIREBASE_PRIVATE_KEY" | sed 's/\\n/\n/g')
+          printf 'FIREBASE_PROJECT_ID=%s\n' "$FIREBASE_PROJECT_ID" > .env
+          printf 'FIREBASE_CLIENT_EMAIL=%s\n' "$FIREBASE_CLIENT_EMAIL" >> .env
+          printf 'OPENAI_API_KEY=%s\n' "$OPENAI_API_KEY" >> .env
+          printf 'EVENTS_LIMIT_PER_WEEK=10\n' >> .env
+          printf 'CITY_FOCUS=Fortaleza\n' >> .env
+          printf 'STATE_FOCUS=CE\n' >> .env
+          printf 'FIREBASE_PRIVATE_KEY="%s"\n' "$FIXED_KEY" >> .env
 
       - name: Executar agente de eventos
         working-directory: project-LGBTQIA+/agent

@@ -3,10 +3,13 @@ service cloud.firestore {
   match /databases/{database}/documents {
     
     // Função helper - verifica se é admin
+    // Admin = email do fundador OU usuário com role 'admin' no Firestore
     function isAdmin() {
-      return request.auth != null && 
-             exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
-             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+      return request.auth != null && (
+        request.auth.token.email == 'fernandomariodasmartins@gmail.com' ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin')
+      );
     }
     
     function isSignedIn() {

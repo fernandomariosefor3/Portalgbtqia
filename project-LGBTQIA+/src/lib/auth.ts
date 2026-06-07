@@ -5,8 +5,6 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
   GoogleAuthProvider,
   signOut as firebaseSignOut,
   updateProfile,
@@ -56,41 +54,15 @@ export async function signUpWithEmail(
 }
 
 export async function signInWithGoogle() {
-  try {
-    // Tenta popup primeiro; se bloqueado, cai no redirect
-    const result = await signInWithPopup(auth, googleProvider);
-    const userDoc = await getDoc(doc(db, 'users', result.user.uid));
-    if (!userDoc.exists()) {
-      await createUserProfile(result.user, {
-        displayName: result.user.displayName || 'Usuário',
-        email: result.user.email || '',
-      });
-    }
-    return result;
-  } catch (err: any) {
-    if (err.code === 'auth/popup-blocked' || err.code === 'auth/popup-closed-by-user') {
-      return signInWithRedirect(auth, googleProvider);
-    }
-    throw err;
+  const result = await signInWithPopup(auth, googleProvider);
+  const userDoc = await getDoc(doc(db, 'users', result.user.uid));
+  if (!userDoc.exists()) {
+    await createUserProfile(result.user, {
+      displayName: result.user.displayName || 'Usuário',
+      email: result.user.email || '',
+    });
   }
-}
-
-export async function handleGoogleRedirect() {
-  try {
-    const result = await getRedirectResult(auth);
-    if (result?.user) {
-      const userDoc = await getDoc(doc(db, 'users', result.user.uid));
-      if (!userDoc.exists()) {
-        await createUserProfile(result.user, {
-          displayName: result.user.displayName || 'Usuário',
-          email: result.user.email || '',
-        });
-      }
-    }
-    return result;
-  } catch {
-    return null;
-  }
+  return result;
 }
 
 export async function signOut() {

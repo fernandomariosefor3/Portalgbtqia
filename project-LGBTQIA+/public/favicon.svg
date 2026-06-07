@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="32" fill="#E94E77"/>
+  <!-- Rainbow stripes -->
+  <path d="M8 28 Q32 8 56 28" stroke="#FF0000" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M10 32 Q32 10 54 32" stroke="#FF8C00" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M11 36 Q32 14 53 36" stroke="#FFD700" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M11 40 Q32 18 53 40" stroke="#00C851" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M12 44 Q32 22 52 44" stroke="#007BFF" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M14 48 Q32 26 50 48" stroke="#9B59B6" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,37 @@
+{
+  "name": "Portal LGBTQ+ Nordeste",
+  "short_name": "Portal LGBTQ+",
+  "description": "Informação, cultura, saúde e comunidade LGBTQ+ no Nordeste do Brasil.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#E94E77",
+  "orientation": "portrait-primary",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["news", "education", "lifestyle"],
+  "shortcuts": [
+    {
+      "name": "Artigos",
+      "url": "/artigos",
+      "description": "Leia artigos e opinião"
+    },
+    {
+      "name": "Eventos",
+      "url": "/eventos",
+      "description": "Agenda e paradas"
+    },
+    {
+      "name": "Saúde",
+      "url": "/saude",
+      "description": "Guias de saúde LGBTQ+"
+    }
+  ]
+}

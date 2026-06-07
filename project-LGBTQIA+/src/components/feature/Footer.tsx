@@ -104,7 +104,15 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/40 text-center sm:text-left">
-            © 2026 Portal LGBTQ+ Nordeste. Todos os direitos reservados.
+            © 2026 Portal LGBTQ+ Nordeste. Todos os direitos reservados.{" "}
+            Criado por{" "}
+            <a
+              href="/sobre"
+              className="text-white/60 hover:text-primary-300 transition-colors"
+            >
+              Fernando Mário da Silva Martins
+            </a>
+            .
           </p>
           <div className="flex items-center gap-4 text-xs text-white/40">
             <Link to="/sobre" className="hover:text-white/60 transition-colors">Privacidade</Link>

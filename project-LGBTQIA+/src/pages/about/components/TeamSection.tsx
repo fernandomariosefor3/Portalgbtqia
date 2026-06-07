@@ -2,6 +2,53 @@ export default function TeamSection() {
   return (
     <section className="w-full bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 py-14 md:py-20">
+
+        {/* Fundador */}
+        <div className="max-w-3xl mx-auto mb-16 md:mb-20">
+          <div className="text-center mb-8">
+            <span className="inline-block px-4 py-1.5 text-xs font-medium rounded-full bg-primary-50 text-primary-500 border border-primary-100">
+              Fundador
+            </span>
+          </div>
+          <div className="rounded-2xl border border-dark-100 bg-gradient-to-br from-white to-primary-50 p-8 md:p-10 flex flex-col sm:flex-row items-center gap-7">
+            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary-400 to-secondary-500 flex items-center justify-center text-white text-4xl flex-shrink-0 shadow-lg">
+              <i className="ri-user-heart-line"></i>
+            </div>
+            <div className="text-center sm:text-left">
+              <h3 className="text-xl md:text-2xl font-playfair font-bold text-dark-800">
+                Fernando Mário da Silva Martins
+              </h3>
+              <p className="text-sm font-medium text-primary-500 mt-1 mb-3">
+                Fundador & Editor — @nando_apollo
+              </p>
+              <p className="text-sm text-dark-500 leading-relaxed">
+                Criador do Portal LGBTQ+ Nordeste, espaço digital dedicado à
+                informação, cultura e acolhimento da comunidade LGBTQIA+ no Brasil,
+                com foco especial na região Nordeste e em Fortaleza, Ceará.
+              </p>
+              <div className="flex items-center gap-3 mt-4 justify-center sm:justify-start">
+                <a
+                  href="https://instagram.com/nando_apollo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-xs font-medium text-primary-500 hover:text-primary-600 transition-colors"
+                >
+                  <i className="ri-instagram-line text-base"></i>
+                  @nando_apollo
+                </a>
+                <span className="text-dark-200">·</span>
+                <a
+                  href="mailto:fernandomariodasmartins@gmail.com"
+                  className="flex items-center gap-1.5 text-xs font-medium text-primary-500 hover:text-primary-600 transition-colors"
+                >
+                  <i className="ri-mail-line text-base"></i>
+                  Contato
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
           <span className="inline-block px-4 py-1.5 text-xs font-medium rounded-full bg-primary-50 text-primary-500 border border-primary-100 mb-5">
             Colaboração

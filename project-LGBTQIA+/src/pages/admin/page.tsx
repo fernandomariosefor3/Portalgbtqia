@@ -10,10 +10,8 @@ interface ArticleItem {
   published_at: any;
 }
 
-const ADMIN_EMAIL = "fernandomariodasmartins@gmail.com";
-
 export default function AdminPage() {
-  const { user, loading } = useAuth();
+  const { user, loading, isAdmin } = useAuth();
   const [url, setUrl] = useState("");
   const [isFetching, setIsFetching] = useState(false);
   const [isPublishing, setIsPublishing] = useState(false);
@@ -46,7 +44,7 @@ export default function AdminPage() {
   };
 
   if (loading) return <div className="flex justify-center items-center min-h-screen">Carregando...</div>;
-  if (!user || user.email !== ADMIN_EMAIL) {
+  if (!user || !isAdmin) {
     return (
       <main className="max-w-xl mx-auto px-4 py-24 text-center">
         <h1 className="text-2xl font-bold mb-4">Acesso restrito</h1>

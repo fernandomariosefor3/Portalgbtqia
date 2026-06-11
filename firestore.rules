@@ -4,6 +4,7 @@ service cloud.firestore {
     
     // Função helper - verifica se é admin
     // Admin = email do fundador OU usuário com role 'admin' no Firestore
+    // OBS: o mesmo e-mail está centralizado no frontend em src/lib/auth.ts (FOUNDER_EMAIL).
     function isAdmin() {
       return request.auth != null && (
         request.auth.token.email == 'fernandomariodasmartins@gmail.com' ||

@@ -14,20 +14,51 @@ import { auth, db } from './firebase';
 
 const googleProvider = new GoogleAuthProvider();
 
-export function useAuth() {
+/**
+ * E-mail do fundador, usado como fallback de admin enquanto o papel
+ * `role: 'admin'` não estiver atribuído no perfil do Firestore.
+ * Mantido em um único lugar (também espelhado em firestore.rules).
+ */
+export const FOUNDER_EMAIL = 'fernandomariodasmartins@gmail.com';
+
+export interface AuthState {
+  user: User | null;
+  loading: boolean;
+  isAdmin: boolean;
+}
+
+export function useAuth(): AuthState {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       setUser(firebaseUser);
+
+      if (firebaseUser) {
+        // Fundador é sempre admin; demais usuários dependem de role no perfil.
+        if (firebaseUser.email === FOUNDER_EMAIL) {
+          setIsAdmin(true);
+        } else {
+          try {
+            const profile = await getUserProfile(firebaseUser.uid);
+            setIsAdmin((profile as { role?: string } | null)?.role === 'admin');
+          } catch {
+            setIsAdmin(false);
+          }
+        }
+      } else {
+        setIsAdmin(false);
+      }
+
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  return { user, loading };
+  return { user, loading, isAdmin };
 }
 
 export async function signInWithEmail(email: string, password: string) {

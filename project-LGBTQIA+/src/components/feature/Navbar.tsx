@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth, signInWithGoogle, signOut } from '../../lib/auth';
 
-const ADMIN_EMAIL = "fernandomariodasmartins@gmail.com";
-
 const navLinks = [
   { label: 'Artigos', path: '/artigos' },
   { label: 'Cultura', path: '/cultura' },
@@ -20,8 +18,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { user } = useAuth();
-  const isAdmin = user?.email === ADMIN_EMAIL;
+  const { user, isAdmin } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);

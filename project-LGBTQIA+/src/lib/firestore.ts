@@ -11,6 +11,7 @@ import {
   updateDoc,
   deleteDoc,
   Timestamp,
+  type QueryConstraint,
 } from 'firebase/firestore';
 import { db } from './firebase';
 
@@ -116,9 +117,8 @@ export async function getEvents(filters?: {
   limit?: number;
 }): Promise<Event[]> {
   const eventsRef = collection(db, 'events');
-  let q: ReturnType<typeof query> = eventsRef;
 
-  const constraints = [];
+  const constraints: QueryConstraint[] = [];
 
   if (filters?.category) {
     constraints.push(where('category', '==', filters.category));
@@ -134,7 +134,7 @@ export async function getEvents(filters?: {
     constraints.push(limit(filters.limit));
   }
 
-  q = query(eventsRef, ...constraints);
+  const q = query(eventsRef, ...constraints);
 
   const snapshot = await getDocs(q);
   return snapshot.docs.map((doc) => ({
@@ -205,7 +205,7 @@ export async function getArticles(filters?: {
   limit?: number;
 }): Promise<Article[]> {
   const articlesRef = collection(db, 'articles');
-  const constraints = [where('status', '==', 'published')];
+  const constraints: QueryConstraint[] = [where('status', '==', 'published')];
 
   if (filters?.category) {
     constraints.push(where('category', '==', filters.category));

@@ -72,7 +72,7 @@ export default function MusicPlayer() {
     if (!ready || !containerRef.current) return;
 
     if (playerRef.current) {
-      try { playerRef.current.destroy(); } catch {}
+      try { playerRef.current.destroy(); } catch { /* ignore */ }
     }
 
     playerRef.current = new window.YT.Player(containerRef.current, {
@@ -106,9 +106,9 @@ export default function MusicPlayer() {
     });
 
     return () => {
-      try { playerRef.current?.destroy(); } catch {}
+      try { playerRef.current?.destroy(); } catch { /* ignore */ }
     };
-  }, [ready, currentIdx]);
+  }, [ready, currentIdx, track.id, nextTrack]);
 
   const togglePlay = () => {
     if (!playerRef.current) return;

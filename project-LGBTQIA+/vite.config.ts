@@ -73,6 +73,27 @@ export default defineConfig({
   build: {
     sourcemap: true,
     outDir: 'dist',
+    chunkSizeWarningLimit: 700,
+    rollupOptions: {
+      output: {
+        // Separa SDKs grandes em vendor chunks próprios para melhorar
+        // o cache do navegador e aliviar o bundle principal.
+        manualChunks(id: string) {
+          if (id.includes("node_modules")) {
+            if (id.includes("firebase") || id.includes("@firebase")) {
+              return "firebase";
+            }
+            if (
+              id.includes("react-router") ||
+              id.includes("/react-dom/") ||
+              id.includes("/react/")
+            ) {
+              return "react";
+            }
+          }
+        },
+      },
+    },
   },
   resolve: {
     alias: {

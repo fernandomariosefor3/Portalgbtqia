@@ -1,32 +1,28 @@
+import { lazy } from "react";
 import type { RouteObject } from "react-router-dom";
-import { Navigate } from "react-router-dom";
-import { useAuth } from "../lib/auth";
-import NotFound from "../pages/NotFound";
-import AboutPage from "../pages/about/page";
-import AdminPage from "../pages/admin/page";
-import CommunityPage from "../pages/community/page";
-import CultureCategoryPage from "../pages/culture-category/page";
-import CultureDetailPage from "../pages/culture-detail/page";
-import CulturePage from "../pages/culture/page";
-import EducationPage from "../pages/education/page";
-import EventDetailPage from "../pages/event-detail/page";
-import EventSubmitPage from "../pages/event-submit/page";
-import EventsPage from "../pages/events/page";
-import FamilyPage from "../pages/family/page";
-import GuidePage from "../pages/guide/page";
-import HealthDetailPage from "../pages/health-detail/page";
-import HealthPage from "../pages/health/page";
-import Home from "../pages/home/page";
-import ArticlePage from "../pages/article/page";
-import ArticlesPage from "../pages/articles/page";
-import ParadesPage from "../pages/parades/page";
+import AdminRoute from "./AdminRoute";
 
-function AdminRoute({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth();
-  if (loading) return null;
-  if (!user) return <Navigate to="/" replace />;
-  return <>{children}</>;
-}
+// Code-splitting por rota: cada página vira um chunk separado, carregado
+// sob demanda. Isso reduz drasticamente o bundle inicial.
+const Home = lazy(() => import("../pages/home/page"));
+const AboutPage = lazy(() => import("../pages/about/page"));
+const ArticlesPage = lazy(() => import("../pages/articles/page"));
+const ArticlePage = lazy(() => import("../pages/article/page"));
+const CulturePage = lazy(() => import("../pages/culture/page"));
+const CultureCategoryPage = lazy(() => import("../pages/culture-category/page"));
+const CultureDetailPage = lazy(() => import("../pages/culture-detail/page"));
+const EventsPage = lazy(() => import("../pages/events/page"));
+const EventSubmitPage = lazy(() => import("../pages/event-submit/page"));
+const EventDetailPage = lazy(() => import("../pages/event-detail/page"));
+const HealthPage = lazy(() => import("../pages/health/page"));
+const HealthDetailPage = lazy(() => import("../pages/health-detail/page"));
+const FamilyPage = lazy(() => import("../pages/family/page"));
+const GuidePage = lazy(() => import("../pages/guide/page"));
+const ParadesPage = lazy(() => import("../pages/parades/page"));
+const EducationPage = lazy(() => import("../pages/education/page"));
+const CommunityPage = lazy(() => import("../pages/community/page"));
+const AdminPage = lazy(() => import("../pages/admin/page"));
+const NotFound = lazy(() => import("../pages/NotFound"));
 
 const routes: RouteObject[] = [
   { path: "/", element: <Home /> },

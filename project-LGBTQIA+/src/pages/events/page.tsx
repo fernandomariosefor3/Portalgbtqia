@@ -2,9 +2,10 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import EventCard from './components/EventCard';
 import EventFilters from './components/EventFilters';
-import { featuredEvents } from '@/mocks/events';
+import { useEvents } from '@/lib/useEvents';
 
 export default function EventsPage() {
+  const { events, loading } = useEvents();
   const [activeCategory, setActiveCategory] = useState('todos');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCity, setActiveCity] = useState('todas');
@@ -12,12 +13,12 @@ export default function EventsPage() {
   const [timeFilter, setTimeFilter] = useState('todos');
 
   const cities = useMemo(() => {
-    const set = new Set(featuredEvents.map((e) => e.city));
+    const set = new Set(events.map((e) => e.city).filter(Boolean));
     return Array.from(set).sort();
-  }, []);
+  }, [events]);
 
   const filteredEvents = useMemo(() => {
-    let result = [...featuredEvents];
+    let result = [...events];
 
     if (activeCategory !== 'todos') {
       result = result.filter((e) => e.category === activeCategory);
@@ -64,7 +65,7 @@ export default function EventsPage() {
     });
 
     return result;
-  }, [activeCategory, searchQuery, activeCity, sortBy, timeFilter]);
+  }, [events, activeCategory, searchQuery, activeCity, sortBy, timeFilter]);
 
   const featured = filteredEvents.filter((e) => e.is_featured);
   const regular = filteredEvents.filter((e) => !e.is_featured);
@@ -132,7 +133,23 @@ export default function EventsPage() {
         />
 
         <div className="mt-8">
-          {filteredEvents.length === 0 ? (
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="rounded-xl border border-dark-100 bg-white overflow-hidden animate-pulse"
+                >
+                  <div className="h-48 bg-dark-100" />
+                  <div className="p-4 space-y-3">
+                    <div className="h-4 w-3/4 bg-dark-100 rounded" />
+                    <div className="h-3 w-1/2 bg-dark-100 rounded" />
+                    <div className="h-3 w-full bg-dark-100 rounded" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : filteredEvents.length === 0 ? (
             <div className="text-center py-16">
               <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-dark-100 text-dark-400 text-2xl mb-4">
                 <i className="ri-calendar-close-line"></i>

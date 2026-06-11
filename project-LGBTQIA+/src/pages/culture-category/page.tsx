@@ -1,5 +1,4 @@
 import { useLocation } from 'react-router-dom';
-import CultureHero from '../culture/components/CultureHero';
 import CultureCard from '../culture/components/CultureCard';
 import CultureSubNav from '../culture/components/CultureSubNav';
 import { allCulture, typeLabels, typeColors, typeIcons } from '@/mocks/culture';

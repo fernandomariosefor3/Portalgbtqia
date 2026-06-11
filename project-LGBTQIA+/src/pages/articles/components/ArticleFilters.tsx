@@ -13,11 +13,6 @@ export default function ArticleFilters({ activeCategory, onChange }: ArticleFilt
       {categories.map((cat) => {
         const isActive = activeCategory === cat;
         const label = cat === 'todas' ? 'Todas' : categoryLabels[cat] || cat;
-        const colorClass = cat === 'todas'
-          ? 'bg-dark-700 text-white'
-          : isActive
-            ? (categoryColors[cat]?.replace('100', '400').replace('700', '50') || 'bg-primary-400 text-white')
-            : (categoryColors[cat] || 'bg-dark-50 text-dark-500');
 
         return (
           <button

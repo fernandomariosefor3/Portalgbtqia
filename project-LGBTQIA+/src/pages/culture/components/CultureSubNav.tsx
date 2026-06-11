@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { typeLabels, typeColors, typeIcons } from '@/mocks/culture';
+import { typeColors, typeIcons } from '@/mocks/culture';
 
 interface CultureSubNavProps {
   activeType?: string;

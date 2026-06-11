@@ -65,7 +65,7 @@ export default function EventSubmitPage() {
       const category = autoCategorize(finalTitle, finalDescription);
       const tags = autoTags(finalTitle, finalDescription);
 
-      const eventId = await createEvent({
+      await createEvent({
         title: finalTitle,
         slug,
         description: finalDescription || undefined,
@@ -170,7 +170,7 @@ export default function EventSubmitPage() {
                         <li className="flex items-center gap-1">
                           <i className="ri-check-line text-emerald-500"></i> Tags extraídas: <span className="font-medium text-dark-700">{Array.isArray(result.ai_actions.tags_extracted) ? result.ai_actions.tags_extracted.join(', ') : ''}</span>
                         </li>
-                        {result.ai_actions.short_description_generated && (
+                        {Boolean(result.ai_actions.short_description_generated) && (
                           <li className="flex items-center gap-1">
                             <i className="ri-check-line text-emerald-500"></i> Resumo gerado automaticamente
                           </li>

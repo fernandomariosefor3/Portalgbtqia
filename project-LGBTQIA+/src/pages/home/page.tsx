@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import HeroSection from './components/HeroSection';
 import FeaturedArticles from './components/FeaturedArticles';
 import SectionsGrid from './components/SectionsGrid';

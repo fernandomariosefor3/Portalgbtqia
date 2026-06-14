@@ -98,10 +98,38 @@ Aviso de "chunk > 500 kB" eliminado.
 
 ---
 
+---
+
+## Rodada 3 — dados, testes, OG e contraste
+
+### 12. Cultura e Saúde conectadas ao Firestore
+- **`src/lib/useCulture.ts`** e **`src/lib/useHealth.ts`** (novos): hooks que leem das coleções
+  `culture` e `health_guides` com fallback automático para os mocks (site nunca fica sem conteúdo).
+- Páginas migradas: `culture/page`, `culture-category/page`, `culture-detail/page`,
+  `health/page`, `health-detail/page` (com guard de loading nos detalhes).
+- **`firestore.rules`**: regras de leitura pública (status `published`) e escrita só admin para
+  `culture` e `health_guides`. **`firestore.indexes.json`**: índices `status + published_at`.
+
+### 13. Testes de componente (React Testing Library)
+- Adicionados `@testing-library/react`, `jest-dom`, `user-event` e ambiente `jsdom`.
+- **`ArticleFilters.test.tsx`** (interação) e **`EventCard.test.tsx`** (render/link/alt/label).
+- Total agora: **26 testes** (18 puros + 8 de componente). `vitest.config.ts` usa
+  `environmentMatchGlobs` (jsdom p/ `.test.tsx`, node p/ `.test.ts`) + `setup.ts`.
+
+### 14. Imagem Open Graph
+- **`public/og-image.png`** (1200×630) gerada com a identidade da marca.
+  Antes, `/og-image.png` retornava HTML (fallback SPA) → previews quebrados em redes sociais.
+
+### 15. Auditoria de contraste (WCAG AA)
+- Relatório completo em **`AUDITORIA_CONTRASTE.md`**.
+- Correção aplicada: `text-dark-300` → `text-dark-400` em 14 textos de metadados
+  (era 2.38:1 ilegível → 5.33:1, passa AA). Recomendações de design documentadas para os botões rosa.
+
+---
+
 ## Próximos passos sugeridos (não aplicados ainda)
 
-- Migrar cultura e saúde para Firestore (exigem criar coleções/conteúdo primeiro; hoje são conteúdo curado em mocks).
-- Mais testes: componentes (React Testing Library) e o fluxo de eventos/artigos.
-- Auditoria de contraste de cores com Lighthouse/axe.
+- Popular as coleções `culture`/`health_guides` no Firestore (hoje servem dos mocks via fallback).
+- Aplicar as recomendações de contraste dos botões/links rosa (decisão de design).
+- Rodar o Lighthouse real (instruções no `AUDITORIA_CONTRASTE.md`).
 - Self-host de fontes/ícones (hoje via CDN).
-- Instalar o workflow de CI (ver `ci-workflow-pendente/`) com um token de escopo `workflow`.

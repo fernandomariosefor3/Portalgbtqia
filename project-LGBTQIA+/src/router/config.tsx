@@ -22,6 +22,7 @@ const ParadesPage = lazy(() => import("../pages/parades/page"));
 const EducationPage = lazy(() => import("../pages/education/page"));
 const CommunityPage = lazy(() => import("../pages/community/page"));
 const AdminPage = lazy(() => import("../pages/admin/page"));
+const LoginPage = lazy(() => import("../pages/login/page"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 const routes: RouteObject[] = [
@@ -49,6 +50,7 @@ const routes: RouteObject[] = [
   { path: "/paradas", element: <ParadesPage /> },
   { path: "/educacao", element: <EducationPage /> },
   { path: "/comunidade", element: <CommunityPage /> },
+  { path: "/login", element: <LoginPage /> },
   { path: "/admin", element: <AdminRoute><AdminPage /></AdminRoute> },
   { path: "*", element: <NotFound /> },
 ];

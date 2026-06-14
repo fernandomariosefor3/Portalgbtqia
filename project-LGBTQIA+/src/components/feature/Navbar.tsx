@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth, signInWithGoogle, signOut } from '../../lib/auth';
+import { useAuth, signOut } from '../../lib/auth';
 
 const navLinks = [
   { label: 'Artigos', path: '/artigos' },
@@ -39,7 +39,7 @@ export default function Navbar() {
           style={{ color: scrolled ? '#1A1A1A' : '#FFFFFF' }}
         >
           <span className="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full bg-primary-400 text-white text-sm md:text-base">
-            <i className="ri-rainbow-line"></i>
+            <i className="ri-rainbow-line" aria-hidden="true"></i>
           </span>
           Portal LGBTQ+
         </Link>
@@ -67,7 +67,7 @@ export default function Navbar() {
             }`}
             aria-label="Buscar"
           >
-            <i className="ri-search-line text-lg"></i>
+            <i className="ri-search-line text-lg" aria-hidden="true"></i>
           </button>
 
           {isAdmin ? (
@@ -97,12 +97,12 @@ export default function Navbar() {
               Sair
             </button>
           ) : (
-            <button
-              onClick={() => signInWithGoogle()}
+            <Link
+              to="/login"
               className="px-5 py-2 text-sm font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap"
             >
               Entrar
-            </button>
+            </Link>
           )}
         </div>
 
@@ -148,12 +148,13 @@ export default function Navbar() {
                 Sair
               </button>
             ) : (
-              <button
-                onClick={() => { signInWithGoogle(); setMobileOpen(false); }}
+              <Link
+                to="/login"
+                onClick={() => setMobileOpen(false)}
                 className="px-3 py-3 text-sm font-medium text-left text-primary-400 hover:bg-primary-50 rounded-md transition-colors"
               >
-                Entrar com Google
-              </button>
+                Entrar
+              </Link>
             )}
           </div>
         </div>

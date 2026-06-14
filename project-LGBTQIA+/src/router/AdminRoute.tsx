@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../lib/auth";
 
 /**
@@ -8,6 +8,7 @@ import { useAuth } from "../lib/auth";
  */
 export default function AdminRoute({ children }: { children: ReactNode }) {
   const { user, loading, isAdmin } = useAuth();
+  const location = useLocation();
 
   if (loading) {
     return (
@@ -17,7 +18,13 @@ export default function AdminRoute({ children }: { children: ReactNode }) {
     );
   }
 
-  if (!user || !isAdmin) {
+  // Não autenticado → vai para o login e volta para cá após entrar.
+  if (!user) {
+    return <Navigate to="/login" replace state={{ from: location.pathname }} />;
+  }
+
+  // Autenticado mas sem permissão de admin → volta para a home.
+  if (!isAdmin) {
     return <Navigate to="/" replace />;
   }
 

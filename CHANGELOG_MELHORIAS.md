@@ -68,10 +68,40 @@ Aviso de "chunk > 500 kB" eliminado.
 
 ---
 
+---
+
+## Rodada 2 — features e qualidade
+
+### 8. Mais páginas conectadas ao Firestore
+- **`src/lib/useArticles.ts`** (novo): hook de artigos publicados com fallback automático para os mocks.
+- **`src/pages/articles/page.tsx`**: refatorada para usar `useArticles` (removida a lógica duplicada de fetch/map).
+- **`src/pages/home/components/FeaturedArticles.tsx`**: home agora exibe artigos reais publicados (com fallback aos mocks).
+
+### 9. Testes automatizados (Vitest)
+- **`src/lib/eventHelpers.ts`** (novo): funções puras (`generateSlug`, `generateShortDescription`,
+  `autoCategorize`, `autoTags`) extraídas de `firestore.ts` (que inicializa o Firebase),
+  re-exportadas para manter a API. Assim podem ser testadas sem dependências externas.
+- **`src/lib/eventHelpers.test.ts`** (novo): **18 testes** cobrindo slug, categorização e tags.
+- **`vitest.config.ts`** + scripts `test`/`test:watch`; `validate` agora roda type-check + lint + test.
+
+### 10. Página de login/cadastro dedicada
+- **`src/pages/login/page.tsx`** (novo): login/cadastro com e-mail+senha e Google,
+  estados de loading/erro e mensagens de erro do Firebase traduzidas para PT-BR.
+- Rota `/login` adicionada; botões "Entrar" da Navbar agora levam à página dedicada.
+- **`AdminRoute`**: usuário não autenticado é redirecionado para `/login` (com retorno à origem).
+
+### 11. Acessibilidade
+- **120 ícones decorativos** (`<i className="ri-...">`) receberam `aria-hidden="true"`
+  para não serem lidos por leitores de tela.
+- **Skip link** "Pular para o conteúdo" em `App.tsx`, com alvo focável `#main-content`.
+- Conferido: todas as `<img>` têm `alt`; `html lang="pt-BR"`; inputs do login com `<label>` associado.
+
+---
+
 ## Próximos passos sugeridos (não aplicados ainda)
 
-- Migrar as demais páginas (home, artigos, cultura, saúde) de mocks → Firestore usando o mesmo padrão de `useEvents`.
-- Página dedicada de login/cadastro (hoje só "Entrar com Google" na Navbar).
-- Testes com Vitest (o agente já tem Vitest configurado; começar pelas funções puras `generateSlug`, `autoCategorize`, `autoTags`).
-- Auditoria de acessibilidade (contraste, foco, `aria-*`, teclado).
+- Migrar cultura e saúde para Firestore (exigem criar coleções/conteúdo primeiro; hoje são conteúdo curado em mocks).
+- Mais testes: componentes (React Testing Library) e o fluxo de eventos/artigos.
+- Auditoria de contraste de cores com Lighthouse/axe.
 - Self-host de fontes/ícones (hoje via CDN).
+- Instalar o workflow de CI (ver `ci-workflow-pendente/`) com um token de escopo `workflow`.

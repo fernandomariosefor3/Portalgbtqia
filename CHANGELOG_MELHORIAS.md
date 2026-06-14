@@ -127,9 +127,26 @@ Aviso de "chunk > 500 kB" eliminado.
 
 ---
 
+---
+
+## Rodada 4 — seed de conteúdo
+
+### 16. Script de seed (cultura & saúde) via Admin SDK
+- **`agent/src/seed/seed-content.ts`** (novo): popula `culture` (16 itens) e `health_guides` (12 guias)
+  no Firestore a partir do conteúdo curado dos mocks.
+  - Idempotente (usa `slug` como ID com `merge`); grava `status: 'published'` e `published_at` (Timestamp).
+  - Modos: `npm run seed`, `npm run seed:dry` (sem credenciais), `... culture` / `... health`.
+  - Excluído do `tsc build` do agente (roda via `tsx`); dry-run validado: 16 + 12 itens.
+- **`agent/SEED_GUIDE.md`** (novo): guia passo a passo (service account, execução, idempotência).
+
+> Depois de rodar o seed com a service account, `/cultura` e `/saude` passam a servir
+> do Firestore; os mocks continuam como fallback de segurança.
+
+---
+
 ## Próximos passos sugeridos (não aplicados ainda)
 
-- Popular as coleções `culture`/`health_guides` no Firestore (hoje servem dos mocks via fallback).
+- **Rodar o seed** com a service account (instruções em `agent/SEED_GUIDE.md`).
 - Aplicar as recomendações de contraste dos botões/links rosa (decisão de design).
 - Rodar o Lighthouse real (instruções no `AUDITORIA_CONTRASTE.md`).
 - Self-host de fontes/ícones (hoje via CDN).

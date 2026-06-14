@@ -12,6 +12,8 @@
     "scrape": "tsx src/cli/index.ts scrape",
     "test-scrape": "tsx src/scrape-only.ts",
     "process": "tsx src/cli/index.ts process",
+    "seed": "tsx src/seed/seed-content.ts",
+    "seed:dry": "tsx src/seed/seed-content.ts --dry-run",
     "test": "vitest"
   },
   "dependencies": {

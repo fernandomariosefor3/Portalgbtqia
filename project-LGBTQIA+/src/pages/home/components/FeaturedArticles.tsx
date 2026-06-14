@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
-import { featuredArticles, latestArticles } from '@/mocks/articles';
+import { useArticles } from '@/lib/useArticles';
 
 export default function FeaturedArticles() {
+  const { articles } = useArticles();
+
+  // Os 3 primeiros como destaque e os 4 seguintes como "últimos".
+  const featuredArticles = articles.slice(0, 3);
+  const latestArticles = articles.slice(3, 7);
+
   return (
     <section className="w-full bg-surface py-14 md:py-20 px-4 md:px-6 lg:px-10">
       <div className="max-w-7xl mx-auto">
@@ -19,7 +25,7 @@ export default function FeaturedArticles() {
             className="hidden md:flex items-center gap-2 text-sm font-medium text-primary-400 hover:text-primary-500 transition-colors whitespace-nowrap"
           >
             Ver todos
-            <i className="ri-arrow-right-line"></i>
+            <i className="ri-arrow-right-line" aria-hidden="true"></i>
           </Link>
         </div>
 
@@ -53,7 +59,7 @@ export default function FeaturedArticles() {
                   <span className="font-medium text-dark-500">{article.author}</span>
                   <div className="flex items-center gap-3">
                     <span className="flex items-center gap-1">
-                      <i className="ri-time-line"></i>
+                      <i className="ri-time-line" aria-hidden="true"></i>
                       {article.readTime} min
                     </span>
                     <span>{article.date}</span>
@@ -98,7 +104,7 @@ export default function FeaturedArticles() {
             className="inline-flex items-center gap-2 text-sm font-medium text-primary-400 hover:text-primary-500 transition-colors whitespace-nowrap"
           >
             Ver todos os artigos
-            <i className="ri-arrow-right-line"></i>
+            <i className="ri-arrow-right-line" aria-hidden="true"></i>
           </Link>
         </div>
       </div>

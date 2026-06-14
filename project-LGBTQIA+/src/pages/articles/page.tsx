@@ -1,69 +1,17 @@
-import { useState, useMemo, useEffect } from 'react';
-import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { useState, useMemo } from 'react';
 import ArticleCard from './components/ArticleCard';
 import ArticleFilters from './components/ArticleFilters';
 import ArticlesSidebar from './components/ArticlesSidebar';
 import { categoryLabels } from '@/mocks/articles-full';
-import type { Article } from '@/mocks/articles-full';
+import { useArticles } from '@/lib/useArticles';
 
 const ARTICLES_PER_PAGE = 9;
 
-const PLACEHOLDER_AUTHOR_PHOTO = 'https://ui-avatars.com/api/?name=Fernando+Mario&background=E94E77&color=fff&size=64';
-
-function firestoreToArticle(doc: any): Article {
-  const d = doc.data();
-  const date = d.published_at?.toDate?.()
-    ? d.published_at.toDate().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })
-    : '';
-  return {
-    id: doc.id,
-    title: d.title || '',
-    slug: d.slug || doc.id,
-    excerpt: d.excerpt || '',
-    category: d.category || 'artigos',
-    subcategory: d.subcategory || '',
-    date,
-    author: d.author || 'Fernando Mário da Silva Martins',
-    authorRole: d.authorRole || 'Fundador',
-    authorBio: '',
-    authorPhoto: PLACEHOLDER_AUTHOR_PHOTO,
-    readTime: Math.max(2, Math.ceil((d.excerpt?.length || 200) / 200)),
-    views: d.views || 0,
-    image: d.featured_image || 'https://readdy.ai/api/search-image?query=LGBTQ+pride+community+Brazil+colorful&width=800&height=500&seq=art-default&orientation=landscape',
-    featured: false,
-    tags: d.tags || [],
-    content: d.content || '',
-  };
-}
-
 export default function ArticlesPage() {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [loadingArticles, setLoadingArticles] = useState(true);
+  const { articles, loading: loadingArticles } = useArticles();
   const [activeCategory, setActiveCategory] = useState('todas');
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
-
-  useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        const q = query(
-          collection(db, 'articles'),
-          where('status', '==', 'published'),
-          orderBy('published_at', 'desc')
-        );
-        const snapshot = await getDocs(q);
-        const fetched = snapshot.docs.map(firestoreToArticle);
-        if (fetched.length > 0) fetched[0].featured = true;
-        setArticles(fetched);
-      } catch (err) {
-        console.error('Erro ao buscar artigos:', err);
-      } finally {
-        setLoadingArticles(false);
-      }
-    };
-    fetchArticles();
-  }, []);
 
   const filteredArticles = useMemo(() => {
     let result = articles;
@@ -114,7 +62,7 @@ export default function ArticlesPage() {
 
           <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 max-w-lg">
             <div className="relative w-full sm:flex-1">
-              <i className="ri-search-line absolute left-3.5 top-1/2 -translate-y-1/2 text-dark-300"></i>
+              <i className="ri-search-line absolute left-3.5 top-1/2 -translate-y-1/2 text-dark-300" aria-hidden="true"></i>
               <input
                 type="text"
                 placeholder="Buscar artigos, autores, tags..."
@@ -167,7 +115,7 @@ export default function ArticlesPage() {
                   ) : (
                     <div className="text-center py-16">
                       <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-dark-50 mb-4">
-                        <i className="ri-article-line text-2xl text-dark-300"></i>
+                        <i className="ri-article-line text-2xl text-dark-300" aria-hidden="true"></i>
                       </div>
                       <h3 className="text-lg font-medium text-dark-600">Nenhum artigo publicado ainda</h3>
                       <p className="mt-1 text-sm text-dark-400">Publique o primeiro artigo pelo painel admin.</p>
@@ -181,7 +129,7 @@ export default function ArticlesPage() {
                         className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium rounded-full border border-dark-200 text-dark-600 hover:bg-dark-50 hover:border-dark-300 transition-all cursor-pointer whitespace-nowrap"
                       >
                         Carregar mais artigos
-                        <i className="ri-arrow-down-line"></i>
+                        <i className="ri-arrow-down-line" aria-hidden="true"></i>
                       </button>
                     </div>
                   )}

@@ -34,7 +34,7 @@ jobs:
         run: npm run lint
 
       - name: Build
-        run: vite build
+        run: npx vite build
         env:
           # Placeholders so import.meta.env.* are defined at build time.
           VITE_FIREBASE_API_KEY: ci-placeholder

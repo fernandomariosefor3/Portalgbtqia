@@ -5,10 +5,12 @@ import { getRelatedCulture, typeLabels, typeColors, typeIcons } from '@/mocks/cu
 
 interface CultureSidebarProps {
   item: CultureItem;
+  /** Itens relacionados (do mesmo pool de dados). Se omitido, usa os mocks. */
+  related?: CultureItem[];
 }
 
-export default function CultureSidebar({ item }: CultureSidebarProps) {
-  const related = getRelatedCulture(item, 3);
+export default function CultureSidebar({ item, related: relatedProp }: CultureSidebarProps) {
+  const related = relatedProp ?? getRelatedCulture(item, 3);
   const [copied, setCopied] = useState(false);
 
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
@@ -157,7 +159,7 @@ export default function CultureSidebar({ item }: CultureSidebarProps) {
             className="w-9 h-9 flex items-center justify-center rounded-full bg-dark-700 text-white hover:bg-primary-400 transition-colors cursor-pointer"
             aria-label="Copiar link"
           >
-            <i className={copied ? 'ri-check-line' : 'ri-link'}></i>
+            <i className={copied ? 'ri-check-line' : 'ri-link'} aria-hidden="true"></i>
           </button>
         </div>
         {copied && (
@@ -205,7 +207,7 @@ export default function CultureSidebar({ item }: CultureSidebarProps) {
                 </div>
                 <div className="min-w-0">
                   <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium mb-1 ${typeColors[rel.type]}`}>
-                    <i className={`${typeIcons[rel.type]} text-[10px]`}></i>
+                    <i className={`${typeIcons[rel.type]} text-[10px]`} aria-hidden="true"></i>
                     {typeLabels[rel.type]}
                   </span>
                   <h5 className="text-sm font-medium text-dark-700 leading-snug group-hover:text-primary-500 transition-colors line-clamp-2">

@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom';
 import CultureHero from './components/CultureHero';
 import CultureCard from './components/CultureCard';
 import CultureSubNav from './components/CultureSubNav';
-import { allCulture, typeLabels, typeIcons } from '@/mocks/culture';
+import { typeLabels, typeIcons } from '@/mocks/culture';
+import { useCulture } from '@/lib/useCulture';
 
 export default function CulturePage() {
+  const { items: allCulture } = useCulture();
   const featuredItems = allCulture.filter((c) => c.featured).slice(0, 4);
   const types = ['cinema', 'series', 'musica', 'drag'] as const;
 
@@ -40,7 +42,7 @@ export default function CulturePage() {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2">
                   <span className="w-8 h-8 flex items-center justify-center rounded-full bg-dark-700 text-white text-sm">
-                    <i className={`${typeIcons[type]}`}></i>
+                    <i className={`${typeIcons[type]}`} aria-hidden="true"></i>
                   </span>
                   <h2 className="text-xl md:text-2xl font-playfair font-bold text-dark-700">
                     {typeLabels[type]}

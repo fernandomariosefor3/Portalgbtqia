@@ -1,12 +1,22 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState } from 'react';
-import { allHealthGuides, categoryLabels, categoryColors, categoryIcons } from '@/mocks/health';
+import { categoryLabels, categoryColors, categoryIcons } from '@/mocks/health';
+import { useHealth } from '@/lib/useHealth';
 
 export default function HealthDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const [showCopied, setShowCopied] = useState(false);
+  const { guides: allHealthGuides, loading } = useHealth();
 
   const guide = allHealthGuides.find((g) => g.slug === slug);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh] text-dark-400">
+        Carregando…
+      </div>
+    );
+  }
 
   if (!guide) {
     return (
@@ -276,7 +286,7 @@ export default function HealthDetailPage() {
                             <h5 className="text-xs font-medium text-dark-700 leading-snug group-hover:text-accent-500 transition-colors line-clamp-2">
                               {g.title}
                             </h5>
-                            <span className="text-[11px] text-dark-300 mt-0.5 block">
+                            <span className="text-[11px] text-dark-400 mt-0.5 block">
                               {g.readTime} min
                             </span>
                           </div>

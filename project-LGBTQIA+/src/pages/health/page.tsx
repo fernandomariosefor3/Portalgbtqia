@@ -2,10 +2,12 @@ import { Link, useLocation } from 'react-router-dom';
 import HealthHero from './components/HealthHero';
 import HealthCard from './components/HealthCard';
 import HealthSubNav from './components/HealthSubNav';
-import { allHealthGuides, categoryLabels, categoryDescriptions, categoryColors, categoryIcons } from '@/mocks/health';
+import { categoryLabels, categoryDescriptions, categoryColors, categoryIcons } from '@/mocks/health';
+import { useHealth } from '@/lib/useHealth';
 
 export default function HealthPage() {
   const location = useLocation();
+  const { guides: allHealthGuides } = useHealth();
   const pathParts = location.pathname.split('/');
   const category = pathParts[2] && pathParts[2] !== '' ? pathParts[2] : undefined;
   const validCategories = ['prep-pep', 'saude-mental', 'saude-trans', 'educacao-sexual'];

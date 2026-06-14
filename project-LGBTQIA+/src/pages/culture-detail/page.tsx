@@ -1,11 +1,21 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { getCultureBySlug, allCulture } from '@/mocks/culture';
+import { useCulture } from '@/lib/useCulture';
 import CultureHeader from './components/CultureHeader';
 import CultureSidebar from './components/CultureSidebar';
 
 export default function CultureDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const item = slug ? getCultureBySlug(slug) : undefined;
+  const { items: allCulture, loading } = useCulture();
+  const item = slug ? allCulture.find((c) => c.slug === slug) : undefined;
+
+  // Enquanto carrega, evita redirecionar prematuramente.
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh] text-dark-400">
+        Carregando…
+      </div>
+    );
+  }
 
   if (!item) {
     return <Navigate to="/cultura" replace />;
@@ -14,6 +24,11 @@ export default function CultureDetailPage() {
   const currentIndex = allCulture.findIndex((c) => c.id === item.id);
   const prevItem = currentIndex > 0 ? allCulture[currentIndex - 1] : null;
   const nextItem = currentIndex < allCulture.length - 1 ? allCulture[currentIndex + 1] : null;
+
+  // Relacionados do mesmo pool: mesmo tipo, exceto o item atual.
+  const related = allCulture
+    .filter((c) => c.id !== item.id && c.type === item.type)
+    .slice(0, 3);
 
   return (
     <main className="w-full min-h-screen bg-surface font-inter pb-16">
@@ -64,7 +79,7 @@ export default function CultureDetailPage() {
 
             <div className="w-full lg:w-80 flex-shrink-0">
               <div className="lg:sticky lg:top-24">
-                <CultureSidebar item={item} />
+                <CultureSidebar item={item} related={related} />
               </div>
             </div>
           </div>

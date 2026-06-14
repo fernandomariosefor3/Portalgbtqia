@@ -1,13 +1,15 @@
 import { useLocation } from 'react-router-dom';
 import CultureCard from '../culture/components/CultureCard';
 import CultureSubNav from '../culture/components/CultureSubNav';
-import { allCulture, typeLabels, typeColors, typeIcons } from '@/mocks/culture';
+import { typeLabels, typeColors, typeIcons } from '@/mocks/culture';
+import { useCulture } from '@/lib/useCulture';
 
 export default function CultureCategoryPage() {
   const location = useLocation();
   const segment = location.pathname.split('/').pop() || '';
   const validType = ['cinema', 'series', 'musica', 'drag'].includes(segment) ? segment : 'cinema';
 
+  const { items: allCulture } = useCulture();
   const items = allCulture.filter((c) => c.type === validType);
 
   return (
@@ -22,7 +24,7 @@ export default function CultureCategoryPage() {
         </div>
         <div className="relative max-w-7xl mx-auto">
           <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider mb-4 ${typeColors[validType]}`}>
-            <i className={`${typeIcons[validType]} mr-1`}></i>
+            <i className={`${typeIcons[validType]} mr-1`} aria-hidden="true"></i>
             {typeLabels[validType]}
           </span>
           <h1 className="text-3xl md:text-5xl font-playfair font-bold text-white max-w-2xl leading-tight">

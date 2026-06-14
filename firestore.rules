@@ -35,6 +35,18 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
+    // ========== CULTURE ==========
+    match /culture/{cultureId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ========== HEALTH GUIDES ==========
+    match /health_guides/{guideId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
     // ========== EVENTS ==========
     match /events/{eventId} {
       // Leitura pública para eventos aprovados

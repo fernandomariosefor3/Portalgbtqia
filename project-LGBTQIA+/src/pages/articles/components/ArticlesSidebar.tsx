@@ -46,7 +46,7 @@ export default function ArticlesSidebar() {
 
       <div className="rounded-xl bg-primary-400 p-5 text-white">
         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 mb-3">
-          <i className="ri-mail-line text-lg"></i>
+          <i className="ri-mail-line text-lg" aria-hidden="true"></i>
         </div>
         <h4 className="text-base font-playfair font-bold mb-2">
           Newsletter semanal
@@ -59,7 +59,7 @@ export default function ArticlesSidebar() {
           className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-full bg-white text-primary-500 hover:bg-white/90 transition-colors whitespace-nowrap"
         >
           Inscrever-se
-          <i className="ri-arrow-right-line"></i>
+          <i className="ri-arrow-right-line" aria-hidden="true"></i>
         </a>
       </div>
     </aside>

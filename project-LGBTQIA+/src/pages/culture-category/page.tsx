@@ -53,7 +53,7 @@ export default function CultureCategoryPage() {
           ) : (
             <div className="text-center py-16">
               <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-dark-50 mb-4">
-                <i className="ri-film-line text-2xl text-dark-300"></i>
+                <i className="ri-film-line text-2xl text-dark-300" aria-hidden="true"></i>
               </div>
               <h3 className="text-lg font-medium text-dark-600">Nenhum item encontrado</h3>
               <p className="mt-1 text-sm text-dark-400">Volte em breve para novos conteúdos.</p>

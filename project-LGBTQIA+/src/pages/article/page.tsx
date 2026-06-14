@@ -35,7 +35,7 @@ export default function ArticlePage() {
                       to={`/artigos/${prevArticle.slug}`}
                       className="group flex items-center gap-2 text-sm text-dark-500 hover:text-primary-500 transition-colors"
                     >
-                      <i className="ri-arrow-left-line text-lg flex-shrink-0"></i>
+                      <i className="ri-arrow-left-line text-lg flex-shrink-0" aria-hidden="true"></i>
                       <div className="text-left">
                         <span className="block text-[10px] uppercase tracking-wider text-dark-400">Anterior</span>
                         <span className="block font-medium line-clamp-1 max-w-[140px] sm:max-w-[200px]">{prevArticle.title}</span>
@@ -53,7 +53,7 @@ export default function ArticlePage() {
                         <span className="block text-[10px] uppercase tracking-wider text-dark-400">Próximo</span>
                         <span className="block font-medium line-clamp-1 max-w-[140px] sm:max-w-[200px]">{nextArticle.title}</span>
                       </div>
-                      <i className="ri-arrow-right-line text-lg flex-shrink-0"></i>
+                      <i className="ri-arrow-right-line text-lg flex-shrink-0" aria-hidden="true"></i>
                     </Link>
                   ) : (
                     <div />

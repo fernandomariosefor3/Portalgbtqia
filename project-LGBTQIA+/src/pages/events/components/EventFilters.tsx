@@ -48,7 +48,7 @@ export default function EventFilters({
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <i className="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-dark-400"></i>
+          <i className="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-dark-400" aria-hidden="true"></i>
           <input
             type="text"
             value={searchQuery}
@@ -61,7 +61,7 @@ export default function EventFilters({
           onClick={() => setShowFilters(!showFilters)}
           className="sm:hidden px-4 py-2.5 text-sm font-medium border border-dark-200 rounded-lg flex items-center justify-center gap-2"
         >
-          <i className="ri-filter-3-line"></i>
+          <i className="ri-filter-3-line" aria-hidden="true"></i>
           Filtros
         </button>
         <div className={`${showFilters ? 'flex' : 'hidden'} sm:flex flex-col sm:flex-row gap-3`}>

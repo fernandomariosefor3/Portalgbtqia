@@ -61,11 +61,11 @@ export default function EventDetailPage() {
       <main className="min-h-screen bg-surface-50 pt-24 pb-16">
         <div className="text-center px-4">
           <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-dark-100 text-dark-400 text-2xl mb-4">
-            <i className="ri-calendar-close-line"></i>
+            <i className="ri-calendar-close-line" aria-hidden="true"></i>
           </div>
           <h1 className="text-xl font-semibold text-dark-700">Evento não encontrado</h1>
           <Link to="/eventos" className="mt-4 inline-flex items-center gap-1 text-sm text-primary-400 hover:text-primary-500">
-            <i className="ri-arrow-left-line"></i> Ver todos os eventos
+            <i className="ri-arrow-left-line" aria-hidden="true"></i> Ver todos os eventos
           </Link>
         </div>
       </main>
@@ -116,7 +116,7 @@ export default function EventDetailPage() {
               </span>
               {event.is_featured && (
                 <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-amber-700 bg-amber-100 rounded-full">
-                  <i className="ri-star-fill text-xs"></i> Destaque
+                  <i className="ri-star-fill text-xs" aria-hidden="true"></i> Destaque
                 </span>
               )}
             </div>
@@ -125,21 +125,21 @@ export default function EventDetailPage() {
             </h1>
             <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-white/80">
               <span className="flex items-center gap-1">
-                <i className="ri-calendar-line"></i>
+                <i className="ri-calendar-line" aria-hidden="true"></i>
                 {formatDate(event.start_date)}
                 {event.end_date && event.end_date !== event.start_date && ` - ${formatDate(event.end_date)}`}
               </span>
               <span className="flex items-center gap-1">
-                <i className="ri-time-line"></i>
+                <i className="ri-time-line" aria-hidden="true"></i>
                 {formatTime(event.start_time)}
                 {event.end_time && ` - ${formatTime(event.end_time)}`}
               </span>
               <span className="flex items-center gap-1">
-                <i className="ri-map-pin-line"></i>
+                <i className="ri-map-pin-line" aria-hidden="true"></i>
                 {event.city}, {event.state}
               </span>
               <span className="flex items-center gap-1">
-                <i className="ri-eye-line"></i>
+                <i className="ri-eye-line" aria-hidden="true"></i>
                 {event.views.toLocaleString('pt-BR')} visualizações
               </span>
             </div>
@@ -215,7 +215,7 @@ export default function EventDetailPage() {
                 {event.location && (
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 flex items-center justify-center rounded-full bg-primary-50 text-primary-400 flex-shrink-0">
-                      <i className="ri-map-pin-line"></i>
+                      <i className="ri-map-pin-line" aria-hidden="true"></i>
                     </div>
                     <div>
                       <p className="font-medium text-dark-700">{event.location}</p>
@@ -225,7 +225,7 @@ export default function EventDetailPage() {
                 )}
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 flex items-center justify-center rounded-full bg-primary-50 text-primary-400 flex-shrink-0">
-                    <i className="ri-calendar-line"></i>
+                    <i className="ri-calendar-line" aria-hidden="true"></i>
                   </div>
                   <div>
                     <p className="font-medium text-dark-700">{formatDate(event.start_date)}</p>
@@ -237,7 +237,7 @@ export default function EventDetailPage() {
                 {event.start_time && (
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 flex items-center justify-center rounded-full bg-primary-50 text-primary-400 flex-shrink-0">
-                      <i className="ri-time-line"></i>
+                      <i className="ri-time-line" aria-hidden="true"></i>
                     </div>
                     <div>
                       <p className="font-medium text-dark-700">
@@ -249,7 +249,7 @@ export default function EventDetailPage() {
                 )}
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-500 flex-shrink-0">
-                    <i className="ri-price-tag-3-line"></i>
+                    <i className="ri-price-tag-3-line" aria-hidden="true"></i>
                   </div>
                   <div>
                     <p className="font-medium text-emerald-600">{event.price_info}</p>
@@ -258,7 +258,7 @@ export default function EventDetailPage() {
                 {event.organizer && (
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 flex items-center justify-center rounded-full bg-amber-50 text-amber-500 flex-shrink-0">
-                      <i className="ri-building-line"></i>
+                      <i className="ri-building-line" aria-hidden="true"></i>
                     </div>
                     <div>
                       <p className="font-medium text-dark-700">{event.organizer}</p>
@@ -268,7 +268,7 @@ export default function EventDetailPage() {
                 {event.contact_email && (
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 flex items-center justify-center rounded-full bg-dark-50 text-dark-400 flex-shrink-0">
-                      <i className="ri-mail-line"></i>
+                      <i className="ri-mail-line" aria-hidden="true"></i>
                     </div>
                     <a href={`mailto:${event.contact_email}`} className="text-primary-400 hover:text-primary-500 text-xs break-all">
                       {event.contact_email}
@@ -278,7 +278,7 @@ export default function EventDetailPage() {
                 {event.contact_phone && (
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 flex items-center justify-center rounded-full bg-dark-50 text-dark-400 flex-shrink-0">
-                      <i className="ri-phone-line"></i>
+                      <i className="ri-phone-line" aria-hidden="true"></i>
                     </div>
                     <span className="text-dark-600 text-xs">{event.contact_phone}</span>
                   </div>
@@ -306,28 +306,28 @@ export default function EventDetailPage() {
                   className="w-9 h-9 flex items-center justify-center rounded-full bg-dark-50 text-dark-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"
                   aria-label="Compartilhar no Facebook"
                 >
-                  <i className="ri-facebook-fill"></i>
+                  <i className="ri-facebook-fill" aria-hidden="true"></i>
                 </button>
                 <button
                   onClick={() => handleShare('twitter')}
                   className="w-9 h-9 flex items-center justify-center rounded-full bg-dark-50 text-dark-500 hover:bg-sky-50 hover:text-sky-500 transition-colors"
                   aria-label="Compartilhar no Twitter"
                 >
-                  <i className="ri-twitter-x-fill"></i>
+                  <i className="ri-twitter-x-fill" aria-hidden="true"></i>
                 </button>
                 <button
                   onClick={() => handleShare('whatsapp')}
                   className="w-9 h-9 flex items-center justify-center rounded-full bg-dark-50 text-dark-500 hover:bg-green-50 hover:text-green-600 transition-colors"
                   aria-label="Compartilhar no WhatsApp"
                 >
-                  <i className="ri-whatsapp-line"></i>
+                  <i className="ri-whatsapp-line" aria-hidden="true"></i>
                 </button>
                 <button
                   onClick={() => handleShare('copy')}
                   className="w-9 h-9 flex items-center justify-center rounded-full bg-dark-50 text-dark-500 hover:bg-primary-50 hover:text-primary-400 transition-colors"
                   aria-label="Copiar link"
                 >
-                  <i className="ri-link"></i>
+                  <i className="ri-link" aria-hidden="true"></i>
                 </button>
               </div>
             </div>

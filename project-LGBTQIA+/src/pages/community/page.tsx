@@ -122,7 +122,7 @@ export default function CommunityPage() {
                 className="rounded-xl md:rounded-2xl border border-dark-100 bg-white p-5 md:p-6"
               >
                 <div className="flex items-center gap-2">
-                  <i className="ri-phone-line text-primary-500 text-lg"></i>
+                  <i className="ri-phone-line text-primary-500 text-lg" aria-hidden="true"></i>
                   <span className="text-xs font-semibold text-primary-500 uppercase tracking-wider">Ligue agora</span>
                 </div>
                 <p className="mt-2 text-xl font-playfair font-bold text-dark-800">{r.contact}</p>
@@ -134,7 +134,7 @@ export default function CommunityPage() {
                   rel="noopener noreferrer"
                   className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-primary-500 hover:text-primary-600 transition-colors"
                 >
-                  Acessar site <i className="ri-arrow-right-line"></i>
+                  Acessar site <i className="ri-arrow-right-line" aria-hidden="true"></i>
                 </a>
               </div>
             ))}

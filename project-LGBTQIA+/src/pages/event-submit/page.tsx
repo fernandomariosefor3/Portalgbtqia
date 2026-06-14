@@ -136,7 +136,7 @@ export default function EventSubmitPage() {
             to="/eventos"
             className="inline-flex items-center gap-1 text-sm text-dark-500 hover:text-primary-400 transition-colors mb-6"
           >
-            <i className="ri-arrow-left-line"></i> Voltar para eventos
+            <i className="ri-arrow-left-line" aria-hidden="true"></i> Voltar para eventos
           </Link>
 
           <h1 className="text-2xl md:text-3xl font-playfair font-bold text-dark-800">
@@ -151,7 +151,7 @@ export default function EventSubmitPage() {
               {result.success ? (
                 <div>
                   <div className="flex items-center gap-2 text-emerald-700 font-semibold mb-2">
-                    <i className="ri-checkbox-circle-line text-xl"></i>
+                    <i className="ri-checkbox-circle-line text-xl" aria-hidden="true"></i>
                     Evento publicado com sucesso!
                   </div>
                   <p className="text-sm text-emerald-600 mb-3">
@@ -162,17 +162,17 @@ export default function EventSubmitPage() {
                       <p className="text-xs font-semibold text-dark-600 mb-1">Ações da IA:</p>
                       <ul className="text-xs text-dark-500 space-y-0.5">
                         <li className="flex items-center gap-1">
-                          <i className="ri-check-line text-emerald-500"></i> Slug gerado automaticamente
+                          <i className="ri-check-line text-emerald-500" aria-hidden="true"></i> Slug gerado automaticamente
                         </li>
                         <li className="flex items-center gap-1">
-                          <i className="ri-check-line text-emerald-500"></i> Categoria detectada: <span className="font-medium text-dark-700">{String(result.ai_actions.category_detected || '')}</span>
+                          <i className="ri-check-line text-emerald-500" aria-hidden="true"></i> Categoria detectada: <span className="font-medium text-dark-700">{String(result.ai_actions.category_detected || '')}</span>
                         </li>
                         <li className="flex items-center gap-1">
-                          <i className="ri-check-line text-emerald-500"></i> Tags extraídas: <span className="font-medium text-dark-700">{Array.isArray(result.ai_actions.tags_extracted) ? result.ai_actions.tags_extracted.join(', ') : ''}</span>
+                          <i className="ri-check-line text-emerald-500" aria-hidden="true"></i> Tags extraídas: <span className="font-medium text-dark-700">{Array.isArray(result.ai_actions.tags_extracted) ? result.ai_actions.tags_extracted.join(', ') : ''}</span>
                         </li>
                         {Boolean(result.ai_actions.short_description_generated) && (
                           <li className="flex items-center gap-1">
-                            <i className="ri-check-line text-emerald-500"></i> Resumo gerado automaticamente
+                            <i className="ri-check-line text-emerald-500" aria-hidden="true"></i> Resumo gerado automaticamente
                           </li>
                         )}
                       </ul>
@@ -183,13 +183,13 @@ export default function EventSubmitPage() {
                       to={`/eventos/${String((result.event as Record<string, string>).slug || '')}`}
                       className="inline-flex items-center gap-1 text-sm font-medium text-primary-400 hover:text-primary-500 transition-colors"
                     >
-                      Ver evento publicado <i className="ri-arrow-right-line"></i>
+                      Ver evento publicado <i className="ri-arrow-right-line" aria-hidden="true"></i>
                     </Link>
                   )}
                 </div>
               ) : (
                 <div className="flex items-center gap-2 text-rose-700">
-                  <i className="ri-error-warning-line text-xl"></i>
+                  <i className="ri-error-warning-line text-xl" aria-hidden="true"></i>
                   <span className="text-sm">{result.error}</span>
                 </div>
               )}
@@ -400,9 +400,9 @@ export default function EventSubmitPage() {
                 className="inline-flex items-center gap-2 px-8 py-3 text-sm font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
                 {loading ? (
-                  <><i className="ri-loader-4-line animate-spin"></i> Processando com IA...</>
+                  <><i className="ri-loader-4-line animate-spin" aria-hidden="true"></i> Processando com IA...</>
                 ) : (
-                  <><i className="ri-magic-line"></i> Enviar e processar com IA</>
+                  <><i className="ri-magic-line" aria-hidden="true"></i> Enviar e processar com IA</>
                 )}
               </button>
             </div>

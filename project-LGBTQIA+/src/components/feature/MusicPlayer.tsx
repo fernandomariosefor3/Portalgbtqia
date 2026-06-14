@@ -146,7 +146,7 @@ export default function MusicPlayer() {
           className={`w-14 h-14 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-white shadow-lg animate-pulse`}
           title="Abrir player"
         >
-          <i className="ri-music-2-line text-2xl"></i>
+          <i className="ri-music-2-line text-2xl" aria-hidden="true"></i>
         </button>
       ) : (
         // Full player
@@ -154,7 +154,7 @@ export default function MusicPlayer() {
           {/* Header */}
           <div className="flex items-center justify-between px-4 pt-3 pb-1">
             <div className="flex items-center gap-2">
-              <i className="ri-music-2-line text-sm opacity-80"></i>
+              <i className="ri-music-2-line text-sm opacity-80" aria-hidden="true"></i>
               <span className="text-xs font-semibold uppercase tracking-widest opacity-80">
                 Gay Dance Radio 🏳️‍🌈
               </span>
@@ -165,14 +165,14 @@ export default function MusicPlayer() {
                 className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors"
                 title="Minimizar"
               >
-                <i className="ri-subtract-line text-sm"></i>
+                <i className="ri-subtract-line text-sm" aria-hidden="true"></i>
               </button>
               <button
                 onClick={() => setHidden(true)}
                 className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors"
                 title="Fechar"
               >
-                <i className="ri-close-line text-sm"></i>
+                <i className="ri-close-line text-sm" aria-hidden="true"></i>
               </button>
             </div>
           </div>
@@ -187,7 +187,7 @@ export default function MusicPlayer() {
                 }`}
                 style={playing ? { animationDuration: "3s" } : {}}
               >
-                <i className="ri-disc-line text-2xl"></i>
+                <i className="ri-disc-line text-2xl" aria-hidden="true"></i>
               </div>
               <div className="min-w-0">
                 <p className="font-bold text-sm leading-tight truncate">{track.title}</p>
@@ -205,7 +205,7 @@ export default function MusicPlayer() {
               onClick={prevTrack}
               className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors"
             >
-              <i className="ri-skip-back-fill text-lg"></i>
+              <i className="ri-skip-back-fill text-lg" aria-hidden="true"></i>
             </button>
             <button
               onClick={togglePlay}
@@ -217,7 +217,7 @@ export default function MusicPlayer() {
               onClick={nextTrack}
               className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors"
             >
-              <i className="ri-skip-forward-fill text-lg"></i>
+              <i className="ri-skip-forward-fill text-lg" aria-hidden="true"></i>
             </button>
           </div>
 

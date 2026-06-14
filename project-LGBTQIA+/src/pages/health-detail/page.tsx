@@ -13,7 +13,7 @@ export default function HealthDetailPage() {
       <main className="w-full min-h-screen bg-surface font-inter pt-24 pb-16 px-4 md:px-6 lg:px-10">
         <div className="max-w-3xl mx-auto text-center">
           <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-dark-50 text-dark-300 mb-4">
-            <i className="ri-file-search-line text-2xl"></i>
+            <i className="ri-file-search-line text-2xl" aria-hidden="true"></i>
           </div>
           <h1 className="text-xl font-playfair font-bold text-dark-700">Guia não encontrado</h1>
           <p className="mt-2 text-sm text-dark-400">O guia de saúde que você procura não existe ou foi removido.</p>
@@ -114,7 +114,7 @@ export default function HealthDetailPage() {
                     {guide.faqs.map((faq, idx) => (
                       <div key={idx} className="rounded-lg border border-dark-100 bg-white p-5">
                         <h4 className="text-sm font-semibold text-dark-700 mb-2 flex items-start gap-2">
-                          <i className="ri-question-line text-accent-400 mt-0.5"></i>
+                          <i className="ri-question-line text-accent-400 mt-0.5" aria-hidden="true"></i>
                           {faq.question}
                         </h4>
                         <p className="text-sm text-dark-500 leading-relaxed pl-6">
@@ -134,7 +134,7 @@ export default function HealthDetailPage() {
                   <ul className="space-y-2">
                     {guide.sources.map((source, idx) => (
                       <li key={idx} className="text-sm text-dark-500 flex items-start gap-2">
-                        <i className="ri-bookmark-line text-accent-400 mt-0.5"></i>
+                        <i className="ri-bookmark-line text-accent-400 mt-0.5" aria-hidden="true"></i>
                         {source}
                       </li>
                     ))}
@@ -162,28 +162,28 @@ export default function HealthDetailPage() {
                       className="w-8 h-8 flex items-center justify-center rounded-full bg-dark-50 text-dark-400 hover:bg-primary-100 hover:text-primary-500 transition-colors"
                       aria-label="Compartilhar no Facebook"
                     >
-                      <i className="ri-facebook-fill text-sm"></i>
+                      <i className="ri-facebook-fill text-sm" aria-hidden="true"></i>
                     </button>
                     <button
                       onClick={shareTwitter}
                       className="w-8 h-8 flex items-center justify-center rounded-full bg-dark-50 text-dark-400 hover:bg-primary-100 hover:text-primary-500 transition-colors"
                       aria-label="Compartilhar no Twitter"
                     >
-                      <i className="ri-twitter-x-fill text-sm"></i>
+                      <i className="ri-twitter-x-fill text-sm" aria-hidden="true"></i>
                     </button>
                     <button
                       onClick={shareWhatsApp}
                       className="w-8 h-8 flex items-center justify-center rounded-full bg-dark-50 text-dark-400 hover:bg-primary-100 hover:text-primary-500 transition-colors"
                       aria-label="Compartilhar no WhatsApp"
                     >
-                      <i className="ri-whatsapp-line text-sm"></i>
+                      <i className="ri-whatsapp-line text-sm" aria-hidden="true"></i>
                     </button>
                     <button
                       onClick={handleShare}
                       className="w-8 h-8 flex items-center justify-center rounded-full bg-dark-50 text-dark-400 hover:bg-primary-100 hover:text-primary-500 transition-colors relative"
                       aria-label="Copiar link"
                     >
-                      <i className="ri-link text-sm"></i>
+                      <i className="ri-link text-sm" aria-hidden="true"></i>
                       {showCopied && (
                         <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-dark-700 text-white text-[10px] rounded whitespace-nowrap">
                           Copiado!
@@ -223,7 +223,7 @@ export default function HealthDetailPage() {
 
                 <div className="rounded-xl border border-accent-100 bg-accent-50 p-5">
                   <div className="flex items-start gap-3">
-                    <i className="ri-information-line text-accent-500 text-lg mt-0.5"></i>
+                    <i className="ri-information-line text-accent-500 text-lg mt-0.5" aria-hidden="true"></i>
                     <div>
                       <h4 className="text-sm font-semibold text-accent-600 mb-1">
                         Aviso importante
@@ -298,7 +298,7 @@ export default function HealthDetailPage() {
                     href="tel:188"
                     className="inline-flex px-4 py-2 text-xs font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap items-center gap-1.5"
                   >
-                    <i className="ri-phone-line"></i>
+                    <i className="ri-phone-line" aria-hidden="true"></i>
                     Ligar CVV 188
                   </a>
                 </div>

@@ -80,7 +80,7 @@ export default function GuidePage() {
       <section className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 pt-10 pb-4">
         <div className="rounded-xl border border-primary-100 bg-primary-50/50 p-4 md:p-5 flex items-start gap-3 mb-6">
           <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-primary-100 text-primary-500 shrink-0">
-            <i className="ri-information-line text-lg"></i>
+            <i className="ri-information-line text-lg" aria-hidden="true"></i>
           </div>
           <div>
             <p className="text-sm font-semibold text-dark-700">Guia colaborativo com referências verificadas</p>
@@ -128,7 +128,7 @@ export default function GuidePage() {
               <div className="p-5 md:p-6">
                 <h3 className="text-base md:text-lg font-semibold text-dark-800">{s.name}</h3>
                 <p className="mt-1 text-xs text-dark-400 flex items-center gap-1">
-                  <i className="ri-map-pin-line"></i>
+                  <i className="ri-map-pin-line" aria-hidden="true"></i>
                   {s.address}
                 </p>
                 <p className="mt-3 text-sm text-dark-500 leading-relaxed">{s.desc}</p>

@@ -51,7 +51,7 @@ export default function CulturePage() {
                   className="text-sm font-medium text-primary-500 hover:text-primary-600 transition-colors whitespace-nowrap flex items-center gap-1"
                 >
                   Ver todos
-                  <i className="ri-arrow-right-line"></i>
+                  <i className="ri-arrow-right-line" aria-hidden="true"></i>
                 </Link>
               </div>
 

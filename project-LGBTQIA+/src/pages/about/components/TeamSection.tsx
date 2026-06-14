@@ -12,7 +12,7 @@ export default function TeamSection() {
           </div>
           <div className="rounded-2xl border border-dark-100 bg-gradient-to-br from-white to-primary-50 p-8 md:p-10 flex flex-col sm:flex-row items-center gap-7">
             <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary-400 to-secondary-500 flex items-center justify-center text-white text-4xl flex-shrink-0 shadow-lg">
-              <i className="ri-user-heart-line"></i>
+              <i className="ri-user-heart-line" aria-hidden="true"></i>
             </div>
             <div className="text-center sm:text-left">
               <h3 className="text-xl md:text-2xl font-playfair font-bold text-dark-800">
@@ -33,7 +33,7 @@ export default function TeamSection() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 text-xs font-medium text-primary-500 hover:text-primary-600 transition-colors"
                 >
-                  <i className="ri-instagram-line text-base"></i>
+                  <i className="ri-instagram-line text-base" aria-hidden="true"></i>
                   @nando_apollo
                 </a>
                 <span className="text-dark-200">·</span>
@@ -41,7 +41,7 @@ export default function TeamSection() {
                   href="mailto:fernandomariodasmartins@gmail.com"
                   className="flex items-center gap-1.5 text-xs font-medium text-primary-500 hover:text-primary-600 transition-colors"
                 >
-                  <i className="ri-mail-line text-base"></i>
+                  <i className="ri-mail-line text-base" aria-hidden="true"></i>
                   Contato
                 </a>
               </div>
@@ -66,7 +66,7 @@ export default function TeamSection() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-6 max-w-4xl mx-auto">
           <div className="rounded-xl md:rounded-2xl border border-dark-100 bg-white p-5 md:p-6 text-center">
             <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-primary-50 text-primary-500 mx-auto">
-              <i className="ri-article-line text-xl"></i>
+              <i className="ri-article-line text-xl" aria-hidden="true"></i>
             </div>
             <h3 className="mt-4 text-base font-semibold text-dark-800">
               Envie um artigo
@@ -79,7 +79,7 @@ export default function TeamSection() {
 
           <div className="rounded-xl md:rounded-2xl border border-dark-100 bg-white p-5 md:p-6 text-center">
             <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-secondary-50 text-secondary-500 mx-auto">
-              <i className="ri-map-pin-add-line text-xl"></i>
+              <i className="ri-map-pin-add-line text-xl" aria-hidden="true"></i>
             </div>
             <h3 className="mt-4 text-base font-semibold text-dark-800">
               Indique um espaço
@@ -92,7 +92,7 @@ export default function TeamSection() {
 
           <div className="rounded-xl md:rounded-2xl border border-dark-100 bg-white p-5 md:p-6 text-center">
             <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-accent-50 text-accent-500 mx-auto">
-              <i className="ri-calendar-event-line text-xl"></i>
+              <i className="ri-calendar-event-line text-xl" aria-hidden="true"></i>
             </div>
             <h3 className="mt-4 text-base font-semibold text-dark-800">
               Divulgue um evento

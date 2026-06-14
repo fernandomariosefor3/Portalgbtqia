@@ -57,7 +57,7 @@ export default function HealthPage() {
           {filteredGuides.length === 0 && (
             <div className="text-center py-16">
               <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-dark-50 text-dark-300 mb-4">
-                <i className="ri-file-search-line text-2xl"></i>
+                <i className="ri-file-search-line text-2xl" aria-hidden="true"></i>
               </div>
               <p className="text-sm text-dark-400">Nenhum guia encontrado nesta categoria.</p>
             </div>
@@ -91,7 +91,7 @@ export default function HealthPage() {
                     </p>
                     <span className="mt-auto pt-3 text-xs font-medium text-accent-500 flex items-center gap-1">
                       {count} guias
-                      <i className="ri-arrow-right-line group-hover:translate-x-0.5 transition-transform"></i>
+                      <i className="ri-arrow-right-line group-hover:translate-x-0.5 transition-transform" aria-hidden="true"></i>
                     </span>
                   </Link>
                 );
@@ -117,7 +117,7 @@ export default function HealthPage() {
               href="tel:188"
               className="px-6 py-3 text-sm font-medium rounded-full bg-accent-400 text-white hover:bg-accent-500 transition-colors whitespace-nowrap flex items-center gap-2 flex-shrink-0"
             >
-              <i className="ri-phone-line"></i>
+              <i className="ri-phone-line" aria-hidden="true"></i>
               Ligar CVV 188
             </a>
           </div>

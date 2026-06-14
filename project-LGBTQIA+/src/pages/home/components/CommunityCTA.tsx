@@ -48,7 +48,7 @@ export default function CommunityCTA() {
         <div className="mt-10 md:mt-14 grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
           <div className="text-center">
             <div className="w-14 h-14 md:w-16 md:h-16 mx-auto flex items-center justify-center rounded-2xl bg-primary-400/20 text-primary-300">
-              <i className="ri-message-3-line text-2xl md:text-3xl"></i>
+              <i className="ri-message-3-line text-2xl md:text-3xl" aria-hidden="true"></i>
             </div>
             <h3 className="mt-4 text-lg font-semibold text-white">Fórum de discussões</h3>
             <p className="mt-2 text-sm text-white/60 leading-relaxed">
@@ -57,7 +57,7 @@ export default function CommunityCTA() {
           </div>
           <div className="text-center">
             <div className="w-14 h-14 md:w-16 md:h-16 mx-auto flex items-center justify-center rounded-2xl bg-secondary-400/20 text-secondary-300">
-              <i className="ri-user-heart-line text-2xl md:text-3xl"></i>
+              <i className="ri-user-heart-line text-2xl md:text-3xl" aria-hidden="true"></i>
             </div>
             <h3 className="mt-4 text-lg font-semibold text-white">Mentoria gratuita</h3>
             <p className="mt-2 text-sm text-white/60 leading-relaxed">
@@ -66,7 +66,7 @@ export default function CommunityCTA() {
           </div>
           <div className="text-center">
             <div className="w-14 h-14 md:w-16 md:h-16 mx-auto flex items-center justify-center rounded-2xl bg-accent-400/20 text-accent-300">
-              <i className="ri-chat-smile-2-line text-2xl md:text-3xl"></i>
+              <i className="ri-chat-smile-2-line text-2xl md:text-3xl" aria-hidden="true"></i>
             </div>
             <h3 className="mt-4 text-lg font-semibold text-white">Chat seguro</h3>
             <p className="mt-2 text-sm text-white/60 leading-relaxed">

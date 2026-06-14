@@ -95,7 +95,7 @@ export default function CultureCard({ item, variant = 'default' }: CultureCardPr
         </div>
         {item.rating && (
           <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 rounded-full bg-white/90 backdrop-blur text-xs font-semibold text-dark-700">
-            <i className="ri-star-fill text-secondary-400"></i>
+            <i className="ri-star-fill text-secondary-400" aria-hidden="true"></i>
             {item.rating}
           </div>
         )}

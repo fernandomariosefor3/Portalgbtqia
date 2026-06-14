@@ -63,15 +63,15 @@ export default function ArticleHeader({ article }: ArticleHeaderProps) {
               <div className="hidden sm:block w-px h-8 bg-dark-100"></div>
               <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs text-dark-400">
                 <span className="flex items-center gap-1">
-                  <i className="ri-calendar-line"></i>
+                  <i className="ri-calendar-line" aria-hidden="true"></i>
                   {formattedDate}
                 </span>
                 <span className="flex items-center gap-1">
-                  <i className="ri-time-line"></i>
+                  <i className="ri-time-line" aria-hidden="true"></i>
                   {article.readTime} min de leitura
                 </span>
                 <span className="flex items-center gap-1">
-                  <i className="ri-eye-line"></i>
+                  <i className="ri-eye-line" aria-hidden="true"></i>
                   {article.views.toLocaleString()} leituras
                 </span>
               </div>

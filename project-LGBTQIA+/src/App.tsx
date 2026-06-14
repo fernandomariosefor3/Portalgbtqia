@@ -11,8 +11,14 @@ function App() {
     <I18nextProvider i18n={i18n}>
       <BrowserRouter basename={__BASE_PATH__}>
         <div className="flex flex-col min-h-screen">
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-primary-400 focus:text-white focus:shadow-lg"
+          >
+            Pular para o conteúdo
+          </a>
           <Navbar />
-          <div className="flex-1">
+          <div id="main-content" tabIndex={-1} className="flex-1 outline-none">
             <AppRoutes />
           </div>
           <Footer />

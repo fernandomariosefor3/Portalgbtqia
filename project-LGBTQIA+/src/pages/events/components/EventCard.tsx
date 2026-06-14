@@ -50,7 +50,7 @@ export default function EventCard({ event, variant = 'default' }: EventCardProps
           {event.is_featured && (
             <div className="absolute top-3 right-3">
               <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-amber-700 bg-amber-100 rounded-full">
-                <i className="ri-star-fill text-xs"></i> Destaque
+                <i className="ri-star-fill text-xs" aria-hidden="true"></i> Destaque
               </span>
             </div>
           )}
@@ -61,24 +61,24 @@ export default function EventCard({ event, variant = 'default' }: EventCardProps
           </h3>
           <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-dark-500">
             <span className="flex items-center gap-1">
-              <i className="ri-calendar-line"></i>
+              <i className="ri-calendar-line" aria-hidden="true"></i>
               {formatDate(event.start_date)}
               {event.end_date && event.end_date !== event.start_date && ` - ${formatDate(event.end_date)}`}
             </span>
             <span className="flex items-center gap-1">
-              <i className="ri-time-line"></i>
+              <i className="ri-time-line" aria-hidden="true"></i>
               {formatTime(event.start_time)}
               {event.end_time && ` - ${formatTime(event.end_time)}`}
             </span>
           </div>
           <div className="mt-2 flex items-center gap-1 text-xs text-dark-500">
-            <i className="ri-map-pin-line"></i>
+            <i className="ri-map-pin-line" aria-hidden="true"></i>
             <span className="truncate">{event.city}, {event.state}</span>
           </div>
           <div className="mt-3 flex items-center justify-between">
             <span className="text-sm font-medium text-emerald-600">{event.price_info}</span>
             <span className="text-xs text-dark-400 flex items-center gap-1">
-              <i className="ri-eye-line"></i> {event.views.toLocaleString('pt-BR')}
+              <i className="ri-eye-line" aria-hidden="true"></i> {event.views.toLocaleString('pt-BR')}
             </span>
           </div>
         </div>
@@ -112,7 +112,7 @@ export default function EventCard({ event, variant = 'default' }: EventCardProps
             </span>
             {event.is_featured && (
               <span className="inline-flex items-center gap-1 text-xs text-amber-600">
-                <i className="ri-star-fill text-xs"></i> Destaque
+                <i className="ri-star-fill text-xs" aria-hidden="true"></i> Destaque
               </span>
             )}
           </div>
@@ -125,11 +125,11 @@ export default function EventCard({ event, variant = 'default' }: EventCardProps
         </div>
         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-dark-500">
           <span className="flex items-center gap-1">
-            <i className="ri-calendar-line"></i>
+            <i className="ri-calendar-line" aria-hidden="true"></i>
             {formatDate(event.start_date)}
           </span>
           <span className="flex items-center gap-1">
-            <i className="ri-map-pin-line"></i>
+            <i className="ri-map-pin-line" aria-hidden="true"></i>
             {event.city}
           </span>
           <span className="text-emerald-600 font-medium">{event.price_info}</span>

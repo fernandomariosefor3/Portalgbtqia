@@ -85,7 +85,7 @@ export default function EventsPage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium text-primary-300 bg-primary-400/20 rounded-full mb-4">
-                <i className="ri-calendar-event-line"></i> Agenda LGBTQ+ Nordeste
+                <i className="ri-calendar-event-line" aria-hidden="true"></i> Agenda LGBTQ+ Nordeste
               </span>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-white leading-tight">
                 Eventos & Agenda
@@ -98,7 +98,7 @@ export default function EventsPage() {
               to="/eventos/submeter"
               className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap"
             >
-              <i className="ri-add-circle-line"></i>
+              <i className="ri-add-circle-line" aria-hidden="true"></i>
               Indicar evento
             </Link>
           </div>
@@ -108,7 +108,7 @@ export default function EventsPage() {
       <section className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 py-8 md:py-10">
         <div className="rounded-xl border border-primary-100 bg-primary-50/50 p-4 md:p-5 flex items-start gap-3 mb-8">
           <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-primary-100 text-primary-500 shrink-0">
-            <i className="ri-calendar-event-line text-lg"></i>
+            <i className="ri-calendar-event-line text-lg" aria-hidden="true"></i>
           </div>
           <div>
             <p className="text-sm font-semibold text-dark-700">Agenda em construção</p>
@@ -152,7 +152,7 @@ export default function EventsPage() {
           ) : filteredEvents.length === 0 ? (
             <div className="text-center py-16">
               <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-dark-100 text-dark-400 text-2xl mb-4">
-                <i className="ri-calendar-close-line"></i>
+                <i className="ri-calendar-close-line" aria-hidden="true"></i>
               </div>
               <h3 className="text-lg font-semibold text-dark-700">Nenhum evento encontrado</h3>
               <p className="mt-1 text-sm text-dark-500">Tente ajustar os filtros ou a busca.</p>

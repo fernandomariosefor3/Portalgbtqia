@@ -16,7 +16,7 @@ export default function NotFound() {
           to="/"
           className="mt-6 inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors"
         >
-          <i className="ri-arrow-left-line"></i>
+          <i className="ri-arrow-left-line" aria-hidden="true"></i>
           Voltar para a página inicial
         </Link>
       </div>

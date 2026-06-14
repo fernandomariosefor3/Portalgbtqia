@@ -52,7 +52,7 @@ export default function ArticleSidebar({ article }: ArticleSidebarProps) {
             className="w-9 h-9 flex items-center justify-center rounded-full bg-dark-700 text-white hover:bg-primary-400 transition-colors"
             aria-label="Compartilhar no Facebook"
           >
-            <i className="ri-facebook-fill"></i>
+            <i className="ri-facebook-fill" aria-hidden="true"></i>
           </a>
           <a
             href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${shareText}`}
@@ -61,7 +61,7 @@ export default function ArticleSidebar({ article }: ArticleSidebarProps) {
             className="w-9 h-9 flex items-center justify-center rounded-full bg-dark-700 text-white hover:bg-primary-400 transition-colors"
             aria-label="Compartilhar no Twitter"
           >
-            <i className="ri-twitter-x-fill"></i>
+            <i className="ri-twitter-x-fill" aria-hidden="true"></i>
           </a>
           <a
             href={`https://api.whatsapp.com/send?text=${shareText}%20${encodeURIComponent(shareUrl)}`}
@@ -70,7 +70,7 @@ export default function ArticleSidebar({ article }: ArticleSidebarProps) {
             className="w-9 h-9 flex items-center justify-center rounded-full bg-dark-700 text-white hover:bg-primary-400 transition-colors"
             aria-label="Compartilhar no WhatsApp"
           >
-            <i className="ri-whatsapp-line"></i>
+            <i className="ri-whatsapp-line" aria-hidden="true"></i>
           </a>
           <a
             href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
@@ -79,7 +79,7 @@ export default function ArticleSidebar({ article }: ArticleSidebarProps) {
             className="w-9 h-9 flex items-center justify-center rounded-full bg-dark-700 text-white hover:bg-primary-400 transition-colors"
             aria-label="Compartilhar no LinkedIn"
           >
-            <i className="ri-linkedin-fill"></i>
+            <i className="ri-linkedin-fill" aria-hidden="true"></i>
           </a>
           <button
             onClick={handleCopy}

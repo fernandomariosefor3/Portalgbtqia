@@ -15,7 +15,7 @@ export default function HealthHero() {
       <div className="relative max-w-7xl mx-auto px-4 md:px-6 lg:px-10 py-20 md:py-28 lg:py-32">
         <div className="max-w-2xl">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent-400/90 text-white text-xs font-medium mb-5">
-            <i className="ri-heart-pulse-line"></i>
+            <i className="ri-heart-pulse-line" aria-hidden="true"></i>
             Cuidado e informação
           </span>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-white leading-tight">
@@ -30,21 +30,21 @@ export default function HealthHero() {
               to="/saude/prep-pep"
               className="px-5 py-2.5 text-sm font-medium rounded-full bg-accent-400 text-white hover:bg-accent-500 transition-colors whitespace-nowrap flex items-center gap-1.5"
             >
-              <i className="ri-capsule-line"></i>
+              <i className="ri-capsule-line" aria-hidden="true"></i>
               PrEP/PEP
             </Link>
             <Link
               to="/saude/saude-mental"
               className="px-5 py-2.5 text-sm font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap flex items-center gap-1.5"
             >
-              <i className="ri-mental-health-line"></i>
+              <i className="ri-mental-health-line" aria-hidden="true"></i>
               Saúde Mental
             </Link>
             <Link
               to="/saude/saude-trans"
               className="px-5 py-2.5 text-sm font-medium rounded-full bg-secondary-400 text-white hover:bg-secondary-500 transition-colors whitespace-nowrap flex items-center gap-1.5"
             >
-              <i className="ri-user-heart-line"></i>
+              <i className="ri-user-heart-line" aria-hidden="true"></i>
               Saúde Trans
             </Link>
           </div>

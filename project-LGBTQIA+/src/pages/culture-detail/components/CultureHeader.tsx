@@ -39,7 +39,7 @@ export default function CultureHeader({ item }: CultureHeaderProps) {
               )}
               {item.rating && (
                 <span className="flex items-center gap-1 text-xs font-semibold text-secondary-500">
-                  <i className="ri-star-fill"></i>
+                  <i className="ri-star-fill" aria-hidden="true"></i>
                   {item.rating}
                 </span>
               )}
@@ -70,15 +70,15 @@ export default function CultureHeader({ item }: CultureHeaderProps) {
               <div className="hidden sm:block w-px h-8 bg-dark-100"></div>
               <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs text-dark-400">
                 <span className="flex items-center gap-1">
-                  <i className="ri-calendar-line"></i>
+                  <i className="ri-calendar-line" aria-hidden="true"></i>
                   {formattedDate}
                 </span>
                 <span className="flex items-center gap-1">
-                  <i className="ri-time-line"></i>
+                  <i className="ri-time-line" aria-hidden="true"></i>
                   {item.readTime} min de leitura
                 </span>
                 <span className="flex items-center gap-1">
-                  <i className="ri-eye-line"></i>
+                  <i className="ri-eye-line" aria-hidden="true"></i>
                   {item.views.toLocaleString()} leituras
                 </span>
               </div>

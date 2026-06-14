@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 text-xl font-playfair font-bold">
               <span className="w-8 h-8 flex items-center justify-center rounded-full bg-primary-400 text-white text-sm">
-                <i className="ri-rainbow-line"></i>
+                <i className="ri-rainbow-line" aria-hidden="true"></i>
               </span>
               Portal LGBTQ+
             </Link>
@@ -24,7 +24,7 @@ export default function Footer() {
                 className="w-9 h-9 flex items-center justify-center rounded-full border border-white/30 text-white hover:bg-white/10 transition-colors"
                 aria-label="Instagram"
               >
-                <i className="ri-instagram-line"></i>
+                <i className="ri-instagram-line" aria-hidden="true"></i>
               </a>
               <a
                 href="https://twitter.com"
@@ -33,7 +33,7 @@ export default function Footer() {
                 className="w-9 h-9 flex items-center justify-center rounded-full border border-white/30 text-white hover:bg-white/10 transition-colors"
                 aria-label="Twitter"
               >
-                <i className="ri-twitter-x-line"></i>
+                <i className="ri-twitter-x-line" aria-hidden="true"></i>
               </a>
               <a
                 href="https://youtube.com"
@@ -42,7 +42,7 @@ export default function Footer() {
                 className="w-9 h-9 flex items-center justify-center rounded-full border border-white/30 text-white hover:bg-white/10 transition-colors"
                 aria-label="YouTube"
               >
-                <i className="ri-youtube-line"></i>
+                <i className="ri-youtube-line" aria-hidden="true"></i>
               </a>
               <a
                 href="https://tiktok.com"
@@ -51,7 +51,7 @@ export default function Footer() {
                 className="w-9 h-9 flex items-center justify-center rounded-full border border-white/30 text-white hover:bg-white/10 transition-colors"
                 aria-label="TikTok"
               >
-                <i className="ri-tiktok-line"></i>
+                <i className="ri-tiktok-line" aria-hidden="true"></i>
               </a>
             </div>
           </div>
@@ -89,11 +89,11 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-white/60">
-                <i className="ri-map-pin-line mt-0.5 text-primary-300"></i>
+                <i className="ri-map-pin-line mt-0.5 text-primary-300" aria-hidden="true"></i>
                 <span>Fortaleza, Ceará — Brasil</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-white/60">
-                <i className="ri-mail-line mt-0.5 text-primary-300"></i>
+                <i className="ri-mail-line mt-0.5 text-primary-300" aria-hidden="true"></i>
                 <span>contato@portallgbtq.com.br</span>
               </li>
             </ul>

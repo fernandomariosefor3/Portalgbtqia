@@ -1,14 +1,22 @@
 import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
 import { resolve } from "node:path";
 
 export default defineConfig({
-  // Define um objeto PostCSS inline (vazio) para impedir o Vite de procurar
-  // o postcss.config.ts (que exigiria ts-node). Testes não precisam de CSS.
+  plugins: [react()],
+  // Objeto PostCSS inline (vazio) impede o Vite de procurar o postcss.config.ts
+  // (que exigiria ts-node). Testes não precisam processar CSS real.
   css: {
     postcss: {},
   },
   test: {
-    environment: "node",
+    // Testes de componente (.test.tsx) usam jsdom; testes de funções puras
+    // (.test.ts) rodam em node (mais leve).
+    environmentMatchGlobs: [
+      ["src/**/*.test.tsx", "jsdom"],
+      ["src/**/*.test.ts", "node"],
+    ],
+    setupFiles: ["./src/test/setup.ts"],
     include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
     globals: true,
   },

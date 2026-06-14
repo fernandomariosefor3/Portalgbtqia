@@ -34,7 +34,7 @@ jobs:
         run: npm run lint
 
       - name: Build
-        run: vite build
+        run: npx vite build
         env:
           VITE_FIREBASE_API_KEY: ci-placeholder
           VITE_FIREBASE_AUTH_DOMAIN: ci-placeholder

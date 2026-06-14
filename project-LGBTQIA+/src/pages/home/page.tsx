@@ -58,7 +58,7 @@ export default function Home() {
               name="email"
               placeholder="Seu melhor e-mail"
               required
-              className="w-full sm:flex-1 px-5 py-3.5 text-sm rounded-full border border-dark-200 bg-white text-dark-700 placeholder:text-dark-300 focus:outline-none focus:ring-2 focus:ring-primary-400/30 focus:border-primary-400 transition-all"
+              className="w-full sm:flex-1 px-5 py-3.5 text-sm rounded-full border border-dark-200 bg-white text-dark-700 placeholder:text-dark-400 focus:outline-none focus:ring-2 focus:ring-primary-400/30 focus:border-primary-400 transition-all"
             />
             <button
               type="submit"
@@ -78,7 +78,7 @@ export default function Home() {
             </p>
           )}
           {formStatus === 'idle' && (
-            <p className="mt-3 text-xs text-dark-300">
+            <p className="mt-3 text-xs text-dark-400">
               Prometemos não enviar spam. Você pode cancelar a qualquer momento.
             </p>
           )}

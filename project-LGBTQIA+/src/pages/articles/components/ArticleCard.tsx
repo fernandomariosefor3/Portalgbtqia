@@ -24,7 +24,7 @@ export default function ArticleCard({ article, variant = 'default' }: ArticleCar
             <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${categoryColors[article.category] || 'bg-dark-100 text-dark-600'}`}>
               {categoryLabels[article.category] || article.category}
             </span>
-            <span className="text-xs text-dark-300">
+            <span className="text-xs text-dark-400">
               {article.date}
             </span>
           </div>
@@ -45,7 +45,7 @@ export default function ArticleCard({ article, variant = 'default' }: ArticleCar
             />
             <span className="text-xs text-dark-500 font-medium">{article.author}</span>
             <span className="text-dark-200">·</span>
-            <span className="text-xs text-dark-300">{article.readTime} min de leitura</span>
+            <span className="text-xs text-dark-400">{article.readTime} min de leitura</span>
           </div>
         </div>
       </article>
@@ -72,7 +72,7 @@ export default function ArticleCard({ article, variant = 'default' }: ArticleCar
               {article.title}
             </Link>
           </h4>
-          <span className="mt-1 block text-xs text-dark-300">{article.date}</span>
+          <span className="mt-1 block text-xs text-dark-400">{article.date}</span>
         </div>
       </article>
     );
@@ -111,7 +111,7 @@ export default function ArticleCard({ article, variant = 'default' }: ArticleCar
           />
           <div className="flex flex-col">
             <span className="text-xs text-dark-500 font-medium">{article.author}</span>
-            <span className="text-[11px] text-dark-300">{article.readTime} min · {article.views.toLocaleString()} leituras</span>
+            <span className="text-[11px] text-dark-400">{article.readTime} min · {article.views.toLocaleString()} leituras</span>
           </div>
         </div>
       </div>

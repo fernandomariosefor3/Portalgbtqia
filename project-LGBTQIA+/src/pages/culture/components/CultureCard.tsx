@@ -26,7 +26,7 @@ export default function CultureCard({ item, variant = 'default' }: CultureCardPr
               {typeLabels[item.type]}
             </span>
             {item.year && (
-              <span className="text-xs text-dark-300">{item.year}</span>
+              <span className="text-xs text-dark-400">{item.year}</span>
             )}
           </div>
           <h3 className="text-lg md:text-xl font-playfair font-bold text-dark-700 leading-snug group-hover:text-primary-500 transition-colors">
@@ -46,7 +46,7 @@ export default function CultureCard({ item, variant = 'default' }: CultureCardPr
             />
             <span className="text-xs text-dark-500 font-medium">{item.author}</span>
             <span className="text-dark-200">·</span>
-            <span className="text-xs text-dark-300">{item.readTime} min de leitura</span>
+            <span className="text-xs text-dark-400">{item.readTime} min de leitura</span>
           </div>
         </div>
       </article>
@@ -72,7 +72,7 @@ export default function CultureCard({ item, variant = 'default' }: CultureCardPr
           <h4 className="text-sm font-medium text-dark-700 leading-snug group-hover:text-primary-500 transition-colors">
             <Link to={`/cultura/${item.slug}`}>{item.title}</Link>
           </h4>
-          <span className="mt-1 block text-xs text-dark-300">{item.year}</span>
+          <span className="mt-1 block text-xs text-dark-400">{item.year}</span>
         </div>
       </article>
     );
@@ -118,7 +118,7 @@ export default function CultureCard({ item, variant = 'default' }: CultureCardPr
           />
           <div className="flex flex-col">
             <span className="text-xs text-dark-500 font-medium">{item.author}</span>
-            <span className="text-[11px] text-dark-300">{item.readTime} min · {item.views.toLocaleString()} leituras</span>
+            <span className="text-[11px] text-dark-400">{item.readTime} min · {item.views.toLocaleString()} leituras</span>
           </div>
         </div>
       </div>

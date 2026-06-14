@@ -43,7 +43,7 @@ export default function HealthCard({ guide, variant = 'default' }: HealthCardPro
             />
             <span className="text-xs text-dark-500 font-medium">{guide.author}</span>
             <span className="text-dark-200">·</span>
-            <span className="text-xs text-dark-300">{guide.readTime} min de leitura</span>
+            <span className="text-xs text-dark-400">{guide.readTime} min de leitura</span>
           </div>
         </div>
       </article>
@@ -69,7 +69,7 @@ export default function HealthCard({ guide, variant = 'default' }: HealthCardPro
           <h4 className="text-sm font-medium text-dark-700 leading-snug group-hover:text-accent-500 transition-colors">
             <Link to={`/saude/${guide.slug}`}>{guide.title}</Link>
           </h4>
-          <span className="mt-1 block text-xs text-dark-300">{guide.readTime} min</span>
+          <span className="mt-1 block text-xs text-dark-400">{guide.readTime} min</span>
         </div>
       </article>
     );
@@ -109,7 +109,7 @@ export default function HealthCard({ guide, variant = 'default' }: HealthCardPro
           />
           <div className="flex flex-col">
             <span className="text-xs text-dark-500 font-medium">{guide.author}</span>
-            <span className="text-[11px] text-dark-300">{guide.readTime} min · {guide.views.toLocaleString()} leituras</span>
+            <span className="text-[11px] text-dark-400">{guide.readTime} min · {guide.views.toLocaleString()} leituras</span>
           </div>
         </div>
       </div>

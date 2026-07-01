@@ -135,7 +135,7 @@ export default function EducationPage() {
           </div>
           <a
             href="mailto:contato@portallgbtq.com.br?subject=Sugestão de glossário"
-            className="px-6 py-3 text-sm font-semibold rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap shrink-0"
+            className="px-6 py-3 text-sm font-semibold rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap shrink-0"
           >
             Enviar sugestão
           </a>

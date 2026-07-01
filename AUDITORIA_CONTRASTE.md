@@ -25,16 +25,23 @@ Critério WCAG AA: **≥ 4.5:1** para texto normal, **≥ 3.0:1** para texto gra
 - Confirmado que os usos de `text-secondary-400` (amarelo) são apenas **ícones de estrela decorativos**
   (`ri-star-fill`), não texto — portanto não são problema de leitura.
 
-## ⚠️ Recomendações (não aplicadas — exigem decisão de design)
+## ✅ Botões/links rosa corrigidos (2026-06-30)
 
-1. **Botões/badges rosa (`bg-primary-400` + `text-white`, 3.61:1):** usados em ~34 lugares.
-   Passam em **texto grande** (a maioria dos botões), mas falham para texto pequeno.
-   - **Recomendação:** para botões com texto pequeno, usar `bg-primary-500` (#D43D66, passa AA 4.51).
-   - Como é a cor da marca e a mudança é ampla, deixei para uma decisão de design dedicada.
-2. **Links rosa (`text-primary-400` em fundo branco, 3.61:1):** 23 ocorrências.
-   - **Recomendação:** usar `text-primary-500`/`text-primary-600` para links em texto corrido.
-3. **Verde `accent-400` (4.25:1):** muito perto de passar; considerar `accent-500` (#267A4C) para texto branco.
-4. **Amarelo `secondary-400`:** nunca usar como texto sobre branco nem branco sobre ele (2.01:1).
+1. **Botões/badges rosa (`bg-primary-400` + `text-white`):** todas as combinações estáticas
+   (16 ocorrências) migradas para `bg-primary-500` (4.51:1, passa AA), com o `hover:` correspondente
+   subindo para `bg-primary-600` para preservar o feedback visual de interação.
+2. **Links rosa (`text-primary-400` em fundo branco):** todas as ocorrências estáticas (7, incluindo
+   o skip link de acessibilidade em `App.tsx`) migradas para `text-primary-500`, com `hover:` subindo
+   para `text-primary-600` onde aplicável.
+   - Estados **apenas** de `hover:`/`group-hover:` (ex.: títulos de card que ficam rosa só ao passar
+     o mouse) foram mantidos em `primary-400` — são estados transitórios, não texto de leitura estática.
+3. Pontos decorativos (bullets de calendário em `parades/page.tsx`) e ícones com `aria-hidden`
+   permanecem em `primary-400`: não são texto, já passam no limiar de 3:1 para componentes de UI.
+
+## ⚠️ Recomendações restantes (não aplicadas — exigem decisão de design)
+
+1. **Verde `accent-400` (4.25:1):** muito perto de passar; considerar `accent-500` (#267A4C) para texto branco.
+2. **Amarelo `secondary-400`:** nunca usar como texto sobre branco nem branco sobre ele (2.01:1).
    Só usar como cor de destaque/ícone com texto escuro por cima.
 
 ## Outras melhorias de acessibilidade já no projeto

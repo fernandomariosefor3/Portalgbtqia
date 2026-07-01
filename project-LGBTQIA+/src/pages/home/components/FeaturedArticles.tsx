@@ -22,7 +22,7 @@ export default function FeaturedArticles() {
           </div>
           <Link
             to="/artigos"
-            className="hidden md:flex items-center gap-2 text-sm font-medium text-primary-400 hover:text-primary-500 transition-colors whitespace-nowrap"
+            className="hidden md:flex items-center gap-2 text-sm font-medium text-primary-500 hover:text-primary-600 transition-colors whitespace-nowrap"
           >
             Ver todos
             <i className="ri-arrow-right-line" aria-hidden="true"></i>
@@ -101,7 +101,7 @@ export default function FeaturedArticles() {
         <div className="mt-6 md:hidden text-center">
           <Link
             to="/artigos"
-            className="inline-flex items-center gap-2 text-sm font-medium text-primary-400 hover:text-primary-500 transition-colors whitespace-nowrap"
+            className="inline-flex items-center gap-2 text-sm font-medium text-primary-500 hover:text-primary-600 transition-colors whitespace-nowrap"
           >
             Ver todos os artigos
             <i className="ri-arrow-right-line" aria-hidden="true"></i>

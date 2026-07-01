@@ -155,7 +155,7 @@ export default function CommunityPage() {
           </div>
           <a
             href="mailto:contato@portallgbtq.com.br?subject=Quero ser voluntário"
-            className="px-6 py-3 text-sm font-semibold rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap shrink-0"
+            className="px-6 py-3 text-sm font-semibold rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap shrink-0"
           >
             Se inscrever
           </a>

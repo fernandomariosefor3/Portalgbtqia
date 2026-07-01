@@ -20,7 +20,7 @@ export default function ArticleFilters({ activeCategory, onChange }: ArticleFilt
             onClick={() => onChange(cat)}
             className={`px-3.5 py-1.5 text-xs font-medium rounded-full transition-all duration-200 whitespace-nowrap cursor-pointer ${
               isActive
-                ? (cat === 'todas' ? 'bg-dark-700 text-white' : categoryColors[cat]?.replace('100', '400').replace('text-', 'bg-').replace('700', '50').replace('600', '400') || 'bg-primary-400 text-white')
+                ? (cat === 'todas' ? 'bg-dark-700 text-white' : categoryColors[cat]?.replace('100', '400').replace('text-', 'bg-').replace('700', '50').replace('600', '400') || 'bg-primary-500 text-white')
                 : 'bg-dark-50 text-dark-500 hover:bg-dark-100'
             }`}
           >

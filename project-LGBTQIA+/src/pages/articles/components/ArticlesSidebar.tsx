@@ -44,7 +44,7 @@ export default function ArticlesSidebar() {
         </div>
       </div>
 
-      <div className="rounded-xl bg-primary-400 p-5 text-white">
+      <div className="rounded-xl bg-primary-500 p-5 text-white">
         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 mb-3">
           <i className="ri-mail-line text-lg" aria-hidden="true"></i>
         </div>

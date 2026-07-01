@@ -64,7 +64,7 @@ export default function EventDetailPage() {
             <i className="ri-calendar-close-line" aria-hidden="true"></i>
           </div>
           <h1 className="text-xl font-semibold text-dark-700">Evento não encontrado</h1>
-          <Link to="/eventos" className="mt-4 inline-flex items-center gap-1 text-sm text-primary-400 hover:text-primary-500">
+          <Link to="/eventos" className="mt-4 inline-flex items-center gap-1 text-sm text-primary-500 hover:text-primary-600">
             <i className="ri-arrow-left-line" aria-hidden="true"></i> Ver todos os eventos
           </Link>
         </div>
@@ -270,7 +270,7 @@ export default function EventDetailPage() {
                     <div className="w-8 h-8 flex items-center justify-center rounded-full bg-dark-50 text-dark-400 flex-shrink-0">
                       <i className="ri-mail-line" aria-hidden="true"></i>
                     </div>
-                    <a href={`mailto:${event.contact_email}`} className="text-primary-400 hover:text-primary-500 text-xs break-all">
+                    <a href={`mailto:${event.contact_email}`} className="text-primary-500 hover:text-primary-600 text-xs break-all">
                       {event.contact_email}
                     </a>
                   </div>

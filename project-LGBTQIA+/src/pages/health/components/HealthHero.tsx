@@ -35,7 +35,7 @@ export default function HealthHero() {
             </Link>
             <Link
               to="/saude/saude-mental"
-              className="px-5 py-2.5 text-sm font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap flex items-center gap-1.5"
+              className="px-5 py-2.5 text-sm font-medium rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap flex items-center gap-1.5"
             >
               <i className="ri-mental-health-line" aria-hidden="true"></i>
               Saúde Mental

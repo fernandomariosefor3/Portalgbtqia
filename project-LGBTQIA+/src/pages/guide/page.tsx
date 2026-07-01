@@ -96,7 +96,7 @@ export default function GuidePage() {
                 key={f}
                 className={`px-4 py-2 text-xs md:text-sm font-medium rounded-full border transition-colors whitespace-nowrap ${
                   i === 0
-                    ? "bg-primary-400 text-white border-primary-400"
+                    ? "bg-primary-500 text-white border-primary-500"
                     : "bg-white text-dark-600 border-dark-200 hover:border-primary-300"
                 }`}
               >
@@ -162,7 +162,7 @@ export default function GuidePage() {
             </div>
             <a
               href="mailto:contato@portallgbtq.com.br?subject=Indicação de espaço seguro"
-              className="px-6 py-3 text-sm font-semibold rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap shrink-0"
+              className="px-6 py-3 text-sm font-semibold rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap shrink-0"
             >
               Indicar espaço
             </a>

@@ -62,7 +62,7 @@ export default function Home() {
             />
             <button
               type="submit"
-              className="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap"
+              className="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap"
             >
               Inscrever-se
             </button>

@@ -96,7 +96,7 @@ export default function EventsPage() {
             </div>
             <Link
               to="/eventos/submeter"
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap"
             >
               <i className="ri-add-circle-line" aria-hidden="true"></i>
               Indicar evento

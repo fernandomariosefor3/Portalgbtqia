@@ -14,7 +14,7 @@ export default function NotFound() {
         <p className="mt-4 text-lg md:text-xl text-gray-500">Verifique o endereço ou volte para a página inicial.</p>
         <Link
           to="/"
-          className="mt-6 inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors"
+          className="mt-6 inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors"
         >
           <i className="ri-arrow-left-line" aria-hidden="true"></i>
           Voltar para a página inicial

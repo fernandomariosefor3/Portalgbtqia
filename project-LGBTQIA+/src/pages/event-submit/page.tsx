@@ -181,7 +181,7 @@ export default function EventSubmitPage() {
                   {result.event && (
                     <Link
                       to={`/eventos/${String((result.event as Record<string, string>).slug || '')}`}
-                      className="inline-flex items-center gap-1 text-sm font-medium text-primary-400 hover:text-primary-500 transition-colors"
+                      className="inline-flex items-center gap-1 text-sm font-medium text-primary-500 hover:text-primary-600 transition-colors"
                     >
                       Ver evento publicado <i className="ri-arrow-right-line" aria-hidden="true"></i>
                     </Link>
@@ -397,7 +397,7 @@ export default function EventSubmitPage() {
               <button
                 type="submit"
                 disabled={loading || !form.title.trim() || form.title.trim().length < 3}
-                className="inline-flex items-center gap-2 px-8 py-3 text-sm font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                className="inline-flex items-center gap-2 px-8 py-3 text-sm font-medium rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
                 {loading ? (
                   <><i className="ri-loader-4-line animate-spin" aria-hidden="true"></i> Processando com IA...</>

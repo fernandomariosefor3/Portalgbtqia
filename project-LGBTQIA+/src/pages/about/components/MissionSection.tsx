@@ -31,7 +31,7 @@ export default function MissionSection() {
             <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <Link
                 to="/artigos"
-                className="px-6 py-3 text-sm font-semibold rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap"
+                className="px-6 py-3 text-sm font-semibold rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap"
               >
                 Explorar conteúdo
               </Link>

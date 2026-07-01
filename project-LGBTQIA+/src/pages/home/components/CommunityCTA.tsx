@@ -31,7 +31,7 @@ export default function CommunityCTA() {
             <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center gap-4">
               <Link
                 to="/comunidade"
-                className="px-8 py-3.5 text-sm md:text-base font-semibold rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap shadow-lg"
+                className="px-8 py-3.5 text-sm md:text-base font-semibold rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap shadow-lg"
               >
                 Entrar no fórum
               </Link>

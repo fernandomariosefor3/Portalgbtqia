@@ -97,7 +97,7 @@ export default function LoginPage() {
             to="/"
             className="inline-flex items-center gap-2 text-xl font-playfair font-bold text-dark-700"
           >
-            <span className="w-9 h-9 flex items-center justify-center rounded-full bg-primary-400 text-white">
+            <span className="w-9 h-9 flex items-center justify-center rounded-full bg-primary-500 text-white">
               <i className="ri-rainbow-line" aria-hidden="true"></i>
             </span>
             Portal LGBTQ+
@@ -193,7 +193,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors disabled:opacity-60"
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors disabled:opacity-60"
             >
               {loading && (
                 <i className="ri-loader-4-line animate-spin" aria-hidden="true"></i>

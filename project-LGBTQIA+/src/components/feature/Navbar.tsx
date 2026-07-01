@@ -38,7 +38,7 @@ export default function Navbar() {
           className="flex items-center gap-2 text-lg md:text-xl font-playfair font-bold tracking-tight whitespace-nowrap"
           style={{ color: scrolled ? '#1A1A1A' : '#FFFFFF' }}
         >
-          <span className="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full bg-primary-400 text-white text-sm md:text-base">
+          <span className="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full bg-primary-500 text-white text-sm md:text-base">
             <i className="ri-rainbow-line" aria-hidden="true"></i>
           </span>
           Portal LGBTQ+
@@ -99,7 +99,7 @@ export default function Navbar() {
           ) : (
             <Link
               to="/login"
-              className="px-5 py-2 text-sm font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap"
+              className="px-5 py-2 text-sm font-medium rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap"
             >
               Entrar
             </Link>
@@ -151,7 +151,7 @@ export default function Navbar() {
               <Link
                 to="/login"
                 onClick={() => setMobileOpen(false)}
-                className="px-3 py-3 text-sm font-medium text-left text-primary-400 hover:bg-primary-50 rounded-md transition-colors"
+                className="px-3 py-3 text-sm font-medium text-left text-primary-500 hover:bg-primary-50 rounded-md transition-colors"
               >
                 Entrar
               </Link>

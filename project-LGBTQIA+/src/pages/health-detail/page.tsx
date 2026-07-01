@@ -306,7 +306,7 @@ export default function HealthDetailPage() {
                   </p>
                   <a
                     href="tel:188"
-                    className="inline-flex px-4 py-2 text-xs font-medium rounded-full bg-primary-400 text-white hover:bg-primary-500 transition-colors whitespace-nowrap items-center gap-1.5"
+                    className="inline-flex px-4 py-2 text-xs font-medium rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap items-center gap-1.5"
                   >
                     <i className="ri-phone-line" aria-hidden="true"></i>
                     Ligar CVV 188

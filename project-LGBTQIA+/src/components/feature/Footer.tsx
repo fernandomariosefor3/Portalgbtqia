@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 text-xl font-playfair font-bold">
-              <span className="w-8 h-8 flex items-center justify-center rounded-full bg-primary-400 text-white text-sm">
+              <span className="w-8 h-8 flex items-center justify-center rounded-full bg-primary-500 text-white text-sm">
                 <i className="ri-rainbow-line" aria-hidden="true"></i>
               </span>
               Portal LGBTQ+

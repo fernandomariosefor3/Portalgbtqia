@@ -43,7 +43,7 @@ export default function SectionsGrid() {
                   {section.description}
                 </p>
                 <div className="mt-auto pt-3 flex items-center justify-between">
-                  <span className="text-xs font-medium text-primary-400">{section.stats}</span>
+                  <span className="text-xs font-medium text-primary-500">{section.stats}</span>
                   <span className="w-7 h-7 flex items-center justify-center rounded-full bg-dark-50 text-dark-500 group-hover:bg-primary-400 group-hover:text-white transition-colors">
                     <i className="ri-arrow-right-line text-sm" aria-hidden="true"></i>
                   </span>

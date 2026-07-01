@@ -7,6 +7,11 @@ dist/
 .DS_Store
 Thumbs.db
 
+# Chaves de service account (nunca commitar credenciais Firebase/GCP)
+*firebase-adminsdk*.json
+*serviceAccountKey*.json
+*service-account*.json
+
 # Arquivos gerados pelo unplugin-auto-import
 **/auto-imports.d.ts
 

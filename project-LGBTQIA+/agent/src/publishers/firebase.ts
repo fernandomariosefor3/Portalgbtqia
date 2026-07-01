@@ -85,6 +85,41 @@ export class FirebasePublisher {
     return results;
   }
 
+  /**
+   * O frontend (src/lib/firestore.ts) le e ordena eventos por campos em
+   * snake_case (start_date, image_url, short_description...), enquanto o
+   * agente trabalha internamente em camelCase (ProcessedEvent). Sem esse
+   * mapeamento, os documentos gravados ficam invisiveis para a UI: o
+   * orderBy('start_date') do frontend exclui qualquer doc que nao tenha
+   * exatamente esse campo.
+   */
+  private toFirestoreFields(event: ProcessedEvent): Record<string, unknown> {
+    return {
+      title: event.title,
+      slug: event.slug,
+      description: event.description,
+      short_description: event.shortDescription,
+      category: event.category,
+      location: event.location,
+      address: event.address,
+      city: event.city,
+      state: event.state,
+      start_date: event.startDate,
+      end_date: event.endDate,
+      start_time: event.startTime,
+      end_time: event.endTime,
+      image_url: event.imageUrl,
+      source_url: event.sourceUrl,
+      status: event.status,
+      organizer: event.organizer,
+      contact_email: event.contactEmail,
+      contact_phone: event.contactPhone,
+      price_info: event.priceInfo,
+      tags: event.tags,
+      source: event.source,
+    };
+  }
+
   private async publishEvent(event: ProcessedEvent): Promise<PublishResult> {
     try {
       // Verifica se evento já existe (por slug)
@@ -104,7 +139,7 @@ export class FirebasePublisher {
 
       // Adiciona evento
       const eventRef = await this.db.collection('events').add({
-        ...event,
+        ...this.toFirestoreFields(event),
         createdAt: FieldValue.serverTimestamp(),
         publishedBy: 'agent',
       });
@@ -133,7 +168,7 @@ export class FirebasePublisher {
     }
   }
 
-  async getRecentPublications(): Promise<ProcessedEvent[]> {
+  async getRecentPublications(): Promise<Record<string, unknown>[]> {
     const weekAgo = new Date();
     weekAgo.setDate(weekAgo.getDate() - 7);
 
@@ -145,11 +180,11 @@ export class FirebasePublisher {
       .get();
 
     return snapshot.docs
-      .map((doc) => doc.data() as ProcessedEvent & { publishedAt?: { toDate(): Date } })
+      .map((doc) => doc.data() as Record<string, unknown> & { createdAt?: { toDate(): Date } })
       .filter((event) => {
-        const publishedAt = event.publishedAt;
-        if (!publishedAt || typeof publishedAt.toDate !== 'function') return false;
-        return publishedAt.toDate() >= weekAgo;
+        const createdAt = event.createdAt;
+        if (!createdAt || typeof createdAt.toDate !== 'function') return false;
+        return createdAt.toDate() >= weekAgo;
       });
   }
 

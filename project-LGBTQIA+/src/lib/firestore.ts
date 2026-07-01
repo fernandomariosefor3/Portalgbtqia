@@ -69,7 +69,12 @@ export async function getEvents(filters?: {
 }): Promise<Event[]> {
   const eventsRef = collection(db, 'events');
 
-  const constraints: QueryConstraint[] = [];
+  // Sem orderBy aqui de proposito: combinar orderBy com where exige um indice
+  // composto no Firestore que nunca foi criado corretamente (o indexes.json
+  // declarado no repo referencia um campo "date" que nao existe nos
+  // documentos reais, que usam "start_date"). Filtros de igualdade puros nao
+  // exigem indice composto, entao ordenamos em JS depois de buscar.
+  const constraints: QueryConstraint[] = [where('status', '==', 'approved')];
 
   if (filters?.category) {
     constraints.push(where('category', '==', filters.category));
@@ -78,20 +83,17 @@ export async function getEvents(filters?: {
     constraints.push(where('city', '==', filters.city));
   }
 
-  constraints.push(where('status', '==', 'approved'));
-  constraints.push(orderBy('start_date', 'asc'));
-
-  if (filters?.limit) {
-    constraints.push(limit(filters.limit));
-  }
-
   const q = query(eventsRef, ...constraints);
 
   const snapshot = await getDocs(q);
-  return snapshot.docs.map((doc) => ({
+  const events = snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
   })) as Event[];
+
+  events.sort((a, b) => (a.start_date || '').localeCompare(b.start_date || ''));
+
+  return filters?.limit ? events.slice(0, filters.limit) : events;
 }
 
 export async function getEventBySlug(slug: string): Promise<Event | null> {

@@ -52,13 +52,13 @@ export default function EducationPage() {
               'url("https://readdy.ai/api/search-image?query=open%20books%20stacked%20on%20wooden%20desk%20with%20reading%20lamp%20warm%20soft%20light%20cozy%20study%20atmosphere%20editorial%20photography%20educational%20setting%20minimal%20elegant%20composition&width=1200&height=480&seq=edhero&orientation=landscape")',
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/70" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 md:px-6">
           <span className="px-4 py-1.5 text-xs font-medium rounded-full bg-white/15 text-white border border-white/25 backdrop-blur-sm mb-5">
             Aprenda
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white leading-tight max-w-3xl">
-            Educação e <span className="italic text-secondary-300">glossário</span>
+            Educação e <span className="italic text-secondary-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]">glossário</span>
           </h1>
           <p className="mt-4 md:mt-5 text-base md:text-lg text-white/80 max-w-2xl leading-relaxed">
             Conteúdo educativo, glossário completo e materiais para todas as idades sobre identidade, sexualidade e direitos.

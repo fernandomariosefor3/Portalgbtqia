@@ -54,6 +54,19 @@ praticamente ilegíveis:
 | Visibilidade | `pink-400` | ~2.3:1 ❌ | `pink-700` | 6.03 ✅ |
 | Encontros | `indigo-400` | ~2.5:1 ❌ | `indigo-600` | 6.28 ✅ |
 
+## ✅ Palavras de destaque em heróis com foto corrigidas (2026-07-01)
+
+Seis páginas (`parades`, `family`, `community`, `about`, `education`, `guide`) usam o mesmo
+padrão de hero: foto de fundo com overlay `bg-gradient-to-b from-black/40 via-black/30 to-black/60`
+e uma palavra de destaque em `italic text-secondary-300` (dourado claro) dentro do `<h1>`. Como a
+maioria das fotos é "golden hour"/tom quente, e a palavra de destaque cai exatamente na faixa do
+overlay mais fraca (`via-black/30`, só 30% preto), o texto dourado se misturava com o fundo e ficava
+ilegível — reportado pelo usuário na página `/familia` ("diversas"/"iguais" invisíveis).
+
+Correção: overlay escurecido uniformemente (`from-black/55 via-black/45 to-black/70`) e
+`drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]` adicionado às palavras de destaque como reforço,
+independente do brilho/tom da foto usada.
+
 ## ⚠️ Recomendações restantes (não aplicadas — exigem decisão de design)
 
 1. **Verde `accent-400` (4.25:1):** muito perto de passar; considerar `accent-500` (#267A4C) para texto branco.

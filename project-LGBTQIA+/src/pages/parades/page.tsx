@@ -49,13 +49,13 @@ export default function ParadesPage() {
               'url("https://readdy.ai/api/search-image?query=large%20pride%20parade%20crowd%20in%20street%20rainbow%20flags%20waving%20warm%20sunset%20light%20joyful%20celebration%20editorial%20photography%20vibrant%20dynamic%20inclusive%20urban%20scene&width=1200&height=480&seq=pradhero&orientation=landscape")',
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/70" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 md:px-6">
           <span className="px-4 py-1.5 text-xs font-medium rounded-full bg-white/15 text-white border border-white/25 backdrop-blur-sm mb-5">
             Agenda
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white leading-tight max-w-3xl">
-            Paradas e <span className="italic text-secondary-300">datas de visibilidade</span>
+            Paradas e <span className="italic text-secondary-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]">datas de visibilidade</span>
           </h1>
           <p className="mt-4 md:mt-5 text-base md:text-lg text-white/80 max-w-2xl leading-relaxed">
             Calendário das principais paradas LGBTQ+ do Nordeste e datas de conscientização ao longo do ano.

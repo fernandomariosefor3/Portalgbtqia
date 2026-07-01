@@ -59,13 +59,13 @@ export default function CommunityPage() {
               'url("https://readdy.ai/api/search-image?query=diverse%20group%20of%20people%20holding%20hands%20in%20circle%20community%20gathering%20indoor%20soft%20warm%20lighting%20authentic%20friendship%20unity%20editorial%20photography%20top%20view%20artistic%20composition&width=1200&height=480&seq=comhero&orientation=landscape")',
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/70" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 md:px-6">
           <span className="px-4 py-1.5 text-xs font-medium rounded-full bg-white/15 text-white border border-white/25 backdrop-blur-sm mb-5">
             Comunidade
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white leading-tight max-w-3xl">
-            Juntos somos <span className="italic text-secondary-300">mais fortes</span>
+            Juntos somos <span className="italic text-secondary-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]">mais fortes</span>
           </h1>
           <p className="mt-4 md:mt-5 text-base md:text-lg text-white/80 max-w-2xl leading-relaxed">
             Fórum, mentoria, recursos de apoio e uma rede de conexão para a comunidade LGBTQ+ do Nordeste.

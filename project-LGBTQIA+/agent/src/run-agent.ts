@@ -43,7 +43,11 @@ async function main() {
       report.errors.forEach((err) => console.log(`   - ${err.substring(0, 100)}`));
     }
 
-    process.exit(report.errors.length > 0 ? 1 : 0);
+    if (report.eventsFound === 0) {
+      console.log('\n❌ Nenhum evento encontrado em nenhuma fonte — tratando como falha para não mascarar um scraper quebrado.');
+    }
+
+    process.exit(report.errors.length > 0 || report.eventsFound === 0 ? 1 : 0);
   } catch (error) {
     console.error('\n❌ ERRO FATAL:', error instanceof Error ? error.message : 'Unknown error');
     process.exit(1);

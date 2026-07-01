@@ -2,7 +2,11 @@
  * Base Scraper - Classe abstrata para scrapers de eventos
  */
 
+import puppeteer, { type Page } from 'puppeteer';
 import { RawEvent, EventSource } from '../types.js';
+
+const BROWSER_USER_AGENT =
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
 export abstract class BaseScraper {
   protected source: EventSource;
@@ -16,6 +20,27 @@ export abstract class BaseScraper {
   }
 
   abstract scrape(): Promise<RawEvent[]>;
+
+  /**
+   * Abre um navegador headless, navega até `url`, espera a rede ficar ociosa
+   * (necessário para sites React/Next.js que renderizam a listagem via JS,
+   * como Sympla e Eventbrite) e entrega a página pronta para extração via
+   * `page.evaluate(...)`. Sempre fecha o navegador ao final, mesmo em erro.
+   */
+  protected async withRenderedPage<T>(
+    url: string,
+    extract: (page: Page) => Promise<T>
+  ): Promise<T> {
+    const browser = await puppeteer.launch({ headless: true });
+    try {
+      const page = await browser.newPage();
+      await page.setUserAgent(BROWSER_USER_AGENT);
+      await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
+      return await extract(page);
+    } finally {
+      await browser.close();
+    }
+  }
 
   protected isRelevantCity(text: string): boolean {
     const searchText = text.toLowerCase();

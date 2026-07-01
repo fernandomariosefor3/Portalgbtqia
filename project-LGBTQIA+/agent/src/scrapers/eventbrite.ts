@@ -1,11 +1,24 @@
 /**
  * Eventbrite Scraper - Busca eventos no Eventbrite
+ *
+ * A busca do Eventbrite é uma SPA React: o HTML inicial baixado por `axios`
+ * vem vazio, os cards só existem depois do JavaScript rodar. Por isso usamos
+ * um navegador real (Puppeteer) e filtramos por palavras-chave LGBTQIA+
+ * depois de carregar a listagem geral da cidade (a busca por categoria
+ * "lgbt" da própria plataforma mistura resultados irrelevantes).
  */
 
-import axios from 'axios';
-import * as cheerio from 'cheerio';
 import { BaseScraper } from './base.js';
 import { RawEvent } from '../types.js';
+
+interface EventbriteCardData {
+  href: string;
+  title: string;
+  location: string;
+  category: string;
+  dateText: string;
+  imageUrl?: string;
+}
 
 export class EventbriteScraper extends BaseScraper {
   private apiKey?: string;
@@ -16,91 +29,77 @@ export class EventbriteScraper extends BaseScraper {
   }
 
   async scrape(): Promise<RawEvent[]> {
-    const events: RawEvent[] = [];
+    const citySlug = this.buildCitySlug();
+    const url = `https://www.eventbrite.com.br/d/brazil--${citySlug}/all-events/`;
+
+    console.log(`🔍 Eventbrite: Buscando eventos em "${citySlug}"`);
 
     try {
-      // Busca eventos LGBTQIA+ no Brasil
-      const searchQueries = [
-        'lgbt events',
-        'pride events',
-        'drag events',
-        'queer events',
-      ];
-
-      for (const query of searchQueries) {
-        console.log(`🔍 Eventbrite: Buscando "${query}"`);
-
-        const url = `https://www.eventbrite.com/d/brazil--fortaleza/events--${query}/?page=1`;
-
-        const response = await axios.get(url, {
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept-Language': 'pt-BR,pt;q=0.9,en;q=0.8',
-          },
-          timeout: 15000,
+      const cards = await this.withRenderedPage(url, async (page) => {
+        return page.evaluate(() => {
+          const containers = Array.from(document.querySelectorAll('.event-card'));
+          return containers.map((container) => {
+            const link = container.querySelector('a.event-card-link') as HTMLAnchorElement | null;
+            const img = container.querySelector('img');
+            return {
+              href: link?.href || '',
+              title: container.querySelector('h3')?.textContent?.trim() || '',
+              location: link?.getAttribute('data-event-location') || '',
+              category: link?.getAttribute('data-event-category') || '',
+              dateText: container.querySelector('p')?.textContent?.trim() || '',
+              imageUrl: img?.getAttribute('src') || undefined,
+            };
+          });
         });
+      });
 
-        const $ = cheerio.load(response.data);
+      const seenUrls = new Set<string>();
+      const events = cards
+        .filter((card) => {
+          if (!card.href || !card.title || seenUrls.has(card.href)) return false;
+          seenUrls.add(card.href);
+          return this.isLgbtqiaEvent(card.title + ' ' + card.category);
+        })
+        .map((card) => this.toRawEvent(card));
 
-        // Procura cards de eventos
-        $('[data-testid="search-results"] .eds-event-card').each((_, element) => {
-          const $el = $(element);
-
-          const title = $el.find('[data-testid="ed-tile-title"]').text().trim() ||
-                       $el.find('h2').first().text().trim();
-          const link = $el.find('a').first().attr('href') || '';
-          const description = $el.find('.event-card-description').text().trim() ||
-                            $el.find('p').first().text().trim();
-          const dateText = $el.find('[data-testid="ed-tile-date"]').text().trim() ||
-                          $el.find('.event-date').text().trim();
-          const location = $el.find('.event-location').text().trim() ||
-                          $el.find('[data-testid="ed-tile-location"]').text().trim();
-          const image = $el.find('img').attr('src') || $el.find('img').attr('data-src');
-
-          if (title && link) {
-            const { startDate, endDate } = this.extractDates(dateText + ' ' + description);
-            const { startTime, endTime } = this.extractTimes(dateText);
-
-            events.push({
-              source: this.source,
-              sourceUrl: link.startsWith('http') ? link : `https://www.eventbrite.com${link}`,
-              title: this.cleanTitle(title),
-              description: this.cleanDescription(description),
-              imageUrl: image,
-              startDate,
-              endDate,
-              startTime,
-              endTime,
-              location: location ? this.cleanLocation(location) : undefined,
-              city: this.cityFocus,
-              state: this.stateFocus,
-              rawData: { dateText, source: 'eventbrite' },
-            });
-          }
-        });
-
-        await this.delay(1500);
-      }
+      console.log(`✅ Eventbrite: ${cards.length} eventos na listagem, ${events.length} relevantes LGBTQIA+`);
+      return events.map((e) => this.normalizeEvent(e));
     } catch (error) {
       console.error('❌ Erro ao buscar Eventbrite:', error instanceof Error ? error.message : 'Unknown error');
+      return [];
     }
-
-    return events.map((e) => this.normalizeEvent(e));
   }
 
-  private delay(ms: number): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+  private buildCitySlug(): string {
+    return this.cityFocus
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]+/g, '-');
+  }
+
+  private toRawEvent(card: EventbriteCardData): RawEvent {
+    const { startDate, endDate } = this.extractDates(card.dateText);
+    const { startTime, endTime } = this.extractTimes(card.dateText);
+
+    return {
+      source: this.source,
+      sourceUrl: card.href,
+      title: this.cleanTitle(card.title),
+      description: card.dateText,
+      imageUrl: card.imageUrl,
+      startDate,
+      endDate,
+      startTime,
+      endTime,
+      location: card.location || undefined,
+      city: this.cityFocus,
+      state: this.stateFocus,
+      rawData: { dateText: card.dateText, category: card.category, source: 'eventbrite' },
+    };
   }
 
   private cleanTitle(title: string): string {
     return title.trim().replace(/\s+/g, ' ').substring(0, 200);
-  }
-
-  private cleanDescription(text: string): string {
-    return text.trim().replace(/\s+/g, ' ').substring(0, 500);
-  }
-
-  private cleanLocation(location: string): string {
-    return location.trim().replace(/\s+/g, ' ');
   }
 }

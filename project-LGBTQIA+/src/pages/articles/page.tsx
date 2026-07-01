@@ -65,7 +65,10 @@ export default function ArticlesPage() {
               <i className="ri-search-line absolute left-3.5 top-1/2 -translate-y-1/2 text-dark-300" aria-hidden="true"></i>
               <input
                 type="text"
+                id="article-search"
+                name="article-search"
                 placeholder="Buscar artigos, autores, tags..."
+                aria-label="Buscar artigos, autores, tags"
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);

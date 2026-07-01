@@ -53,6 +53,11 @@ export function useAuth(): AuthState {
       }
 
       setLoading(false);
+    }, (error) => {
+      console.error('[auth] onAuthStateChanged falhou:', error);
+      setUser(null);
+      setIsAdmin(false);
+      setLoading(false);
     });
 
     return () => unsubscribe();

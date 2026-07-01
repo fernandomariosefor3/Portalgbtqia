@@ -51,9 +51,12 @@ export default function EventFilters({
           <i className="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-dark-400" aria-hidden="true"></i>
           <input
             type="text"
+            id="event-search"
+            name="event-search"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Buscar eventos..."
+            aria-label="Buscar eventos"
             className="w-full pl-10 pr-4 py-2.5 text-sm border border-dark-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-300"
           />
         </div>
@@ -66,6 +69,9 @@ export default function EventFilters({
         </button>
         <div className={`${showFilters ? 'flex' : 'hidden'} sm:flex flex-col sm:flex-row gap-3`}>
           <select
+            id="event-city"
+            name="event-city"
+            aria-label="Filtrar por cidade"
             value={activeCity}
             onChange={(e) => onCityChange(e.target.value)}
             className="px-3 py-2.5 text-sm border border-dark-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 bg-white"
@@ -76,6 +82,9 @@ export default function EventFilters({
             ))}
           </select>
           <select
+            id="event-time-filter"
+            name="event-time-filter"
+            aria-label="Filtrar por período"
             value={timeFilter}
             onChange={(e) => onTimeFilterChange(e.target.value)}
             className="px-3 py-2.5 text-sm border border-dark-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 bg-white"
@@ -85,6 +94,9 @@ export default function EventFilters({
             ))}
           </select>
           <select
+            id="event-sort"
+            name="event-sort"
+            aria-label="Ordenar por"
             value={sortBy}
             onChange={(e) => onSortChange(e.target.value)}
             className="px-3 py-2.5 text-sm border border-dark-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 bg-white"

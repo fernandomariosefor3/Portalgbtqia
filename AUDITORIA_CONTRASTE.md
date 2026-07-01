@@ -38,6 +38,22 @@ Critério WCAG AA: **≥ 4.5:1** para texto normal, **≥ 3.0:1** para texto gra
 3. Pontos decorativos (bullets de calendário em `parades/page.tsx`) e ícones com `aria-hidden`
    permanecem em `primary-400`: não são texto, já passam no limiar de 3:1 para componentes de UI.
 
+## ✅ Badges de categoria de eventos corrigidos (2026-07-01)
+
+Os badges de categoria em `mocks/events.ts` (usados em `EventCard.tsx`, `EventFilters.tsx` e
+`event-detail/page.tsx` via `getCategoryColor`) usavam tons claros do Tailwind com `text-white`,
+praticamente ilegíveis:
+
+| Categoria | Antes | Contraste | Depois | Contraste |
+|---|---|---|---|---|
+| Paradas | `rose-500` | 3.76 ❌ | `rose-600` | 4.70 ✅ |
+| Festas | `orange-400` | ~2:1 ❌ | `orange-700` | 5.18 ✅ |
+| Cultura | `amber-500` | 2.40 ❌ | `amber-700` | 5.02 ✅ |
+| Saúde | `emerald-500` | 2.86 ❌ | `emerald-700` | 5.48 ✅ |
+| Educação | `teal-500` | 2.65 ❌ | `teal-700` | 5.47 ✅ |
+| Visibilidade | `pink-400` | ~2.3:1 ❌ | `pink-700` | 6.03 ✅ |
+| Encontros | `indigo-400` | ~2.5:1 ❌ | `indigo-600` | 6.28 ✅ |
+
 ## ⚠️ Recomendações restantes (não aplicadas — exigem decisão de design)
 
 1. **Verde `accent-400` (4.25:1):** muito perto de passar; considerar `accent-500` (#267A4C) para texto branco.

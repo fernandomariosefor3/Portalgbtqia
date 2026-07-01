@@ -41,7 +41,11 @@ export class FirebasePublisher {
       });
     }
 
-    return getFirestore();
+    const db = getFirestore();
+    // Muitos campos opcionais (address, imageUrl, endDate...) ficam undefined
+    // dependendo da fonte do scraper; o Firestore rejeita undefined por padrão.
+    db.settings({ ignoreUndefinedProperties: true });
+    return db;
   }
 
   async publishEvents(events: ProcessedEvent[]): Promise<PublishResult[]> {
@@ -133,13 +137,20 @@ export class FirebasePublisher {
     const weekAgo = new Date();
     weekAgo.setDate(weekAgo.getDate() - 7);
 
+    // Query de campo único para evitar exigência de índice composto no Firestore.
+    // O filtro por data é feito em memória (coleção pequena, publicada só pelo agente).
     const snapshot = await this.db
       .collection('events')
       .where('publishedBy', '==', 'agent')
-      .where('publishedAt', '>=', weekAgo)
       .get();
 
-    return snapshot.docs.map((doc) => doc.data() as ProcessedEvent);
+    return snapshot.docs
+      .map((doc) => doc.data() as ProcessedEvent & { publishedAt?: { toDate(): Date } })
+      .filter((event) => {
+        const publishedAt = event.publishedAt;
+        if (!publishedAt || typeof publishedAt.toDate !== 'function') return false;
+        return publishedAt.toDate() >= weekAgo;
+      });
   }
 
   async getPublishedCountThisWeek(): Promise<number> {

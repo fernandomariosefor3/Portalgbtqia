@@ -83,7 +83,45 @@ export abstract class BaseScraper {
     return keywords.some((keyword) => searchText.includes(keyword));
   }
 
+  private static readonly PT_MONTHS: Record<string, number> = {
+    jan: 1, fev: 2, mar: 3, abr: 4, mai: 5, jun: 6,
+    jul: 7, ago: 8, set: 9, out: 10, nov: 11, dez: 12,
+  };
+
+  /**
+   * Sites como Sympla exibem datas por extenso ("Sábado, 25 de Jul às 19:30"),
+   * sem ano. Assume o ano corrente e rola para o próximo ano se a data já passou,
+   * já que a listagem sempre mostra eventos futuros.
+   */
+  private extractNamedMonthDate(text: string): { startDate?: string } {
+    const match = text.match(/(\d{1,2})\s*de\s*([a-zçã]+)/i);
+    if (!match) return {};
+
+    const day = parseInt(match[1]);
+    const monthKey = match[2].toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').substring(0, 3);
+    const month = BaseScraper.PT_MONTHS[monthKey];
+    if (!month) return {};
+
+    const now = new Date();
+    let year = now.getFullYear();
+    let date = new Date(year, month - 1, day);
+
+    if (isNaN(date.getTime())) return {};
+
+    // Compara apenas por data (sem horário) para não descartar o próprio dia
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    if (date < today) {
+      year += 1;
+      date = new Date(year, month - 1, day);
+    }
+
+    return { startDate: date.toISOString().split('T')[0] };
+  }
+
   protected extractDates(text: string): { startDate?: string; endDate?: string } {
+    const namedMonth = this.extractNamedMonthDate(text);
+    if (namedMonth.startDate) return namedMonth;
+
     const datePatterns = [
       // DD/MM/YYYY ou DD-MM-YYYY
       /(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/g,

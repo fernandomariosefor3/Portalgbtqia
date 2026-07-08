@@ -11,7 +11,8 @@ export default function ArticleSidebar({ article }: ArticleSidebarProps) {
   const related = getRelatedArticles(article, 3);
   const [copied, setCopied] = useState(false);
 
-  const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const publicArticleUrl = `https://portalgbtqia.vercel.app/artigos/${article.slug}`;
+  const shareUrl = publicArticleUrl;
   const shareText = encodeURIComponent(`${article.title} — Portal LGBTQ+ Nordeste`);
 
   const handleCopy = () => {
@@ -20,6 +21,11 @@ export default function ArticleSidebar({ article }: ArticleSidebarProps) {
       setTimeout(() => setCopied(false), 2000);
     });
   };
+
+  const facebookShareUrl = new URL('https://www.facebook.com/sharer/sharer.php');
+  facebookShareUrl.searchParams.set('u', publicArticleUrl);
+  facebookShareUrl.searchParams.set('quote', article.title);
+  facebookShareUrl.searchParams.set('hashtag', '#LGBTQIA');
 
   return (
     <aside className="space-y-8">
@@ -46,7 +52,7 @@ export default function ArticleSidebar({ article }: ArticleSidebarProps) {
         </h4>
         <div className="flex flex-wrap items-center gap-2">
           <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+            href={facebookShareUrl.toString()}
             target="_blank"
             rel="noopener noreferrer"
             className="w-9 h-9 flex items-center justify-center rounded-full bg-dark-700 text-white hover:bg-primary-400 transition-colors"

@@ -1,11 +1,48 @@
+import { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { getArticleBySlug, allArticles } from '@/mocks/articles-full';
+import { getArticleBySlug, allArticles, type Article } from '@/mocks/articles-full';
+import { getFirestoreArticleBySlug } from '@/lib/useArticles';
 import ArticleHeader from './components/ArticleHeader';
 import ArticleSidebar from './components/ArticleSidebar';
 
 export default function ArticlePage() {
   const { slug } = useParams<{ slug: string }>();
-  const article = slug ? getArticleBySlug(slug) : undefined;
+  const [article, setArticle] = useState<Article | null | undefined>(undefined);
+
+  useEffect(() => {
+    let active = true;
+
+    (async () => {
+      if (!slug) {
+        setArticle(null);
+        return;
+      }
+
+      try {
+        const firestoreArticle = await getFirestoreArticleBySlug(slug);
+        if (!active) return;
+        setArticle(firestoreArticle ?? getArticleBySlug(slug) ?? null);
+      } catch (error) {
+        console.error('Erro ao buscar artigo do Firestore:', error);
+        if (active) setArticle(getArticleBySlug(slug) ?? null);
+      }
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [slug]);
+
+  if (article === undefined) {
+    return (
+      <main className="w-full min-h-screen bg-surface font-inter flex items-center justify-center">
+        <span className="inline-flex items-center gap-2 text-sm text-dark-400">
+          <i className="ri-loader-4-line animate-spin text-lg" aria-hidden="true"></i>
+          Carregando artigo...
+        </span>
+      </main>
+    );
+  }
 
   if (!article) {
     return <Navigate to="/artigos" replace />;
@@ -27,6 +64,20 @@ export default function ArticlePage() {
                 className="article-content prose prose-lg max-w-none"
                 dangerouslySetInnerHTML={{ __html: article.content }}
               />
+
+              {article.sourceUrl && (
+                <div className="mt-8">
+                  <a
+                    href={article.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-primary-500 text-white text-sm font-semibold hover:bg-primary-600 transition-colors"
+                  >
+                    Acessar fonte original
+                    <i className="ri-external-link-line" aria-hidden="true"></i>
+                  </a>
+                </div>
+              )}
 
               <div className="mt-10 pt-8 border-t border-dark-100">
                 <div className="flex items-center justify-between gap-4 flex-wrap">

@@ -5,6 +5,7 @@ import {
   where,
   orderBy,
   getDocs,
+  limit,
   type DocumentData,
   type QueryDocumentSnapshot,
 } from 'firebase/firestore';
@@ -20,7 +21,7 @@ const DEFAULT_ARTICLE_IMAGE =
 /**
  * Converte um documento do Firestore para o formato `Article` usado pela UI.
  */
-function firestoreToArticle(doc: QueryDocumentSnapshot<DocumentData>): Article {
+export function firestoreToArticle(doc: QueryDocumentSnapshot<DocumentData>): Article {
   const d = doc.data();
   const date = d.published_at?.toDate?.()
     ? d.published_at
@@ -45,7 +46,19 @@ function firestoreToArticle(doc: QueryDocumentSnapshot<DocumentData>): Article {
     featured: false,
     tags: d.tags || [],
     content: d.content || '',
+    sourceUrl: d.source_url || '',
   };
+}
+
+export async function getFirestoreArticleBySlug(slug: string): Promise<Article | null> {
+  const q = query(
+    collection(db, 'articles'),
+    where('slug', '==', slug),
+    where('status', '==', 'published'),
+    limit(1)
+  );
+  const snapshot = await getDocs(q);
+  return snapshot.empty ? null : firestoreToArticle(snapshot.docs[0]);
 }
 
 export interface UseArticlesResult {

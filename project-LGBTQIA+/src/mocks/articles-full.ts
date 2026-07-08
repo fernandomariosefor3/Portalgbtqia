@@ -16,6 +16,7 @@ export interface Article {
   featured: boolean;
   tags: string[];
   views: number;
+  sourceUrl?: string;
 }
 
 export const allArticles: Article[] = [

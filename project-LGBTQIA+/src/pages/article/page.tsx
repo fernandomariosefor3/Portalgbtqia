@@ -51,6 +51,7 @@ export default function ArticlePage() {
   const currentIndex = allArticles.findIndex((a) => a.id === article.id);
   const prevArticle = currentIndex > 0 ? allArticles[currentIndex - 1] : null;
   const nextArticle = currentIndex < allArticles.length - 1 ? allArticles[currentIndex + 1] : null;
+  const contentHtml = article.content?.trim() || `<p class="lead">${article.excerpt}</p>`;
 
   return (
     <main className="w-full min-h-screen bg-surface font-inter pb-16">
@@ -62,7 +63,7 @@ export default function ArticlePage() {
             <article className="flex-1 min-w-0">
               <div
                 className="article-content prose prose-lg max-w-none"
-                dangerouslySetInnerHTML={{ __html: article.content }}
+                dangerouslySetInnerHTML={{ __html: contentHtml }}
               />
 
               {article.sourceUrl && (

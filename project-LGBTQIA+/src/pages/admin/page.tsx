@@ -433,13 +433,13 @@ export default function AdminPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Texto completo / HTML</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Conteudo que aparece ao clicar</label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={7}
             className="w-full px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
-            placeholder="<p>Texto da materia...</p>"
+            placeholder="Escreva aqui a informacao completa da postagem. Pode usar parágrafos simples ou HTML."
           />
         </div>
 

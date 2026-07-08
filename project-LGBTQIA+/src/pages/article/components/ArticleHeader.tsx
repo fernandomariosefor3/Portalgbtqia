@@ -8,7 +8,11 @@ interface ArticleHeaderProps {
 
 export default function ArticleHeader({ article }: ArticleHeaderProps) {
   const formattedDate = useMemo(() => {
-    return new Date(article.date).toLocaleDateString('pt-BR', {
+    if (!article.date) return 'Publicado recentemente';
+    const parsed = new Date(article.date);
+    if (Number.isNaN(parsed.getTime())) return article.date;
+
+    return parsed.toLocaleDateString('pt-BR', {
       day: 'numeric',
       month: 'long',
       year: 'numeric',

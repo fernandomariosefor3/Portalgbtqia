@@ -146,7 +146,6 @@ export default function AdminPage() {
   const [places, setPlaces] = useState<EditableRecord[]>([]);
   const [facebookText, setFacebookText] = useState("");
   const [facebookArticleUrl, setFacebookArticleUrl] = useState("");
-  const [isFacebookPublishing, setIsFacebookPublishing] = useState(false);
 
   const loadArticles = useCallback(async () => {
     const q = query(collection(db, "articles"), orderBy("published_at", "desc"));
@@ -361,40 +360,18 @@ export default function AdminPage() {
     setIsPublishing(false);
   };
 
-  const publishToFacebook = async () => {
-    if (!facebookText.trim() || !facebookArticleUrl.trim()) {
-      setMessage({ type: "error", text: "Selecione um artigo e revise o texto antes de publicar." });
+  const copyFacebookText = async (text: string, successText: string) => {
+    if (!text.trim()) {
+      setMessage({ type: "error", text: "Selecione um artigo antes de copiar." });
       return;
     }
 
-    setIsFacebookPublishing(true);
-    setMessage(null);
-
     try {
-      const idToken = await user.getIdToken();
-      const response = await fetch("/api/facebook/publish", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${idToken}`,
-        },
-        body: JSON.stringify({
-          message: facebookText.trim(),
-          link: facebookArticleUrl.trim(),
-        }),
-      });
-
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error(result.error || "Falha ao publicar no Facebook.");
-      }
-
-      setMessage({ type: "success", text: `Publicado na pagina do Facebook. ID: ${result.id}` });
-    } catch (e: any) {
-      setMessage({ type: "error", text: `Erro ao publicar no Facebook: ${e?.message || e}` });
+      await navigator.clipboard.writeText(text);
+      setMessage({ type: "success", text: successText });
+    } catch {
+      setMessage({ type: "error", text: "Nao foi possivel copiar automaticamente. Selecione o texto e copie manualmente." });
     }
-
-    setIsFacebookPublishing(false);
   };
 
   return (
@@ -618,6 +595,10 @@ export default function AdminPage() {
       {activeTab === "facebook" && (
         <div className="grid lg:grid-cols-2 gap-6">
           <div className="bg-white border rounded-xl p-6 shadow-sm space-y-4">
+            <div>
+              <h2 className="text-xl font-bold">Post manual para o Facebook</h2>
+              <p className="text-sm text-gray-500 mt-1">Escolha o artigo, copie o texto pronto e cole na pagina do Facebook.</p>
+            </div>
             <label className="block text-sm font-medium text-gray-700">Escolha um artigo para gerar a chamada</label>
             <select
               className="w-full px-4 py-2 border rounded-lg text-sm"
@@ -626,33 +607,39 @@ export default function AdminPage() {
                 if (!article) return;
                 const articleUrl = `https://portalgbtqia.vercel.app/artigos/${article.slug ?? slugify(article.title)}`;
                 setFacebookArticleUrl(articleUrl);
-                setFacebookText(`${article.title}\n\n${article.excerpt ?? ""}\n\nLeia no Portal LGBTQ+ Nordeste: ${articleUrl}\n\n#LGBTQIA #Nordeste #Diversidade`);
+                setFacebookText(`${article.title}\n\n${article.excerpt ?? ""}\n\n#LGBTQIA #Nordeste #Diversidade`);
               }}
             >
               <option value="">Selecionar artigo</option>
               {articles.map((article) => <option key={article.id} value={article.id}>{article.title}</option>)}
             </select>
             <textarea value={facebookText} onChange={(e) => setFacebookText(e.target.value)} rows={10} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Texto para publicar no Facebook" />
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Link da postagem no portal</label>
+              <input value={facebookArticleUrl} onChange={(e) => setFacebookArticleUrl(e.target.value)} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="https://portalgbtqia.vercel.app/artigos/..." />
+            </div>
             <div className="flex flex-wrap gap-3">
               <button
                 type="button"
-                onClick={publishToFacebook}
-                disabled={isFacebookPublishing || !facebookText.trim() || !facebookArticleUrl.trim()}
-                className="px-5 py-2 bg-pink-600 text-white rounded-lg text-sm font-semibold disabled:opacity-50 hover:bg-pink-700 transition-colors"
+                onClick={() => copyFacebookText(`${facebookText.trim()}\n\n${facebookArticleUrl.trim()}`.trim(), "Texto completo copiado. Agora e so colar no Facebook.")}
+                className="px-5 py-2 bg-pink-600 text-white rounded-lg text-sm font-semibold hover:bg-pink-700 transition-colors"
               >
-                {isFacebookPublishing ? "Publicando..." : "Publicar na pagina"}
+                Copiar texto + link
               </button>
-              <button type="button" onClick={() => navigator.clipboard?.writeText(facebookText)} className="px-5 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold">
+              <button type="button" onClick={() => copyFacebookText(facebookText, "Texto copiado.")} className="px-5 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold">
                 Copiar texto
               </button>
-              <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="px-5 py-2 border rounded-lg text-sm font-semibold hover:bg-gray-50">
-                Abrir Facebook
+              <button type="button" onClick={() => copyFacebookText(facebookArticleUrl, "Link copiado.")} className="px-5 py-2 border rounded-lg text-sm font-semibold hover:bg-gray-50">
+                Copiar link
+              </button>
+              <a href="https://www.facebook.com/profile.php?id=1202909452904232" target="_blank" rel="noopener noreferrer" className="px-5 py-2 border rounded-lg text-sm font-semibold hover:bg-gray-50">
+                Abrir pagina
               </a>
             </div>
           </div>
           <div className="bg-white border rounded-xl p-6 shadow-sm">
             <h2 className="text-lg font-bold mb-3">Previa</h2>
-            <pre className="whitespace-pre-wrap text-sm text-gray-700 bg-gray-50 border rounded-lg p-4 min-h-64">{facebookText || "A previa do post aparece aqui."}</pre>
+            <pre className="whitespace-pre-wrap text-sm text-gray-700 bg-gray-50 border rounded-lg p-4 min-h-64">{facebookText || "A previa do post aparece aqui."}{facebookArticleUrl ? `\n\n${facebookArticleUrl}` : ""}</pre>
           </div>
         </div>
       )}

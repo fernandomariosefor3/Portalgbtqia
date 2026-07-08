@@ -39,7 +39,7 @@ export function useSiteSection(key: string, fallback: SiteSectionContent) {
     return () => {
       active = false;
     };
-  }, [key]);
+  }, [fallback, key]);
 
   return { content, loading };
 }

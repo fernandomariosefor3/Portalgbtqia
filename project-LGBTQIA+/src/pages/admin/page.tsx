@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   collection,
   addDoc,
@@ -146,13 +146,13 @@ export default function AdminPage() {
   const [places, setPlaces] = useState<EditableRecord[]>([]);
   const [facebookText, setFacebookText] = useState("");
 
-  const loadArticles = async () => {
+  const loadArticles = useCallback(async () => {
     const q = query(collection(db, "articles"), orderBy("published_at", "desc"));
     const snap = await getDocs(q);
     setArticles(snap.docs.map((d) => ({ id: d.id, ...d.data() } as ArticleItem)));
-  };
+  }, []);
 
-  const loadSections = async () => {
+  const loadSections = useCallback(async () => {
     const next = await Promise.all(
       defaultSections.map(async (section) => {
         const snapshot = await getDoc(doc(db, "site_sections", section.key));
@@ -160,10 +160,10 @@ export default function AdminPage() {
       }),
     );
     setSections(next);
-    setSectionForm(next.find((section) => section.key === selectedSectionKey) ?? next[0]);
-  };
+    setSectionForm((current) => next.find((section) => section.key === current.key) ?? next[0]);
+  }, []);
 
-  const loadRecords = async (collectionName: "events" | "places") => {
+  const loadRecords = useCallback(async (collectionName: "events" | "places") => {
     const snap = await getDocs(collection(db, collectionName));
     return snap.docs.map((item) => {
       const data = item.data();
@@ -177,14 +177,14 @@ export default function AdminPage() {
         status: data.status ?? "published",
       };
     }) as EditableRecord[];
-  };
+  }, []);
 
   useEffect(() => {
     loadArticles();
     loadSections();
     loadRecords("events").then(setEvents).catch(() => setEvents([]));
     loadRecords("places").then(setPlaces).catch(() => setPlaces([]));
-  }, []);
+  }, [loadArticles, loadRecords, loadSections]);
 
   const deleteArticle = async (id: string) => {
     if (!confirm("Apagar este artigo?")) return;

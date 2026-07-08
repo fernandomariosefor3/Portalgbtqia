@@ -3,9 +3,7 @@ import {
   collection,
   query,
   where,
-  orderBy,
   getDocs,
-  limit,
   type DocumentData,
   type QueryDocumentSnapshot,
 } from 'firebase/firestore';
@@ -51,14 +49,10 @@ export function firestoreToArticle(doc: QueryDocumentSnapshot<DocumentData>): Ar
 }
 
 export async function getFirestoreArticleBySlug(slug: string): Promise<Article | null> {
-  const q = query(
-    collection(db, 'articles'),
-    where('slug', '==', slug),
-    where('status', '==', 'published'),
-    limit(1)
-  );
+  const q = query(collection(db, 'articles'), where('status', '==', 'published'));
   const snapshot = await getDocs(q);
-  return snapshot.empty ? null : firestoreToArticle(snapshot.docs[0]);
+  const found = snapshot.docs.find((doc) => (doc.data().slug || doc.id) === slug);
+  return found ? firestoreToArticle(found) : null;
 }
 
 export interface UseArticlesResult {
@@ -84,15 +78,12 @@ export function useArticles(): UseArticlesResult {
 
     (async () => {
       try {
-        const q = query(
-          collection(db, 'articles'),
-          where('status', '==', 'published'),
-          orderBy('published_at', 'desc')
-        );
+        const q = query(collection(db, 'articles'), where('status', '==', 'published'));
         const snapshot = await getDocs(q);
         if (!active) return;
 
         const fetched = snapshot.docs.map(firestoreToArticle);
+        fetched.sort((a, b) => b.date.localeCompare(a.date));
 
         if (fetched.length > 0) {
           fetched[0].featured = true;

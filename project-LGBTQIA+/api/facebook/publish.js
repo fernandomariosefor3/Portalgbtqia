@@ -1,5 +1,22 @@
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'fernandomariodasmartins@gmail.com';
 
+async function publishToGraph({ graphVersion, targetId, pageAccessToken, message, link }) {
+  const body = new URLSearchParams({
+    message,
+    link,
+    access_token: pageAccessToken,
+  });
+
+  const graphResponse = await fetch(`https://graph.facebook.com/${graphVersion}/${targetId}/feed`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body,
+  });
+
+  const result = await graphResponse.json();
+  return { ok: graphResponse.ok, status: graphResponse.status, result };
+}
+
 async function verifyFirebaseUser(idToken) {
   const firebaseApiKey = process.env.VITE_FIREBASE_API_KEY;
   if (!firebaseApiKey) {
@@ -53,27 +70,36 @@ export default async function handler(req, res) {
     }
 
     const graphVersion = process.env.META_GRAPH_VERSION || 'v20.0';
-    const body = new URLSearchParams({
+    const publishPayload = {
+      graphVersion,
+      targetId: pageId,
+      pageAccessToken,
       message,
       link,
-      access_token: pageAccessToken,
-    });
+    };
 
-    const graphResponse = await fetch(`https://graph.facebook.com/${graphVersion}/${pageId}/feed`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body,
-    });
+    let publishResult = await publishToGraph(publishPayload);
+    const metaError = publishResult.result?.error;
+    const shouldRetryWithMe =
+      metaError?.code === 100 &&
+      typeof metaError.message === 'string' &&
+      metaError.message.includes('global id');
 
-    const result = await graphResponse.json();
-    if (!graphResponse.ok) {
-      return res.status(graphResponse.status).json({
-        error: result.error?.message || 'Falha ao publicar no Facebook.',
+    if (!publishResult.ok && shouldRetryWithMe) {
+      publishResult = await publishToGraph({ ...publishPayload, targetId: 'me' });
+    }
+
+    if (!publishResult.ok) {
+      const errorMessage = publishResult.result?.error?.message || 'Falha ao publicar no Facebook.';
+      return res.status(publishResult.status).json({
+        error:
+          errorMessage +
+          ' Verifique se META_FACEBOOK_PAGE_ACCESS_TOKEN e um Page Access Token com pages_manage_posts.',
       });
     }
 
     return res.status(200).json({
-      id: result.id,
+      id: publishResult.result.id,
       message: 'Publicado na pagina do Facebook.',
     });
   } catch (error) {

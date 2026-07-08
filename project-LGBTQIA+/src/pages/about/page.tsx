@@ -1,8 +1,22 @@
 import MissionSection from "./components/MissionSection";
 import ValuesSection from "./components/ValuesSection";
 import TeamSection from "./components/TeamSection";
+import { useSiteSection } from "@/lib/useSiteSection";
+
+const fallbackAbout = {
+  title: "Sobre o Portal LGBTQ+",
+  subtitle: "Institucional",
+  description:
+    "Informacao de qualidade, cultura vibrante e acolhimento comunitario para a diversidade no Nordeste do Brasil.",
+  image:
+    "https://readdy.ai/api/search-image?query=diverse%20crowd%20of%20brazilian%20people%20marching%20in%20pride%20parade%20colorful%20flags%20and%20banners%20warm%20sunset%20light%20urban%20street%20editorial%20photography%20inclusive%20celebration%20joyful%20atmosphere%20high%20quality&width=1200&height=520&seq=about-hero&orientation=landscape",
+  ctaLabel: "Fale conosco",
+  ctaUrl: "/comunidade",
+};
 
 export default function AboutPage() {
+  const { content } = useSiteSection("about-page", fallbackAbout);
+
   return (
     <main className="w-full bg-white">
       {/* Hero */}
@@ -10,22 +24,19 @@ export default function AboutPage() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage:
-              'url("https://readdy.ai/api/search-image?query=diverse%20crowd%20of%20brazilian%20people%20marching%20in%20pride%20parade%20colorful%20flags%20and%20banners%20warm%20sunset%20light%20urban%20street%20editorial%20photography%20inclusive%20celebration%20joyful%20atmosphere%20high%20quality&width=1200&height=520&seq=about-hero&orientation=landscape")',
+            backgroundImage: `url("${content.image || fallbackAbout.image}")`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/70" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 md:px-6">
           <span className="px-4 py-1.5 text-xs font-medium rounded-full bg-white/15 text-white border border-white/25 backdrop-blur-sm mb-5">
-            Institucional
+            {content.subtitle}
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white leading-tight max-w-4xl">
-            Sobre o{" "}
-            <span className="italic text-secondary-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]">Portal LGBTQ+</span>
+            {content.title}
           </h1>
           <p className="mt-4 md:mt-5 text-base md:text-lg text-white/80 max-w-2xl leading-relaxed">
-            Informação de qualidade, cultura vibrante e acolhimento comunitário
-            para a diversidade no Nordeste do Brasil.
+            {content.description}
           </p>
         </div>
       </section>

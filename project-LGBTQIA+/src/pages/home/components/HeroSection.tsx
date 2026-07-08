@@ -1,34 +1,48 @@
 import { Link } from 'react-router-dom';
+import { useSiteSection } from '@/lib/useSiteSection';
+
+const fallbackHero = {
+  title: 'Informacao, cultura e comunidade para todas as identidades',
+  subtitle: 'Portal LGBTQ+ Nordeste',
+  description:
+    'O primeiro portal LGBTQ+ do Nordeste. Artigos, guias, mapa de espacos seguros e uma comunidade acolhedora para quem busca representatividade e informacao de qualidade.',
+  image:
+    'https://readdy.ai/api/search-image?query=diverse%20group%20of%20LGBTQ%20people%20celebrating%20together%20at%20pride%20event%20rainbow%20flags%20warm%20golden%20hour%20lighting%20photorealistic%20editorial%20photography%20outdoor%20celebration%20joyful%20atmosphere%20authentic%20diversity&width=1600&height=900&seq=hero1&orientation=landscape',
+  ctaLabel: 'Ler artigos',
+  ctaUrl: '/artigos',
+};
 
 export default function HeroSection() {
+  const { content } = useSiteSection('home-hero', fallbackHero);
+
   return (
     <section className="relative w-full min-h-[420px] md:min-h-[600px] flex items-center justify-center overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center object-top"
         style={{
-          backgroundImage:
-            'url("https://readdy.ai/api/search-image?query=diverse%20group%20of%20LGBTQ%20people%20celebrating%20together%20at%20pride%20event%20rainbow%20flags%20warm%20golden%20hour%20lighting%20photorealistic%20editorial%20photography%20outdoor%20celebration%20joyful%20atmosphere%20authentic%20diversity&width=1600&height=900&seq=hero1&orientation=landscape")',
+          backgroundImage: `url("${content.image || fallbackHero.image}")`,
         }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-dark-700/60 via-dark-700/40 to-dark-700/70" />
 
       <div className="relative z-10 w-full px-4 md:px-6 lg:px-10 text-center py-10">
+        {content.subtitle && (
+          <span className="mb-4 inline-flex px-4 py-1.5 text-xs font-medium rounded-full bg-white/15 text-white border border-white/25 backdrop-blur-sm">
+            {content.subtitle}
+          </span>
+        )}
         <h1 className="font-playfair text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-5xl mx-auto">
-          Informação, cultura e
-          <span className="italic"> comunidade</span>
-          <br className="hidden sm:block" />
-          {' '}para todas as identidades
+          {content.title}
         </h1>
         <p className="mt-4 md:mt-6 text-sm md:text-lg text-white/85 max-w-2xl mx-auto font-inter leading-relaxed">
-          O primeiro portal LGBTQ+ do Nordeste. Artigos, guias, mapa de espaços seguros e uma
-          comunidade acolhedora para quem busca representatividade e informação de qualidade.
+          {content.description}
         </p>
         <div className="mt-6 md:mt-8 flex flex-col sm:flex-row items-center gap-4">
           <Link
-            to="/artigos"
+            to={content.ctaUrl || '/artigos'}
             className="px-6 py-3 text-sm font-semibold rounded-full bg-white text-dark-700 hover:bg-white/90 transition-colors whitespace-nowrap"
           >
-            Ler artigos
+            {content.ctaLabel || 'Ler artigos'}
           </Link>
           <Link
             to="/saude"

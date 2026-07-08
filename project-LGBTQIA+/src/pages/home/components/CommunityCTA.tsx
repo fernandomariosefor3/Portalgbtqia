@@ -1,6 +1,20 @@
 import { Link } from 'react-router-dom';
+import { useSiteSection } from '@/lib/useSiteSection';
+
+const fallbackCommunity = {
+  title: 'Um espaco seguro para conversar, aprender e crescer juntos',
+  subtitle: 'Junte-se a comunidade',
+  description:
+    'Participe do forum de discussoes, encontre um mentor ou converse no chat seguro. Sua voz importa e faz parte da mudanca.',
+  image:
+    'https://readdy.ai/api/search-image?query=diverse%20group%20of%20people%20holding%20hands%20in%20circle%20community%20gathering%20indoor%20soft%20warm%20lighting%20authentic%20friendship%20unity%20editorial%20photography%20top%20view%20artistic%20composition&width=1200&height=500&seq=cta1&orientation=landscape',
+  ctaLabel: 'Entrar no forum',
+  ctaUrl: '/comunidade',
+};
 
 export default function CommunityCTA() {
+  const { content } = useSiteSection('home-community', fallbackCommunity);
+
   return (
     <section className="w-full bg-dark-700 py-16 md:py-24 px-4 md:px-6 lg:px-10">
       <div className="max-w-7xl mx-auto">
@@ -8,32 +22,27 @@ export default function CommunityCTA() {
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage:
-                'url("https://readdy.ai/api/search-image?query=diverse%20group%20of%20people%20holding%20hands%20in%20circle%20community%20gathering%20indoor%20soft%20warm%20lighting%20authentic%20friendship%20unity%20editorial%20photography%20top%20view%20artistic%20composition&width=1200&height=500&seq=cta1&orientation=landscape")',
+              backgroundImage: `url("${content.image || fallbackCommunity.image}")`,
             }}
           />
           <div className="absolute inset-0 bg-dark-700/70" />
 
           <div className="relative z-10 flex flex-col items-center text-center py-12 md:py-20 px-6 md:px-10">
             <span className="px-4 py-1.5 text-xs font-medium rounded-full bg-secondary-400/20 text-secondary-300 border border-secondary-400/30">
-              Junte-se à comunidade
+              {content.subtitle}
             </span>
             <h2 className="mt-5 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-white leading-tight max-w-3xl">
-              Um espaço seguro para{' '}
-              <span className="italic text-secondary-300">conversar</span>,{' '}
-              <span className="italic text-secondary-300">aprender</span> e{' '}
-              <span className="italic text-secondary-300">crescer</span> juntos
+              {content.title}
             </h2>
             <p className="mt-4 md:mt-5 text-base md:text-lg text-white/75 max-w-2xl leading-relaxed">
-              Participe do fórum de discussões, encontre um mentor ou converse no chat seguro.
-              Sua voz importa e faz parte da mudança.
+              {content.description}
             </p>
             <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center gap-4">
               <Link
-                to="/comunidade"
+                to={content.ctaUrl || '/comunidade'}
                 className="px-8 py-3.5 text-sm md:text-base font-semibold rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap shadow-lg"
               >
-                Entrar no fórum
+                {content.ctaLabel || 'Entrar no forum'}
               </Link>
               <Link
                 to="/comunidade"

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { HealthGuide } from '@/mocks/health';
 import { categoryLabels, categoryColors, categoryIcons } from '@/mocks/health';
@@ -7,16 +8,55 @@ interface HealthCardProps {
   variant?: 'default' | 'featured' | 'compact';
 }
 
+function HealthImage({
+  guide,
+  className,
+  compact = false,
+}: {
+  guide: HealthGuide;
+  className: string;
+  compact?: boolean;
+}) {
+  const [failed, setFailed] = useState(!guide.image);
+
+  if (failed) {
+    return (
+      <div
+        className={`${className} flex items-center justify-center bg-gradient-to-br from-accent-50 via-primary-50 to-secondary-50`}
+        role="img"
+        aria-label={guide.title}
+      >
+        <div className="flex flex-col items-center gap-2 text-accent-500">
+          <i className={`${categoryIcons[guide.category]} ${compact ? 'text-2xl' : 'text-4xl'}`} aria-hidden="true"></i>
+          {!compact && (
+            <span className="px-3 py-1 rounded-full bg-white/80 text-xs font-semibold text-accent-600">
+              {categoryLabels[guide.category]}
+            </span>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={guide.image}
+      alt={guide.title}
+      className={className}
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
 export default function HealthCard({ guide, variant = 'default' }: HealthCardProps) {
   if (variant === 'featured') {
     return (
       <article className="group relative flex flex-col md:flex-row gap-0 md:gap-6 rounded-xl overflow-hidden bg-white border border-dark-100 hover:border-accent-200 transition-all duration-300">
         <div className="w-full md:w-[45%] h-52 md:h-auto overflow-hidden">
-          <img
-            src={guide.image}
-            alt={guide.title}
+          <HealthImage
+            guide={guide}
             className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
           />
         </div>
         <div className="flex-1 p-5 md:py-6 md:pr-6 flex flex-col">
@@ -54,11 +94,10 @@ export default function HealthCard({ guide, variant = 'default' }: HealthCardPro
     return (
       <article className="group flex gap-4 items-start">
         <div className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden">
-          <img
-            src={guide.image}
-            alt={guide.title}
+          <HealthImage
+            guide={guide}
             className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
+            compact
           />
         </div>
         <div className="flex-1 min-w-0">
@@ -78,11 +117,9 @@ export default function HealthCard({ guide, variant = 'default' }: HealthCardPro
   return (
     <article className="group flex flex-col rounded-xl overflow-hidden bg-white border border-dark-100 hover:border-accent-200 hover:shadow-sm transition-all duration-300">
       <div className="relative w-full aspect-[16/10] overflow-hidden">
-        <img
-          src={guide.image}
-          alt={guide.title}
+        <HealthImage
+          guide={guide}
           className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
         />
         <div className="absolute top-3 left-3">
           <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium ${categoryColors[guide.category]}`}>

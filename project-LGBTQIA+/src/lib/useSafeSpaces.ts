@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { collection, getDocs, type DocumentData, type QueryDocumentSnapshot } from 'firebase/firestore';
 import { db } from './firebase';
 import {
+  safeSpaceCategoryImages,
   staticSafeSpaces,
   type SafeSpace,
   type SafeSpaceCategory,
@@ -47,19 +48,35 @@ function slugify(value: string) {
     .replace(/(^-|-$)/g, '');
 }
 
+function isSafeSpaceCategory(value: unknown): value is SafeSpaceCategory {
+  return typeof value === 'string' && value in safeSpaceCategoryImages;
+}
+
+function imageForCategory(category: SafeSpaceCategory) {
+  return safeSpaceCategoryImages[category] || safeSpaceCategoryImages['ONG & Acolhimento'];
+}
+
+function normalizeSafeSpaceImage(image: unknown, category: SafeSpaceCategory) {
+  if (typeof image !== 'string' || !image.trim() || image.includes('readdy.ai')) {
+    return imageForCategory(category);
+  }
+  return image;
+}
+
 function firestorePlaceToSafeSpace(doc: QueryDocumentSnapshot<DocumentData>): SafeSpace {
   const data = doc.data();
   const name = data.title || data.name || '';
+  const category = isSafeSpaceCategory(data.category) ? data.category : 'ONG & Acolhimento';
   return {
     id: doc.id,
     slug: data.slug || slugify(name || doc.id),
     name,
-    category: data.category || 'ONG & Acolhimento',
+    category,
     address: data.address || '',
     city: data.city || 'Fortaleza',
     state: data.state || 'CE',
     description: data.description || data.short_description || '',
-    image: data.image_url || data.image || '',
+    image: normalizeSafeSpaceImage(data.image_url || data.image, category),
     tags: splitList(data.tags),
     badges: splitList(data.badges),
     rating: Number(data.rating ?? 0),
@@ -75,15 +92,16 @@ function firestorePlaceToSafeSpace(doc: QueryDocumentSnapshot<DocumentData>): Sa
 
 export function applySafeSpaceOverride(space: SafeSpace, override?: Partial<SafeSpaceOverride>): SafeSpace {
   if (!override) return space;
+  const category = override.category || space.category;
   return {
     ...space,
     name: override.name || space.name,
-    category: override.category || space.category,
+    category,
     address: override.address || space.address,
     city: override.city || space.city,
     state: override.state || space.state,
     description: override.description || space.description,
-    image: override.image || space.image,
+    image: normalizeSafeSpaceImage(override.image || space.image, category),
     tags: override.tags?.length ? override.tags : space.tags,
     badges: override.badges?.length ? override.badges : space.badges,
     rating: typeof override.rating === 'number' ? override.rating : space.rating,

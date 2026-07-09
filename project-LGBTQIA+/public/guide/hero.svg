@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" role="img" aria-labelledby="title desc">
+  <title id="title">Mapa LGBTQIA+ de Fortaleza</title>
+  <desc id="desc">Ilustracao editorial de Fortaleza com mapa, mar e pontos seguros.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset=".48" stop-color="#1d4ed8"/>
+      <stop offset="1" stop-color="#e94e77"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#06b6d4"/>
+      <stop offset="1" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="700" fill="url(#sky)"/>
+  <circle cx="1330" cy="130" r="120" fill="#fbbf24" opacity=".72"/>
+  <path d="M0 420c230-70 400-40 600-8 260 42 430 12 610-32 155-38 280-38 390 4v316H0z" fill="url(#sea)" opacity=".78"/>
+  <path d="M0 500c260-42 430-8 650 35 240 47 520 20 950-84v249H0z" fill="#f8fafc" opacity=".9"/>
+  <path d="M190 590C430 472 645 455 815 525c114 47 240 64 388-7 83-40 154-48 227-25" fill="none" stroke="#334155" stroke-width="16" stroke-linecap="round" opacity=".35"/>
+  <g fill="#ffffff" stroke="#e94e77" stroke-width="8">
+    <path d="M410 290c-55 0-98 43-98 97 0 72 98 175 98 175s98-103 98-175c0-54-43-97-98-97z"/>
+    <circle cx="410" cy="386" r="34" fill="#e94e77"/>
+    <path d="M830 235c-48 0-86 38-86 86 0 63 86 154 86 154s86-91 86-154c0-48-38-86-86-86z"/>
+    <circle cx="830" cy="320" r="30" fill="#10b981"/>
+    <path d="M1160 315c-50 0-90 40-90 90 0 67 90 160 90 160s90-93 90-160c0-50-40-90-90-90z"/>
+    <circle cx="1160" cy="404" r="31" fill="#7c3aed"/>
+  </g>
+  <text x="120" y="170" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="800" fill="#ffffff">Espacos seguros em Fortaleza</text>
+  <text x="122" y="230" font-family="Inter, Arial, sans-serif" font-size="28" fill="#e0f2fe">cultura, saude, acolhimento e noite LGBTQIA+</text>
+</svg>

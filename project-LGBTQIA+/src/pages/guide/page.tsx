@@ -1,5 +1,11 @@
 import { useMemo, useState } from 'react';
-import { badgeLabels, safeSpaceCategories } from '@/mocks/safeSpaces';
+import {
+  badgeLabels,
+  guideHeroImage,
+  safeSpaceCategories,
+  safeSpaceCategoryImages,
+  type SafeSpace,
+} from '@/mocks/safeSpaces';
 import { useSafeSpaces } from '@/lib/useSafeSpaces';
 
 const filters = ['Todos', ...safeSpaceCategories] as const;
@@ -30,6 +36,21 @@ const mappedRegions = [
     icon: 'ri-shield-user-line',
   },
 ];
+
+function GuideSpaceImage({ space }: { space: SafeSpace }) {
+  const fallback = safeSpaceCategoryImages[space.category] || safeSpaceCategoryImages['ONG & Acolhimento'];
+  const [src, setSrc] = useState(space.image || fallback);
+
+  return (
+    <img
+      src={src}
+      alt={space.name}
+      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+      loading="lazy"
+      onError={() => setSrc(fallback)}
+    />
+  );
+}
 
 export default function GuidePage() {
   const { spaces, loading } = useSafeSpaces();
@@ -67,8 +88,7 @@ export default function GuidePage() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage:
-              'url("https://readdy.ai/api/search-image?query=fortaleza%20ceara%20brazil%20cityscape%20coastal%20aerial%20view%20warm%20sunset%20golden%20light%20tropical%20beach%20urban%20skyline%20editorial%20photography%20vibrant%20warm%20colors&width=1600&height=700&seq=guidehero-v2&orientation=landscape")',
+            backgroundImage: `url("${guideHeroImage}")`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/75" />
@@ -108,7 +128,7 @@ export default function GuidePage() {
           <div>
             <p className="text-sm font-semibold text-dark-700">MVP do mapa de espaços seguros</p>
             <p className="mt-1 text-xs text-dark-500 leading-relaxed">
-              Esta primeira versão organiza espaços por categoria, badges e regiões. A curadoria pode ocultar, editar ou incluir novos pontos pelo admin enquanto o mapa interativo entra nas próximas etapas.
+              Esta primeira versão organiza espaços por categoria, badges e regiões. Avaliações comunitárias, denúncias e mapa interativo entram nas próximas etapas, enquanto a curadoria pode ocultar, editar ou incluir novos pontos pelo admin.
             </p>
           </div>
         </div>
@@ -186,17 +206,7 @@ export default function GuidePage() {
                 className="group rounded-xl md:rounded-2xl border border-dark-100 bg-white overflow-hidden hover:shadow-md transition-all hover:-translate-y-0.5"
               >
                 <div className="relative w-full h-44 md:h-48 overflow-hidden bg-dark-50">
-                  {space.image ? (
-                    <img
-                      src={space.image}
-                      alt={space.name}
-                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-dark-300">
-                      <i className="ri-map-pin-line text-3xl" aria-hidden="true"></i>
-                    </div>
-                  )}
+                  <GuideSpaceImage space={space} />
                   <div className="absolute top-3 left-3 px-2.5 py-1 text-xs font-medium rounded-full bg-white/90 text-dark-700 backdrop-blur-sm">
                     {space.category}
                   </div>

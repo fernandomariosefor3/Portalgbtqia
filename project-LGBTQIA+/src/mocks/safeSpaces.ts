@@ -45,6 +45,7 @@ export const safeSpaceCategories: SafeSpaceCategory[] = [
 
 export const badgeLabels: Record<string, string> = {
   geral: 'Espaço seguro',
+  gay: 'Gay friendly',
   trans: 'Seguro para pessoas trans',
   mental: 'Saúde mental',
   drag: 'Drag friendly',
@@ -55,6 +56,20 @@ export const badgeLabels: Record<string, string> = {
   cultura: 'Cultura',
   sus: 'SUS',
 };
+
+export const safeSpaceCategoryImages: Record<SafeSpaceCategory, string> = {
+  'Bar & Entretenimento': `${import.meta.env.BASE_URL}guide/nightlife.svg`,
+  'Centro Cultural': `${import.meta.env.BASE_URL}guide/culture.svg`,
+  'ONG & Acolhimento': `${import.meta.env.BASE_URL}guide/community.svg`,
+  Saúde: `${import.meta.env.BASE_URL}guide/health.svg`,
+  'Serviços Públicos': `${import.meta.env.BASE_URL}guide/rights.svg`,
+  Hospedagem: `${import.meta.env.BASE_URL}guide/tourism.svg`,
+  Educação: `${import.meta.env.BASE_URL}guide/culture.svg`,
+  Comércio: `${import.meta.env.BASE_URL}guide/community.svg`,
+  Trabalho: `${import.meta.env.BASE_URL}guide/rights.svg`,
+};
+
+export const guideHeroImage = `${import.meta.env.BASE_URL}guide/hero.svg`;
 
 export const staticSafeSpaces: SafeSpace[] = [
   {
@@ -68,12 +83,11 @@ export const staticSafeSpaces: SafeSpace[] = [
     description:
       "Casa de festas LGBTQIA+ em casarões históricos da Praia de Iracema. Três ambientes, duas pistas internas e bar externo. Programação com pop, brasilidades e house.",
     tags: ['Noite', 'Festas', 'DJs'],
-    badges: ['geral', 'drag'],
+    badges: ['geral', 'gay', 'drag'],
     rating: 4.7,
     reviews: 23,
     price: '$$',
-    image:
-      'https://readdy.ai/api/search-image?query=vibrant%20nightlife%20bar%20club%20interior%20colorful%20neon%20lighting%20diverse%20crowd%20dancing%20festive%20atmosphere%20LGBTQ%20friendly%20space%20editorial%20photography%20dynamic%20warm%20tones&width=400&height=250&seq=guide1&orientation=landscape',
+    image: safeSpaceCategoryImages['Bar & Entretenimento'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Gandaia%20Bar%20Club%20Fortaleza',
     status: 'published',
     source: 'static',
@@ -89,12 +103,11 @@ export const staticSafeSpaces: SafeSpace[] = [
     description:
       'Balada pop e eletrônica na Praia de Iracema. DJs residentes, festas temáticas de funk e pop nacional. Público jovem e vibrante que movimenta os finais de semana.',
     tags: ['Noite', 'Pop', 'Funk'],
-    badges: ['geral', 'precos'],
+    badges: ['geral', 'gay', 'precos'],
     rating: 4.5,
     reviews: 18,
     price: '$$',
-    image:
-      'https://readdy.ai/api/search-image?query=modern%20nightclub%20dance%20floor%20colorful%20laser%20lights%20energetic%20crowd%20young%20people%20dancing%20LGBTQ%20party%20atmosphere%20editorial%20photography%20vibrant%20dynamic&width=400&height=250&seq=guide2&orientation=landscape',
+    image: safeSpaceCategoryImages['Bar & Entretenimento'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Yall%20Club%20Fortaleza',
     status: 'published',
     source: 'static',
@@ -110,12 +123,11 @@ export const staticSafeSpaces: SafeSpace[] = [
     description:
       "Projeto 'Divino Domingos' mantém viva a cultura drag e transformista tradicional de Fortaleza. Atrai público de diversas gerações aos domingos em ambiente acolhedor.",
     tags: ['Domingo', 'Drag', 'Cultura'],
-    badges: ['geral', 'drag', 'cultura'],
+    badges: ['geral', 'gay', 'drag', 'cultura'],
     rating: 4.6,
     reviews: 16,
     price: '$',
-    image:
-      'https://readdy.ai/api/search-image?query=cozy%20bar%20interior%20warm%20lighting%20people%20socializing%20sunday%20afternoon%20casual%20atmosphere%20diverse%20community%20gathering%20editorial%20photography%20natural%20warm%20tones&width=400&height=250&seq=guide3&orientation=landscape',
+    image: safeSpaceCategoryImages['Bar & Entretenimento'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Morenos%20Bar%20Benfica%20Fortaleza',
     status: 'published',
     source: 'static',
@@ -134,8 +146,7 @@ export const staticSafeSpaces: SafeSpace[] = [
     badges: ['geral', 'cultura', 'acessivel'],
     rating: 4.8,
     reviews: 41,
-    image:
-      'https://readdy.ai/api/search-image?query=modern%20cultural%20center%20building%20exterior%20contemporary%20architecture%20public%20space%20artistic%20urban%20design%20editorial%20photography%20bright%20natural%20light&width=400&height=250&seq=guide4&orientation=landscape',
+    image: safeSpaceCategoryImages['Centro Cultural'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Centro%20Dragao%20do%20Mar%20Fortaleza',
     status: 'published',
     source: 'static',
@@ -154,8 +165,7 @@ export const staticSafeSpaces: SafeSpace[] = [
     badges: ['geral', 'comunidade', 'familia'],
     rating: 4.9,
     reviews: 27,
-    image:
-      'https://readdy.ai/api/search-image?query=community%20cultural%20center%20interior%20warm%20welcoming%20space%20people%20gathering%20plants%20natural%20light%20alternative%20creative%20environment%20editorial%20photography%20cozy%20atmosphere&width=400&height=250&seq=guide5&orientation=landscape',
+    image: safeSpaceCategoryImages['ONG & Acolhimento'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Outra%20Casa%20Coletiva%20Fortaleza',
     status: 'published',
     source: 'static',
@@ -174,8 +184,7 @@ export const staticSafeSpaces: SafeSpace[] = [
     badges: ['trans', 'sus', 'mental'],
     rating: 4.4,
     reviews: 12,
-    image:
-      'https://readdy.ai/api/search-image?query=modern%20hospital%20outpatient%20clinic%20interior%20clean%20bright%20welcoming%20healthcare%20environment%20natural%20light%20professional%20medical%20setting%20editorial%20photography&width=400&height=250&seq=guide6&orientation=landscape',
+    image: safeSpaceCategoryImages.Saúde,
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Hospital%20Universitario%20do%20Ceara%20Sertrans',
     status: 'published',
     source: 'static',
@@ -194,8 +203,7 @@ export const staticSafeSpaces: SafeSpace[] = [
     badges: ['geral', 'trans', 'comunidade'],
     rating: 4.8,
     reviews: 0,
-    image:
-      'https://readdy.ai/api/search-image?query=public%20community%20support%20office%20welcoming%20reception%20inclusive%20social%20service%20warm%20light%20editorial%20photography&width=400&height=250&seq=guide-janaina&orientation=landscape',
+    image: safeSpaceCategoryImages['Serviços Públicos'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Centro%20de%20Refer%C3%AAncia%20LGBT%20Jana%C3%ADna%20Dutra%20Fortaleza',
     status: 'published',
     source: 'static',
@@ -214,8 +222,7 @@ export const staticSafeSpaces: SafeSpace[] = [
     badges: ['geral', 'comunidade', 'cultura'],
     rating: 4.8,
     reviews: 0,
-    image:
-      'https://readdy.ai/api/search-image?query=lgbtq%20community%20organization%20meeting%20room%20posters%20rainbow%20details%20warm%20welcoming%20editorial%20photography&width=400&height=250&seq=guide-grab&orientation=landscape',
+    image: safeSpaceCategoryImages['ONG & Acolhimento'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Grupo%20de%20Apoio%20Asa%20Branca%20Fortaleza',
     status: 'published',
     source: 'static',
@@ -234,8 +241,7 @@ export const staticSafeSpaces: SafeSpace[] = [
     badges: ['cultura', 'acessivel'],
     rating: 4.4,
     reviews: 0,
-    image:
-      'https://readdy.ai/api/search-image?query=historic%20beachfront%20cultural%20building%20fortaleza%20praia%20de%20iracema%20warm%20sunset%20editorial%20photography&width=400&height=250&seq=guide-estoril&orientation=landscape',
+    image: safeSpaceCategoryImages['Centro Cultural'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Estoril%20Praia%20de%20Iracema%20Fortaleza',
     status: 'published',
     source: 'static',
@@ -254,8 +260,7 @@ export const staticSafeSpaces: SafeSpace[] = [
     badges: ['cultura', 'precos'],
     rating: 4.3,
     reviews: 0,
-    image:
-      'https://readdy.ai/api/search-image?query=pier%20at%20praia%20de%20iracema%20fortaleza%20sunset%20ocean%20walkway%20warm%20travel%20editorial%20photography&width=400&height=250&seq=guide-ponte&orientation=landscape',
+    image: safeSpaceCategoryImages.Hospedagem,
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ponte%20dos%20Ingleses%20Fortaleza',
     status: 'published',
     source: 'static',

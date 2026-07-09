@@ -14,6 +14,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 import { useAuth } from "../../lib/auth";
+import { allCulture, type CultureItem } from "../../mocks/culture";
 
 interface ArticleItem {
   id: string;
@@ -49,10 +50,23 @@ interface SiteSection {
   ctaUrl: string;
 }
 
-type TabKey = "articles" | "sections" | "events" | "places" | "facebook";
+interface CultureOverride {
+  slug: string;
+  title: string;
+  subtitle: string;
+  excerpt: string;
+  content: string;
+  image: string;
+  type: CultureItem["type"];
+  status: "published" | "hidden";
+  featured: boolean;
+}
+
+type TabKey = "articles" | "culture" | "sections" | "events" | "places" | "facebook";
 
 const tabs: Array<{ id: TabKey; label: string }> = [
   { id: "articles", label: "Artigos" },
+  { id: "culture", label: "Cultura" },
   { id: "sections", label: "Espacos do site" },
   { id: "events", label: "Eventos" },
   { id: "places", label: "Guia" },
@@ -137,6 +151,8 @@ export default function AdminPage() {
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [articles, setArticles] = useState<ArticleItem[]>([]);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [cultureOverrides, setCultureOverrides] = useState<Record<string, CultureOverride>>({});
+  const [cultureForm, setCultureForm] = useState<CultureOverride | null>(null);
   const [sections, setSections] = useState<SiteSection[]>(defaultSections);
   const [selectedSectionKey, setSelectedSectionKey] = useState(defaultSections[0].key);
   const [sectionForm, setSectionForm] = useState<SiteSection>(defaultSections[0]);
@@ -164,6 +180,15 @@ export default function AdminPage() {
     setSectionForm((current) => next.find((section) => section.key === current.key) ?? next[0]);
   }, []);
 
+  const loadCultureOverrides = useCallback(async () => {
+    const snap = await getDocs(collection(db, "culture_overrides"));
+    const next: Record<string, CultureOverride> = {};
+    snap.docs.forEach((item) => {
+      next[item.id] = { slug: item.id, ...item.data() } as CultureOverride;
+    });
+    setCultureOverrides(next);
+  }, []);
+
   const loadRecords = useCallback(async (collectionName: "events" | "places") => {
     const snap = await getDocs(collection(db, collectionName));
     return snap.docs.map((item) => {
@@ -182,10 +207,11 @@ export default function AdminPage() {
 
   useEffect(() => {
     loadArticles();
+    loadCultureOverrides();
     loadSections();
     loadRecords("events").then(setEvents).catch(() => setEvents([]));
     loadRecords("places").then(setPlaces).catch(() => setPlaces([]));
-  }, [loadArticles, loadRecords, loadSections]);
+  }, [loadArticles, loadCultureOverrides, loadRecords, loadSections]);
 
   const deleteArticle = async (id: string) => {
     if (!confirm("Apagar este artigo?")) return;
@@ -221,6 +247,43 @@ export default function AdminPage() {
     setArticleStatus(article.status ?? "published");
     setActiveTab("articles");
     setMessage({ type: "success", text: "Artigo carregado para edicao." });
+  };
+
+  const getCultureForm = (item: CultureItem): CultureOverride => ({
+    slug: item.slug,
+    title: cultureOverrides[item.slug]?.title ?? item.title,
+    subtitle: cultureOverrides[item.slug]?.subtitle ?? item.subtitle,
+    excerpt: cultureOverrides[item.slug]?.excerpt ?? item.excerpt,
+    content: cultureOverrides[item.slug]?.content ?? item.content,
+    image: cultureOverrides[item.slug]?.image ?? item.image,
+    type: cultureOverrides[item.slug]?.type ?? item.type,
+    status: cultureOverrides[item.slug]?.status ?? "published",
+    featured: cultureOverrides[item.slug]?.featured ?? item.featured,
+  });
+
+  const saveCultureOverride = async (form: CultureOverride) => {
+    setIsPublishing(true);
+    setMessage(null);
+    try {
+      await setDoc(doc(db, "culture_overrides", form.slug), {
+        ...form,
+        updated_at: serverTimestamp(),
+      }, { merge: true });
+      setCultureOverrides((prev) => ({ ...prev, [form.slug]: form }));
+      setCultureForm(form);
+      setMessage({ type: "success", text: "Item de cultura salvo." });
+    } catch (e: any) {
+      setMessage({ type: "error", text: `Erro ao salvar cultura: ${e?.message || e}` });
+    }
+    setIsPublishing(false);
+  };
+
+  const toggleCultureItem = async (item: CultureItem) => {
+    const form = getCultureForm(item);
+    await saveCultureOverride({
+      ...form,
+      status: form.status === "published" ? "hidden" : "published",
+    });
   };
 
   const saveSection = async () => {
@@ -547,6 +610,96 @@ export default function AdminPage() {
             ))}
           </div>
         )}
+          </div>
+        </div>
+      )}
+
+      {activeTab === "culture" && (
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_420px] gap-6">
+          <div>
+            <h2 className="text-xl font-bold mb-4">Cultura estática ({allCulture.length})</h2>
+            <p className="text-sm text-gray-500 mb-4">
+              Escolha o que fica publicado, o que sai do ar e edite textos sem apagar o conteúdo do projeto.
+            </p>
+            <div className="space-y-2">
+              {allCulture.map((item) => {
+                const form = getCultureForm(item);
+                return (
+                  <div key={item.slug} className="bg-white border rounded-lg px-4 py-3 shadow-sm">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium text-gray-800 truncate">{form.title}</p>
+                        <p className="text-xs text-gray-400 mt-0.5">
+                          {form.type} · {form.status === "published" ? "Publicado" : "Fora do ar"}
+                        </p>
+                      </div>
+                      <span className={`flex-shrink-0 px-2 py-1 rounded-full text-[11px] font-semibold ${form.status === "published" ? "bg-green-50 text-green-700" : "bg-amber-50 text-amber-700"}`}>
+                        {form.status === "published" ? "Publicado" : "Oculto"}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      <button
+                        type="button"
+                        onClick={() => setCultureForm(form)}
+                        className="px-3 py-1.5 text-xs font-medium text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-50"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => toggleCultureItem(item)}
+                        className={`px-3 py-1.5 text-xs font-medium border rounded-lg ${
+                          form.status === "published"
+                            ? "text-amber-700 border-amber-200 hover:bg-amber-50"
+                            : "text-green-700 border-green-200 hover:bg-green-50"
+                        }`}
+                      >
+                        {form.status === "published" ? "Tirar do ar" : "Publicar"}
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="bg-white border rounded-xl p-6 shadow-sm space-y-4 h-fit lg:sticky lg:top-6">
+            {cultureForm ? (
+              <>
+                <div>
+                  <h2 className="text-xl font-bold">Editar cultura</h2>
+                  <p className="text-xs text-gray-400 mt-1">{cultureForm.slug}</p>
+                </div>
+                <input value={cultureForm.title} onChange={(e) => setCultureForm({ ...cultureForm, title: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Titulo" />
+                <input value={cultureForm.subtitle} onChange={(e) => setCultureForm({ ...cultureForm, subtitle: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Subtitulo" />
+                <textarea value={cultureForm.excerpt} onChange={(e) => setCultureForm({ ...cultureForm, excerpt: e.target.value })} rows={3} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Resumo" />
+                <textarea value={cultureForm.content} onChange={(e) => setCultureForm({ ...cultureForm, content: e.target.value })} rows={8} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Conteudo HTML" />
+                <input value={cultureForm.image} onChange={(e) => setCultureForm({ ...cultureForm, image: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="URL da imagem" />
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <select value={cultureForm.type} onChange={(e) => setCultureForm({ ...cultureForm, type: e.target.value as CultureItem["type"] })} className="w-full px-4 py-2 border rounded-lg text-sm">
+                    <option value="cinema">Cinema</option>
+                    <option value="series">Séries</option>
+                    <option value="musica">Música</option>
+                    <option value="drag">Drag</option>
+                  </select>
+                  <select value={cultureForm.status} onChange={(e) => setCultureForm({ ...cultureForm, status: e.target.value as CultureOverride["status"] })} className="w-full px-4 py-2 border rounded-lg text-sm">
+                    <option value="published">Publicado</option>
+                    <option value="hidden">Fora do ar</option>
+                  </select>
+                </div>
+                <label className="flex items-center gap-2 text-sm text-gray-600">
+                  <input type="checkbox" checked={cultureForm.featured} onChange={(e) => setCultureForm({ ...cultureForm, featured: e.target.checked })} />
+                  Destaque
+                </label>
+                <button onClick={() => saveCultureOverride(cultureForm)} disabled={isPublishing || !cultureForm.title.trim()} className="w-full py-3 bg-pink-600 text-white rounded-lg font-semibold text-sm disabled:opacity-50">
+                  {isPublishing ? "Salvando..." : "Salvar cultura"}
+                </button>
+              </>
+            ) : (
+              <div className="text-sm text-gray-500">
+                Selecione um item de cultura para editar.
+              </div>
+            )}
           </div>
         </div>
       )}

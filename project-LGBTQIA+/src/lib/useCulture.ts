@@ -9,7 +9,7 @@ import {
   type QueryDocumentSnapshot,
 } from 'firebase/firestore';
 import { db } from './firebase';
-import type { CultureItem } from '@/mocks/culture';
+import { allCulture, type CultureItem } from '@/mocks/culture';
 
 const DEFAULT_IMAGE =
   'https://readdy.ai/api/search-image?query=LGBTQ+queer+culture+art+colorful&width=800&height=500&seq=culture-default&orientation=landscape';
@@ -62,7 +62,8 @@ export interface UseCultureResult {
 }
 
 /**
- * Busca itens de cultura publicados do Firestore.
+ * Busca itens de cultura publicados do Firestore e aplica controles editoriais
+ * sobre os itens estáticos originais.
  */
 export function useCulture(): UseCultureResult {
   const [items, setItems] = useState<CultureItem[]>([]);
@@ -84,13 +85,36 @@ export function useCulture(): UseCultureResult {
         if (!active) return;
 
         const fetched = snapshot.docs.map(firestoreToCulture);
-        setItems(fetched);
+        const overridesSnapshot = await getDocs(collection(db, 'culture_overrides'));
+        if (!active) return;
+
+        const overrides = new Map(overridesSnapshot.docs.map((doc) => [doc.id, doc.data()]));
+        const fetchedSlugs = new Set(fetched.map((item) => item.slug));
+        const staticItems = allCulture
+          .filter((item) => !fetchedSlugs.has(item.slug))
+          .map((item) => {
+            const override = overrides.get(item.slug);
+            return override
+              ? {
+                  ...item,
+                  title: override.title || item.title,
+                  subtitle: override.subtitle || item.subtitle,
+                  excerpt: override.excerpt || item.excerpt,
+                  content: override.content || item.content,
+                  image: override.image || item.image,
+                  featured: typeof override.featured === 'boolean' ? override.featured : item.featured,
+                }
+              : item;
+          })
+          .filter((item) => overrides.get(item.slug)?.status !== 'hidden');
+
+        setItems([...fetched, ...staticItems]);
         setUsingFallback(false);
       } catch (err) {
         if (!active) return;
         console.error('Erro ao buscar cultura do Firestore:', err);
-        setItems([]);
-        setUsingFallback(false);
+        setItems(allCulture);
+        setUsingFallback(true);
         setError(err instanceof Error ? err.message : 'Erro desconhecido');
       } finally {
         if (active) setLoading(false);

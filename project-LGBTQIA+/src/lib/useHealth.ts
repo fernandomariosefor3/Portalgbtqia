@@ -9,10 +9,9 @@ import {
   type QueryDocumentSnapshot,
 } from 'firebase/firestore';
 import { db } from './firebase';
-import { allHealthGuides, type HealthGuide } from '@/mocks/health';
+import { allHealthGuides, categoryImages, type HealthGuide } from '@/mocks/health';
 
-const DEFAULT_IMAGE =
-  'https://readdy.ai/api/search-image?query=LGBTQ+health+care+wellbeing+calm&width=800&height=500&seq=health-default&orientation=landscape';
+const DEFAULT_IMAGE = categoryImages['prep-pep'];
 
 const PLACEHOLDER_AUTHOR_PHOTO =
   'https://ui-avatars.com/api/?name=Portal+LGBTQ&background=10B981&color=fff&size=64';
@@ -20,6 +19,12 @@ const PLACEHOLDER_AUTHOR_PHOTO =
 /** Converte um documento do Firestore para o formato `HealthGuide` da UI. */
 function firestoreToHealth(doc: QueryDocumentSnapshot<DocumentData>): HealthGuide {
   const d = doc.data();
+  const category = d.category || 'prep-pep';
+  const rawImage = d.image || d.featured_image || '';
+  const image =
+    typeof rawImage === 'string' && rawImage && !rawImage.includes('readdy.ai')
+      ? rawImage
+      : categoryImages[category as HealthGuide['category']] || DEFAULT_IMAGE;
   const publishedAt = d.published_at?.toDate?.()
     ? d.published_at
         .toDate()
@@ -31,9 +36,9 @@ function firestoreToHealth(doc: QueryDocumentSnapshot<DocumentData>): HealthGuid
     title: d.title || '',
     excerpt: d.excerpt || '',
     content: d.content || '',
-    category: d.category || 'prep-pep',
+    category,
     subcategory: d.subcategory,
-    image: d.image || d.featured_image || DEFAULT_IMAGE,
+    image,
     author: d.author || 'Portal LGBTQ+',
     authorPhoto: d.authorPhoto || PLACEHOLDER_AUTHOR_PHOTO,
     authorBio: d.authorBio || '',

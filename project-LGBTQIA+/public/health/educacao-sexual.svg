@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Educacao sexual e prevencao</title>
+  <desc id="desc">Ilustracao editorial com materiais de educacao sexual, coracao e check de consentimento.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7ed"/>
+      <stop offset="0.55" stop-color="#fdf2f8"/>
+      <stop offset="1" stop-color="#eff6ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <circle cx="965" cy="570" r="180" fill="#e94e77" opacity=".12"/>
+  <circle cx="235" cy="170" r="150" fill="#f59e0b" opacity=".14"/>
+  <rect x="235" y="155" width="730" height="445" rx="42" fill="#ffffff" opacity=".88"/>
+  <rect x="355" y="230" width="250" height="270" rx="26" fill="#fff1f5" stroke="#e94e77" stroke-width="18"/>
+  <rect x="635" y="230" width="210" height="270" rx="26" fill="#ecfeff" stroke="#10b981" stroke-width="18"/>
+  <path d="M476 423c-58-31-96-82-96-139 0-48 32-80 74-80 32 0 58 18 74 45 16-27 42-45 74-45 42 0 74 32 74 80 0 57-38 108-96 139l-52 27-52-27z" fill="#e94e77"/>
+  <path d="M684 356l44 44 78-98" fill="none" stroke="#10b981" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="600" y="660" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="700" fill="#263238">Consentimento, testagem e cuidado</text>
+</svg>

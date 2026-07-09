@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Saude mental LGBTQIA+</title>
+  <desc id="desc">Ilustracao editorial de acolhimento psicologico e bem-estar.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdf2f8"/>
+      <stop offset="0.5" stop-color="#f0f9ff"/>
+      <stop offset="1" stop-color="#f7fee7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <circle cx="250" cy="180" r="130" fill="#e94e77" opacity=".14"/>
+  <circle cx="960" cy="560" r="190" fill="#22c55e" opacity=".13"/>
+  <rect x="220" y="170" width="760" height="430" rx="46" fill="#ffffff" opacity=".88"/>
+  <path d="M502 532c-96-50-162-134-162-228 0-82 54-137 126-137 55 0 98 31 124 78 26-47 69-78 124-78 72 0 126 55 126 137 0 94-66 178-162 228l-88 46-88-46z" fill="#e94e77" opacity=".92"/>
+  <path d="M477 335c42-47 102-47 144 0s102 47 144 0" fill="none" stroke="#ffffff" stroke-width="24" stroke-linecap="round"/>
+  <path d="M461 415h258" stroke="#ffffff" stroke-width="24" stroke-linecap="round"/>
+  <path d="M507 475h166" stroke="#ffffff" stroke-width="24" stroke-linecap="round"/>
+  <text x="600" y="660" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="700" fill="#263238">Acolhimento e apoio emocional</text>
+</svg>

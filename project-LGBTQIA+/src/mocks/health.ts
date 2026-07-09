@@ -40,6 +40,13 @@ export const categoryIcons: Record<HealthGuide['category'], string> = {
   'educacao-sexual': 'ri-heart-pulse-line',
 };
 
+export const categoryImages: Record<HealthGuide['category'], string> = {
+  'prep-pep': `${import.meta.env.BASE_URL}health/prep-pep.svg`,
+  'saude-mental': `${import.meta.env.BASE_URL}health/saude-mental.svg`,
+  'saude-trans': `${import.meta.env.BASE_URL}health/saude-trans.svg`,
+  'educacao-sexual': `${import.meta.env.BASE_URL}health/educacao-sexual.svg`,
+};
+
 export const categoryDescriptions: Record<HealthGuide['category'], string> = {
   'prep-pep': 'Prevenção combinada, PrEP, PEP, testagem e caminhos de acesso pelo SUS.',
   'saude-mental': 'Acolhimento psicológico, crise, apoio emocional e redes de cuidado afirmativo.',
@@ -67,8 +74,7 @@ export const allHealthGuides: HealthGuide[] = [
       <p>PrEP e PEP não substituem testagem, preservativo e vacinação quando indicada. Acompanhamento médico é essencial.</p>
     `,
     category: 'prep-pep',
-    image:
-      'https://readdy.ai/api/search-image?query=public%20health%20clinic%20welcoming%20consultation%20room%20soft%20natural%20light%20inclusive%20healthcare%20editorial%20photography&width=800&height=500&seq=health-mvp-1&orientation=landscape',
+    image: categoryImages['prep-pep'],
     author: 'Portal LGBTQ+ Nordeste',
     authorPhoto,
     authorBio: 'Conteúdo informativo de saúde e cidadania do Portal LGBTQ+ Nordeste.',
@@ -99,8 +105,7 @@ export const allHealthGuides: HealthGuide[] = [
       <p>CAPS, UBS, serviços universitários, psicólogos afirmativos, ONGs e redes de apoio comunitário podem ser pontos de cuidado. O CVV atende 24h pelo 188.</p>
     `,
     category: 'saude-mental',
-    image:
-      'https://readdy.ai/api/search-image?query=calm%20therapy%20room%20plants%20warm%20light%20comfortable%20chairs%20mental%20health%20support%20editorial%20photography&width=800&height=500&seq=health-mvp-2&orientation=landscape',
+    image: categoryImages['saude-mental'],
     author: 'Portal LGBTQ+ Nordeste',
     authorPhoto,
     authorBio: 'Conteúdo informativo de saúde e cidadania do Portal LGBTQ+ Nordeste.',
@@ -125,8 +130,7 @@ export const allHealthGuides: HealthGuide[] = [
       <p>Anote data, local, nome do serviço e, se possível, protocolo. Procure a Ouvidoria do SUS, Defensoria Pública ou entidades de direitos humanos.</p>
     `,
     category: 'saude-trans',
-    image:
-      'https://readdy.ai/api/search-image?query=inclusive%20healthcare%20consultation%20doctor%20and%20patient%20welcoming%20clinic%20warm%20natural%20light%20editorial%20photography&width=800&height=500&seq=health-mvp-3&orientation=landscape',
+    image: categoryImages['saude-trans'],
     author: 'Portal LGBTQ+ Nordeste',
     authorPhoto,
     authorBio: 'Conteúdo informativo de saúde e cidadania do Portal LGBTQ+ Nordeste.',
@@ -151,8 +155,7 @@ export const allHealthGuides: HealthGuide[] = [
       <p>CTAs, UBS e campanhas de saúde oferecem testagem para HIV, sífilis e hepatites. Pessoas com múltiplos parceiros ou em maior vulnerabilidade devem testar com mais regularidade.</p>
     `,
     category: 'educacao-sexual',
-    image:
-      'https://readdy.ai/api/search-image?query=sexual%20health%20education%20materials%20clean%20desk%20brochures%20soft%20light%20healthcare%20prevention%20editorial%20photography&width=800&height=500&seq=health-mvp-4&orientation=landscape',
+    image: categoryImages['educacao-sexual'],
     author: 'Portal LGBTQ+ Nordeste',
     authorPhoto,
     authorBio: 'Conteúdo informativo de saúde e cidadania do Portal LGBTQ+ Nordeste.',

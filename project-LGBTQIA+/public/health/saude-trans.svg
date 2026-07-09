@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Saude trans no SUS</title>
+  <desc id="desc">Ilustracao editorial sobre cuidado trans e atendimento respeitoso.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecfeff"/>
+      <stop offset="0.5" stop-color="#fdf2f8"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset=".5" stop-color="#f9a8d4"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <circle cx="985" cy="175" r="155" fill="#38bdf8" opacity=".16"/>
+  <circle cx="210" cy="610" r="185" fill="#f472b6" opacity=".16"/>
+  <rect x="210" y="165" width="780" height="430" rx="48" fill="#ffffff" opacity=".88"/>
+  <circle cx="600" cy="310" r="104" fill="url(#card)"/>
+  <path d="M418 557c24-114 94-179 182-179s158 65 182 179" fill="#ffffff" stroke="#e94e77" stroke-width="24" stroke-linecap="round"/>
+  <path d="M600 206v208" stroke="#263238" stroke-width="22" stroke-linecap="round"/>
+  <path d="M528 278h144" stroke="#263238" stroke-width="22" stroke-linecap="round"/>
+  <path d="M648 218h88v88" fill="none" stroke="#263238" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="600" y="660" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="700" fill="#263238">Saude trans e nome social</text>
+</svg>

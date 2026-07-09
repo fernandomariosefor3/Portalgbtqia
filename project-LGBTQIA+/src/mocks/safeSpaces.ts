@@ -58,18 +58,18 @@ export const badgeLabels: Record<string, string> = {
 };
 
 export const safeSpaceCategoryImages: Record<SafeSpaceCategory, string> = {
-  'Bar & Entretenimento': `${import.meta.env.BASE_URL}guide/nightlife.svg`,
-  'Centro Cultural': `${import.meta.env.BASE_URL}guide/culture.svg`,
-  'ONG & Acolhimento': `${import.meta.env.BASE_URL}guide/community.svg`,
-  Saúde: `${import.meta.env.BASE_URL}guide/health.svg`,
-  'Serviços Públicos': `${import.meta.env.BASE_URL}guide/rights.svg`,
-  Hospedagem: `${import.meta.env.BASE_URL}guide/tourism.svg`,
-  Educação: `${import.meta.env.BASE_URL}guide/culture.svg`,
-  Comércio: `${import.meta.env.BASE_URL}guide/community.svg`,
-  Trabalho: `${import.meta.env.BASE_URL}guide/rights.svg`,
+  'Bar & Entretenimento': `${import.meta.env.BASE_URL}guide/nightlife.png`,
+  'Centro Cultural': `${import.meta.env.BASE_URL}guide/culture.png`,
+  'ONG & Acolhimento': `${import.meta.env.BASE_URL}guide/community.png`,
+  Saúde: `${import.meta.env.BASE_URL}guide/health.png`,
+  'Serviços Públicos': `${import.meta.env.BASE_URL}guide/rights.png`,
+  Hospedagem: `${import.meta.env.BASE_URL}guide/tourism.png`,
+  Educação: `${import.meta.env.BASE_URL}guide/culture.png`,
+  Comércio: `${import.meta.env.BASE_URL}guide/community.png`,
+  Trabalho: `${import.meta.env.BASE_URL}guide/rights.png`,
 };
 
-export const guideHeroImage = `${import.meta.env.BASE_URL}guide/hero.svg`;
+export const guideHeroImage = `${import.meta.env.BASE_URL}guide/hero.png`;
 
 export const staticSafeSpaces: SafeSpace[] = [
   {

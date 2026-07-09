@@ -15,6 +15,8 @@ import {
 import { db } from "../../lib/firebase";
 import { useAuth } from "../../lib/auth";
 import { allCulture, type CultureItem } from "../../mocks/culture";
+import { safeSpaceCategories, staticSafeSpaces, type SafeSpace, type SafeSpaceCategory } from "../../mocks/safeSpaces";
+import { applySafeSpaceOverride, safeSpaceToOverride, type SafeSpaceOverride } from "../../lib/useSafeSpaces";
 
 interface ArticleItem {
   id: string;
@@ -153,6 +155,8 @@ export default function AdminPage() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [cultureOverrides, setCultureOverrides] = useState<Record<string, CultureOverride>>({});
   const [cultureForm, setCultureForm] = useState<CultureOverride | null>(null);
+  const [safeSpaceOverrides, setSafeSpaceOverrides] = useState<Record<string, SafeSpaceOverride>>({});
+  const [safeSpaceForm, setSafeSpaceForm] = useState<SafeSpaceOverride | null>(null);
   const [sections, setSections] = useState<SiteSection[]>(defaultSections);
   const [selectedSectionKey, setSelectedSectionKey] = useState(defaultSections[0].key);
   const [sectionForm, setSectionForm] = useState<SiteSection>(defaultSections[0]);
@@ -189,6 +193,15 @@ export default function AdminPage() {
     setCultureOverrides(next);
   }, []);
 
+  const loadSafeSpaceOverrides = useCallback(async () => {
+    const snap = await getDocs(collection(db, "safe_space_overrides"));
+    const next: Record<string, SafeSpaceOverride> = {};
+    snap.docs.forEach((item) => {
+      next[item.id] = { slug: item.id, ...item.data() } as SafeSpaceOverride;
+    });
+    setSafeSpaceOverrides(next);
+  }, []);
+
   const loadRecords = useCallback(async (collectionName: "events" | "places") => {
     const snap = await getDocs(collection(db, collectionName));
     return snap.docs.map((item) => {
@@ -208,10 +221,11 @@ export default function AdminPage() {
   useEffect(() => {
     loadArticles();
     loadCultureOverrides();
+    loadSafeSpaceOverrides();
     loadSections();
     loadRecords("events").then(setEvents).catch(() => setEvents([]));
     loadRecords("places").then(setPlaces).catch(() => setPlaces([]));
-  }, [loadArticles, loadCultureOverrides, loadRecords, loadSections]);
+  }, [loadArticles, loadCultureOverrides, loadRecords, loadSafeSpaceOverrides, loadSections]);
 
   const deleteArticle = async (id: string) => {
     if (!confirm("Apagar este artigo?")) return;
@@ -281,6 +295,36 @@ export default function AdminPage() {
   const toggleCultureItem = async (item: CultureItem) => {
     const form = getCultureForm(item);
     await saveCultureOverride({
+      ...form,
+      status: form.status === "published" ? "hidden" : "published",
+    });
+  };
+
+  const getSafeSpaceForm = (space: SafeSpace): SafeSpaceOverride => {
+    const controlled = applySafeSpaceOverride(space, safeSpaceOverrides[space.slug]);
+    return safeSpaceToOverride(controlled);
+  };
+
+  const saveSafeSpaceOverride = async (form: SafeSpaceOverride) => {
+    setIsPublishing(true);
+    setMessage(null);
+    try {
+      await setDoc(doc(db, "safe_space_overrides", form.slug), {
+        ...form,
+        updated_at: serverTimestamp(),
+      }, { merge: true });
+      setSafeSpaceOverrides((prev) => ({ ...prev, [form.slug]: form }));
+      setSafeSpaceForm(form);
+      setMessage({ type: "success", text: "Espaço seguro salvo." });
+    } catch (e: any) {
+      setMessage({ type: "error", text: `Erro ao salvar espaço: ${e?.message || e}` });
+    }
+    setIsPublishing(false);
+  };
+
+  const toggleSafeSpace = async (space: SafeSpace) => {
+    const form = getSafeSpaceForm(space);
+    await saveSafeSpaceOverride({
       ...form,
       status: form.status === "published" ? "hidden" : "published",
     });
@@ -742,7 +786,102 @@ export default function AdminPage() {
       )}
 
       {activeTab === "places" && (
-        <RecordEditor title="Guia de espacos seguros" form={placeForm} setForm={setPlaceForm} records={places} onSave={() => saveRecord("places", placeForm)} onDelete={(id) => deleteRecord("places", id)} isSaving={isPublishing} />
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_420px] gap-6">
+            <div>
+              <h2 className="text-xl font-bold mb-4">Espaços curados ({staticSafeSpaces.length})</h2>
+              <p className="text-sm text-gray-500 mb-4">
+                Controle os espaços que já vêm na página Guia CE. Você pode editar, tirar do ar ou publicar de novo sem apagar o conteúdo.
+              </p>
+              <div className="space-y-2">
+                {staticSafeSpaces.map((space) => {
+                  const form = getSafeSpaceForm(space);
+                  return (
+                    <div key={space.slug} className="bg-white border rounded-lg px-4 py-3 shadow-sm">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="min-w-0">
+                          <p className="text-sm font-medium text-gray-800 truncate">{form.name}</p>
+                          <p className="text-xs text-gray-400 mt-0.5">
+                            {form.category} · {form.city}/{form.state} · {form.status === "published" ? "Publicado" : "Fora do ar"}
+                          </p>
+                        </div>
+                        <span className={`flex-shrink-0 px-2 py-1 rounded-full text-[11px] font-semibold ${form.status === "published" ? "bg-green-50 text-green-700" : "bg-amber-50 text-amber-700"}`}>
+                          {form.status === "published" ? "Publicado" : "Oculto"}
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        <button
+                          type="button"
+                          onClick={() => setSafeSpaceForm(form)}
+                          className="px-3 py-1.5 text-xs font-medium text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-50"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => toggleSafeSpace(space)}
+                          className={`px-3 py-1.5 text-xs font-medium border rounded-lg ${
+                            form.status === "published"
+                              ? "text-amber-700 border-amber-200 hover:bg-amber-50"
+                              : "text-green-700 border-green-200 hover:bg-green-50"
+                          }`}
+                        >
+                          {form.status === "published" ? "Tirar do ar" : "Publicar"}
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="bg-white border rounded-xl p-6 shadow-sm space-y-4 h-fit lg:sticky lg:top-6">
+              {safeSpaceForm ? (
+                <>
+                  <div>
+                    <h2 className="text-xl font-bold">Editar espaço</h2>
+                    <p className="text-xs text-gray-400 mt-1">{safeSpaceForm.slug}</p>
+                  </div>
+                  <input value={safeSpaceForm.name} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, name: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Nome do espaço" />
+                  <textarea value={safeSpaceForm.description} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, description: e.target.value })} rows={4} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Descrição" />
+                  <input value={safeSpaceForm.address} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, address: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Endereço" />
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <input value={safeSpaceForm.city} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, city: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Cidade" />
+                    <input value={safeSpaceForm.state} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, state: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="UF" />
+                  </div>
+                  <input value={safeSpaceForm.image} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, image: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="URL da imagem" />
+                  <input value={safeSpaceForm.mapUrl ?? ""} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, mapUrl: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Link de rota ou mapa" />
+                  <input value={safeSpaceForm.phone ?? ""} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, phone: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Telefone" />
+                  <input value={safeSpaceForm.website ?? ""} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, website: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Site ou Instagram" />
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <select value={safeSpaceForm.category} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, category: e.target.value as SafeSpaceCategory })} className="w-full px-4 py-2 border rounded-lg text-sm">
+                      {safeSpaceCategories.map((category) => <option key={category} value={category}>{category}</option>)}
+                    </select>
+                    <select value={safeSpaceForm.status} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, status: e.target.value as SafeSpaceOverride["status"] })} className="w-full px-4 py-2 border rounded-lg text-sm">
+                      <option value="published">Publicado</option>
+                      <option value="hidden">Fora do ar</option>
+                    </select>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <input type="number" step="0.1" min="0" max="5" value={safeSpaceForm.rating} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, rating: Number(e.target.value) })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Nota" />
+                    <input type="number" min="0" value={safeSpaceForm.reviews} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, reviews: Number(e.target.value) })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Avaliações" />
+                  </div>
+                  <input value={safeSpaceForm.tags.join(", ")} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, tags: e.target.value.split(",").map((tag) => tag.trim()).filter(Boolean) })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Tags separadas por vírgula" />
+                  <input value={safeSpaceForm.badges.join(", ")} onChange={(e) => setSafeSpaceForm({ ...safeSpaceForm, badges: e.target.value.split(",").map((badge) => badge.trim()).filter(Boolean) })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Badges: geral, trans, mental..." />
+                  <button onClick={() => saveSafeSpaceOverride(safeSpaceForm)} disabled={isPublishing || !safeSpaceForm.name.trim()} className="w-full py-3 bg-pink-600 text-white rounded-lg font-semibold text-sm disabled:opacity-50">
+                    {isPublishing ? "Salvando..." : "Salvar espaço"}
+                  </button>
+                </>
+              ) : (
+                <div className="text-sm text-gray-500">
+                  Selecione um espaço curado para editar.
+                </div>
+              )}
+            </div>
+          </div>
+
+          <RecordEditor title="Novos espaços do guia" form={placeForm} setForm={setPlaceForm} records={places} onSave={() => saveRecord("places", placeForm)} onDelete={(id) => deleteRecord("places", id)} isSaving={isPublishing} />
+        </div>
       )}
 
       {activeTab === "facebook" && (

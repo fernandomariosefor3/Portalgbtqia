@@ -8,7 +8,7 @@ import {
   type QueryDocumentSnapshot,
 } from 'firebase/firestore';
 import { db } from './firebase';
-import { allArticles, type Article } from '@/mocks/articles-full';
+import type { Article } from '@/mocks/articles-full';
 
 const PLACEHOLDER_AUTHOR_PHOTO =
   'https://ui-avatars.com/api/?name=Fernando+Mario&background=E94E77&color=fff&size=64';
@@ -59,12 +59,12 @@ export interface UseArticlesResult {
   articles: Article[];
   loading: boolean;
   error: string | null;
-  /** true quando os dados vieram dos mocks (Firestore vazio/indisponível). */
+  /** Mantido por compatibilidade; o portal nao publica mocks automaticamente. */
   usingFallback: boolean;
 }
 
 /**
- * Busca artigos publicados do Firestore com fallback automático para os mocks.
+ * Busca artigos publicados do Firestore.
  * O primeiro artigo da lista resultante é marcado como `featured`.
  */
 export function useArticles(): UseArticlesResult {
@@ -87,17 +87,14 @@ export function useArticles(): UseArticlesResult {
 
         if (fetched.length > 0) {
           fetched[0].featured = true;
-          setArticles(fetched);
-          setUsingFallback(false);
-        } else {
-          setArticles(allArticles);
-          setUsingFallback(true);
         }
+        setArticles(fetched);
+        setUsingFallback(false);
       } catch (err) {
         if (!active) return;
         console.error('Erro ao buscar artigos do Firestore:', err);
-        setArticles(allArticles);
-        setUsingFallback(true);
+        setArticles([]);
+        setUsingFallback(false);
         setError(err instanceof Error ? err.message : 'Erro desconhecido');
       } finally {
         if (active) setLoading(false);

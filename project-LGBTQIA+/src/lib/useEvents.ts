@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getEvents, type Event as FirestoreEvent } from './firestore';
-import { featuredEvents as mockEvents, type EventItem } from '@/mocks/events';
+import type { EventItem } from '@/mocks/events';
 
 /**
  * Converte um documento de evento do Firestore para o formato `EventItem`
@@ -49,13 +49,12 @@ export interface UseEventsResult {
   events: EventItem[];
   loading: boolean;
   error: string | null;
-  /** true quando os dados vieram dos mocks (Firestore vazio/indisponível). */
+  /** Mantido por compatibilidade; o portal nao publica mocks automaticamente. */
   usingFallback: boolean;
 }
 
 /**
- * Busca eventos aprovados do Firestore com fallback automático para os mocks.
- * Mantém o site funcional mesmo sem Firebase configurado ou sem eventos ainda.
+ * Busca eventos aprovados do Firestore.
  */
 export function useEvents(): UseEventsResult {
   const [events, setEvents] = useState<EventItem[]>([]);
@@ -71,19 +70,13 @@ export function useEvents(): UseEventsResult {
         const docs = await getEvents();
         if (!active) return;
 
-        if (docs.length > 0) {
-          setEvents(docs.map(toEventItem));
-          setUsingFallback(false);
-        } else {
-          // Sem eventos publicados ainda → usa mocks como conteúdo de exemplo.
-          setEvents(mockEvents);
-          setUsingFallback(true);
-        }
+        setEvents(docs.map(toEventItem));
+        setUsingFallback(false);
       } catch (err) {
         if (!active) return;
         console.error('Falha ao buscar eventos do Firestore:', err);
-        setEvents(mockEvents);
-        setUsingFallback(true);
+        setEvents([]);
+        setUsingFallback(false);
         setError(err instanceof Error ? err.message : 'Erro desconhecido');
       } finally {
         if (active) setLoading(false);

@@ -9,7 +9,7 @@ import {
   type QueryDocumentSnapshot,
 } from 'firebase/firestore';
 import { db } from './firebase';
-import { allHealthGuides, type HealthGuide } from '@/mocks/health';
+import type { HealthGuide } from '@/mocks/health';
 
 const DEFAULT_IMAGE =
   'https://readdy.ai/api/search-image?query=LGBTQ+health+care+wellbeing+calm&width=800&height=500&seq=health-default&orientation=landscape';
@@ -55,7 +55,7 @@ export interface UseHealthResult {
 }
 
 /**
- * Busca guias de saúde publicados do Firestore com fallback para os mocks.
+ * Busca guias de saúde publicados do Firestore.
  */
 export function useHealth(): UseHealthResult {
   const [guides, setGuides] = useState<HealthGuide[]>([]);
@@ -77,18 +77,13 @@ export function useHealth(): UseHealthResult {
         if (!active) return;
 
         const fetched = snapshot.docs.map(firestoreToHealth);
-        if (fetched.length > 0) {
-          setGuides(fetched);
-          setUsingFallback(false);
-        } else {
-          setGuides(allHealthGuides);
-          setUsingFallback(true);
-        }
+        setGuides(fetched);
+        setUsingFallback(false);
       } catch (err) {
         if (!active) return;
         console.error('Erro ao buscar guias de saúde do Firestore:', err);
-        setGuides(allHealthGuides);
-        setUsingFallback(true);
+        setGuides([]);
+        setUsingFallback(false);
         setError(err instanceof Error ? err.message : 'Erro desconhecido');
       } finally {
         if (active) setLoading(false);

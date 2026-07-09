@@ -1,9 +1,4 @@
-import ArticleCard from './ArticleCard';
-import { getMostViewed } from '@/mocks/articles-full';
-
 export default function ArticlesSidebar() {
-  const mostViewed = getMostViewed(5);
-
   const allTags = [
     'política', 'trans', 'cinema', 'saúde', 'família', 'cultura',
     'drag', 'PrEP', 'adoção', 'direitos', 'jovens', 'história',
@@ -12,22 +7,6 @@ export default function ArticlesSidebar() {
 
   return (
     <aside className="space-y-8">
-      <div className="bg-white rounded-xl border border-dark-100 p-5">
-        <h4 className="text-sm font-semibold text-dark-700 uppercase tracking-wider mb-4">
-          Mais lidas
-        </h4>
-        <div className="space-y-4">
-          {mostViewed.map((article, idx) => (
-            <div key={article.id} className="flex items-start gap-3">
-              <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center rounded-full bg-primary-50 text-primary-500 text-[10px] font-bold mt-0.5">
-                {idx + 1}
-              </span>
-              <ArticleCard article={article} variant="compact" />
-            </div>
-          ))}
-        </div>
-      </div>
-
       <div className="bg-white rounded-xl border border-dark-100 p-5">
         <h4 className="text-sm font-semibold text-dark-700 uppercase tracking-wider mb-4">
           Tags populares

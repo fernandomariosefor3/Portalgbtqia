@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { getArticleBySlug, allArticles, type Article } from '@/mocks/articles-full';
+import type { Article } from '@/mocks/articles-full';
 import { getFirestoreArticleBySlug } from '@/lib/useArticles';
 import ArticleHeader from './components/ArticleHeader';
 import ArticleSidebar from './components/ArticleSidebar';
@@ -21,10 +21,10 @@ export default function ArticlePage() {
       try {
         const firestoreArticle = await getFirestoreArticleBySlug(slug);
         if (!active) return;
-        setArticle(firestoreArticle ?? getArticleBySlug(slug) ?? null);
+        setArticle(firestoreArticle ?? null);
       } catch (error) {
         console.error('Erro ao buscar artigo do Firestore:', error);
-        if (active) setArticle(getArticleBySlug(slug) ?? null);
+        if (active) setArticle(null);
       }
     })();
 
@@ -48,9 +48,6 @@ export default function ArticlePage() {
     return <Navigate to="/artigos" replace />;
   }
 
-  const currentIndex = allArticles.findIndex((a) => a.id === article.id);
-  const prevArticle = currentIndex > 0 ? allArticles[currentIndex - 1] : null;
-  const nextArticle = currentIndex < allArticles.length - 1 ? allArticles[currentIndex + 1] : null;
   const contentHtml = article.content?.trim() || `<p class="lead">${article.excerpt}</p>`;
 
   return (
@@ -81,36 +78,13 @@ export default function ArticlePage() {
               )}
 
               <div className="mt-10 pt-8 border-t border-dark-100">
-                <div className="flex items-center justify-between gap-4 flex-wrap">
-                  {prevArticle ? (
-                    <Link
-                      to={`/artigos/${prevArticle.slug}`}
-                      className="group flex items-center gap-2 text-sm text-dark-500 hover:text-primary-500 transition-colors"
-                    >
-                      <i className="ri-arrow-left-line text-lg flex-shrink-0" aria-hidden="true"></i>
-                      <div className="text-left">
-                        <span className="block text-[10px] uppercase tracking-wider text-dark-400">Anterior</span>
-                        <span className="block font-medium line-clamp-1 max-w-[140px] sm:max-w-[200px]">{prevArticle.title}</span>
-                      </div>
-                    </Link>
-                  ) : (
-                    <div />
-                  )}
-                  {nextArticle ? (
-                    <Link
-                      to={`/artigos/${nextArticle.slug}`}
-                      className="group flex items-center gap-2 text-sm text-dark-500 hover:text-primary-500 transition-colors"
-                    >
-                      <div className="text-right">
-                        <span className="block text-[10px] uppercase tracking-wider text-dark-400">Próximo</span>
-                        <span className="block font-medium line-clamp-1 max-w-[140px] sm:max-w-[200px]">{nextArticle.title}</span>
-                      </div>
-                      <i className="ri-arrow-right-line text-lg flex-shrink-0" aria-hidden="true"></i>
-                    </Link>
-                  ) : (
-                    <div />
-                  )}
-                </div>
+                <Link
+                  to="/artigos"
+                  className="inline-flex items-center gap-2 text-sm text-dark-500 hover:text-primary-500 transition-colors"
+                >
+                  <i className="ri-arrow-left-line text-lg flex-shrink-0" aria-hidden="true"></i>
+                  Voltar para artigos
+                </Link>
               </div>
             </article>
 

@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import type { Article } from '@/mocks/articles-full';
-import { getRelatedArticles, categoryLabels, categoryColors } from '@/mocks/articles-full';
 
 interface ArticleSidebarProps {
   article: Article;
 }
 
 export default function ArticleSidebar({ article }: ArticleSidebarProps) {
-  const related = getRelatedArticles(article, 3);
   const [copied, setCopied] = useState(false);
 
   const publicArticleUrl = `https://portalgbtqia.vercel.app/artigos/${article.slug}`;
@@ -113,40 +110,6 @@ export default function ArticleSidebar({ article }: ArticleSidebarProps) {
               >
                 {tag}
               </span>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {related.length > 0 && (
-        <div className="bg-white rounded-xl border border-dark-100 p-5">
-          <h4 className="text-sm font-semibold text-dark-700 uppercase tracking-wider mb-4">
-            Leia também
-          </h4>
-          <div className="space-y-4">
-            {related.map((rel) => (
-              <Link
-                key={rel.id}
-                to={`/artigos/${rel.slug}`}
-                className="group flex gap-3 items-start"
-              >
-                <div className="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
-                  <img
-                    src={rel.image}
-                    alt={rel.title}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="min-w-0">
-                  <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-medium mb-1 ${categoryColors[rel.category] || 'bg-dark-100 text-dark-600'}`}>
-                    {categoryLabels[rel.category] || rel.category}
-                  </span>
-                  <h5 className="text-sm font-medium text-dark-700 leading-snug group-hover:text-primary-500 transition-colors line-clamp-2">
-                    {rel.title}
-                  </h5>
-                </div>
-              </Link>
             ))}
           </div>
         </div>

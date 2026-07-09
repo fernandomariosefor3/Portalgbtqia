@@ -9,7 +9,7 @@ import {
   type QueryDocumentSnapshot,
 } from 'firebase/firestore';
 import { db } from './firebase';
-import { allCulture, type CultureItem } from '@/mocks/culture';
+import type { CultureItem } from '@/mocks/culture';
 
 const DEFAULT_IMAGE =
   'https://readdy.ai/api/search-image?query=LGBTQ+queer+culture+art+colorful&width=800&height=500&seq=culture-default&orientation=landscape';
@@ -62,7 +62,7 @@ export interface UseCultureResult {
 }
 
 /**
- * Busca itens de cultura publicados do Firestore com fallback para os mocks.
+ * Busca itens de cultura publicados do Firestore.
  */
 export function useCulture(): UseCultureResult {
   const [items, setItems] = useState<CultureItem[]>([]);
@@ -84,18 +84,13 @@ export function useCulture(): UseCultureResult {
         if (!active) return;
 
         const fetched = snapshot.docs.map(firestoreToCulture);
-        if (fetched.length > 0) {
-          setItems(fetched);
-          setUsingFallback(false);
-        } else {
-          setItems(allCulture);
-          setUsingFallback(true);
-        }
+        setItems(fetched);
+        setUsingFallback(false);
       } catch (err) {
         if (!active) return;
         console.error('Erro ao buscar cultura do Firestore:', err);
-        setItems(allCulture);
-        setUsingFallback(true);
+        setItems([]);
+        setUsingFallback(false);
         setError(err instanceof Error ? err.message : 'Erro desconhecido');
       } finally {
         if (active) setLoading(false);

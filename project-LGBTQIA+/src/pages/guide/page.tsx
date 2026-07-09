@@ -4,6 +4,33 @@ import { useSafeSpaces } from '@/lib/useSafeSpaces';
 
 const filters = ['Todos', ...safeSpaceCategories] as const;
 
+const mappedRegions = [
+  {
+    name: 'Praia de Iracema / Dragão do Mar',
+    description: 'Circuito de noite, cultura, pontos de encontro, turismo e boemia LGBTQIA+.',
+    tags: ['Gandaia', "Y'all", 'Dragão do Mar', 'Estoril', 'Ponte dos Ingleses'],
+    icon: 'ri-disc-line',
+  },
+  {
+    name: 'Benfica',
+    description: 'Território de convivência, cultura independente, bares alternativos e acolhimento comunitário.',
+    tags: ['Outra Casa', "Moreno's Bar", 'Cultura drag', 'Coletivos'],
+    icon: 'ri-community-line',
+  },
+  {
+    name: 'Itaperi / rede SUS',
+    description: 'Referências públicas de saúde, cuidado trans e atendimento multiprofissional.',
+    tags: ['Sertrans', 'HUC', 'SUS', 'Saúde trans'],
+    icon: 'ri-heart-pulse-line',
+  },
+  {
+    name: 'Centro / direitos',
+    description: 'Serviços de proteção, memória política e articulação do movimento LGBTQIA+ cearense.',
+    tags: ['Janaína Dutra', 'GRAB', 'Denúncia', 'Direitos'],
+    icon: 'ri-shield-user-line',
+  },
+];
+
 export default function GuidePage() {
   const { spaces, loading } = useSafeSpaces();
   const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>('Todos');
@@ -52,10 +79,10 @@ export default function GuidePage() {
               Fortaleza, CE
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white leading-tight">
-              Guia de espaços seguros LGBTQIA+
+              Mapa de espaços gays e LGBTQIA+ em Fortaleza
             </h1>
             <p className="mt-4 md:mt-5 text-base md:text-lg text-white/80 max-w-2xl leading-relaxed">
-              Lugares de saúde, cultura, acolhimento e convivência com badges comunitários, rotas rápidas e controle editorial pelo portal.
+              Lugares de saúde, cultura, acolhimento, direitos e convivência organizados por circuitos da cidade, com rotas rápidas e controle editorial pelo portal.
             </p>
             <div className="mt-8 grid grid-cols-3 gap-3 max-w-xl">
               {[
@@ -81,7 +108,7 @@ export default function GuidePage() {
           <div>
             <p className="text-sm font-semibold text-dark-700">MVP do mapa de espaços seguros</p>
             <p className="mt-1 text-xs text-dark-500 leading-relaxed">
-              Esta primeira versão organiza espaços por categoria e badges. Avaliações comunitárias, denúncias e mapa interativo entram nas próximas etapas.
+              Esta primeira versão organiza espaços por categoria, badges e regiões. A curadoria pode ocultar, editar ou incluir novos pontos pelo admin enquanto o mapa interativo entra nas próximas etapas.
             </p>
           </div>
         </div>
@@ -117,6 +144,36 @@ export default function GuidePage() {
               <span className="ml-1 opacity-70">({categoryCounts[filter] || 0})</span>
             </button>
           ))}
+        </div>
+
+        <div className="mt-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-500">Regiões mapeadas</p>
+              <h2 className="mt-2 text-xl md:text-2xl font-semibold text-dark-800">Circuitos iniciais de Fortaleza</h2>
+            </div>
+            <p className="text-sm text-dark-500 max-w-2xl leading-relaxed">
+              O guia começa pelos territórios mais citados na cena cultural, no acolhimento e nos serviços públicos. Cada circuito pode receber novos pontos sem apagar os existentes.
+            </p>
+          </div>
+          <div className="mt-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            {mappedRegions.map((region) => (
+              <article key={region.name} className="rounded-xl border border-dark-100 bg-white p-5">
+                <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary-50 text-primary-500">
+                  <i className={`${region.icon} text-xl`} aria-hidden="true"></i>
+                </div>
+                <h3 className="mt-4 text-base font-semibold text-dark-800">{region.name}</h3>
+                <p className="mt-2 text-sm text-dark-500 leading-relaxed">{region.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {region.tags.map((tag) => (
+                    <span key={tag} className="px-2.5 py-1 text-xs rounded-full bg-dark-50 text-dark-500">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

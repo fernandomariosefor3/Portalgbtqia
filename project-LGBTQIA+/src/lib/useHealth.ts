@@ -9,7 +9,7 @@ import {
   type QueryDocumentSnapshot,
 } from 'firebase/firestore';
 import { db } from './firebase';
-import type { HealthGuide } from '@/mocks/health';
+import { allHealthGuides, type HealthGuide } from '@/mocks/health';
 
 const DEFAULT_IMAGE =
   'https://readdy.ai/api/search-image?query=LGBTQ+health+care+wellbeing+calm&width=800&height=500&seq=health-default&orientation=landscape';
@@ -55,10 +55,10 @@ export interface UseHealthResult {
 }
 
 /**
- * Busca guias de saúde publicados do Firestore.
+ * Busca guias de saúde publicados do Firestore com base editorial local.
  */
 export function useHealth(): UseHealthResult {
-  const [guides, setGuides] = useState<HealthGuide[]>([]);
+  const [guides, setGuides] = useState<HealthGuide[]>(allHealthGuides);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [usingFallback, setUsingFallback] = useState(false);
@@ -77,13 +77,13 @@ export function useHealth(): UseHealthResult {
         if (!active) return;
 
         const fetched = snapshot.docs.map(firestoreToHealth);
-        setGuides(fetched);
-        setUsingFallback(false);
+        setGuides(fetched.length > 0 ? fetched : allHealthGuides);
+        setUsingFallback(fetched.length === 0);
       } catch (err) {
         if (!active) return;
         console.error('Erro ao buscar guias de saúde do Firestore:', err);
-        setGuides([]);
-        setUsingFallback(false);
+        setGuides(allHealthGuides);
+        setUsingFallback(true);
         setError(err instanceof Error ? err.message : 'Erro desconhecido');
       } finally {
         if (active) setLoading(false);

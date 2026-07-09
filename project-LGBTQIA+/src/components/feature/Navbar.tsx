@@ -10,6 +10,7 @@ const navLinks = [
   { label: 'Família', path: '/familia' },
   { label: 'Guia CE', path: '/guia-fortaleza' },
   { label: 'Direitos', path: '/direitos' },
+  { label: 'Roteiros', path: '/roteiros' },
   { label: 'Paradas', path: '/paradas' },
   { label: 'Educação', path: '/educacao' },
   { label: 'Sobre', path: '/sobre' },

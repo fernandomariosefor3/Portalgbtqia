@@ -19,6 +19,8 @@ import { safeSpaceCategories, staticSafeSpaces, type SafeSpace, type SafeSpaceCa
 import { applySafeSpaceOverride, safeSpaceToOverride, type SafeSpaceOverride } from "../../lib/useSafeSpaces";
 import { legalCategories, staticLegalGuides, type LegalGuide, type LegalGuideCategory } from "../../mocks/legalRights";
 import { applyLegalGuideOverride, legalGuideToOverride, type LegalGuideOverride } from "../../lib/useLegalGuides";
+import { queerRouteTypes, staticQueerRoutes, type QueerRoute, type QueerRouteType } from "../../mocks/queerRoutes";
+import { applyQueerRouteOverride, queerRouteToOverride, type QueerRouteOverride } from "../../lib/useQueerRoutes";
 
 interface ArticleItem {
   id: string;
@@ -66,12 +68,13 @@ interface CultureOverride {
   featured: boolean;
 }
 
-type TabKey = "articles" | "culture" | "rights" | "sections" | "events" | "places" | "facebook";
+type TabKey = "articles" | "culture" | "rights" | "routes" | "sections" | "events" | "places" | "facebook";
 
 const tabs: Array<{ id: TabKey; label: string }> = [
   { id: "articles", label: "Artigos" },
   { id: "culture", label: "Cultura" },
   { id: "rights", label: "Direitos" },
+  { id: "routes", label: "Roteiros" },
   { id: "sections", label: "Espacos do site" },
   { id: "events", label: "Eventos" },
   { id: "places", label: "Guia" },
@@ -162,6 +165,8 @@ export default function AdminPage() {
   const [safeSpaceForm, setSafeSpaceForm] = useState<SafeSpaceOverride | null>(null);
   const [legalGuideOverrides, setLegalGuideOverrides] = useState<Record<string, LegalGuideOverride>>({});
   const [legalGuideForm, setLegalGuideForm] = useState<LegalGuideOverride | null>(null);
+  const [queerRouteOverrides, setQueerRouteOverrides] = useState<Record<string, QueerRouteOverride>>({});
+  const [queerRouteForm, setQueerRouteForm] = useState<QueerRouteOverride | null>(null);
   const [sections, setSections] = useState<SiteSection[]>(defaultSections);
   const [selectedSectionKey, setSelectedSectionKey] = useState(defaultSections[0].key);
   const [sectionForm, setSectionForm] = useState<SiteSection>(defaultSections[0]);
@@ -216,6 +221,15 @@ export default function AdminPage() {
     setLegalGuideOverrides(next);
   }, []);
 
+  const loadQueerRouteOverrides = useCallback(async () => {
+    const snap = await getDocs(collection(db, "queer_route_overrides"));
+    const next: Record<string, QueerRouteOverride> = {};
+    snap.docs.forEach((item) => {
+      next[item.id] = { slug: item.id, ...item.data() } as QueerRouteOverride;
+    });
+    setQueerRouteOverrides(next);
+  }, []);
+
   const loadRecords = useCallback(async (collectionName: "events" | "places") => {
     const snap = await getDocs(collection(db, collectionName));
     return snap.docs.map((item) => {
@@ -237,10 +251,11 @@ export default function AdminPage() {
     loadCultureOverrides();
     loadSafeSpaceOverrides();
     loadLegalGuideOverrides();
+    loadQueerRouteOverrides();
     loadSections();
     loadRecords("events").then(setEvents).catch(() => setEvents([]));
     loadRecords("places").then(setPlaces).catch(() => setPlaces([]));
-  }, [loadArticles, loadCultureOverrides, loadLegalGuideOverrides, loadRecords, loadSafeSpaceOverrides, loadSections]);
+  }, [loadArticles, loadCultureOverrides, loadLegalGuideOverrides, loadQueerRouteOverrides, loadRecords, loadSafeSpaceOverrides, loadSections]);
 
   const deleteArticle = async (id: string) => {
     if (!confirm("Apagar este artigo?")) return;
@@ -370,6 +385,36 @@ export default function AdminPage() {
   const toggleLegalGuide = async (guide: LegalGuide) => {
     const form = getLegalGuideForm(guide);
     await saveLegalGuideOverride({
+      ...form,
+      status: form.status === "published" ? "hidden" : "published",
+    });
+  };
+
+  const getQueerRouteForm = (route: QueerRoute): QueerRouteOverride => {
+    const controlled = applyQueerRouteOverride(route, queerRouteOverrides[route.slug]);
+    return queerRouteToOverride(controlled);
+  };
+
+  const saveQueerRouteOverride = async (form: QueerRouteOverride) => {
+    setIsPublishing(true);
+    setMessage(null);
+    try {
+      await setDoc(doc(db, "queer_route_overrides", form.slug), {
+        ...form,
+        updated_at: serverTimestamp(),
+      }, { merge: true });
+      setQueerRouteOverrides((prev) => ({ ...prev, [form.slug]: form }));
+      setQueerRouteForm(form);
+      setMessage({ type: "success", text: "Roteiro salvo." });
+    } catch (e: any) {
+      setMessage({ type: "error", text: `Erro ao salvar roteiro: ${e?.message || e}` });
+    }
+    setIsPublishing(false);
+  };
+
+  const toggleQueerRoute = async (route: QueerRoute) => {
+    const form = getQueerRouteForm(route);
+    await saveQueerRouteOverride({
       ...form,
       status: form.status === "published" ? "hidden" : "published",
     });
@@ -876,6 +921,105 @@ export default function AdminPage() {
             ) : (
               <div className="text-sm text-gray-500">
                 Selecione um guia jurídico para editar.
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {activeTab === "routes" && (
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_440px] gap-6">
+          <div>
+            <h2 className="text-xl font-bold mb-4">Roteiros queer ({staticQueerRoutes.length})</h2>
+            <p className="text-sm text-gray-500 mb-4">
+              Controle os roteiros da página Roteiros. Edite texto, itinerário, segurança e publicação sem apagar o conteúdo base.
+            </p>
+            <div className="space-y-2">
+              {staticQueerRoutes.map((route) => {
+                const form = getQueerRouteForm(route);
+                return (
+                  <div key={route.slug} className="bg-white border rounded-lg px-4 py-3 shadow-sm">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium text-gray-800 truncate">{form.title}</p>
+                        <p className="text-xs text-gray-400 mt-0.5">
+                          {form.destination}/{form.state} · {form.type} · {form.status === "published" ? "Publicado" : "Fora do ar"}
+                        </p>
+                      </div>
+                      <span className={`flex-shrink-0 px-2 py-1 rounded-full text-[11px] font-semibold ${form.status === "published" ? "bg-green-50 text-green-700" : "bg-amber-50 text-amber-700"}`}>
+                        {form.status === "published" ? "Publicado" : "Oculto"}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      <button type="button" onClick={() => setQueerRouteForm(form)} className="px-3 py-1.5 text-xs font-medium text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-50">
+                        Editar
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => toggleQueerRoute(route)}
+                        className={`px-3 py-1.5 text-xs font-medium border rounded-lg ${
+                          form.status === "published"
+                            ? "text-amber-700 border-amber-200 hover:bg-amber-50"
+                            : "text-green-700 border-green-200 hover:bg-green-50"
+                        }`}
+                      >
+                        {form.status === "published" ? "Tirar do ar" : "Publicar"}
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="bg-white border rounded-xl p-6 shadow-sm space-y-4 h-fit lg:sticky lg:top-6">
+            {queerRouteForm ? (
+              <>
+                <div>
+                  <h2 className="text-xl font-bold">Editar roteiro</h2>
+                  <p className="text-xs text-gray-400 mt-1">{queerRouteForm.slug}</p>
+                </div>
+                <input value={queerRouteForm.title} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, title: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Título" />
+                <textarea value={queerRouteForm.summary} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, summary: e.target.value })} rows={3} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Resumo" />
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <input value={queerRouteForm.destination} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, destination: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Destino" />
+                  <input value={queerRouteForm.state} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, state: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="UF" />
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <select value={queerRouteForm.type} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, type: e.target.value as QueerRouteType })} className="w-full px-4 py-2 border rounded-lg text-sm">
+                    {queerRouteTypes.map((type) => <option key={type} value={type}>{type}</option>)}
+                  </select>
+                  <input value={queerRouteForm.duration} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, duration: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Duração" />
+                </div>
+                <div className="grid sm:grid-cols-3 gap-3">
+                  <select value={queerRouteForm.budget} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, budget: e.target.value as QueerRouteOverride["budget"] })} className="w-full px-4 py-2 border rounded-lg text-sm">
+                    <option value="$">$</option>
+                    <option value="$$">$$</option>
+                    <option value="$$$">$$$</option>
+                    <option value="$$$$">$$$$</option>
+                  </select>
+                  <input type="number" min="1" max="5" value={queerRouteForm.safetyLevel} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, safetyLevel: Number(e.target.value) as QueerRouteOverride["safetyLevel"] })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Segurança 1-5" />
+                  <select value={queerRouteForm.status} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, status: e.target.value as QueerRouteOverride["status"] })} className="w-full px-4 py-2 border rounded-lg text-sm">
+                    <option value="published">Publicado</option>
+                    <option value="hidden">Fora do ar</option>
+                  </select>
+                </div>
+                <input value={queerRouteForm.image} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, image: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="URL da imagem" />
+                <textarea value={queerRouteForm.highlights.join("\n")} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, highlights: e.target.value.split("\n").map((item) => item.trim()).filter(Boolean) })} rows={4} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Destaques, um por linha" />
+                <textarea value={queerRouteForm.itinerary.map((item) => `${item.day}|${item.title}|${item.description}`).join("\n")} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, itinerary: e.target.value.split("\n").map((line) => {
+                  const [day = "", title = "", description = ""] = line.split("|");
+                  return { day: day.trim(), title: title.trim(), description: description.trim() };
+                }).filter((item) => item.day || item.title || item.description) })} rows={6} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Itinerário: Dia|Título|Descrição" />
+                <textarea value={queerRouteForm.safetyTips.join("\n")} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, safetyTips: e.target.value.split("\n").map((item) => item.trim()).filter(Boolean) })} rows={4} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Dicas de segurança, uma por linha" />
+                <textarea value={queerRouteForm.usefulContacts.join("\n")} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, usefulContacts: e.target.value.split("\n").map((item) => item.trim()).filter(Boolean) })} rows={3} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Contatos úteis, um por linha" />
+                <input value={queerRouteForm.tags.join(", ")} onChange={(e) => setQueerRouteForm({ ...queerRouteForm, tags: e.target.value.split(",").map((tag) => tag.trim()).filter(Boolean) })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Tags separadas por vírgula" />
+                <button onClick={() => saveQueerRouteOverride(queerRouteForm)} disabled={isPublishing || !queerRouteForm.title.trim()} className="w-full py-3 bg-pink-600 text-white rounded-lg font-semibold text-sm disabled:opacity-50">
+                  {isPublishing ? "Salvando..." : "Salvar roteiro"}
+                </button>
+              </>
+            ) : (
+              <div className="text-sm text-gray-500">
+                Selecione um roteiro para editar.
               </div>
             )}
           </div>

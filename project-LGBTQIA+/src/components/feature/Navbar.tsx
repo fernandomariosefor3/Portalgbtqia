@@ -9,6 +9,7 @@ const navLinks = [
   { label: 'Saúde', path: '/saude' },
   { label: 'Família', path: '/familia' },
   { label: 'Guia CE', path: '/guia-fortaleza' },
+  { label: 'Direitos', path: '/direitos' },
   { label: 'Paradas', path: '/paradas' },
   { label: 'Educação', path: '/educacao' },
   { label: 'Sobre', path: '/sobre' },

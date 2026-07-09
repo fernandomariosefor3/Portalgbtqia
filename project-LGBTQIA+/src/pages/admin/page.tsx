@@ -17,6 +17,8 @@ import { useAuth } from "../../lib/auth";
 import { allCulture, type CultureItem } from "../../mocks/culture";
 import { safeSpaceCategories, staticSafeSpaces, type SafeSpace, type SafeSpaceCategory } from "../../mocks/safeSpaces";
 import { applySafeSpaceOverride, safeSpaceToOverride, type SafeSpaceOverride } from "../../lib/useSafeSpaces";
+import { legalCategories, staticLegalGuides, type LegalGuide, type LegalGuideCategory } from "../../mocks/legalRights";
+import { applyLegalGuideOverride, legalGuideToOverride, type LegalGuideOverride } from "../../lib/useLegalGuides";
 
 interface ArticleItem {
   id: string;
@@ -64,11 +66,12 @@ interface CultureOverride {
   featured: boolean;
 }
 
-type TabKey = "articles" | "culture" | "sections" | "events" | "places" | "facebook";
+type TabKey = "articles" | "culture" | "rights" | "sections" | "events" | "places" | "facebook";
 
 const tabs: Array<{ id: TabKey; label: string }> = [
   { id: "articles", label: "Artigos" },
   { id: "culture", label: "Cultura" },
+  { id: "rights", label: "Direitos" },
   { id: "sections", label: "Espacos do site" },
   { id: "events", label: "Eventos" },
   { id: "places", label: "Guia" },
@@ -157,6 +160,8 @@ export default function AdminPage() {
   const [cultureForm, setCultureForm] = useState<CultureOverride | null>(null);
   const [safeSpaceOverrides, setSafeSpaceOverrides] = useState<Record<string, SafeSpaceOverride>>({});
   const [safeSpaceForm, setSafeSpaceForm] = useState<SafeSpaceOverride | null>(null);
+  const [legalGuideOverrides, setLegalGuideOverrides] = useState<Record<string, LegalGuideOverride>>({});
+  const [legalGuideForm, setLegalGuideForm] = useState<LegalGuideOverride | null>(null);
   const [sections, setSections] = useState<SiteSection[]>(defaultSections);
   const [selectedSectionKey, setSelectedSectionKey] = useState(defaultSections[0].key);
   const [sectionForm, setSectionForm] = useState<SiteSection>(defaultSections[0]);
@@ -202,6 +207,15 @@ export default function AdminPage() {
     setSafeSpaceOverrides(next);
   }, []);
 
+  const loadLegalGuideOverrides = useCallback(async () => {
+    const snap = await getDocs(collection(db, "legal_guide_overrides"));
+    const next: Record<string, LegalGuideOverride> = {};
+    snap.docs.forEach((item) => {
+      next[item.id] = { slug: item.id, ...item.data() } as LegalGuideOverride;
+    });
+    setLegalGuideOverrides(next);
+  }, []);
+
   const loadRecords = useCallback(async (collectionName: "events" | "places") => {
     const snap = await getDocs(collection(db, collectionName));
     return snap.docs.map((item) => {
@@ -222,10 +236,11 @@ export default function AdminPage() {
     loadArticles();
     loadCultureOverrides();
     loadSafeSpaceOverrides();
+    loadLegalGuideOverrides();
     loadSections();
     loadRecords("events").then(setEvents).catch(() => setEvents([]));
     loadRecords("places").then(setPlaces).catch(() => setPlaces([]));
-  }, [loadArticles, loadCultureOverrides, loadRecords, loadSafeSpaceOverrides, loadSections]);
+  }, [loadArticles, loadCultureOverrides, loadLegalGuideOverrides, loadRecords, loadSafeSpaceOverrides, loadSections]);
 
   const deleteArticle = async (id: string) => {
     if (!confirm("Apagar este artigo?")) return;
@@ -325,6 +340,36 @@ export default function AdminPage() {
   const toggleSafeSpace = async (space: SafeSpace) => {
     const form = getSafeSpaceForm(space);
     await saveSafeSpaceOverride({
+      ...form,
+      status: form.status === "published" ? "hidden" : "published",
+    });
+  };
+
+  const getLegalGuideForm = (guide: LegalGuide): LegalGuideOverride => {
+    const controlled = applyLegalGuideOverride(guide, legalGuideOverrides[guide.slug]);
+    return legalGuideToOverride(controlled);
+  };
+
+  const saveLegalGuideOverride = async (form: LegalGuideOverride) => {
+    setIsPublishing(true);
+    setMessage(null);
+    try {
+      await setDoc(doc(db, "legal_guide_overrides", form.slug), {
+        ...form,
+        updated_at: serverTimestamp(),
+      }, { merge: true });
+      setLegalGuideOverrides((prev) => ({ ...prev, [form.slug]: form }));
+      setLegalGuideForm(form);
+      setMessage({ type: "success", text: "Guia jurídico salvo." });
+    } catch (e: any) {
+      setMessage({ type: "error", text: `Erro ao salvar guia jurídico: ${e?.message || e}` });
+    }
+    setIsPublishing(false);
+  };
+
+  const toggleLegalGuide = async (guide: LegalGuide) => {
+    const form = getLegalGuideForm(guide);
+    await saveLegalGuideOverride({
       ...form,
       status: form.status === "published" ? "hidden" : "published",
     });
@@ -742,6 +787,95 @@ export default function AdminPage() {
             ) : (
               <div className="text-sm text-gray-500">
                 Selecione um item de cultura para editar.
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {activeTab === "rights" && (
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_420px] gap-6">
+          <div>
+            <h2 className="text-xl font-bold mb-4">Guias jurídicos ({staticLegalGuides.length})</h2>
+            <p className="text-sm text-gray-500 mb-4">
+              Controle o conteúdo da página Direitos. Você pode editar, tirar do ar ou publicar novamente.
+            </p>
+            <div className="space-y-2">
+              {staticLegalGuides.map((guide) => {
+                const form = getLegalGuideForm(guide);
+                return (
+                  <div key={guide.slug} className="bg-white border rounded-lg px-4 py-3 shadow-sm">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium text-gray-800 truncate">{form.title}</p>
+                        <p className="text-xs text-gray-400 mt-0.5">
+                          {form.category} · prioridade {form.priority} · {form.status === "published" ? "Publicado" : "Fora do ar"}
+                        </p>
+                      </div>
+                      <span className={`flex-shrink-0 px-2 py-1 rounded-full text-[11px] font-semibold ${form.status === "published" ? "bg-green-50 text-green-700" : "bg-amber-50 text-amber-700"}`}>
+                        {form.status === "published" ? "Publicado" : "Oculto"}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      <button
+                        type="button"
+                        onClick={() => setLegalGuideForm(form)}
+                        className="px-3 py-1.5 text-xs font-medium text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-50"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => toggleLegalGuide(guide)}
+                        className={`px-3 py-1.5 text-xs font-medium border rounded-lg ${
+                          form.status === "published"
+                            ? "text-amber-700 border-amber-200 hover:bg-amber-50"
+                            : "text-green-700 border-green-200 hover:bg-green-50"
+                        }`}
+                      >
+                        {form.status === "published" ? "Tirar do ar" : "Publicar"}
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="bg-white border rounded-xl p-6 shadow-sm space-y-4 h-fit lg:sticky lg:top-6">
+            {legalGuideForm ? (
+              <>
+                <div>
+                  <h2 className="text-xl font-bold">Editar guia jurídico</h2>
+                  <p className="text-xs text-gray-400 mt-1">{legalGuideForm.slug}</p>
+                </div>
+                <input value={legalGuideForm.title} onChange={(e) => setLegalGuideForm({ ...legalGuideForm, title: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Título" />
+                <textarea value={legalGuideForm.summary} onChange={(e) => setLegalGuideForm({ ...legalGuideForm, summary: e.target.value })} rows={3} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Resumo" />
+                <textarea value={legalGuideForm.content} onChange={(e) => setLegalGuideForm({ ...legalGuideForm, content: e.target.value })} rows={7} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Conteúdo" />
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <select value={legalGuideForm.category} onChange={(e) => setLegalGuideForm({ ...legalGuideForm, category: e.target.value as LegalGuideCategory })} className="w-full px-4 py-2 border rounded-lg text-sm">
+                    {legalCategories.map((category) => <option key={category} value={category}>{category}</option>)}
+                  </select>
+                  <select value={legalGuideForm.priority} onChange={(e) => setLegalGuideForm({ ...legalGuideForm, priority: e.target.value as LegalGuideOverride["priority"] })} className="w-full px-4 py-2 border rounded-lg text-sm">
+                    <option value="alta">Alta</option>
+                    <option value="media">Média</option>
+                    <option value="baixa">Baixa</option>
+                  </select>
+                </div>
+                <select value={legalGuideForm.status} onChange={(e) => setLegalGuideForm({ ...legalGuideForm, status: e.target.value as LegalGuideOverride["status"] })} className="w-full px-4 py-2 border rounded-lg text-sm">
+                  <option value="published">Publicado</option>
+                  <option value="hidden">Fora do ar</option>
+                </select>
+                <textarea value={legalGuideForm.actions.join("\n")} onChange={(e) => setLegalGuideForm({ ...legalGuideForm, actions: e.target.value.split("\n").map((item) => item.trim()).filter(Boolean) })} rows={5} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Passos recomendados, um por linha" />
+                <textarea value={legalGuideForm.contacts.join("\n")} onChange={(e) => setLegalGuideForm({ ...legalGuideForm, contacts: e.target.value.split("\n").map((item) => item.trim()).filter(Boolean) })} rows={4} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Canais úteis, um por linha" />
+                <input value={legalGuideForm.tags.join(", ")} onChange={(e) => setLegalGuideForm({ ...legalGuideForm, tags: e.target.value.split(",").map((tag) => tag.trim()).filter(Boolean) })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Tags separadas por vírgula" />
+                <button onClick={() => saveLegalGuideOverride(legalGuideForm)} disabled={isPublishing || !legalGuideForm.title.trim()} className="w-full py-3 bg-pink-600 text-white rounded-lg font-semibold text-sm disabled:opacity-50">
+                  {isPublishing ? "Salvando..." : "Salvar guia"}
+                </button>
+              </>
+            ) : (
+              <div className="text-sm text-gray-500">
+                Selecione um guia jurídico para editar.
               </div>
             )}
           </div>

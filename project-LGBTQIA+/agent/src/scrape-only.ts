@@ -26,8 +26,8 @@ async function main() {
   const config: AgentConfig = {
     cityFocus: process.env.CITY_FOCUS || 'Fortaleza',
     stateFocus: process.env.STATE_FOCUS || 'CE',
-    eventsLimitPerWeek: parseInt(process.env.EVENTS_LIMIT_PER_WEEK || '10'),
-    scrapeFrequencyDays: parseInt(process.env.SCRAPE_FREQUENCY_DAYS || '7'),
+    eventsLimitPerFortnight: parseInt(process.env.EVENTS_LIMIT_PER_FORTNIGHT || process.env.EVENTS_LIMIT_PER_WEEK || '12'),
+    scrapeFrequencyDays: parseInt(process.env.SCRAPE_FREQUENCY_DAYS || '14'),
     sources: [],
   };
 

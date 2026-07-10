@@ -80,7 +80,7 @@ npm run preview
 
 ## 🤖 Agent de Eventos
 
-Agente autônomo que busca e publica eventos LGBTQIA+ semanalmente.
+Agente autônomo que busca e publica eventos LGBTQIA+ quinzenalmente.
 
 ```bash
 cd project-LGBTQIA+/agent

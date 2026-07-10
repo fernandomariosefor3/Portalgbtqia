@@ -13,8 +13,7 @@ import { allHealthGuides, categoryImages, type HealthGuide } from '@/mocks/healt
 
 const DEFAULT_IMAGE = categoryImages['prep-pep'];
 
-const PLACEHOLDER_AUTHOR_PHOTO =
-  'https://ui-avatars.com/api/?name=Portal+LGBTQ&background=10B981&color=fff&size=64';
+const PLACEHOLDER_AUTHOR_PHOTO = `${import.meta.env.BASE_URL}favicon.svg`;
 
 /** Converte um documento do Firestore para o formato `HealthGuide` da UI. */
 function firestoreToHealth(doc: QueryDocumentSnapshot<DocumentData>): HealthGuide {

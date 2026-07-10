@@ -49,7 +49,7 @@ export class FacebookScraper extends BaseScraper {
           const link = $el.find('a').first().attr('href') || '';
           const description = $el.find('p, [role="presentation"]').first().text().trim();
           const dateText = $el.find('[aria-label*="data"], [aria-label*="Data"]').text().trim() ||
-                          $el.find('span').filter((_, el) => $(el).text().match(/\d{1,2}[\/\-]\d{1,2}/)).first().text().trim();
+                          $el.find('span').filter((_, el) => Boolean($(el).text().match(/\d{1,2}[\/\-]\d{1,2}/))).first().text().trim();
           const location = $el.find('[aria-label*="local"], [aria-label*="Local"]').text().trim();
           const image = $el.find('img').attr('src');
 
@@ -98,5 +98,9 @@ export class FacebookScraper extends BaseScraper {
 
   private cleanLocation(location: string): string {
     return location.trim().replace(/\s+/g, ' ');
+  }
+
+  private delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }

@@ -6,7 +6,7 @@ Agente autônomo que busca, processa e publica eventos LGBTQIA+ automaticamente 
 
 - **Web Scraping Multi-Fonte**: Busca eventos de Google, Eventbrite, Sympla, Instagram e Facebook
 - **Enriquecimento com IA**: Usa OpenAI GPT para melhorar títulos, descrições e categorização
-- **Publicação Automática**: Publica até 10 eventos por semana no Firebase Firestore
+- **Publicação Automática**: Publica até 12 eventos por quinzena no Firebase Firestore
 - **Execução Agendada**: Roda automaticamente toda segunda-feira via GitHub Actions
 
 ## 📁 Estrutura
@@ -133,7 +133,7 @@ No arquivo `src/index.ts`:
 const config = {
   cityFocus: 'Fortaleza',    // Cidade foco
   stateFocus: 'CE',          // Estado
-  eventsLimitPerWeek: 10,    // Limite semanal
+  eventsLimitPerFortnight: 12, // Limite quinzenal
   scrapeFrequencyDays: 3,     // Frequência de scraping
   sources: [],                // Fontes específicas (vazio = todas)
 };
@@ -148,7 +148,7 @@ O agente está configurado para rodar via GitHub Actions E cron job local:
 
 ### Cron Job (Execução Automática Semanal)
 
-O agente está configurado para executar automaticamente toda semana:
+O agente está configurado para executar automaticamente quinzenalmente:
 
 1. **Acesse o Dashboard de Tarefas Agendadas**
 2. **Configure a tarefa** com:

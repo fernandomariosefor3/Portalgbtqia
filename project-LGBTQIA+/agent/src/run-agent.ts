@@ -16,7 +16,7 @@ async function main() {
   console.log('='.repeat(60));
   console.log(`⏰ Iniciado em: ${new Date().toISOString()}`);
   console.log(`📍 Cidade foco: ${process.env.CITY_FOCUS || 'Fortaleza'}`);
-  console.log(`📊 Limite semanal: ${process.env.EVENTS_LIMIT_PER_WEEK || 10} eventos`);
+  console.log(`📊 Limite quinzenal: ${process.env.EVENTS_LIMIT_PER_FORTNIGHT || process.env.EVENTS_LIMIT_PER_WEEK || 12} eventos`);
   console.log('='.repeat(60));
 
   try {
@@ -24,8 +24,8 @@ async function main() {
     const agent = createAgent({
       cityFocus: process.env.CITY_FOCUS || 'Fortaleza',
       stateFocus: process.env.STATE_FOCUS || 'CE',
-      eventsLimitPerWeek: parseInt(process.env.EVENTS_LIMIT_PER_WEEK || '10'),
-      scrapeFrequencyDays: parseInt(process.env.SCRAPE_FREQUENCY_DAYS || '7'),
+      eventsLimitPerFortnight: parseInt(process.env.EVENTS_LIMIT_PER_FORTNIGHT || process.env.EVENTS_LIMIT_PER_WEEK || '12'),
+      scrapeFrequencyDays: parseInt(process.env.SCRAPE_FREQUENCY_DAYS || '14'),
       sources: [],
     });
 

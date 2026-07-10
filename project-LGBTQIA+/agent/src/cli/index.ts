@@ -75,7 +75,7 @@ async function runAgent(options: Record<string, string | boolean>) {
   const config = {
     cityFocus: (options.city as string) || defaultConfig.cityFocus,
     stateFocus: (options.state as string) || defaultConfig.stateFocus,
-    eventsLimitPerWeek: parseInt(options.limit as string) || defaultConfig.eventsLimitPerWeek,
+    eventsLimitPerFortnight: parseInt(options.limit as string) || defaultConfig.eventsLimitPerFortnight,
     scrapeFrequencyDays: defaultConfig.scrapeFrequencyDays,
     sources: defaultConfig.sources,
   };
@@ -132,7 +132,7 @@ function showHelp() {
 
   --city <nome>      Cidade foco (padrão: Fortaleza)
   --state <sigla>    Estado foco (padrão: CE)
-  --limit <número>   Limite de eventos por semana (padrão: 10)
+  --limit <número>   Limite de eventos por quinzena (padrão: 12)
   --sources          Fontes específicas (google, eventbrite, etc.)
 
 📋 EXEMPLOS:

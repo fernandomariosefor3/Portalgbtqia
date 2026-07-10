@@ -1,9 +1,9 @@
-name: Agente de Eventos LGBTQIA+
+name: Agente Quinzenal de Eventos LGBTQIA+
 
 on:
-  # Toda segunda-feira às 8h (horário de Brasília = 11h UTC)
+  # Divulgação quinzenal: dias 1 e 15 às 8h (horário de Brasília = 11h UTC)
   schedule:
-    - cron: '0 11 * * 1'
+    - cron: '0 11 1,15 * *'
 
   # Execução manual pelo GitHub
   workflow_dispatch:
@@ -13,9 +13,9 @@ on:
         required: false
         default: 'Fortaleza'
       limit:
-        description: 'Limite de eventos por semana'
+        description: 'Limite de eventos por quinzena'
         required: false
-        default: '10'
+        default: '12'
 
 jobs:
   run-agent:
@@ -49,7 +49,7 @@ jobs:
           FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
           FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          EVENTS_LIMIT_PER_WEEK: ${{ github.event.inputs.limit || '10' }}
+          EVENTS_LIMIT_PER_FORTNIGHT: ${{ github.event.inputs.limit || '12' }}
           CITY_FOCUS: ${{ github.event.inputs.city || 'Fortaleza' }}
           STATE_FOCUS: CE
 

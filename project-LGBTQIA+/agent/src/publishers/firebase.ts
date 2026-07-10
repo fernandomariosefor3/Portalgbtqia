@@ -12,8 +12,8 @@ export class FirebasePublisher {
   private publishedCount: number = 0;
   private errors: string[] = [];
 
-  constructor(eventsLimitPerWeek: number = 10) {
-    this.eventsLimit = eventsLimitPerWeek;
+  constructor(eventsLimitPerFortnight: number = 12) {
+    this.eventsLimit = eventsLimitPerFortnight;
     this.db = this.initializeFirebase();
   }
 
@@ -53,7 +53,7 @@ export class FirebasePublisher {
 
     console.log(`\n🚀 Iniciando publicação de ${Math.min(events.length, this.eventsLimit)} eventos...`);
 
-    // Limita eventos por semana
+    // Limita eventos por quinzena
     const eventsToPublish = events.slice(0, this.eventsLimit);
 
     for (const event of eventsToPublish) {
@@ -169,8 +169,8 @@ export class FirebasePublisher {
   }
 
   async getRecentPublications(): Promise<Record<string, unknown>[]> {
-    const weekAgo = new Date();
-    weekAgo.setDate(weekAgo.getDate() - 7);
+    const fortnightAgo = new Date();
+    fortnightAgo.setDate(fortnightAgo.getDate() - 14);
 
     // Query de campo único para evitar exigência de índice composto no Firestore.
     // O filtro por data é feito em memória (coleção pequena, publicada só pelo agente).
@@ -184,13 +184,17 @@ export class FirebasePublisher {
       .filter((event) => {
         const createdAt = event.createdAt;
         if (!createdAt || typeof createdAt.toDate !== 'function') return false;
-        return createdAt.toDate() >= weekAgo;
+        return createdAt.toDate() >= fortnightAgo;
       });
   }
 
-  async getPublishedCountThisWeek(): Promise<number> {
+  async getPublishedCountThisFortnight(): Promise<number> {
     const publications = await this.getRecentPublications();
     return publications.length;
+  }
+
+  async getPublishedCountThisWeek(): Promise<number> {
+    return this.getPublishedCountThisFortnight();
   }
 
   async logRun(report: AgentReport): Promise<void> {

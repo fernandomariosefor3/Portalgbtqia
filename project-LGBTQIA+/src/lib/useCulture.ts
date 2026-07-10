@@ -14,8 +14,7 @@ import { allCulture, type CultureItem } from '@/mocks/culture';
 const DEFAULT_IMAGE =
   'https://readdy.ai/api/search-image?query=LGBTQ+queer+culture+art+colorful&width=800&height=500&seq=culture-default&orientation=landscape';
 
-const PLACEHOLDER_AUTHOR_PHOTO =
-  'https://ui-avatars.com/api/?name=Portal+LGBTQ&background=E94E77&color=fff&size=64';
+const PLACEHOLDER_AUTHOR_PHOTO = `${import.meta.env.BASE_URL}favicon.svg`;
 
 /** Converte um documento do Firestore para o formato `CultureItem` da UI. */
 function firestoreToCulture(doc: QueryDocumentSnapshot<DocumentData>): CultureItem {

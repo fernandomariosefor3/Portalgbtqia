@@ -11,7 +11,7 @@ import { MeetupScraper } from './meetup.js';
 import { RawEvent, EventSource, AgentConfig } from '../types.js';
 
 export class ScraperManager {
-  private scrapers: Map<EventSource, any> = new Map();
+  private scrapers: Map<EventSource, { scrape(): Promise<RawEvent[]> }> = new Map();
   private config: AgentConfig;
 
   constructor(config: AgentConfig) {

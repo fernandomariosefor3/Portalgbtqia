@@ -17,7 +17,7 @@ export class EventAgent {
     this.config = config;
     this.scraperManager = new ScraperManager(config);
     this.aiProcessor = new AIProcessor(process.env.OPENAI_API_KEY);
-    this.firebasePublisher = new FirebasePublisher(config.eventsLimitPerWeek);
+    this.firebasePublisher = new FirebasePublisher(config.eventsLimitPerFortnight);
   }
 
   async run(): Promise<AgentReport> {
@@ -26,7 +26,7 @@ export class EventAgent {
     console.log('='.repeat(60));
     console.log(`📅 Data: ${new Date().toISOString()}`);
     console.log(`🎯 Cidade foco: ${this.config.cityFocus} (${this.config.stateFocus})`);
-    console.log(`📊 Limite semanal: ${this.config.eventsLimitPerWeek} eventos`);
+    console.log(`📊 Limite quinzenal: ${this.config.eventsLimitPerFortnight} eventos`);
     console.log('='.repeat(60));
 
     const report: AgentReport = {
@@ -68,11 +68,11 @@ export class EventAgent {
       // Etapa 3: Publicação no Firebase
       console.log('\n[ETAPA 3] 📤 Publicando eventos...');
 
-      // Verifica quantos já foram publicados esta semana
-      const alreadyPublished = await this.firebasePublisher.getPublishedCountThisWeek();
-      const remainingSlots = Math.max(0, this.config.eventsLimitPerWeek - alreadyPublished);
+      // Verifica quantos já foram publicados na quinzena
+      const alreadyPublished = await this.firebasePublisher.getPublishedCountThisFortnight();
+      const remainingSlots = Math.max(0, this.config.eventsLimitPerFortnight - alreadyPublished);
 
-      console.log(`📊 Já publicados esta semana: ${alreadyPublished}`);
+      console.log(`📊 Já publicados na quinzena: ${alreadyPublished}`);
       console.log(`📊 Slots restantes: ${remainingSlots}`);
 
       if (remainingSlots > 0) {
@@ -97,7 +97,7 @@ export class EventAgent {
           }
         }
       } else {
-        console.log('\n⚠️ Limite semanal atingido. Pulando publicação.');
+        console.log('\n⚠️ Limite quinzenal atingido. Pulando publicação.');
       }
 
       // Salva relatório
@@ -167,8 +167,8 @@ export class EventAgent {
 export const defaultConfig: AgentConfig = {
   cityFocus: 'Fortaleza',
   stateFocus: 'CE',
-  eventsLimitPerWeek: 10,
-  scrapeFrequencyDays: 3,
+  eventsLimitPerFortnight: 12,
+  scrapeFrequencyDays: 14,
   sources: [],
 };
 

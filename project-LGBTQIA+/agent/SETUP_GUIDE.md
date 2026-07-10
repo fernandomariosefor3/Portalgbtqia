@@ -18,7 +18,7 @@ OPENAI_API_KEY=sk-... (opcional)
 # Configurações do Agente
 CITY_FOCUS=Fortaleza
 STATE_FOCUS=CE
-EVENTS_LIMIT_PER_WEEK=10
+EVENTS_LIMIT_PER_FORTNIGHT=12
 ```
 
 ### 2. Firebase Setup (Obrigatório)

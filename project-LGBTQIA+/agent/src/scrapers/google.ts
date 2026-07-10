@@ -5,6 +5,7 @@
 
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import type { Element } from 'domhandler';
 import { BaseScraper } from './base.js';
 import { RawEvent } from '../types.js';
 
@@ -121,10 +122,6 @@ export class GoogleSearchScraper extends BaseScraper {
     return events.map((e) => this.normalizeEvent(e));
   }
 
-  private delay(ms: number): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-
   private cleanTitle(title: string): string {
     return title
       .trim()
@@ -132,6 +129,10 @@ export class GoogleSearchScraper extends BaseScraper {
       .replace(/\|.*$/, '')
       .replace(/—.*$/, '')
       .trim();
+  }
+
+  private delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   private cleanDescription(text: string): string {
@@ -159,7 +160,7 @@ export class GoogleSearchScraper extends BaseScraper {
     return undefined;
   }
 
-  private extractImageUrl($: cheerio.CheerioAPI, element: cheerio.Element): string | undefined {
+  private extractImageUrl($: cheerio.CheerioAPI, element: Element): string | undefined {
     const imgElement = $(element).find('img');
     const src = imgElement.attr('src');
     const dataSrc = imgElement.attr('data-src');

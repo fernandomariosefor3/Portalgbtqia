@@ -302,12 +302,12 @@ Portal digital dedicado a informação, cultura, saúde, direitos e comunidade p
 ## 7. Agente de Eventos Autônomo
 
 ### Descrição
-Agente automatizado que busca, processa e publica eventos LGBTQIA+ semanalmente no portal, sem necessidade de intervenção manual.
+Agente automatizado que busca, processa e publica eventos LGBTQIA+ quinzenalmente no portal, sem necessidade de intervenção manual.
 
 ### Funcionalidades
 - **Web Scraping Multi-Fonte**: Google Search, Eventbrite, Sympla, Instagram, Facebook
 - **Enriquecimento com IA**: Usa OpenAI para melhorar títulos, descrições e categorização
-- **Publicação Automática**: Publica até 10 eventos por semana no Firebase Firestore
+- **Publicação Automática**: Publica até 12 eventos por quinzena no Firebase Firestore
 - **Execução Agendada**: Roda automaticamente toda segunda-feira via GitHub Actions
 
 ### Estrutura
@@ -328,6 +328,6 @@ agent/
 1. Configurar variáveis de ambiente (`.env`)
 2. Configurar Firebase Admin SDK
 3. Configurar GitHub Secrets
-4. O agente executa automaticamente toda semana
+4. O agente executa automaticamente a cada quinzena
 
 ### Status: ✅ Implementado

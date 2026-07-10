@@ -83,7 +83,7 @@ export interface ScrapingResult {
 export interface AgentConfig {
   cityFocus: string;
   stateFocus: string;
-  eventsLimitPerWeek: number;
+  eventsLimitPerFortnight: number;
   scrapeFrequencyDays: number;
   sources: EventSource[];
 }

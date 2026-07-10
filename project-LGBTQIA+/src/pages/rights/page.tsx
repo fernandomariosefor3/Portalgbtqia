@@ -4,6 +4,16 @@ import { useLegalGuides } from '@/lib/useLegalGuides';
 
 const filters = ['Todos', ...legalCategories] as const;
 
+const categoryMeta = {
+  Relacionamentos: { icon: 'ri-hearts-line', title: 'Relacionamentos' },
+  Identidade: { icon: 'ri-transgender-line', title: 'Identidade de gênero' },
+  Saúde: { icon: 'ri-heart-pulse-line', title: 'Saúde' },
+  Trabalho: { icon: 'ri-briefcase-line', title: 'Trabalho' },
+  Violência: { icon: 'ri-alarm-warning-line', title: 'Violência' },
+  Educação: { icon: 'ri-graduation-cap-line', title: 'Educação' },
+  Serviços: { icon: 'ri-customer-service-2-line', title: 'Serviços' },
+};
+
 const priorityStyle = {
   alta: 'bg-red-50 text-red-700 border-red-100',
   media: 'bg-amber-50 text-amber-700 border-amber-100',
@@ -31,6 +41,22 @@ export default function RightsPage() {
   }, [activeFilter, guides, query]);
 
   const activeGuide = visibleGuides.find((guide) => guide.slug === activeSlug) ?? visibleGuides[0];
+  const groupedGuides = useMemo(() => {
+    return legalCategories.map((category) => ({
+      category,
+      guides: guides.filter((guide) => guide.category === category),
+    }));
+  }, [guides]);
+
+  function downloadText(filename: string, body: string) {
+    const blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.click();
+    URL.revokeObjectURL(url);
+  }
 
   return (
     <main className="w-full min-h-screen bg-surface font-inter pt-16 md:pt-20">
@@ -103,6 +129,40 @@ export default function RightsPage() {
             </button>
           ))}
         </div>
+
+        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {groupedGuides.map(({ category, guides: categoryGuides }) => {
+            const meta = categoryMeta[category];
+            return (
+              <article key={category} className="rounded-2xl border border-dark-100 bg-white p-5">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-50 text-primary-500">
+                    <i className={`${meta.icon} text-xl`} aria-hidden="true"></i>
+                  </div>
+                  <div>
+                    <h2 className="text-base font-semibold text-dark-800">{meta.title}</h2>
+                    <p className="text-xs text-dark-400">{categoryGuides.length} guias</p>
+                  </div>
+                </div>
+                <div className="mt-4 space-y-2">
+                  {categoryGuides.slice(0, 4).map((guide) => (
+                    <button
+                      key={guide.slug}
+                      type="button"
+                      onClick={() => {
+                        setActiveFilter(category);
+                        setActiveSlug(guide.slug);
+                      }}
+                      className="block w-full rounded-lg bg-dark-50 px-3 py-2 text-left text-xs font-medium text-dark-600 hover:bg-primary-50 hover:text-primary-600"
+                    >
+                      {guide.title}
+                    </button>
+                  ))}
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </section>
 
       <section className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 pb-14 md:pb-20">
@@ -152,7 +212,38 @@ export default function RightsPage() {
                 <p>{activeGuide.content}</p>
               </div>
 
+              {activeGuide.subtopics?.length ? (
+                <div className="mt-6 rounded-xl border border-secondary-100 bg-secondary-50/60 p-5">
+                  <h3 className="text-sm font-semibold text-secondary-700 uppercase tracking-wider mb-4">
+                    Tópicos deste guia
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {activeGuide.subtopics.map((topic) => (
+                      <span key={topic} className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-secondary-700">
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
               <div className="mt-8 grid md:grid-cols-2 gap-5">
+                {activeGuide.documents?.length ? (
+                  <div className="rounded-xl bg-white border border-dark-100 p-5">
+                    <h3 className="text-sm font-semibold text-dark-700 uppercase tracking-wider mb-4">
+                      Documentos necessários
+                    </h3>
+                    <ul className="space-y-3">
+                      {activeGuide.documents.map((document) => (
+                        <li key={document} className="flex items-start gap-2 text-sm text-dark-500 leading-relaxed">
+                          <i className="ri-file-list-3-line text-secondary-600 mt-0.5" aria-hidden="true"></i>
+                          <span>{document}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+
                 <div className="rounded-xl bg-dark-50 border border-dark-100 p-5">
                   <h3 className="text-sm font-semibold text-dark-700 uppercase tracking-wider mb-4">
                     Passos recomendados
@@ -181,6 +272,41 @@ export default function RightsPage() {
                   </ul>
                 </div>
               </div>
+
+              {(activeGuide.averageTime || activeGuide.costs || activeGuide.downloads?.length) && (
+                <div className="mt-6 grid gap-5 md:grid-cols-3">
+                  {activeGuide.averageTime && (
+                    <div className="rounded-xl border border-dark-100 bg-white p-5">
+                      <h3 className="text-sm font-semibold text-dark-700">Tempo médio</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-dark-500">{activeGuide.averageTime}</p>
+                    </div>
+                  )}
+                  {activeGuide.costs && (
+                    <div className="rounded-xl border border-dark-100 bg-white p-5">
+                      <h3 className="text-sm font-semibold text-dark-700">Custos</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-dark-500">{activeGuide.costs}</p>
+                    </div>
+                  )}
+                  {activeGuide.downloads?.length ? (
+                    <div className="rounded-xl border border-primary-100 bg-primary-50 p-5">
+                      <h3 className="text-sm font-semibold text-primary-700">Modelos para baixar</h3>
+                      <div className="mt-3 space-y-2">
+                        {activeGuide.downloads.map((download) => (
+                          <button
+                            key={download.filename}
+                            type="button"
+                            onClick={() => downloadText(download.filename, download.body)}
+                            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary-500 px-4 py-2 text-xs font-semibold text-white hover:bg-primary-600"
+                          >
+                            <i className="ri-download-2-line" aria-hidden="true"></i>
+                            {download.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              )}
 
               <div className="mt-6 flex flex-wrap gap-2">
                 {activeGuide.tags.map((tag) => (

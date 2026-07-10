@@ -12,10 +12,16 @@ export interface QueerRouteOverride {
   duration: string;
   budget: QueerRoute['budget'];
   safetyLevel: QueerRoute['safetyLevel'];
+  safetySummary?: string;
+  safetyNotes?: string[];
   summary: string;
   highlights: string[];
   itinerary: QueerRoute['itinerary'];
+  hotels?: QueerRoute['hotels'];
+  foodAndBars?: QueerRoute['foodAndBars'];
   safetyTips: string[];
+  resources?: QueerRoute['resources'];
+  testimonials?: QueerRoute['testimonials'];
   usefulContacts: string[];
   image: string;
   tags: string[];
@@ -32,10 +38,16 @@ export function queerRouteToOverride(route: QueerRoute): QueerRouteOverride {
     duration: route.duration,
     budget: route.budget,
     safetyLevel: route.safetyLevel,
+    safetySummary: route.safetySummary,
+    safetyNotes: route.safetyNotes,
     summary: route.summary,
     highlights: route.highlights,
     itinerary: route.itinerary,
+    hotels: route.hotels,
+    foodAndBars: route.foodAndBars,
     safetyTips: route.safetyTips,
+    resources: route.resources,
+    testimonials: route.testimonials,
     usefulContacts: route.usefulContacts,
     image: route.image,
     tags: route.tags,
@@ -57,10 +69,16 @@ export function applyQueerRouteOverride(
     duration: override.duration || route.duration,
     budget: override.budget || route.budget,
     safetyLevel: override.safetyLevel || route.safetyLevel,
+    safetySummary: override.safetySummary || route.safetySummary,
+    safetyNotes: override.safetyNotes?.length ? override.safetyNotes : route.safetyNotes,
     summary: override.summary || route.summary,
     highlights: override.highlights?.length ? override.highlights : route.highlights,
     itinerary: override.itinerary?.length ? override.itinerary : route.itinerary,
+    hotels: override.hotels?.length ? override.hotels : route.hotels,
+    foodAndBars: override.foodAndBars?.length ? override.foodAndBars : route.foodAndBars,
     safetyTips: override.safetyTips?.length ? override.safetyTips : route.safetyTips,
+    resources: override.resources?.length ? override.resources : route.resources,
+    testimonials: override.testimonials?.length ? override.testimonials : route.testimonials,
     usefulContacts: override.usefulContacts?.length ? override.usefulContacts : route.usefulContacts,
     image: override.image || route.image,
     tags: override.tags?.length ? override.tags : route.tags,

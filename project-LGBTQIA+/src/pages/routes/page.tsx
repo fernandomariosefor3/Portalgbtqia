@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { queerRouteTypes } from '@/mocks/queerRoutes';
+import { queerRouteTypes, type RoutePlace } from '@/mocks/queerRoutes';
 import { useQueerRoutes } from '@/lib/useQueerRoutes';
 
 const filters = ['Todos', ...queerRouteTypes] as const;
@@ -9,6 +9,47 @@ function safetyLabel(level: number) {
   if (level >= 4) return 'Seguro';
   if (level >= 3) return 'Atenção normal';
   return 'Atenção redobrada';
+}
+
+function stars(level: number) {
+  return `${'★'.repeat(level)}${'☆'.repeat(5 - level)}`;
+}
+
+function RoutePlaceList({ title, places }: { title: string; places?: RoutePlace[] }) {
+  if (!places?.length) return null;
+
+  return (
+    <div className="rounded-xl border border-dark-100 bg-white p-5">
+      <h3 className="text-sm font-semibold text-dark-700 uppercase tracking-wider mb-4">{title}</h3>
+      <div className="space-y-3">
+        {places.map((place) => (
+          <div
+            key={place.name}
+            className={`rounded-xl border p-4 ${place.negative ? 'border-red-100 bg-red-50' : 'border-dark-100 bg-surface'}`}
+          >
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="font-semibold text-dark-800">{place.negative ? '✗ ' : ''}{place.name}</p>
+                <p className="mt-1 text-xs text-dark-400">{place.kind} • {place.price}</p>
+              </div>
+              <div className="text-left sm:text-right">
+                <p className="text-sm font-bold text-dark-700">{place.rating.toFixed(1)}/5</p>
+                <p className="text-[11px] text-dark-400">{place.reviews} avaliações</p>
+              </div>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {place.badges.map((badge) => (
+                <span key={badge} className="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-dark-600 border border-dark-100">
+                  {badge}
+                </span>
+              ))}
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-dark-500">{place.note}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default function RoutesPage() {
@@ -121,6 +162,35 @@ export default function RoutesPage() {
             </button>
           ))}
         </div>
+
+        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {queerRouteTypes.map((type) => (
+            <button
+              key={type}
+              type="button"
+              onClick={() => {
+                setActiveFilter(type);
+                setActiveSlug(null);
+              }}
+              className="rounded-2xl border border-dark-100 bg-white p-5 text-left transition-all hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-sm"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <h2 className="text-base font-semibold text-dark-800">{type}</h2>
+                <span className="rounded-full bg-primary-50 px-2.5 py-1 text-xs font-semibold text-primary-600">
+                  {routes.filter((route) => route.type === type).length}
+                </span>
+              </div>
+              <p className="mt-2 text-sm text-dark-500">
+                {type === 'Praias inclusivas' && 'Jericoacoara, Canoa Quebrada, Pipa e outros destinos de sol.'}
+                {type === 'Rotas urbanas' && 'Salvador, Recife, Fortaleza e capitais com cena queer ativa.'}
+                {type === 'Festivais e eventos' && 'Prides, festas, mostras e encontros pelo Nordeste.'}
+                {type === 'Histórico e cultura' && 'Memória do movimento, museus, centros culturais e arte.'}
+                {type === 'Ecoturismo' && 'Chapada Diamantina, Lençóis, lagoas, trilhas e natureza.'}
+                {type === 'Fins de semana' && 'Escapadas curtas com logística simples e pontos verificados.'}
+              </p>
+            </button>
+          ))}
+        </div>
       </section>
 
       <section className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 pb-8">
@@ -201,13 +271,37 @@ export default function RoutesPage() {
                   </div>
                   <div className="rounded-xl bg-dark-50 border border-dark-100 p-4">
                     <p className="text-xs text-dark-400">Segurança</p>
-                    <p className="mt-1 text-sm font-semibold text-dark-700">{safetyLabel(featuredRoute.safetyLevel)}</p>
+                    <p className="mt-1 text-sm font-semibold text-dark-700">{stars(featuredRoute.safetyLevel)} {featuredRoute.safetySummary || safetyLabel(featuredRoute.safetyLevel)}</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="p-5 md:p-8 border-t border-dark-100">
+              {featuredRoute.safetyNotes?.length ? (
+                <div className="mb-8 rounded-xl border border-amber-100 bg-amber-50 p-5">
+                  <h3 className="text-sm font-semibold text-amber-800 uppercase tracking-wider mb-4">
+                    Nível de segurança
+                  </h3>
+                  <p className="text-lg font-bold text-amber-900">
+                    {stars(featuredRoute.safetyLevel)} <span className="text-sm font-semibold">({featuredRoute.safetySummary || safetyLabel(featuredRoute.safetyLevel)})</span>
+                  </p>
+                  <ul className="mt-4 grid gap-3 md:grid-cols-2">
+                    {featuredRoute.safetyNotes.map((note) => (
+                      <li key={note} className="flex items-start gap-2 text-sm text-amber-800 leading-relaxed">
+                        <i className="ri-shield-check-line mt-0.5" aria-hidden="true"></i>
+                        <span>{note}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              <div className="mb-8 grid gap-5 lg:grid-cols-2">
+                <RoutePlaceList title="Hotéis verificados" places={featuredRoute.hotels} />
+                <RoutePlaceList title="Restaurantes e bares" places={featuredRoute.foodAndBars} />
+              </div>
+
               <div className="grid lg:grid-cols-[minmax(0,1fr)_340px] gap-8">
                 <div>
                   <h3 className="text-sm font-semibold text-dark-700 uppercase tracking-wider mb-4">Roteiro dia a dia</h3>
@@ -257,7 +351,51 @@ export default function RoutesPage() {
                       ))}
                     </ul>
                   </div>
+
+                  {featuredRoute.resources?.length ? (
+                    <div className="rounded-xl bg-dark-50 border border-dark-100 p-5">
+                      <h3 className="text-sm font-semibold text-dark-700 uppercase tracking-wider mb-4">Recursos úteis</h3>
+                      <div className="grid gap-2">
+                        {featuredRoute.resources.map((resource) => (
+                          <a
+                            key={resource.label}
+                            href={resource.href}
+                            target={resource.href.startsWith('http') ? '_blank' : undefined}
+                            rel={resource.href.startsWith('http') ? 'noreferrer' : undefined}
+                            className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-dark-700 border border-dark-100 hover:border-primary-200"
+                          >
+                            <i className={resource.icon} aria-hidden="true"></i>
+                            {resource.label}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
                 </aside>
+              </div>
+
+              {featuredRoute.testimonials?.length ? (
+                <div className="mt-8 rounded-xl border border-secondary-100 bg-secondary-50 p-5">
+                  <h3 className="text-sm font-semibold text-secondary-700 uppercase tracking-wider mb-4">Depoimentos</h3>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {featuredRoute.testimonials.map((testimonial) => (
+                      <blockquote key={`${testimonial.author}-${testimonial.location}`} className="rounded-xl bg-white p-5 text-sm leading-relaxed text-dark-600">
+                        “{testimonial.quote}”
+                        <footer className="mt-3 text-xs font-semibold text-secondary-700">
+                          {testimonial.author}, {testimonial.location}
+                        </footer>
+                      </blockquote>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
+              <div className="mt-6 flex flex-wrap gap-2">
+                {featuredRoute.tags.map((tag) => (
+                  <span key={tag} className="rounded-full bg-dark-50 px-3 py-1 text-xs font-semibold text-dark-500">
+                    #{tag}
+                  </span>
+                ))}
               </div>
             </div>
           </article>

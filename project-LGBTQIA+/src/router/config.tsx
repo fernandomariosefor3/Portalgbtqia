@@ -20,6 +20,7 @@ const FamilyPage = lazy(() => import("../pages/family/page"));
 const GuidePage = lazy(() => import("../pages/guide/page"));
 const RightsPage = lazy(() => import("../pages/rights/page"));
 const RoutesPage = lazy(() => import("../pages/routes/page"));
+const SosPage = lazy(() => import("../pages/sos/page"));
 const ParadesPage = lazy(() => import("../pages/parades/page"));
 const EducationPage = lazy(() => import("../pages/education/page"));
 const CommunityPage = lazy(() => import("../pages/community/page"));
@@ -51,6 +52,7 @@ const routes: RouteObject[] = [
   { path: "/guia-fortaleza", element: <GuidePage /> },
   { path: "/direitos", element: <RightsPage /> },
   { path: "/roteiros", element: <RoutesPage /> },
+  { path: "/sos", element: <SosPage /> },
   { path: "/paradas", element: <ParadesPage /> },
   { path: "/educacao", element: <EducationPage /> },
   { path: "/comunidade", element: <CommunityPage /> },

@@ -4,11 +4,45 @@ import {
   guideHeroImage,
   safeSpaceCategories,
   safeSpaceCategoryImages,
+  safeSpaceBadgeKeys,
+  verificationLabels,
   type SafeSpace,
 } from '@/mocks/safeSpaces';
 import { useSafeSpaces } from '@/lib/useSafeSpaces';
 
 const filters = ['Todos', ...safeSpaceCategories] as const;
+const priceFilters = ['Todos', '$', '$$', '$$$', '$$$$'] as const;
+const distanceFilters = [
+  { label: '100km', value: 100 },
+  { label: '10km', value: 10 },
+  { label: '5km', value: 5 },
+  { label: '1km', value: 1 },
+] as const;
+
+const reviewQuestions = [
+  'Você se sentiu seguro(a)?',
+  'Usaram seu nome social? (se aplicável)',
+  'Usaram pronomes corretos? (se aplicável)',
+  'Havia banheiro gender neutral?',
+  'Funcionários treinados?',
+  'Você voltaria/recomendaria?',
+];
+
+const reviewerTags = [
+  'Lésbica',
+  'Gay',
+  'Bissexual',
+  'Pansexual',
+  'Homem cis',
+  'Mulher cis',
+  'Homem trans',
+  'Mulher trans',
+  'Não-binárie',
+  'Gênero fluido',
+  'Assexual',
+  'Aromântique',
+  'Família homoafetiva',
+];
 
 const mappedRegions = [
   {
@@ -56,6 +90,19 @@ export default function GuidePage() {
   const { spaces, loading } = useSafeSpaces();
   const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>('Todos');
   const [query, setQuery] = useState('');
+  const [activeBadge, setActiveBadge] = useState('Todos');
+  const [maxDistance, setMaxDistance] = useState(100);
+  const [priceFilter, setPriceFilter] = useState<(typeof priceFilters)[number]>('Todos');
+  const [needsAccessibility, setNeedsAccessibility] = useState(false);
+  const [needsWifi, setNeedsWifi] = useState(false);
+  const [openNowOnly, setOpenNowOnly] = useState(false);
+  const [activeReviewSlug, setActiveReviewSlug] = useState<string | null>(null);
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewerTag, setReviewerTag] = useState(reviewerTags[0]);
+  const [reviewAnswers, setReviewAnswers] = useState<Record<string, boolean>>(
+    Object.fromEntries(reviewQuestions.map((question) => [question, true])),
+  );
+  const [localScores, setLocalScores] = useState<Record<string, { rating: number; reviews: number }>>({});
 
   const visibleSpaces = useMemo(() => {
     const search = query.trim().toLowerCase();
@@ -66,10 +113,26 @@ export default function GuidePage() {
         space.name.toLowerCase().includes(search) ||
         space.description.toLowerCase().includes(search) ||
         space.address.toLowerCase().includes(search) ||
-        space.tags.some((tag) => tag.toLowerCase().includes(search));
-      return matchesCategory && matchesSearch;
+        space.tags.some((tag) => tag.toLowerCase().includes(search)) ||
+        space.badges.some((badge) => (badgeLabels[badge] || badge).toLowerCase().includes(search));
+      const matchesBadge = activeBadge === 'Todos' || space.badges.includes(activeBadge);
+      const matchesDistance = (space.distanceKm ?? 0) <= maxDistance;
+      const matchesPrice = priceFilter === 'Todos' || space.price === priceFilter;
+      const matchesAccessibility = !needsAccessibility || Boolean(space.accessibility?.length);
+      const matchesWifi = !needsWifi || Boolean(space.wifi);
+      const matchesOpen = !openNowOnly || Boolean(space.openNow);
+      return (
+        matchesCategory &&
+        matchesSearch &&
+        matchesBadge &&
+        matchesDistance &&
+        matchesPrice &&
+        matchesAccessibility &&
+        matchesWifi &&
+        matchesOpen
+      );
     });
-  }, [activeFilter, query, spaces]);
+  }, [activeBadge, activeFilter, maxDistance, needsAccessibility, needsWifi, openNowOnly, priceFilter, query, spaces]);
 
   const categoryCounts = useMemo(() => {
     return spaces.reduce<Record<string, number>>(
@@ -81,6 +144,23 @@ export default function GuidePage() {
       { Todos: 0 },
     );
   }, [spaces]);
+
+  function scoreFor(space: SafeSpace) {
+    return localScores[space.slug] || { rating: space.rating, reviews: space.reviews };
+  }
+
+  function submitReview(space: SafeSpace) {
+    const current = scoreFor(space);
+    const nextReviews = current.reviews + 1;
+    const nextRating = (current.rating * current.reviews + reviewRating) / nextReviews;
+    setLocalScores((scores) => ({
+      ...scores,
+      [space.slug]: { rating: nextRating, reviews: nextReviews },
+    }));
+    setActiveReviewSlug(null);
+    setReviewRating(5);
+    setReviewerTag(reviewerTags[0]);
+  }
 
   return (
     <main className="w-full bg-white pt-16 md:pt-20">
@@ -108,7 +188,7 @@ export default function GuidePage() {
               {[
                 { label: 'Espaços', value: spaces.length },
                 { label: 'Categorias', value: safeSpaceCategories.length },
-                { label: 'Badges', value: Object.keys(badgeLabels).length },
+                { label: 'Badges', value: safeSpaceBadgeKeys.length },
               ].map((stat) => (
                 <div key={stat.label} className="rounded-xl bg-white/10 border border-white/15 px-4 py-3 backdrop-blur-sm">
                   <p className="text-2xl font-bold text-white">{stat.value}</p>
@@ -128,7 +208,7 @@ export default function GuidePage() {
           <div>
             <p className="text-sm font-semibold text-dark-700">MVP do mapa de espaços seguros</p>
             <p className="mt-1 text-xs text-dark-500 leading-relaxed">
-              Esta primeira versão organiza espaços por categoria, badges e regiões. Avaliações comunitárias, denúncias e mapa interativo entram nas próximas etapas, enquanto a curadoria pode ocultar, editar ou incluir novos pontos pelo admin.
+              Esta versão combina 12 badges oficiais, avaliação comunitária, níveis de verificação e filtros avançados para encontrar acolhimento com mais precisão.
             </p>
           </div>
         </div>
@@ -164,6 +244,89 @@ export default function GuidePage() {
               <span className="ml-1 opacity-70">({categoryCounts[filter] || 0})</span>
             </button>
           ))}
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-dark-100 bg-white p-4 md:p-5">
+          <div className="flex flex-col gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-500">Filtros avançados</p>
+              <h2 className="mt-1 text-lg font-semibold text-dark-800">Badges, distância, preço e estrutura</h2>
+            </div>
+            <div className="grid gap-4 lg:grid-cols-[1.2fr_0.9fr_0.9fr]">
+              <div>
+                <p className="mb-2 text-xs font-semibold text-dark-500">Badge</p>
+                <div className="flex flex-wrap gap-2">
+                  {['Todos', ...safeSpaceBadgeKeys].map((badge) => (
+                    <button
+                      key={badge}
+                      type="button"
+                      onClick={() => setActiveBadge(badge)}
+                      className={`rounded-full border px-3 py-2 text-xs font-medium transition-colors ${
+                        activeBadge === badge
+                          ? 'border-secondary-500 bg-secondary-500 text-white'
+                          : 'border-dark-200 bg-white text-dark-600 hover:border-secondary-300'
+                      }`}
+                    >
+                      {badge === 'Todos' ? 'Todos' : badgeLabels[badge]}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="mb-2 text-xs font-semibold text-dark-500">Distância</p>
+                <div className="flex flex-wrap gap-2">
+                  {distanceFilters.map((distance) => (
+                    <button
+                      key={distance.value}
+                      type="button"
+                      onClick={() => setMaxDistance(distance.value)}
+                      className={`rounded-full border px-3 py-2 text-xs font-medium ${
+                        maxDistance === distance.value
+                          ? 'border-primary-500 bg-primary-500 text-white'
+                          : 'border-dark-200 bg-white text-dark-600'
+                      }`}
+                    >
+                      até {distance.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="mb-2 text-xs font-semibold text-dark-500">Preço</p>
+                <div className="flex flex-wrap gap-2">
+                  {priceFilters.map((price) => (
+                    <button
+                      key={price}
+                      type="button"
+                      onClick={() => setPriceFilter(price)}
+                      className={`rounded-full border px-3 py-2 text-xs font-medium ${
+                        priceFilter === price ? 'border-dark-800 bg-dark-800 text-white' : 'border-dark-200 bg-white text-dark-600'
+                      }`}
+                    >
+                      {price}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {[
+                { label: 'Acessibilidade', value: needsAccessibility, set: setNeedsAccessibility },
+                { label: 'Wi-Fi disponível', value: needsWifi, set: setNeedsWifi },
+                { label: 'Aberto agora', value: openNowOnly, set: setOpenNowOnly },
+              ].map((filter) => (
+                <label key={filter.label} className="inline-flex items-center gap-2 rounded-full border border-dark-200 px-3 py-2 text-xs font-medium text-dark-600">
+                  <input
+                    type="checkbox"
+                    checked={filter.value}
+                    onChange={(event) => filter.set(event.target.checked)}
+                    className="h-4 w-4 accent-primary-500"
+                  />
+                  {filter.label}
+                </label>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="mt-8">
@@ -222,10 +385,20 @@ export default function GuidePage() {
                     </div>
                     {space.rating > 0 && (
                       <div className="text-right shrink-0">
-                        <p className="text-sm font-bold text-dark-700">{space.rating.toFixed(1)}</p>
-                        <p className="text-[11px] text-dark-400">{space.reviews} aval.</p>
+                        <p className="text-sm font-bold text-dark-700">{scoreFor(space).rating.toFixed(1)} ⭐</p>
+                        <p className="text-[11px] text-dark-400">{scoreFor(space).reviews} aval.</p>
                       </div>
                     )}
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                    <span className="rounded-full bg-amber-50 px-2.5 py-1 font-semibold text-amber-700">
+                      Nível {space.verificationLevel || 1}: {verificationLabels[space.verificationLevel || 1]}
+                    </span>
+                    {space.distanceKm !== undefined && (
+                      <span className="rounded-full bg-dark-50 px-2.5 py-1 text-dark-500">{space.distanceKm}km</span>
+                    )}
+                    {space.price && <span className="rounded-full bg-dark-50 px-2.5 py-1 text-dark-500">{space.price}</span>}
+                    {space.openNow && <span className="rounded-full bg-green-50 px-2.5 py-1 text-green-700">Aberto agora</span>}
                   </div>
                   <p className="mt-3 text-sm text-dark-500 leading-relaxed">{space.description}</p>
                   <div className="mt-4 flex flex-wrap gap-2">
@@ -247,6 +420,14 @@ export default function GuidePage() {
                     ))}
                   </div>
                   <div className="mt-5 flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setActiveReviewSlug(activeReviewSlug === space.slug ? null : space.slug)}
+                      className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors"
+                    >
+                      <i className="ri-star-line" aria-hidden="true"></i>
+                      Avaliar
+                    </button>
                     {space.mapUrl && (
                       <a
                         href={space.mapUrl}
@@ -279,6 +460,56 @@ export default function GuidePage() {
                       </a>
                     )}
                   </div>
+                  {activeReviewSlug === space.slug && (
+                    <div className="mt-5 rounded-xl border border-primary-100 bg-primary-50/40 p-4">
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <label className="text-sm font-semibold text-dark-700">
+                          Nota
+                          <select
+                            value={reviewRating}
+                            onChange={(event) => setReviewRating(Number(event.target.value))}
+                            className="ml-2 rounded-lg border border-dark-200 bg-white px-3 py-2 text-sm"
+                          >
+                            {[1, 2, 3, 4, 5].map((rating) => (
+                              <option key={rating} value={rating}>{rating} ⭐</option>
+                            ))}
+                          </select>
+                        </label>
+                        <label className="text-sm font-semibold text-dark-700">
+                          Perfil
+                          <select
+                            value={reviewerTag}
+                            onChange={(event) => setReviewerTag(event.target.value)}
+                            className="ml-2 rounded-lg border border-dark-200 bg-white px-3 py-2 text-sm"
+                          >
+                            {reviewerTags.map((tag) => (
+                              <option key={tag} value={tag}>{tag}</option>
+                            ))}
+                          </select>
+                        </label>
+                      </div>
+                      <div className="mt-4 grid gap-2">
+                        {reviewQuestions.map((question) => (
+                          <label key={question} className="flex items-center justify-between gap-3 rounded-lg bg-white px-3 py-2 text-xs text-dark-600">
+                            <span>{question}</span>
+                            <input
+                              type="checkbox"
+                              checked={reviewAnswers[question]}
+                              onChange={(event) => setReviewAnswers({ ...reviewAnswers, [question]: event.target.checked })}
+                              className="h-4 w-4 accent-primary-500"
+                            />
+                          </label>
+                        ))}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => submitReview(space)}
+                        className="mt-4 w-full rounded-xl bg-dark-800 px-4 py-3 text-sm font-semibold text-white hover:bg-dark-900"
+                      >
+                        Enviar avaliação
+                      </button>
+                    </div>
+                  )}
                 </div>
               </article>
             ))}

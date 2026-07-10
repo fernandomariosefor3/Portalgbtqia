@@ -63,6 +63,14 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
+          <Link
+            to="/sos"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full bg-red-600 text-white hover:bg-red-700 transition-colors whitespace-nowrap"
+          >
+            <i className="ri-alarm-warning-line" aria-hidden="true"></i>
+            SOS
+          </Link>
+
           <button
             className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
               scrolled ? 'text-dark-600 hover:bg-dark-50' : 'text-white/90 hover:bg-white/10'
@@ -132,6 +140,14 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              to="/sos"
+              onClick={() => setMobileOpen(false)}
+              className="px-3 py-3 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-md transition-colors"
+            >
+              <i className="ri-alarm-warning-line mr-2" aria-hidden="true"></i>
+              SOS
+            </Link>
             <hr className="my-2 border-dark-100" />
             {isAdmin && (
               <Link

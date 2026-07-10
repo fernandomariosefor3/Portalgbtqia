@@ -22,6 +22,11 @@ export interface SafeSpaceOverride {
   rating: number;
   reviews: number;
   price?: SafeSpace['price'];
+  verificationLevel?: SafeSpace['verificationLevel'];
+  distanceKm?: number;
+  accessibility?: string[];
+  wifi?: boolean;
+  openNow?: boolean;
   phone?: string;
   website?: string;
   mapUrl?: string;
@@ -82,6 +87,11 @@ function firestorePlaceToSafeSpace(doc: QueryDocumentSnapshot<DocumentData>): Sa
     rating: Number(data.rating ?? 0),
     reviews: Number(data.reviews ?? 0),
     price: data.price,
+    verificationLevel: Number(data.verificationLevel || 1) as SafeSpace['verificationLevel'],
+    distanceKm: Number(data.distanceKm || 0),
+    accessibility: splitList(data.accessibility),
+    wifi: Boolean(data.wifi),
+    openNow: Boolean(data.openNow),
     phone: data.phone,
     website: data.website,
     mapUrl: data.source_url || data.link || data.mapUrl,
@@ -107,6 +117,11 @@ export function applySafeSpaceOverride(space: SafeSpace, override?: Partial<Safe
     rating: typeof override.rating === 'number' ? override.rating : space.rating,
     reviews: typeof override.reviews === 'number' ? override.reviews : space.reviews,
     price: override.price || space.price,
+    verificationLevel: override.verificationLevel || space.verificationLevel,
+    distanceKm: typeof override.distanceKm === 'number' ? override.distanceKm : space.distanceKm,
+    accessibility: override.accessibility?.length ? override.accessibility : space.accessibility,
+    wifi: typeof override.wifi === 'boolean' ? override.wifi : space.wifi,
+    openNow: typeof override.openNow === 'boolean' ? override.openNow : space.openNow,
     phone: override.phone || space.phone,
     website: override.website || space.website,
     mapUrl: override.mapUrl || space.mapUrl,
@@ -129,6 +144,11 @@ export function safeSpaceToOverride(space: SafeSpace): SafeSpaceOverride {
     rating: space.rating,
     reviews: space.reviews,
     price: space.price,
+    verificationLevel: space.verificationLevel,
+    distanceKm: space.distanceKm,
+    accessibility: space.accessibility,
+    wifi: space.wifi,
+    openNow: space.openNow,
     phone: space.phone,
     website: space.website,
     mapUrl: space.mapUrl,

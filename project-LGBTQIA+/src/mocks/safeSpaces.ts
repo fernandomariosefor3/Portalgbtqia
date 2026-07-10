@@ -24,6 +24,11 @@ export interface SafeSpace {
   rating: number;
   reviews: number;
   price?: '$' | '$$' | '$$$' | '$$$$';
+  verificationLevel?: 1 | 2 | 3 | 4;
+  distanceKm?: number;
+  accessibility?: string[];
+  wifi?: boolean;
+  openNow?: boolean;
   phone?: string;
   website?: string;
   mapUrl?: string;
@@ -44,17 +49,27 @@ export const safeSpaceCategories: SafeSpaceCategory[] = [
 ];
 
 export const badgeLabels: Record<string, string> = {
-  geral: 'Espaço seguro',
-  gay: 'Gay friendly',
-  trans: 'Seguro para pessoas trans',
-  mental: 'Saúde mental',
-  drag: 'Drag friendly',
-  familia: 'Seguro para famílias',
-  acessivel: 'Acessível',
-  precos: 'Preços acessíveis',
-  comunidade: 'Comunidade',
-  cultura: 'Cultura',
-  sus: 'SUS',
+  geral: '🏳️‍🌈 Espaço seguro geral',
+  trans: '🏳️‍⚧️ Seguro p/ trans',
+  lesbicas: '👩‍🦰 Friendly p/ lésbicas',
+  banheiro_neutro: '⚧️ Banheiro neutral',
+  gay: '🧑‍🦱 Friendly p/ gays',
+  casais: '🤝 Friendly p/ casais',
+  bissexuais: '♠️ Friendly p/ bissexuais',
+  familia: '👨‍👦 Seguro p/ famílias',
+  mental: '🧠 Acolhedor saúde mental',
+  acessivel: '🦥 Acessível (PCD)',
+  precos: '💰 Preços acessíveis',
+  recomendado: '🌟 Recomendado Portal',
+};
+
+export const safeSpaceBadgeKeys = Object.keys(badgeLabels);
+
+export const verificationLabels: Record<1 | 2 | 3 | 4, string> = {
+  1: 'Autodeclaração',
+  2: '5+ avaliações positivas',
+  3: 'Equipe/ONG parceira',
+  4: 'Certificação oficial',
 };
 
 export const safeSpaceCategoryImages: Record<SafeSpaceCategory, string> = {
@@ -87,6 +102,11 @@ export const staticSafeSpaces: SafeSpace[] = [
     rating: 4.7,
     reviews: 23,
     price: '$$',
+    verificationLevel: 2,
+    distanceKm: 1.4,
+    accessibility: ['rampa'],
+    wifi: true,
+    openNow: true,
     image: safeSpaceCategoryImages['Bar & Entretenimento'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Gandaia%20Bar%20Club%20Fortaleza',
     status: 'published',
@@ -103,10 +123,14 @@ export const staticSafeSpaces: SafeSpace[] = [
     description:
       'Balada pop e eletrônica na Praia de Iracema. DJs residentes, festas temáticas de funk e pop nacional. Público jovem e vibrante que movimenta os finais de semana.',
     tags: ['Noite', 'Pop', 'Funk'],
-    badges: ['geral', 'gay', 'precos'],
+    badges: ['geral', 'gay', 'precos', 'casais'],
     rating: 4.5,
     reviews: 18,
     price: '$$',
+    verificationLevel: 2,
+    distanceKm: 1.6,
+    wifi: true,
+    openNow: false,
     image: safeSpaceCategoryImages['Bar & Entretenimento'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Yall%20Club%20Fortaleza',
     status: 'published',
@@ -123,10 +147,13 @@ export const staticSafeSpaces: SafeSpace[] = [
     description:
       "Projeto 'Divino Domingos' mantém viva a cultura drag e transformista tradicional de Fortaleza. Atrai público de diversas gerações aos domingos em ambiente acolhedor.",
     tags: ['Domingo', 'Drag', 'Cultura'],
-    badges: ['geral', 'gay', 'drag', 'cultura'],
+    badges: ['geral', 'gay', 'lesbicas', 'precos'],
     rating: 4.6,
     reviews: 16,
     price: '$',
+    verificationLevel: 2,
+    distanceKm: 3.1,
+    openNow: true,
     image: safeSpaceCategoryImages['Bar & Entretenimento'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Morenos%20Bar%20Benfica%20Fortaleza',
     status: 'published',
@@ -143,9 +170,14 @@ export const staticSafeSpaces: SafeSpace[] = [
     description:
       'Maior complexo cultural da cidade. Ponto histórico de encontro e resistência da comunidade queer. Abriga museus, teatros e o Hub Cultural Porto Dragão.',
     tags: ['Cultura', 'Arte', 'Museu'],
-    badges: ['geral', 'cultura', 'acessivel'],
+    badges: ['geral', 'casais', 'familia', 'acessivel', 'recomendado'],
     rating: 4.8,
     reviews: 41,
+    verificationLevel: 3,
+    distanceKm: 1.2,
+    accessibility: ['rampa', 'elevador'],
+    wifi: true,
+    openNow: true,
     image: safeSpaceCategoryImages['Centro Cultural'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Centro%20Dragao%20do%20Mar%20Fortaleza',
     status: 'published',
@@ -162,9 +194,14 @@ export const staticSafeSpaces: SafeSpace[] = [
     description:
       'República de acolhimento e centro cultural focado na comunidade LGBTQIAP+. Promove feiras, eventos artísticos e atividades voltadas para cidadania, inclusão e convivência.',
     tags: ['Acolhimento', 'Cultura', 'Comunidade'],
-    badges: ['geral', 'comunidade', 'familia'],
+    badges: ['geral', 'familia', 'mental', 'lesbicas'],
     rating: 4.9,
     reviews: 27,
+    verificationLevel: 3,
+    distanceKm: 2.8,
+    accessibility: ['rampa'],
+    wifi: true,
+    openNow: true,
     image: safeSpaceCategoryImages['ONG & Acolhimento'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Outra%20Casa%20Coletiva%20Fortaleza',
     status: 'published',
@@ -181,9 +218,13 @@ export const staticSafeSpaces: SafeSpace[] = [
     description:
       'Serviço Ambulatorial Transdisciplinar para Pessoas Transgênero. Atendimento multiprofissional, hormonioterapia, exames e apoio social pelo SUS.',
     tags: ['SUS', 'Trans', 'Hormonização'],
-    badges: ['trans', 'sus', 'mental'],
+    badges: ['trans', 'mental', 'banheiro_neutro', 'recomendado'],
     rating: 4.4,
     reviews: 12,
+    verificationLevel: 3,
+    distanceKm: 8.7,
+    accessibility: ['rampa', 'elevador'],
+    openNow: true,
     image: safeSpaceCategoryImages.Saúde,
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Hospital%20Universitario%20do%20Ceara%20Sertrans',
     status: 'published',
@@ -200,9 +241,13 @@ export const staticSafeSpaces: SafeSpace[] = [
     description:
       'Serviço municipal de referência para proteção, orientação e encaminhamento da população LGBTQIA+ em situações de violência, violações ou omissões de direitos.',
     tags: ['Direitos', 'Acolhimento', 'Denúncia'],
-    badges: ['geral', 'trans', 'comunidade'],
+    badges: ['geral', 'trans', 'mental', 'recomendado'],
     rating: 4.8,
     reviews: 0,
+    verificationLevel: 3,
+    distanceKm: 2.2,
+    accessibility: ['rampa'],
+    openNow: true,
     image: safeSpaceCategoryImages['Serviços Públicos'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Centro%20de%20Refer%C3%AAncia%20LGBT%20Jana%C3%ADna%20Dutra%20Fortaleza',
     status: 'published',
@@ -219,9 +264,12 @@ export const staticSafeSpaces: SafeSpace[] = [
     description:
       'Organização histórica do movimento LGBTQIA+ cearense, associada à defesa de direitos, prevenção, cidadania e articulação comunitária.',
     tags: ['ONG', 'Direitos', 'História LGBTQIA+'],
-    badges: ['geral', 'comunidade', 'cultura'],
+    badges: ['geral', 'bissexuais', 'casais', 'precos'],
     rating: 4.8,
     reviews: 0,
+    verificationLevel: 3,
+    distanceKm: 2.4,
+    wifi: true,
     image: safeSpaceCategoryImages['ONG & Acolhimento'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Grupo%20de%20Apoio%20Asa%20Branca%20Fortaleza',
     status: 'published',
@@ -238,9 +286,13 @@ export const staticSafeSpaces: SafeSpace[] = [
     description:
       'Marco histórico da boemia da Praia de Iracema e ponto cultural importante do circuito turístico e afetivo da cidade.',
     tags: ['Praia de Iracema', 'Boemia', 'Cultura'],
-    badges: ['cultura', 'acessivel'],
+    badges: ['geral', 'casais', 'familia', 'acessivel'],
     rating: 4.4,
     reviews: 0,
+    verificationLevel: 1,
+    distanceKm: 1.8,
+    accessibility: ['rampa'],
+    openNow: true,
     image: safeSpaceCategoryImages['Centro Cultural'],
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Estoril%20Praia%20de%20Iracema%20Fortaleza',
     status: 'published',
@@ -257,9 +309,12 @@ export const staticSafeSpaces: SafeSpace[] = [
     description:
       'Ponto turístico e de convivência da Praia de Iracema, útil como referência para encontros, passeios e circulação no circuito cultural próximo ao Dragão do Mar.',
     tags: ['Ponto de encontro', 'Praia de Iracema', 'Turismo'],
-    badges: ['cultura', 'precos'],
+    badges: ['geral', 'casais', 'precos'],
     rating: 4.3,
     reviews: 0,
+    verificationLevel: 1,
+    distanceKm: 1.9,
+    openNow: true,
     image: safeSpaceCategoryImages.Hospedagem,
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ponte%20dos%20Ingleses%20Fortaleza',
     status: 'published',

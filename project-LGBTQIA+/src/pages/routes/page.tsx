@@ -1,8 +1,34 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { queerRouteTypes, type RoutePlace } from '@/mocks/queerRoutes';
 import { useQueerRoutes } from '@/lib/useQueerRoutes';
 
 const filters = ['Todos', ...queerRouteTypes] as const;
+const routeFallbackImage = `${import.meta.env.BASE_URL}guide/tourism.png`;
+
+function RouteImage({
+  src,
+  alt,
+  className,
+}: {
+  src?: string;
+  alt: string;
+  className: string;
+}) {
+  const [currentSrc, setCurrentSrc] = useState(src || routeFallbackImage);
+
+  useEffect(() => {
+    setCurrentSrc(src || routeFallbackImage);
+  }, [src]);
+
+  return (
+    <img
+      src={currentSrc}
+      alt={alt}
+      className={className}
+      onError={() => setCurrentSrc(routeFallbackImage)}
+    />
+  );
+}
 
 function safetyLabel(level: number) {
   if (level >= 5) return 'Muito seguro';
@@ -79,9 +105,12 @@ export default function RoutesPage() {
       <section className="relative w-full min-h-[520px] px-4 md:px-6 lg:px-10 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src={featuredRoute?.image || 'https://readdy.ai/api/search-image?query=northeast%20brazil%20travel%20coast%20warm%20sunset%20editorial%20photography&width=1600&height=800&seq=routes-hero-v2&orientation=landscape'}
+            src={featuredRoute?.image || routeFallbackImage}
             alt=""
             className="w-full h-full object-cover object-top"
+            onError={(event) => {
+              event.currentTarget.src = routeFallbackImage;
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/75" />
         </div>
@@ -204,7 +233,7 @@ export default function RoutesPage() {
                 }`}
               >
                 <div className="h-48 bg-dark-50 overflow-hidden">
-                  <img src={route.image} alt={route.title} className="w-full h-full object-cover object-top" />
+                  <RouteImage src={route.image} alt={route.title} className="w-full h-full object-cover object-top" />
                 </div>
                 <div className="p-5">
                   <div className="flex items-center justify-between gap-3 text-xs mb-3">
@@ -249,7 +278,7 @@ export default function RoutesPage() {
           <article className="rounded-2xl border border-dark-100 bg-white overflow-hidden">
             <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
               <div className="relative min-h-[320px] bg-dark-50">
-                <img src={featuredRoute.image} alt={featuredRoute.title} className="absolute inset-0 w-full h-full object-cover object-top" />
+                <RouteImage src={featuredRoute.image} alt={featuredRoute.title} className="absolute inset-0 w-full h-full object-cover object-top" />
               </div>
               <div className="p-5 md:p-8">
                 <div className="flex flex-wrap gap-2 mb-4">

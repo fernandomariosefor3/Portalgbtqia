@@ -58,6 +58,13 @@ export const queerRouteTypes: QueerRouteType[] = [
   'Fins de semana',
 ];
 
+const routeImages = {
+  beach: `${import.meta.env.BASE_URL}guide/tourism.png`,
+  urban: `${import.meta.env.BASE_URL}guide/nightlife.png`,
+  culture: `${import.meta.env.BASE_URL}guide/culture.png`,
+  community: `${import.meta.env.BASE_URL}guide/community.png`,
+};
+
 export const staticQueerRoutes: QueerRoute[] = [
   {
     id: 'route-jericoacoara',
@@ -195,8 +202,7 @@ export const staticQueerRoutes: QueerRoute[] = [
       },
     ],
     usefulContacts: ['190 - Polícia Militar', '192 - SAMU', 'Disque 100', 'CVV 188', 'Posto de Saúde de Jijoca/Jeri'],
-    image:
-      'https://readdy.ai/api/search-image?query=jericoacoara%20ceara%20brazil%20dunes%20beach%20sunset%20warm%20travel%20editorial%20photography%20inclusive%20tourism&width=1200&height=650&seq=route-jeri-queer&orientation=landscape',
+    image: routeImages.beach,
     tags: ['JeriQueer', 'NordesteGay', 'JericoacoaraLGBT', 'praia', 'Ceará'],
     status: 'published',
   },
@@ -240,8 +246,7 @@ export const staticQueerRoutes: QueerRoute[] = [
       'Compartilhe sua localização com alguém de confiança.',
     ],
     usefulContacts: ['190 - Polícia Militar', '192 - SAMU', 'Disque 100', 'CVV 188'],
-    image:
-      'https://readdy.ai/api/search-image?query=fortaleza%20brazil%20coastline%20praia%20de%20iracema%20sunset%20urban%20beach%20warm%20golden%20light%20editorial%20travel%20photography&width=1200&height=650&seq=route-fortaleza&orientation=landscape',
+    image: routeImages.urban,
     tags: ['Fortaleza', 'cultura', 'praia', 'noite', 'Ceará'],
     status: 'published',
   },
@@ -291,8 +296,7 @@ export const staticQueerRoutes: QueerRoute[] = [
       'Consulte eventos locais antes de viajar.',
     ],
     usefulContacts: ['190 - Polícia Militar', '192 - SAMU', 'Disque 100', 'CVV 188'],
-    image:
-      'https://readdy.ai/api/search-image?query=salvador%20bahia%20pelourinho%20colorful%20colonial%20street%20warm%20sunlight%20travel%20editorial%20photography%20brazil&width=1200&height=650&seq=route-salvador&orientation=landscape',
+    image: routeImages.culture,
     tags: ['Salvador', 'Bahia', 'cultura', 'história', 'música'],
     status: 'published',
   },
@@ -336,8 +340,7 @@ export const staticQueerRoutes: QueerRoute[] = [
       'Mantenha documentos e celular protegidos em áreas turísticas.',
     ],
     usefulContacts: ['190 - Polícia Militar', '192 - SAMU', 'Disque 100', 'CVV 188'],
-    image:
-      'https://readdy.ai/api/search-image?query=recife%20brazil%20bridges%20historic%20center%20marco%20zero%20warm%20sunset%20urban%20travel%20editorial%20photography&width=1200&height=650&seq=route-recife&orientation=landscape',
+    image: routeImages.community,
     tags: ['Recife', 'Pernambuco', 'cinema', 'urbano', 'cultura'],
     status: 'published',
   },

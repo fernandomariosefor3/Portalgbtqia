@@ -10,6 +10,7 @@ import {
   type SafeSpace,
 } from '@/mocks/safeSpaces';
 import { useSafeSpaces } from '@/lib/useSafeSpaces';
+import { createSafeSpaceReview, reportSafeSpace, verifySafeSpace } from '@/lib/safeSpaceCommunity';
 
 const filters = ['Todos', ...safeSpaceCategories] as const;
 const priceFilters = ['Todos', '$', '$$', '$$$', '$$$$'] as const;
@@ -104,6 +105,12 @@ export default function GuidePage() {
     Object.fromEntries(reviewQuestions.map((question) => [question, true])),
   );
   const [localScores, setLocalScores] = useState<Record<string, { rating: number; reviews: number }>>({});
+  const [selectedMapSlug, setSelectedMapSlug] = useState<string | null>(null);
+  const [activeReportSlug, setActiveReportSlug] = useState<string | null>(null);
+  const [reportReason, setReportReason] = useState('Informação desatualizada');
+  const [reportDetails, setReportDetails] = useState('');
+  const [communityMessage, setCommunityMessage] = useState<{ success: boolean; text: string } | null>(null);
+  const [communityBusy, setCommunityBusy] = useState(false);
 
   const visibleSpaces = useMemo(() => {
     const search = query.trim().toLowerCase();
@@ -150,7 +157,17 @@ export default function GuidePage() {
     return localScores[space.slug] || { rating: space.rating, reviews: space.reviews };
   }
 
-  function submitReview(space: SafeSpace) {
+  async function submitReview(space: SafeSpace) {
+    setCommunityBusy(true);
+    setCommunityMessage(null);
+    try {
+      await createSafeSpaceReview({
+        spaceSlug: space.slug,
+        spaceName: space.name,
+        rating: reviewRating,
+        reviewerTag,
+        answers: reviewAnswers,
+      });
     const current = scoreFor(space);
     const nextReviews = current.reviews + 1;
     const nextRating = (current.rating * current.reviews + reviewRating) / nextReviews;
@@ -161,7 +178,55 @@ export default function GuidePage() {
     setActiveReviewSlug(null);
     setReviewRating(5);
     setReviewerTag(reviewerTags[0]);
+      setCommunityMessage({ success: true, text: 'Avaliação enviada para moderação.' });
+    } catch (error) {
+      setCommunityMessage({ success: false, text: error instanceof Error ? error.message : 'Não foi possível enviar.' });
+    } finally {
+      setCommunityBusy(false);
+    }
   }
+
+  async function submitVerification(space: SafeSpace) {
+    setCommunityBusy(true);
+    setCommunityMessage(null);
+    try {
+      await verifySafeSpace(space.slug, space.name);
+      setCommunityMessage({ success: true, text: 'Verificação comunitária registrada.' });
+    } catch (error) {
+      setCommunityMessage({ success: false, text: error instanceof Error ? error.message : 'Não foi possível verificar.' });
+    } finally {
+      setCommunityBusy(false);
+    }
+  }
+
+  async function submitReport(space: SafeSpace) {
+    if (reportDetails.trim().length < 10) {
+      setCommunityMessage({ success: false, text: 'Explique o reporte com pelo menos 10 caracteres.' });
+      return;
+    }
+    setCommunityBusy(true);
+    setCommunityMessage(null);
+    try {
+      await reportSafeSpace({
+        spaceSlug: space.slug,
+        spaceName: space.name,
+        reason: reportReason,
+        details: reportDetails.trim(),
+      });
+      setActiveReportSlug(null);
+      setReportDetails('');
+      setCommunityMessage({ success: true, text: 'Reporte enviado com segurança para a curadoria.' });
+    } catch (error) {
+      setCommunityMessage({ success: false, text: error instanceof Error ? error.message : 'Não foi possível reportar.' });
+    } finally {
+      setCommunityBusy(false);
+    }
+  }
+
+  const selectedMapSpace = spaces.find((space) => space.slug === selectedMapSlug) || visibleSpaces[0];
+  const mapQuery = selectedMapSpace
+    ? encodeURIComponent(selectedMapSpace.name + ', ' + selectedMapSpace.address + ', ' + selectedMapSpace.city)
+    : encodeURIComponent('Fortaleza, CE');
 
   return (
     <main className="w-full bg-white pt-16 md:pt-20">
@@ -202,6 +267,11 @@ export default function GuidePage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 pt-10 pb-4">
+        {communityMessage && (
+          <div role="status" className={'mb-5 rounded-xl border p-4 text-sm ' + (communityMessage.success ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : 'border-rose-200 bg-rose-50 text-rose-700')}>
+            {communityMessage.text}
+          </div>
+        )}
         <div className="rounded-xl border border-primary-100 bg-primary-50/50 p-4 md:p-5 flex items-start gap-3 mb-6">
           <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-primary-100 text-primary-500 shrink-0">
             <i className="ri-shield-check-line text-lg" aria-hidden="true"></i>
@@ -359,6 +429,40 @@ export default function GuidePage() {
             ))}
           </div>
         </div>
+
+        <div className="mt-8 overflow-hidden rounded-2xl border border-dark-100 bg-white">
+          <div className="grid lg:grid-cols-[360px_1fr]">
+            <div className="max-h-[520px] overflow-y-auto border-b border-dark-100 p-4 lg:border-b-0 lg:border-r">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-500">Mapa colaborativo</p>
+              <h2 className="mt-1 text-xl font-semibold text-dark-800">Espaços seguros próximos</h2>
+              <p className="mt-2 text-xs leading-relaxed text-dark-500">Selecione um ponto para visualizar no mapa e conferir sua verificação comunitária.</p>
+              <div className="mt-4 grid gap-2">
+                {visibleSpaces.map((space) => (
+                  <button
+                    key={space.slug}
+                    type="button"
+                    onClick={() => setSelectedMapSlug(space.slug)}
+                    className={'rounded-xl border p-3 text-left transition-colors ' + (selectedMapSpace?.slug === space.slug ? 'border-primary-300 bg-primary-50' : 'border-dark-100 hover:border-primary-200')}
+                  >
+                    <span className="block text-sm font-semibold text-dark-800">{space.name}</span>
+                    <span className="mt-1 block text-xs text-dark-500">{space.category} · {space.address}</span>
+                    <span className="mt-2 block text-[11px] font-semibold text-amber-700">Nível {space.verificationLevel || 1}: {verificationLabels[space.verificationLevel || 1]}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="relative min-h-[420px] bg-dark-50">
+              <iframe
+                key={mapQuery}
+                title={selectedMapSpace ? 'Mapa de ' + selectedMapSpace.name : 'Mapa de espaços seguros'}
+                src={'https://www.google.com/maps?q=' + mapQuery + '&output=embed'}
+                className="absolute inset-0 h-full w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 py-8 md:py-12">
@@ -428,6 +532,23 @@ export default function GuidePage() {
                     >
                       <i className="ri-star-line" aria-hidden="true"></i>
                       Avaliar
+                    </button>
+                    <button
+                      type="button"
+                      disabled={communityBusy}
+                      onClick={() => submitVerification(space)}
+                      className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-full border border-emerald-200 text-emerald-700 hover:bg-emerald-50 disabled:opacity-50"
+                    >
+                      <i className="ri-shield-check-line" aria-hidden="true"></i>
+                      Confirmar local
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveReportSlug(activeReportSlug === space.slug ? null : space.slug)}
+                      className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-full border border-rose-200 text-rose-700 hover:bg-rose-50"
+                    >
+                      <i className="ri-flag-line" aria-hidden="true"></i>
+                      Reportar
                     </button>
                     {space.mapUrl && (
                       <a
@@ -505,9 +626,30 @@ export default function GuidePage() {
                       <button
                         type="button"
                         onClick={() => submitReview(space)}
+                        disabled={communityBusy}
                         className="mt-4 w-full rounded-xl bg-dark-800 px-4 py-3 text-sm font-semibold text-white hover:bg-dark-900"
                       >
                         Enviar avaliação
+                      </button>
+                    </div>
+                  )}
+                  {activeReportSlug === space.slug && (
+                    <div className="mt-5 rounded-xl border border-rose-100 bg-rose-50/50 p-4">
+                      <label className="block text-sm font-semibold text-dark-700">
+                        Motivo
+                        <select value={reportReason} onChange={(event) => setReportReason(event.target.value)} className="mt-2 w-full rounded-lg border border-dark-200 bg-white px-3 py-2 text-sm">
+                          <option>Informação desatualizada</option>
+                          <option>Relato de discriminação</option>
+                          <option>Local fechado ou inexistente</option>
+                          <option>Conteúdo inadequado</option>
+                        </select>
+                      </label>
+                      <label className="mt-3 block text-sm font-semibold text-dark-700">
+                        Detalhes
+                        <textarea value={reportDetails} onChange={(event) => setReportDetails(event.target.value)} maxLength={1000} rows={4} className="mt-2 w-full resize-y rounded-lg border border-dark-200 bg-white px-3 py-2 text-sm" placeholder="Conte o que aconteceu sem incluir dados pessoais sensíveis." />
+                      </label>
+                      <button type="button" disabled={communityBusy} onClick={() => submitReport(space)} className="mt-3 w-full rounded-xl bg-rose-600 px-4 py-3 text-sm font-semibold text-white hover:bg-rose-700 disabled:opacity-50">
+                        Enviar reporte
                       </button>
                     </div>
                   )}

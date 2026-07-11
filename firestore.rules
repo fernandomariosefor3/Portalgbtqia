@@ -66,6 +66,105 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // Espaços cadastrados pelo admin e conteúdo editorial do guia.
+    match /places/{placeId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /safe_space_overrides/{spaceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Indicações públicas aguardam análise; nunca ficam públicas diretamente.
+    match /safe_space_suggestions/{suggestionId} {
+      allow create: if request.resource.data.keys().hasOnly([
+          'name', 'category', 'address', 'city', 'state', 'description',
+          'website', 'contactName', 'contactEmail', 'status', 'createdAt'
+        ])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 3
+        && request.resource.data.name.size() <= 120
+        && request.resource.data.category is string
+        && request.resource.data.address is string
+        && request.resource.data.address.size() >= 5
+        && request.resource.data.address.size() <= 200
+        && request.resource.data.city is string
+        && request.resource.data.city.size() >= 2
+        && request.resource.data.city.size() <= 80
+        && request.resource.data.state is string
+        && request.resource.data.state.size() == 2
+        && request.resource.data.description is string
+        && request.resource.data.description.size() >= 10
+        && request.resource.data.description.size() <= 1000
+        && request.resource.data.website is string
+        && request.resource.data.website.size() <= 300
+        && request.resource.data.contactName is string
+        && request.resource.data.contactName.size() <= 100
+        && request.resource.data.contactEmail is string
+        && request.resource.data.contactEmail.size() >= 5
+        && request.resource.data.contactEmail.size() <= 200
+        && request.resource.data.status == 'pending'
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Avaliações são autenticadas e passam pela curadoria.
+    match /safe_space_reviews/{reviewId} {
+      allow create: if isSignedIn()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.rating is int
+        && request.resource.data.rating >= 1
+        && request.resource.data.rating <= 5
+        && request.resource.data.status == 'pending'
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Uma confirmação por usuário e por local.
+    match /safe_space_verifications/{verificationId} {
+      allow create, update: if isSignedIn()
+        && request.resource.data.userId == request.auth.uid
+        && verificationId == request.resource.data.spaceSlug + '_' + request.auth.uid
+        && request.resource.data.verified == true
+        && request.resource.data.createdAt == request.time;
+      allow read, delete: if isAdmin();
+    }
+
+    // Reportes ficam privados para proteger quem denunciou.
+    match /safe_space_reports/{reportId} {
+      allow create: if isSignedIn()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.details is string
+        && request.resource.data.details.size() >= 10
+        && request.resource.data.details.size() <= 1000
+        && request.resource.data.status == 'pending'
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Conteúdo base público com edição restrita ao admin.
+    match /culture_overrides/{documentId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /legal_guide_overrides/{documentId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /queer_route_overrides/{documentId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /site_sections/{documentId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
     // ========== FORUM TOPICS ==========
     match /forum_topics/{topicId} {
       allow read: if true;
@@ -111,6 +210,11 @@ service cloud.firestore {
     match /columnists/{columnistId} {
       allow read: if true;
       allow write: if isAdmin();
+    }
+
+    // Qualquer coleção não declarada acima permanece bloqueada.
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }

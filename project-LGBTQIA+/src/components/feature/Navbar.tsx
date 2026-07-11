@@ -1,26 +1,29 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth, signOut } from '../../lib/auth';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from './LanguageSelector';
 
 const navLinks = [
-  { label: 'Artigos', path: '/artigos' },
-  { label: 'Cultura', path: '/cultura' },
-  { label: 'Eventos', path: '/eventos' },
-  { label: 'Saúde', path: '/saude' },
-  { label: 'Família', path: '/familia' },
-  { label: 'Guia CE', path: '/guia-fortaleza' },
-  { label: 'Direitos', path: '/direitos' },
-  { label: 'Roteiros', path: '/roteiros' },
-  { label: 'Paradas', path: '/paradas' },
-  { label: 'Educação', path: '/educacao' },
-  { label: 'Sobre', path: '/sobre' },
-  { label: 'Comunidade', path: '/comunidade' },
+  { labelKey: 'nav.articles', path: '/artigos' },
+  { labelKey: 'nav.culture', path: '/cultura' },
+  { labelKey: 'nav.events', path: '/eventos' },
+  { labelKey: 'nav.health', path: '/saude' },
+  { labelKey: 'nav.family', path: '/familia' },
+  { labelKey: 'nav.guide', path: '/guia-fortaleza' },
+  { labelKey: 'nav.rights', path: '/direitos' },
+  { labelKey: 'nav.routes', path: '/roteiros' },
+  { labelKey: 'nav.parades', path: '/paradas' },
+  { labelKey: 'nav.education', path: '/educacao' },
+  { labelKey: 'nav.about', path: '/sobre' },
+  { labelKey: 'nav.community', path: '/comunidade' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, isAdmin } = useAuth();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -57,12 +60,15 @@ export default function Navbar() {
                   : 'text-white/90 hover:text-white hover:bg-white/10'
               }`}
             >
-              {link.label}
+              {t(link.labelKey)}
             </Link>
           ))}
         </div>
 
         <div className="hidden md:flex items-center gap-3">
+          <div className={scrolled ? 'text-dark-600' : 'text-white'}>
+            <LanguageSelector />
+          </div>
           <Link
             to="/sos"
             className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full bg-red-600 text-white hover:bg-red-700 transition-colors whitespace-nowrap"
@@ -75,7 +81,7 @@ export default function Navbar() {
             className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
               scrolled ? 'text-dark-600 hover:bg-dark-50' : 'text-white/90 hover:bg-white/10'
             }`}
-            aria-label="Buscar"
+            aria-label={t('nav.search')}
           >
             <i className="ri-search-line text-lg" aria-hidden="true"></i>
           </button>
@@ -94,7 +100,7 @@ export default function Navbar() {
                   scrolled ? 'text-dark-600 hover:bg-dark-50' : 'text-white/80 hover:bg-white/10'
                 }`}
               >
-                Sair
+                {t('nav.logout')}
               </button>
             </div>
           ) : user ? (
@@ -104,14 +110,14 @@ export default function Navbar() {
                 scrolled ? 'text-dark-600 hover:bg-dark-50 border border-dark-200' : 'text-white/80 hover:bg-white/10 border border-white/20'
               }`}
             >
-              Sair
+              {t('nav.logout')}
             </button>
           ) : (
             <Link
               to="/login"
               className="px-5 py-2 text-sm font-medium rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap"
             >
-              Entrar
+              {t('nav.login')}
             </Link>
           )}
         </div>
@@ -121,7 +127,7 @@ export default function Navbar() {
             scrolled ? 'text-dark-700' : 'text-white'
           }`}
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Menu"
+          aria-label={t('nav.menu')}
         >
           <i className={mobileOpen ? 'ri-close-line text-2xl' : 'ri-menu-line text-2xl'}></i>
         </button>
@@ -137,9 +143,12 @@ export default function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className="px-3 py-3 text-sm font-medium text-dark-600 hover:text-primary-400 hover:bg-primary-50 rounded-md transition-colors"
               >
-                {link.label}
+                {t(link.labelKey)}
               </Link>
             ))}
+            <div className="px-3 py-2 text-dark-600">
+              <LanguageSelector compact />
+            </div>
             <Link
               to="/sos"
               onClick={() => setMobileOpen(false)}
@@ -163,7 +172,7 @@ export default function Navbar() {
                 onClick={() => { signOut(); setMobileOpen(false); }}
                 className="px-3 py-3 text-sm font-medium text-left text-dark-600 hover:bg-dark-50 rounded-md transition-colors"
               >
-                Sair
+                {t('nav.logout')}
               </button>
             ) : (
               <Link
@@ -171,7 +180,7 @@ export default function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className="px-3 py-3 text-sm font-medium text-left text-primary-500 hover:bg-primary-50 rounded-md transition-colors"
               >
-                Entrar
+                {t('nav.login')}
               </Link>
             )}
           </div>

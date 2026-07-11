@@ -181,18 +181,54 @@ service cloud.firestore {
       allow delete: if isOwner(resource.data.author_id) || isAdmin();
     }
 
+    // ========== MENTOR PROFILES ==========
+    match /mentor_profiles/{userId} {
+      allow read: if isSignedIn();
+      allow create, update: if isOwner(userId)
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() >= 2
+        && request.resource.data.displayName.size() <= 80
+        && request.resource.data.bio is string
+        && request.resource.data.bio.size() >= 30
+        && request.resource.data.bio.size() <= 600
+        && request.resource.data.topics is list
+        && request.resource.data.status in ['available', 'paused'];
+      allow delete: if isOwner(userId) || isAdmin();
+    }
+
     // ========== MENTORSHIP ==========
     match /mentorship/{mentorshipId} {
       allow read: if isSignedIn() && 
                   (resource.data.mentor_id == request.auth.uid || 
                    resource.data.mentee_id == request.auth.uid || 
                    isAdmin());
-      allow create: if isSignedIn();
+      allow create: if isSignedIn()
+        && request.resource.data.mentee_id == request.auth.uid
+        && request.resource.data.mentor_id is string
+        && request.resource.data.message is string
+        && request.resource.data.message.size() >= 10
+        && request.resource.data.message.size() <= 600
+        && request.resource.data.status == 'pending'
+        && request.resource.data.createdAt == request.time;
       allow update: if isSignedIn() && 
                    (resource.data.mentor_id == request.auth.uid || 
                     resource.data.mentee_id == request.auth.uid || 
                     isAdmin());
       allow delete: if isAdmin();
+    }
+
+    // Participação privada em grupos temáticos.
+    match /support_group_memberships/{membershipId} {
+      allow create, update: if isSignedIn()
+        && request.resource.data.userId == request.auth.uid
+        && membershipId == request.resource.data.groupId + '_' + request.auth.uid
+        && request.resource.data.status == 'active'
+        && request.resource.data.joinedAt == request.time;
+      allow read: if isSignedIn() &&
+        (resource.data.userId == request.auth.uid || isAdmin());
+      allow delete: if isSignedIn() &&
+        (resource.data.userId == request.auth.uid || isAdmin());
     }
 
     // ========== AGENT LOGS (apenas Admin SDK) ==========

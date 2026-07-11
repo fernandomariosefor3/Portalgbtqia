@@ -1,4 +1,6 @@
 
+import MentorshipHub from './components/MentorshipHub';
+
 const features = [
   {
     icon: "ri-message-3-line",
@@ -10,7 +12,7 @@ const features = [
     icon: "ri-user-heart-line",
     title: "Programa de mentoria",
     desc: "Conecte-se com mentores em áreas como empregabilidade, saúde mental, transição de gênero e empoderamento pessoal.",
-    status: "Em breve",
+    status: "Disponível",
   },
   {
     icon: "ri-chat-smile-2-line",
@@ -77,7 +79,7 @@ export default function CommunityPage() {
       <section className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 py-14 md:py-20">
         <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-playfair font-bold text-dark-800 leading-tight">
-            O que está por vir
+            Comunidade e acolhimento
           </h2>
           <p className="mt-4 text-sm md:text-base text-dark-500 leading-relaxed">
             Estamos construindo ferramentas para conectar, acolher e fortalecer nossa comunidade.
@@ -102,6 +104,8 @@ export default function CommunityPage() {
           ))}
         </div>
       </section>
+
+      <MentorshipHub />
 
       {/* Resources */}
       <section className="w-full bg-dark-50 py-14 md:py-20">

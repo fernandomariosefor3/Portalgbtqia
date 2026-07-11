@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   badgeLabels,
   guideHeroImage,
@@ -533,15 +534,15 @@ export default function GuidePage() {
                 Conhece um espaço seguro que não está aqui?
               </h3>
               <p className="mt-2 text-sm text-dark-500 leading-relaxed">
-                A curadoria pode cadastrar novos lugares no admin e, nas próximas versões, a comunidade poderá avaliar e denunciar informações desatualizadas.
+                Envie os dados do local para a nossa curadoria. Verificamos as informações antes de publicar no guia.
               </p>
             </div>
-            <a
-              href="mailto:contato@portallgbtq.com.br?subject=Indicação de espaço seguro"
+            <Link
+              to="/guia-fortaleza/indicar"
               className="px-6 py-3 text-sm font-semibold rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap shrink-0"
             >
               Indicar espaço
-            </a>
+            </Link>
           </div>
         </div>
       </section>

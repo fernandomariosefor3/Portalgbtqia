@@ -18,6 +18,7 @@ const HealthPage = lazy(() => import("../pages/health/page"));
 const HealthDetailPage = lazy(() => import("../pages/health-detail/page"));
 const FamilyPage = lazy(() => import("../pages/family/page"));
 const GuidePage = lazy(() => import("../pages/guide/page"));
+const SafeSpaceSubmitPage = lazy(() => import("../pages/safe-space-submit/page"));
 const RightsPage = lazy(() => import("../pages/rights/page"));
 const RoutesPage = lazy(() => import("../pages/routes/page"));
 const SosPage = lazy(() => import("../pages/sos/page"));
@@ -50,6 +51,7 @@ const routes: RouteObject[] = [
   { path: "/saude/:slug", element: <HealthDetailPage /> },
   { path: "/familia", element: <FamilyPage /> },
   { path: "/guia-fortaleza", element: <GuidePage /> },
+  { path: "/guia-fortaleza/indicar", element: <SafeSpaceSubmitPage /> },
   { path: "/direitos", element: <RightsPage /> },
   { path: "/roteiros", element: <RoutesPage /> },
   { path: "/sos", element: <SosPage /> },

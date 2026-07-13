@@ -11,8 +11,7 @@ const resources = {
     'nav.parades': 'Paradas', 'nav.education': 'Educação', 'nav.about': 'Sobre', 'nav.community': 'Comunidade',
     'nav.login': 'Entrar', 'nav.logout': 'Sair', 'nav.search': 'Buscar', 'nav.menu': 'Menu',
     'language.label': 'Idioma', 'language.portuguese': 'Português', 'language.spanish': 'Español',
-    'language.english': 'English', 'language.libras': 'Libras',
-    'libras.notice': 'Conteúdo em Libras é publicado somente após tradução e revisão humana em vídeo.',
+    'language.english': 'English',
   }},
   es: { translation: {
     'site.title': 'Portal LGBTQ+ Nordeste — Artículos, Cultura, Salud y Comunidad',
@@ -22,8 +21,7 @@ const resources = {
     'nav.parades': 'Orgullos', 'nav.education': 'Educación', 'nav.about': 'Acerca de', 'nav.community': 'Comunidad',
     'nav.login': 'Ingresar', 'nav.logout': 'Salir', 'nav.search': 'Buscar', 'nav.menu': 'Menú',
     'language.label': 'Idioma', 'language.portuguese': 'Português', 'language.spanish': 'Español',
-    'language.english': 'English', 'language.libras': 'Libras',
-    'libras.notice': 'El contenido en Libras se publica únicamente después de traducción y revisión humana en video.',
+    'language.english': 'English',
   }},
   en: { translation: {
     'site.title': 'LGBTQ+ Northeast Portal — Articles, Culture, Health and Community',
@@ -33,8 +31,7 @@ const resources = {
     'nav.parades': 'Prides', 'nav.education': 'Education', 'nav.about': 'About', 'nav.community': 'Community',
     'nav.login': 'Sign in', 'nav.logout': 'Sign out', 'nav.search': 'Search', 'nav.menu': 'Menu',
     'language.label': 'Language', 'language.portuguese': 'Português', 'language.spanish': 'Español',
-    'language.english': 'English', 'language.libras': 'Libras',
-    'libras.notice': 'Brazilian Sign Language content is published only after human video translation and review.',
+    'language.english': 'English',
   }},
 };
 

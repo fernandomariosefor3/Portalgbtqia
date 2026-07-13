@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const languages = [
@@ -7,67 +6,14 @@ const languages = [
   { code: 'pt-BR', short: 'PT', labelKey: 'language.portuguese' },
 ] as const;
 
-type TranslateWindow = Window & {
-  google?: { translate?: { TranslateElement?: new (options: object, elementId: string) => unknown } };
-  googleTranslateElementInit?: () => void;
-};
-
-function clearTranslationCookies() {
-  const expiredCookie = 'googtrans=; Max-Age=0; path=/; SameSite=Lax';
-  document.cookie = expiredCookie;
-  document.cookie = `${expiredCookie}; domain=${window.location.hostname}`;
-  document.cookie = `${expiredCookie}; domain=.${window.location.hostname}`;
-}
-
-function saveTranslationLanguage(language: string) {
-  clearTranslationCookies();
-  if (language !== 'pt-BR') {
-    document.cookie = `googtrans=/pt/${language}; path=/; SameSite=Lax`;
-  }
-}
-
-function ensurePageTranslator() {
-  const translateWindow = window as TranslateWindow;
-  if (!document.getElementById('google_translate_element')) {
-    const container = document.createElement('div');
-    container.id = 'google_translate_element';
-    container.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(container);
-  }
-
-  translateWindow.googleTranslateElementInit = () => {
-    const TranslateElement = translateWindow.google?.translate?.TranslateElement;
-    if (TranslateElement && !document.querySelector('#google_translate_element select')) {
-      new TranslateElement(
-        { pageLanguage: 'pt', includedLanguages: 'en,es', autoDisplay: false },
-        'google_translate_element',
-      );
-    }
-  };
-
-  if (translateWindow.google?.translate?.TranslateElement) {
-    translateWindow.googleTranslateElementInit();
-  } else if (!document.getElementById('google-translate-script')) {
-    const script = document.createElement('script');
-    script.id = 'google-translate-script';
-    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-    script.async = true;
-    document.head.appendChild(script);
-  }
-}
-
 export default function LanguageSelector({ compact = false }: { compact?: boolean }) {
   const { i18n, t } = useTranslation();
 
-  useEffect(() => {
-    ensurePageTranslator();
-  }, []);
-
-  function changeLanguage(code: string) {
-    saveTranslationLanguage(code);
+  async function changeLanguage(code: string) {
+    await i18n.changeLanguage(code);
     const url = new URL(window.location.href);
     url.searchParams.set('lang', code);
-    window.location.assign(url.toString());
+    window.history.replaceState({}, '', url);
   }
 
   const activeLanguage = i18n.resolvedLanguage || 'pt-BR';

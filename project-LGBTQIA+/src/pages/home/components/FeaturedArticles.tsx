@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useArticles } from '@/lib/useArticles';
 
 export default function FeaturedArticles() {
   const { articles } = useArticles();
+  const { t } = useTranslation();
 
   // Os 3 primeiros como destaque e os 4 seguintes como "últimos".
   const featuredArticles = articles.slice(0, 3);
@@ -14,17 +16,17 @@ export default function FeaturedArticles() {
         <div className="flex items-end justify-between mb-8 md:mb-12">
           <div>
             <span className="text-xs md:text-sm font-medium text-accent-400 uppercase tracking-wider">
-              Destaques editoriais
+              {t('home.featured.eyebrow')}
             </span>
             <h2 className="mt-2 text-2xl md:text-4xl font-playfair font-bold text-dark-700">
-              Artigos em destaque
+              {t('home.featured.title')}
             </h2>
           </div>
           <Link
             to="/artigos"
             className="hidden md:flex items-center gap-2 text-sm font-medium text-primary-500 hover:text-primary-600 transition-colors whitespace-nowrap"
           >
-            Ver todos
+            {t('home.featured.viewAll')}
             <i className="ri-arrow-right-line" aria-hidden="true"></i>
           </Link>
         </div>
@@ -60,7 +62,7 @@ export default function FeaturedArticles() {
                   <div className="flex items-center gap-3">
                     <span className="flex items-center gap-1">
                       <i className="ri-time-line" aria-hidden="true"></i>
-                      {article.readTime} min
+                      {article.readTime} {t('home.featured.readTime')}
                     </span>
                     <span>{article.date}</span>
                   </div>
@@ -103,7 +105,7 @@ export default function FeaturedArticles() {
             to="/artigos"
             className="inline-flex items-center gap-2 text-sm font-medium text-primary-500 hover:text-primary-600 transition-colors whitespace-nowrap"
           >
-            Ver todos os artigos
+            {t('home.featured.viewAllArticles')}
             <i className="ri-arrow-right-line" aria-hidden="true"></i>
           </Link>
         </div>

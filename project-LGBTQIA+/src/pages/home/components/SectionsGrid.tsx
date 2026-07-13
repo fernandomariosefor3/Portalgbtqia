@@ -1,18 +1,25 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { portalSections } from '@/mocks/sections';
 
+const sectionNavKeys: Record<string, string> = {
+  artigos: 'articles', cultura: 'culture', saude: 'health', familia: 'family',
+  guia: 'guide', paradas: 'parades', educacao: 'education', comunidade: 'community',
+};
+
 export default function SectionsGrid() {
+  const { i18n, t } = useTranslation();
+  const isPortuguese = (i18n.resolvedLanguage || 'pt-BR').startsWith('pt');
+
   return (
     <section className="w-full bg-surface-warm py-14 md:py-20 px-4 md:px-6 lg:px-10">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 md:mb-12">
           <span className="text-xs md:text-sm font-medium text-accent-400 uppercase tracking-wider">
-            Explore o portal
+            {t('home.sections.eyebrow')}
           </span>
           <h2 className="mt-2 text-2xl md:text-4xl font-playfair font-bold text-dark-700">
-            Nove caminhos para <span className="italic">conhecer</span>,
-            <br className="hidden md:block" />
-            {' '}aprender e se conectar
+            {t('home.sections.title')}
           </h2>
         </div>
 
@@ -26,7 +33,7 @@ export default function SectionsGrid() {
               <div className="relative w-full aspect-[16/10] sm:aspect-[4/5] overflow-hidden">
                 <img
                   src={section.image}
-                  alt={section.title}
+                  alt={t(`nav.${sectionNavKeys[section.id]}`)}
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
@@ -37,13 +44,15 @@ export default function SectionsGrid() {
               </div>
               <div className="p-4 md:p-5 flex flex-col flex-1">
                 <h3 className="text-base md:text-lg font-bold text-dark-700 group-hover:text-primary-400 transition-colors">
-                  {section.title}
+                  {t(`nav.${sectionNavKeys[section.id]}`)}
                 </h3>
                 <p className="mt-2 text-sm text-dark-400 leading-relaxed line-clamp-2">
-                  {section.description}
+                  {isPortuguese ? section.description : t(`home.sections.${section.id}.description`)}
                 </p>
                 <div className="mt-auto pt-3 flex items-center justify-between">
-                  <span className="text-xs font-medium text-primary-500">{section.stats}</span>
+                  <span className="text-xs font-medium text-primary-500">
+                    {isPortuguese ? section.stats : t(`home.sections.${section.id}.stats`)}
+                  </span>
                   <span className="w-7 h-7 flex items-center justify-center rounded-full bg-dark-50 text-dark-500 group-hover:bg-primary-400 group-hover:text-white transition-colors">
                     <i className="ri-arrow-right-line text-sm" aria-hidden="true"></i>
                   </span>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import HeroSection from './components/HeroSection';
 import FeaturedArticles from './components/FeaturedArticles';
 import SectionsGrid from './components/SectionsGrid';
@@ -7,6 +8,7 @@ import Testimonials from './components/Testimonials';
 
 export default function Home() {
   const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const { t } = useTranslation();
 
   return (
     <main className="w-full min-h-screen bg-surface font-inter">
@@ -19,13 +21,13 @@ export default function Home() {
       <section className="w-full bg-surface py-14 md:py-20 px-4 md:px-6 lg:px-10">
         <div className="max-w-3xl mx-auto text-center">
           <span className="text-xs md:text-sm font-medium text-accent-400 uppercase tracking-wider">
-            Fique por dentro
+            {t('home.newsletter.eyebrow')}
           </span>
           <h2 className="mt-3 text-2xl md:text-4xl font-playfair font-bold text-dark-700">
-            Receba nossa newsletter
+            {t('home.newsletter.title')}
           </h2>
           <p className="mt-3 text-base text-dark-400 max-w-xl mx-auto leading-relaxed">
-            Artigos semanais, alertas sobre novos guias e convites para eventos da comunidade direto no seu e-mail.
+            {t('home.newsletter.description')}
           </p>
           <form
             data-readdy-form
@@ -56,7 +58,7 @@ export default function Home() {
             <input
               type="email"
               name="email"
-              placeholder="Seu melhor e-mail"
+              placeholder={t('home.newsletter.placeholder')}
               required
               className="w-full sm:flex-1 px-5 py-3.5 text-sm rounded-full border border-dark-200 bg-white text-dark-700 placeholder:text-dark-400 focus:outline-none focus:ring-2 focus:ring-primary-400/30 focus:border-primary-400 transition-all"
             />
@@ -64,22 +66,22 @@ export default function Home() {
               type="submit"
               className="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap"
             >
-              Inscrever-se
+              {t('home.newsletter.submit')}
             </button>
           </form>
           {formStatus === 'success' && (
             <p className="mt-3 text-sm font-medium text-accent-500">
-              Inscrição realizada com sucesso! Obrigado por fazer parte.
+              {t('home.newsletter.success')}
             </p>
           )}
           {formStatus === 'error' && (
             <p className="mt-3 text-sm font-medium text-primary-500">
-              Erro ao enviar. Verifique seu e-mail e tente novamente.
+              {t('home.newsletter.error')}
             </p>
           )}
           {formStatus === 'idle' && (
             <p className="mt-3 text-xs text-dark-400">
-              Prometemos não enviar spam. Você pode cancelar a qualquer momento.
+              {t('home.newsletter.privacy')}
             </p>
           )}
         </div>

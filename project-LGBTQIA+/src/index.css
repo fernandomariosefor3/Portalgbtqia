@@ -1,16 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* O seletor próprio controla a tradução; oculta a interface injetada pelo provedor. */
-#google_translate_element,
-body > .skiptranslate,
-.goog-te-banner-frame,
-.goog-te-balloon-frame,
-#goog-gt-tt {
-  display: none !important;
-}
-
-body {
-  top: 0 !important;
-}

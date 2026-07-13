@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useSiteSection } from '@/lib/useSiteSection';
 
 const fallbackCommunity = {
@@ -14,6 +15,15 @@ const fallbackCommunity = {
 
 export default function CommunityCTA() {
   const { content } = useSiteSection('home-community', fallbackCommunity);
+  const { i18n, t } = useTranslation();
+  const isPortuguese = (i18n.resolvedLanguage || 'pt-BR').startsWith('pt');
+  const localizedContent = isPortuguese ? content : {
+    ...content,
+    subtitle: t('home.community.subtitle'),
+    title: t('home.community.title'),
+    description: t('home.community.description'),
+    ctaLabel: t('home.community.cta'),
+  };
 
   return (
     <section className="w-full bg-dark-700 py-16 md:py-24 px-4 md:px-6 lg:px-10">
@@ -22,33 +32,33 @@ export default function CommunityCTA() {
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: `url("${content.image || fallbackCommunity.image}")`,
+              backgroundImage: `url("${localizedContent.image || fallbackCommunity.image}")`,
             }}
           />
           <div className="absolute inset-0 bg-dark-700/70" />
 
           <div className="relative z-10 flex flex-col items-center text-center py-12 md:py-20 px-6 md:px-10">
             <span className="px-4 py-1.5 text-xs font-medium rounded-full bg-secondary-400/20 text-secondary-300 border border-secondary-400/30">
-              {content.subtitle}
+              {localizedContent.subtitle}
             </span>
             <h2 className="mt-5 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-white leading-tight max-w-3xl">
-              {content.title}
+              {localizedContent.title}
             </h2>
             <p className="mt-4 md:mt-5 text-base md:text-lg text-white/75 max-w-2xl leading-relaxed">
-              {content.description}
+              {localizedContent.description}
             </p>
             <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center gap-4">
               <Link
-                to={content.ctaUrl || '/comunidade'}
+                to={localizedContent.ctaUrl || '/comunidade'}
                 className="px-8 py-3.5 text-sm md:text-base font-semibold rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap shadow-lg"
               >
-                {content.ctaLabel || 'Entrar no forum'}
+                {localizedContent.ctaLabel || t('home.community.cta')}
               </Link>
               <Link
                 to="/comunidade"
                 className="px-8 py-3.5 text-sm md:text-base font-semibold rounded-full border-2 border-white/60 text-white hover:bg-white/10 transition-colors whitespace-nowrap"
               >
-                Programa de mentoria
+                {t('home.community.mentoring')}
               </Link>
             </div>
           </div>
@@ -59,27 +69,27 @@ export default function CommunityCTA() {
             <div className="w-14 h-14 md:w-16 md:h-16 mx-auto flex items-center justify-center rounded-2xl bg-primary-400/20 text-primary-300">
               <i className="ri-message-3-line text-2xl md:text-3xl" aria-hidden="true"></i>
             </div>
-            <h3 className="mt-4 text-lg font-semibold text-white">Fórum de discussões</h3>
+            <h3 className="mt-4 text-lg font-semibold text-white">{t('home.community.forum.title')}</h3>
             <p className="mt-2 text-sm text-white/60 leading-relaxed">
-              Debata temas importantes, tire dúvidas e compartilhe experiências em um ambiente moderado e respeitoso.
+              {t('home.community.forum.description')}
             </p>
           </div>
           <div className="text-center">
             <div className="w-14 h-14 md:w-16 md:h-16 mx-auto flex items-center justify-center rounded-2xl bg-secondary-400/20 text-secondary-300">
               <i className="ri-user-heart-line text-2xl md:text-3xl" aria-hidden="true"></i>
             </div>
-            <h3 className="mt-4 text-lg font-semibold text-white">Mentoria gratuita</h3>
+            <h3 className="mt-4 text-lg font-semibold text-white">{t('home.community.mentoring.title')}</h3>
             <p className="mt-2 text-sm text-white/60 leading-relaxed">
-              Conecte-se com mentores experientes em áreas como empregabilidade, saúde mental, transição de gênero e mais.
+              {t('home.community.mentoring.description')}
             </p>
           </div>
           <div className="text-center">
             <div className="w-14 h-14 md:w-16 md:h-16 mx-auto flex items-center justify-center rounded-2xl bg-accent-400/20 text-accent-300">
               <i className="ri-chat-smile-2-line text-2xl md:text-3xl" aria-hidden="true"></i>
             </div>
-            <h3 className="mt-4 text-lg font-semibold text-white">Chat seguro</h3>
+            <h3 className="mt-4 text-lg font-semibold text-white">{t('home.community.chat.title')}</h3>
             <p className="mt-2 text-sm text-white/60 leading-relaxed">
-              Converse em tempo real com anonimato opcional. Um espaço para desabafar, fazer amizades e encontrar apoio.
+              {t('home.community.chat.description')}
             </p>
           </div>
         </div>

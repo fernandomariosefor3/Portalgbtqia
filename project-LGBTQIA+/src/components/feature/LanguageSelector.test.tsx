@@ -24,6 +24,17 @@ describe('LanguageSelector', () => {
     expect(new URL(window.location.href).searchParams.get('lang')).toBe('pt-BR');
   });
 
+  it('exibe as três opções com texto escuro sobre fundo branco', () => {
+    render(<LanguageSelector />);
+    const english = screen.getByRole('option', { name: 'EN — English' });
+    const spanish = screen.getByRole('option', { name: 'ES — Español' });
+    const portuguese = screen.getByRole('option', { name: 'PT — Português' });
+
+    for (const option of [english, spanish, portuguese]) {
+      expect(option).toHaveStyle({ backgroundColor: '#ffffff', color: '#1f2937' });
+    }
+  });
+
   it('troca para inglês', async () => {
     const user = userEvent.setup();
     render(<LanguageSelector />);

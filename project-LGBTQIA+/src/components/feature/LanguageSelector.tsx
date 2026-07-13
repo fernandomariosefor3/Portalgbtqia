@@ -28,8 +28,17 @@ export default function LanguageSelector({ compact = false }: { compact?: boolea
         onChange={(event) => changeLanguage(event.target.value)}
         className="rounded-full border border-current/20 bg-transparent px-3 py-2 text-xs font-semibold outline-none"
       >
-        <option value="" disabled className="text-dark-800">EN / ES</option>
-        {languages.map((language) => <option key={language.code} value={language.code} className="text-dark-800">{language.short} — {t(language.labelKey)}</option>)}
+        <option value="" disabled hidden>EN / ES</option>
+        {languages.map((language) => (
+          <option
+            key={language.code}
+            value={language.code}
+            className="bg-white text-dark-800"
+            style={{ backgroundColor: '#ffffff', color: '#1f2937' }}
+          >
+            {language.short} — {t(language.labelKey)}
+          </option>
+        ))}
       </select>
     </div>
   );

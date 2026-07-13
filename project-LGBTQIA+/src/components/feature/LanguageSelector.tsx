@@ -12,13 +12,18 @@ type TranslateWindow = Window & {
   googleTranslateElementInit?: () => void;
 };
 
-let scheduledLanguage: string | undefined;
+function clearTranslationCookies() {
+  const expiredCookie = 'googtrans=; Max-Age=0; path=/; SameSite=Lax';
+  document.cookie = expiredCookie;
+  document.cookie = `${expiredCookie}; domain=${window.location.hostname}`;
+  document.cookie = `${expiredCookie}; domain=.${window.location.hostname}`;
+}
 
-function setTranslationCookie(language: string) {
-  const target = language === 'pt-BR' ? 'pt' : language;
-  const value = `/pt/${target}`;
-  document.cookie = `googtrans=${value}; path=/; SameSite=Lax`;
-  document.cookie = `googtrans=${value}; path=/; domain=${window.location.hostname}; SameSite=Lax`;
+function saveTranslationLanguage(language: string) {
+  clearTranslationCookies();
+  if (language !== 'pt-BR') {
+    document.cookie = `googtrans=/pt/${language}; path=/; SameSite=Lax`;
+  }
 }
 
 function ensurePageTranslator() {
@@ -51,45 +56,18 @@ function ensurePageTranslator() {
   }
 }
 
-function translatePage(language: string) {
-  setTranslationCookie(language);
-  if (language === 'pt-BR') {
-    window.location.reload();
-    return;
-  }
-
-  let attempts = 0;
-  const applyTranslation = window.setInterval(() => {
-    const select = document.querySelector<HTMLSelectElement>('#google_translate_element select');
-    if (select) {
-      window.clearInterval(applyTranslation);
-      select.value = language;
-      select.dispatchEvent(new Event('change', { bubbles: true }));
-    } else if (++attempts >= 30) {
-      window.clearInterval(applyTranslation);
-      window.location.reload();
-    }
-  }, 100);
-}
-
 export default function LanguageSelector({ compact = false }: { compact?: boolean }) {
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
     ensurePageTranslator();
-    const language = i18n.resolvedLanguage;
-    if ((language === 'en' || language === 'es') && scheduledLanguage !== language) {
-      scheduledLanguage = language;
-      translatePage(language);
-    }
-  }, [i18n.resolvedLanguage]);
+  }, []);
 
-  async function changeLanguage(code: string) {
-    await i18n.changeLanguage(code);
+  function changeLanguage(code: string) {
+    saveTranslationLanguage(code);
     const url = new URL(window.location.href);
     url.searchParams.set('lang', code);
-    window.history.replaceState({}, '', url);
-    if (code === 'pt-BR') translatePage(code);
+    window.location.assign(url.toString());
   }
 
   const activeLanguage = i18n.resolvedLanguage || 'pt-BR';

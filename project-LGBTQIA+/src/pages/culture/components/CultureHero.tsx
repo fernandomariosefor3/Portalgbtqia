@@ -1,5 +1,8 @@
+import { useTranslation } from 'react-i18next';
+
 
 export default function CultureHero() {
+  const { t } = useTranslation();
   return (
     <section className="relative w-full bg-dark-700 pt-20 pb-10 md:pt-24 md:pb-20 px-4 md:px-6 lg:px-10 overflow-hidden">
       <div className="absolute inset-0 opacity-20">
@@ -11,13 +14,13 @@ export default function CultureHero() {
       </div>
       <div className="relative max-w-7xl mx-auto">
         <span className="inline-block px-3 py-1 rounded-full bg-secondary-400/20 text-secondary-300 text-xs font-medium uppercase tracking-wider mb-4">
-          Cultura
+          {t('culture.hero.eyebrow')}
         </span>
         <h1 className="text-3xl md:text-5xl font-playfair font-bold text-white max-w-2xl leading-tight">
-          Cinema, séries, música e drag
+          {t('culture.hero.title')}
         </h1>
         <p className="mt-4 text-base text-white/60 max-w-xl leading-relaxed">
-          Críticas, curadorias e histórias da produção cultural LGBTQ+ no Brasil e no mundo. Do cinema independente à cena drag cearense.
+          {t('culture.hero.description')}
         </p>
       </div>
     </section>

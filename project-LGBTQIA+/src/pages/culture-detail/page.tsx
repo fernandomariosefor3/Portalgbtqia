@@ -1,9 +1,12 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useCulture } from '@/lib/useCulture';
 import CultureHeader from './components/CultureHeader';
 import CultureSidebar from './components/CultureSidebar';
+import { sanitizeHtml } from '@/lib/sanitizeHtml';
 
 export default function CultureDetailPage() {
+  const { t } = useTranslation();
   const { slug } = useParams<{ slug: string }>();
   const { items: allCulture, loading } = useCulture();
   const item = slug ? allCulture.find((c) => c.slug === slug) : undefined;
@@ -12,7 +15,7 @@ export default function CultureDetailPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[60vh] text-dark-400">
-        Carregando…
+        {t('culture.loading')}
       </div>
     );
   }
@@ -40,7 +43,7 @@ export default function CultureDetailPage() {
             <article className="flex-1 min-w-0">
               <div
                 className="article-content prose prose-lg max-w-none"
-                dangerouslySetInnerHTML={{ __html: item.content }}
+                dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.content) }}
               />
 
               <div className="mt-10 pt-8 border-t border-dark-100">
@@ -52,7 +55,7 @@ export default function CultureDetailPage() {
                     >
                       <i className="ri-arrow-left-line text-lg flex-shrink-0" aria-hidden="true"></i>
                       <div className="text-left">
-                        <span className="block text-[10px] uppercase tracking-wider text-dark-400">Anterior</span>
+                        <span className="block text-[10px] uppercase tracking-wider text-dark-400">{t('culture.previous')}</span>
                         <span className="block font-medium line-clamp-1 max-w-[140px] sm:max-w-[200px]">{prevItem.title}</span>
                       </div>
                     </Link>
@@ -65,7 +68,7 @@ export default function CultureDetailPage() {
                       className="group flex items-center gap-2 text-sm text-dark-500 hover:text-primary-500 transition-colors"
                     >
                       <div className="text-right">
-                        <span className="block text-[10px] uppercase tracking-wider text-dark-400">Próximo</span>
+                        <span className="block text-[10px] uppercase tracking-wider text-dark-400">{t('culture.next')}</span>
                         <span className="block font-medium line-clamp-1 max-w-[140px] sm:max-w-[200px]">{nextItem.title}</span>
                       </div>
                       <i className="ri-arrow-right-line text-lg flex-shrink-0" aria-hidden="true"></i>

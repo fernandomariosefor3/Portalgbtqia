@@ -4,6 +4,7 @@ import type { Article } from '@/mocks/articles-full';
 import { getFirestoreArticleBySlug } from '@/lib/useArticles';
 import ArticleHeader from './components/ArticleHeader';
 import ArticleSidebar from './components/ArticleSidebar';
+import { sanitizeHtml } from '@/lib/sanitizeHtml';
 
 export default function ArticlePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -60,7 +61,7 @@ export default function ArticlePage() {
             <article className="flex-1 min-w-0">
               <div
                 className="article-content prose prose-lg max-w-none"
-                dangerouslySetInnerHTML={{ __html: contentHtml }}
+                dangerouslySetInnerHTML={{ __html: sanitizeHtml(contentHtml) }}
               />
 
               {article.sourceUrl && (

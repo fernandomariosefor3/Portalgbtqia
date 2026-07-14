@@ -10,12 +10,7 @@ export default defineConfig({
     postcss: {},
   },
   test: {
-    // Testes de componente (.test.tsx) usam jsdom; testes de funções puras
-    // (.test.ts) rodam em node (mais leve).
-    environmentMatchGlobs: [
-      ["src/**/*.test.tsx", "jsdom"],
-      ["src/**/*.test.ts", "node"],
-    ],
+    environment: "jsdom",
     setupFiles: ["./src/test/setup.ts"],
     include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
     globals: true,

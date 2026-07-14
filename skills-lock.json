@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "skills": {
+    "critical-code-reviewer": {
+      "source": "posit-dev/skills",
+      "sourceType": "github",
+      "skillPath": "posit-dev/critical-code-reviewer/SKILL.md",
+      "computedHash": "30343f8224a778337b02a929900ec08d79ae9faba296456252820681fead990e"
+    },
+    "frontend-architecture": {
+      "source": "manutej/luxor-claude-marketplace",
+      "sourceType": "github",
+      "skillPath": "plugins/luxor-frontend-essentials/skills/frontend-architecture/SKILL.md",
+      "computedHash": "5e62e93d1705e62556448ef287f75eeb6b0331c13d4b5f1f2475f432c551cc00"
+    },
+    "frontend-code-review": {
+      "source": "langgenius/dify",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/frontend-code-review/SKILL.md",
+      "computedHash": "e7d45defb2dbcfb36cd6fcb6a7d2bb2386a9af1f0279c549aafefcdbd4e83f81"
+    },
+    "mastering-typescript": {
+      "source": "spillwavesolutions/mastering-typescript-skill",
+      "sourceType": "github",
+      "skillPath": "mastering-typescript/SKILL.md",
+      "computedHash": "144b5c2feda736321f0383a08dafd74b23abc5d95102daba2aab245ff9435518"
+    },
+    "nextjs-react-typescript": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "skillPath": "nextjs-react-typescript/SKILL.md",
+      "computedHash": "52067402daf8388ba7970478e0ba1f350f1868a65a62ae2bf6f4dc1ac3cf3e88"
+    },
+    "ui-ux-pro-max": {
+      "source": "galaxy-dawn/claude-scholar",
+      "sourceType": "github",
+      "skillPath": "skills/ui-ux-pro-max/SKILL.md",
+      "computedHash": "2a1a98cdfb82e3afe1c9833674d256212737942a2a699451315f141c63f1883b"
+    }
+  }
+}

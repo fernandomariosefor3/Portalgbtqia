@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import CultureHero from './components/CultureHero';
 import CultureCard from './components/CultureCard';
 import CultureSubNav from './components/CultureSubNav';
-import { typeLabels, typeIcons } from '@/mocks/culture';
+import { typeIcons } from '@/mocks/culture';
 import { useCulture } from '@/lib/useCulture';
 
 export default function CulturePage() {
+  const { t } = useTranslation();
   const { items: allCulture } = useCulture();
   const featuredItems = allCulture.filter((c) => c.featured).slice(0, 4);
   const types = ['cinema', 'series', 'musica', 'drag'] as const;
@@ -19,10 +21,10 @@ export default function CulturePage() {
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
             <h2 className="text-xl md:text-2xl font-playfair font-bold text-dark-700">
-              Destaques da semana
+              {t('culture.featured.title')}
             </h2>
             <p className="mt-1 text-sm text-dark-400">
-              As análises e curadorias mais lidas do momento
+              {t('culture.featured.description')}
             </p>
           </div>
 
@@ -45,14 +47,14 @@ export default function CulturePage() {
                     <i className={`${typeIcons[type]}`} aria-hidden="true"></i>
                   </span>
                   <h2 className="text-xl md:text-2xl font-playfair font-bold text-dark-700">
-                    {typeLabels[type]}
+                    {t(`culture.type.${type}`)}
                   </h2>
                 </div>
                 <Link
                   to={`/cultura/${type}`}
                   className="text-sm font-medium text-primary-500 hover:text-primary-600 transition-colors whitespace-nowrap flex items-center gap-1"
                 >
-                  Ver todos
+                  {t('culture.viewAll')}
                   <i className="ri-arrow-right-line" aria-hidden="true"></i>
                 </Link>
               </div>

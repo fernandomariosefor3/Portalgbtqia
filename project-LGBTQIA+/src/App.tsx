@@ -6,6 +6,7 @@ import Navbar from "./components/feature/Navbar";
 import Footer from "./components/feature/Footer";
 import MusicPlayer from "./components/feature/MusicPlayer";
 import MultilingualSeo from "./components/feature/MultilingualSeo";
+import ManagedPageBlocks from "./components/feature/ManagedPageBlocks";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Navbar />
           <div id="main-content" tabIndex={-1} className="flex-1 outline-none">
             <AppRoutes />
+            <ManagedPageBlocks />
           </div>
           <Footer />
           <MusicPlayer />

@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { categoryLabels, categoryColors, categoryIcons } from '@/mocks/health';
 import { useHealth } from '@/lib/useHealth';
+import { sanitizeHtml } from '@/lib/sanitizeHtml';
 
 export default function HealthDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -112,7 +113,7 @@ export default function HealthDetailPage() {
             <div className="lg:col-span-2">
               <article
                 className="prose prose-sm md:prose-base max-w-none text-dark-600"
-                dangerouslySetInnerHTML={{ __html: guide.content }}
+                dangerouslySetInnerHTML={{ __html: sanitizeHtml(guide.content) }}
               />
 
               {guide.faqs && guide.faqs.length > 0 && (

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { typeColors, typeIcons } from '@/mocks/culture';
 
 interface CultureSubNavProps {
@@ -6,11 +7,12 @@ interface CultureSubNavProps {
 }
 
 export default function CultureSubNav({ activeType }: CultureSubNavProps) {
+  const { t } = useTranslation();
   const types = [
-    { key: 'cinema', label: 'Cinema', path: '/cultura/cinema' },
-    { key: 'series', label: 'Séries', path: '/cultura/series' },
-    { key: 'musica', label: 'Música', path: '/cultura/musica' },
-    { key: 'drag', label: 'Drag', path: '/cultura/drag' },
+    { key: 'cinema', label: t('culture.type.cinema'), path: '/cultura/cinema' },
+    { key: 'series', label: t('culture.type.series'), path: '/cultura/series' },
+    { key: 'musica', label: t('culture.type.musica'), path: '/cultura/musica' },
+    { key: 'drag', label: t('culture.type.drag'), path: '/cultura/drag' },
   ];
 
   return (
@@ -25,7 +27,7 @@ export default function CultureSubNav({ activeType }: CultureSubNavProps) {
                 : 'text-dark-600 hover:bg-dark-50'
             }`}
           >
-            Todos
+            {t('culture.all')}
           </Link>
           {types.map((t) => (
             <Link

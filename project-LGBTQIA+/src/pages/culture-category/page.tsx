@@ -1,10 +1,12 @@
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import CultureCard from '../culture/components/CultureCard';
 import CultureSubNav from '../culture/components/CultureSubNav';
-import { typeLabels, typeColors, typeIcons } from '@/mocks/culture';
+import { typeColors, typeIcons } from '@/mocks/culture';
 import { useCulture } from '@/lib/useCulture';
 
 export default function CultureCategoryPage() {
+  const { t } = useTranslation();
   const location = useLocation();
   const segment = location.pathname.split('/').pop() || '';
   const validType = ['cinema', 'series', 'musica', 'drag'].includes(segment) ? segment : 'cinema';
@@ -25,13 +27,13 @@ export default function CultureCategoryPage() {
         <div className="relative max-w-7xl mx-auto">
           <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider mb-4 ${typeColors[validType]}`}>
             <i className={`${typeIcons[validType]} mr-1`} aria-hidden="true"></i>
-            {typeLabels[validType]}
+            {t(`culture.type.${validType}`)}
           </span>
           <h1 className="text-3xl md:text-5xl font-playfair font-bold text-white max-w-2xl leading-tight">
-            {typeLabels[validType]} LGBTQ+
+            {t('culture.category.title', { type: t(`culture.type.${validType}`) })}
           </h1>
           <p className="mt-4 text-base text-white/60 max-w-xl leading-relaxed">
-            Análises, curadorias e histórias sobre {typeLabels[validType].toLowerCase()} que celebram e problematizam a produção cultural queer.
+            {t('culture.category.description', { type: t(`culture.type.${validType}`).toLowerCase() })}
           </p>
         </div>
       </section>
@@ -42,7 +44,7 @@ export default function CultureCategoryPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <span className="text-sm text-dark-400">
-              {items.length} {items.length === 1 ? 'item' : 'itens'}
+              {items.length} {t(items.length === 1 ? 'culture.item' : 'culture.items')}
             </span>
           </div>
 
@@ -57,8 +59,8 @@ export default function CultureCategoryPage() {
               <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-dark-50 mb-4">
                 <i className="ri-film-line text-2xl text-dark-300" aria-hidden="true"></i>
               </div>
-              <h3 className="text-lg font-medium text-dark-600">Nenhum item encontrado</h3>
-              <p className="mt-1 text-sm text-dark-400">Volte em breve para novos conteúdos.</p>
+              <h3 className="text-lg font-medium text-dark-600">{t('culture.empty.title')}</h3>
+              <p className="mt-1 text-sm text-dark-400">{t('culture.empty.description')}</p>
             </div>
           )}
         </div>

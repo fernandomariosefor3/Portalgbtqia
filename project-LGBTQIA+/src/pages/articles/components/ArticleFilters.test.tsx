@@ -3,15 +3,20 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ArticleFilters from "./ArticleFilters";
 
+const articles = [
+  { category: "saude" },
+  { category: "cultura" },
+];
+
 describe("ArticleFilters", () => {
   it("renderiza o botão 'Todas'", () => {
-    render(<ArticleFilters activeCategory="todas" onChange={() => {}} />);
+    render(<ArticleFilters activeCategory="todas" articles={articles} onChange={() => {}} />);
     expect(screen.getByRole("button", { name: "Todas" })).toBeInTheDocument();
   });
 
   it("chama onChange com a categoria ao clicar", async () => {
     const onChange = vi.fn();
-    render(<ArticleFilters activeCategory="todas" onChange={onChange} />);
+    render(<ArticleFilters activeCategory="todas" articles={articles} onChange={onChange} />);
 
     const buttons = screen.getAllByRole("button");
     // Clica em um botão de categoria que não seja "Todas".
@@ -25,7 +30,7 @@ describe("ArticleFilters", () => {
   });
 
   it("renderiza mais de uma categoria além de 'Todas'", () => {
-    render(<ArticleFilters activeCategory="todas" onChange={() => {}} />);
+    render(<ArticleFilters activeCategory="todas" articles={articles} onChange={() => {}} />);
     const buttons = screen.getAllByRole("button");
     expect(buttons.length).toBeGreaterThan(1);
   });

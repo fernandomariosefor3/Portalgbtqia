@@ -21,6 +21,7 @@ import { legalCategories, staticLegalGuides, type LegalGuide, type LegalGuideCat
 import { applyLegalGuideOverride, legalGuideToOverride, type LegalGuideOverride } from "../../lib/useLegalGuides";
 import { queerRouteTypes, staticQueerRoutes, type QueerRoute, type QueerRouteType } from "../../mocks/queerRoutes";
 import { applyQueerRouteOverride, queerRouteToOverride, type QueerRouteOverride } from "../../lib/useQueerRoutes";
+import PageBlocksManager from "./components/PageBlocksManager";
 
 interface ArticleItem {
   id: string;
@@ -66,13 +67,15 @@ interface CultureOverride {
   type: CultureItem["type"];
   status: "published" | "hidden";
   featured: boolean;
+  source?: "static" | "firestore";
 }
 
-type TabKey = "articles" | "culture" | "rights" | "routes" | "sections" | "events" | "places" | "facebook";
+type TabKey = "articles" | "culture" | "pages" | "rights" | "routes" | "sections" | "events" | "places" | "facebook";
 
 const tabs: Array<{ id: TabKey; label: string }> = [
   { id: "articles", label: "Artigos" },
   { id: "culture", label: "Cultura" },
+  { id: "pages", label: "Páginas" },
   { id: "rights", label: "Direitos" },
   { id: "routes", label: "Roteiros" },
   { id: "sections", label: "Espacos do site" },
@@ -125,6 +128,19 @@ const emptyArticle = {
   sourceUrl: "",
 };
 
+const emptyCulture: CultureOverride = {
+  slug: "",
+  title: "",
+  subtitle: "",
+  excerpt: "",
+  content: "",
+  image: "",
+  type: "cinema",
+  status: "published",
+  featured: false,
+  source: "firestore",
+};
+
 const emptyRecord: EditableRecord = {
   id: "",
   title: "",
@@ -160,6 +176,7 @@ export default function AdminPage() {
   const [articles, setArticles] = useState<ArticleItem[]>([]);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [cultureOverrides, setCultureOverrides] = useState<Record<string, CultureOverride>>({});
+  const [managedCulture, setManagedCulture] = useState<CultureOverride[]>([]);
   const [cultureForm, setCultureForm] = useState<CultureOverride | null>(null);
   const [safeSpaceOverrides, setSafeSpaceOverrides] = useState<Record<string, SafeSpaceOverride>>({});
   const [safeSpaceForm, setSafeSpaceForm] = useState<SafeSpaceOverride | null>(null);
@@ -200,6 +217,22 @@ export default function AdminPage() {
     snap.docs.forEach((item) => {
       next[item.id] = { slug: item.id, ...item.data() } as CultureOverride;
     });
+    const managedSnapshot = await getDocs(collection(db, "culture"));
+    setManagedCulture(managedSnapshot.docs.map((item) => {
+      const data = item.data();
+      return {
+        slug: typeof data.slug === "string" ? data.slug : item.id,
+        title: typeof data.title === "string" ? data.title : "",
+        subtitle: typeof data.subtitle === "string" ? data.subtitle : "",
+        excerpt: typeof data.excerpt === "string" ? data.excerpt : "",
+        content: typeof data.content === "string" ? data.content : "",
+        image: typeof data.image === "string" ? data.image : typeof data.featured_image === "string" ? data.featured_image : "",
+        type: ["cinema", "series", "musica", "drag"].includes(data.type) ? data.type as CultureItem["type"] : "cinema",
+        status: data.status === "published" ? "published" : "hidden",
+        featured: Boolean(data.featured),
+        source: "firestore",
+      };
+    }));
     setCultureOverrides(next);
   }, []);
 
@@ -303,12 +336,37 @@ export default function AdminPage() {
     type: cultureOverrides[item.slug]?.type ?? item.type,
     status: cultureOverrides[item.slug]?.status ?? "published",
     featured: cultureOverrides[item.slug]?.featured ?? item.featured,
+    source: "static",
   });
 
   const saveCultureOverride = async (form: CultureOverride) => {
     setIsPublishing(true);
     setMessage(null);
     try {
+      if (form.source === "firestore") {
+        const slug = form.slug || slugify(form.title);
+        const { source: _source, ...cultureData } = form;
+        await setDoc(doc(db, "culture", slug), {
+          ...cultureData,
+          slug,
+          author: "Fernando Mario da Silva Martins",
+          authorRole: "Curadoria cultural",
+          authorBio: "Equipe editorial do Portal LGBTQ+ Nordeste.",
+          authorPhoto: `${import.meta.env.BASE_URL}favicon.svg`,
+          tags: [],
+          views: 0,
+          readTime: Math.max(2, Math.ceil((form.content.length || form.excerpt.length || 200) / 1000)),
+          featured_image: form.image,
+          published_at: serverTimestamp(),
+          updated_at: serverTimestamp(),
+        }, { merge: true });
+        await loadCultureOverrides();
+        setCultureForm({ ...form, slug });
+        setMessage({ type: "success", text: "Conteúdo cultural salvo e disponível na página Cultura." });
+        setIsPublishing(false);
+        return;
+      }
+
       await setDoc(doc(db, "culture_overrides", form.slug), {
         ...form,
         updated_at: serverTimestamp(),
@@ -330,7 +388,20 @@ export default function AdminPage() {
     });
   };
 
+  const deleteManagedCulture = async (slug: string) => {
+    if (!confirm("Apagar definitivamente este conteúdo cultural?")) return;
+    try {
+      await deleteDoc(doc(db, "culture", slug));
+      setManagedCulture((current) => current.filter((item) => item.slug !== slug));
+      if (cultureForm?.source === "firestore" && cultureForm.slug === slug) setCultureForm(null);
+      setMessage({ type: "success", text: "Conteúdo cultural apagado." });
+    } catch (e: any) {
+      setMessage({ type: "error", text: `Erro ao apagar cultura: ${e?.message || e}` });
+    }
+  };
+
   const getSafeSpaceForm = (space: SafeSpace): SafeSpaceOverride => {
+
     const controlled = applySafeSpaceOverride(space, safeSpaceOverrides[space.slug]);
     return safeSpaceToOverride(controlled);
   };
@@ -748,14 +819,63 @@ export default function AdminPage() {
         </div>
       )}
 
+      {activeTab === "pages" && <PageBlocksManager />}
+
       {activeTab === "culture" && (
         <div className="grid lg:grid-cols-[minmax(0,1fr)_420px] gap-6">
           <div>
-            <h2 className="text-xl font-bold mb-4">Cultura estática ({allCulture.length})</h2>
+            <p className="sr-only">Itens culturais incluídos originalmente no portal</p>
             <p className="text-sm text-gray-500 mb-4">
               Escolha o que fica publicado, o que sai do ar e edite textos sem apagar o conteúdo do projeto.
             </p>
             <div className="space-y-2">
+            <div className="mb-8 rounded-xl border border-pink-100 bg-pink-50/50 p-4">
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900">Conteúdo publicado pelo painel ({managedCulture.length})</h2>
+                  <p className="mt-1 text-sm text-gray-600">Crie filmes, séries, música ou drag diretamente na seção Cultura.</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setCultureForm({ ...emptyCulture })}
+                  className="min-h-11 rounded-lg bg-pink-600 px-4 py-2 text-sm font-semibold text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2"
+                >
+                  Novo conteúdo cultural
+                </button>
+              </div>
+              {managedCulture.length === 0 ? (
+                <p className="rounded-lg border border-dashed border-pink-200 bg-white p-5 text-center text-sm text-gray-600">Nenhum conteúdo cultural criado pelo painel.</p>
+              ) : (
+                <div className="space-y-2">
+                  {managedCulture.map((item) => (
+                    <article key={item.slug} className="rounded-lg border bg-white px-4 py-3 shadow-sm">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="min-w-0">
+                          <h3 className="truncate text-sm font-semibold text-gray-800">{item.title}</h3>
+                          <p className="mt-1 text-xs text-gray-500">{item.type} · {item.status === "published" ? "Publicado" : "Fora do ar"}</p>
+                        </div>
+                        <span className={`rounded-full px-2 py-1 text-[11px] font-semibold ${item.status === "published" ? "bg-green-50 text-green-700" : "bg-amber-50 text-amber-700"}`}>
+                          {item.status === "published" ? "Publicado" : "Oculto"}
+                        </span>
+                      </div>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <button type="button" onClick={() => setCultureForm({ ...item })} className="min-h-10 rounded-lg border border-blue-200 px-3 text-xs font-semibold text-blue-700 hover:bg-blue-50">Editar</button>
+                        <button
+                          type="button"
+                          onClick={() => void saveCultureOverride({ ...item, status: item.status === "published" ? "hidden" : "published" })}
+                          className="min-h-10 rounded-lg border border-amber-200 px-3 text-xs font-semibold text-amber-700 hover:bg-amber-50"
+                        >
+                          {item.status === "published" ? "Tirar do ar" : "Publicar"}
+                        </button>
+                        <button type="button" onClick={() => void deleteManagedCulture(item.slug)} className="min-h-10 rounded-lg border border-red-200 px-3 text-xs font-semibold text-red-700 hover:bg-red-50">Apagar</button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <h2 className="text-xl font-bold mb-4">Conteúdo base editável ({allCulture.length})</h2>
               {allCulture.map((item) => {
                 const form = getCultureForm(item);
                 return (
@@ -801,32 +921,34 @@ export default function AdminPage() {
             {cultureForm ? (
               <>
                 <div>
-                  <h2 className="text-xl font-bold">Editar cultura</h2>
+                  <h2 className="text-xl font-bold">{cultureForm.source === "firestore" && !cultureForm.slug ? "Novo conteúdo cultural" : "Editar cultura"}</h2>
                   <p className="text-xs text-gray-400 mt-1">{cultureForm.slug}</p>
                 </div>
-                <input value={cultureForm.title} onChange={(e) => setCultureForm({ ...cultureForm, title: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Titulo" />
-                <input value={cultureForm.subtitle} onChange={(e) => setCultureForm({ ...cultureForm, subtitle: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Subtitulo" />
-                <textarea value={cultureForm.excerpt} onChange={(e) => setCultureForm({ ...cultureForm, excerpt: e.target.value })} rows={3} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Resumo" />
-                <textarea value={cultureForm.content} onChange={(e) => setCultureForm({ ...cultureForm, content: e.target.value })} rows={8} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Conteudo HTML" />
-                <input value={cultureForm.image} onChange={(e) => setCultureForm({ ...cultureForm, image: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="URL da imagem" />
+                <label className="block text-sm font-medium text-gray-700">Título<input name="culture-title" value={cultureForm.title} onChange={(e) => setCultureForm({ ...cultureForm, title: e.target.value })} className="mt-1 w-full rounded-lg border px-4 py-2 font-normal" /></label>
+                <label className="block text-sm font-medium text-gray-700">Subtítulo<input name="culture-subtitle" value={cultureForm.subtitle} onChange={(e) => setCultureForm({ ...cultureForm, subtitle: e.target.value })} className="mt-1 w-full rounded-lg border px-4 py-2 font-normal" /></label>
+                <label className="block text-sm font-medium text-gray-700">Resumo<textarea name="culture-excerpt" value={cultureForm.excerpt} onChange={(e) => setCultureForm({ ...cultureForm, excerpt: e.target.value })} rows={3} className="mt-1 w-full rounded-lg border px-4 py-2 font-normal" /></label>
+                <label className="block text-sm font-medium text-gray-700">Conteúdo HTML<textarea name="culture-content" value={cultureForm.content} onChange={(e) => setCultureForm({ ...cultureForm, content: e.target.value })} rows={8} className="mt-1 w-full rounded-lg border px-4 py-2 font-normal" /></label>
+                <label className="block text-sm font-medium text-gray-700">URL da imagem<input name="culture-image" type="url" value={cultureForm.image} onChange={(e) => setCultureForm({ ...cultureForm, image: e.target.value })} className="mt-1 w-full rounded-lg border px-4 py-2 font-normal" /></label>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  <select value={cultureForm.type} onChange={(e) => setCultureForm({ ...cultureForm, type: e.target.value as CultureItem["type"] })} className="w-full px-4 py-2 border rounded-lg text-sm">
+                  <label className="text-sm font-medium text-gray-700">Tipo
+                  <select name="culture-type" value={cultureForm.type} onChange={(e) => setCultureForm({ ...cultureForm, type: e.target.value as CultureItem["type"] })} className="mt-1 w-full rounded-lg border px-4 py-2 font-normal">
                     <option value="cinema">Cinema</option>
                     <option value="series">Séries</option>
                     <option value="musica">Música</option>
                     <option value="drag">Drag</option>
                   </select>
-                  <select value={cultureForm.status} onChange={(e) => setCultureForm({ ...cultureForm, status: e.target.value as CultureOverride["status"] })} className="w-full px-4 py-2 border rounded-lg text-sm">
+                  </label>
+                  <label className="text-sm font-medium text-gray-700">Status<select name="culture-status" value={cultureForm.status} onChange={(e) => setCultureForm({ ...cultureForm, status: e.target.value as CultureOverride["status"] })} className="mt-1 w-full rounded-lg border px-4 py-2 font-normal">
                     <option value="published">Publicado</option>
                     <option value="hidden">Fora do ar</option>
-                  </select>
+                  </select></label>
                 </div>
                 <label className="flex items-center gap-2 text-sm text-gray-600">
                   <input type="checkbox" checked={cultureForm.featured} onChange={(e) => setCultureForm({ ...cultureForm, featured: e.target.checked })} />
                   Destaque
                 </label>
-                <button onClick={() => saveCultureOverride(cultureForm)} disabled={isPublishing || !cultureForm.title.trim()} className="w-full py-3 bg-pink-600 text-white rounded-lg font-semibold text-sm disabled:opacity-50">
-                  {isPublishing ? "Salvando..." : "Salvar cultura"}
+                <button type="button" onClick={() => saveCultureOverride(cultureForm)} disabled={isPublishing || !cultureForm.title.trim()} className="w-full py-3 bg-pink-600 text-white rounded-lg font-semibold text-sm disabled:opacity-50">
+                  {isPublishing ? "Salvando…" : "Salvar cultura"}
                 </button>
               </>
             ) : (

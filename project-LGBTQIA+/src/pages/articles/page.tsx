@@ -84,7 +84,11 @@ export default function ArticlesPage() {
       <section className="w-full py-8 px-4 md:px-6 lg:px-10 border-b border-dark-100 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <ArticleFilters activeCategory={activeCategory} onChange={(cat) => { setActiveCategory(cat); setCurrentPage(1); }} />
+            <ArticleFilters
+              activeCategory={activeCategory}
+              articles={articles}
+              onChange={(cat) => { setActiveCategory(cat); setCurrentPage(1); }}
+            />
             <span className="text-xs text-dark-400">
               {filteredArticles.length} {filteredArticles.length === 1 ? 'artigo' : 'artigos'}
               {activeCategory !== 'todas' && ` em ${categoryLabels[activeCategory]}`}

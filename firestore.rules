@@ -165,6 +165,12 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // Blocos editoriais adicionais exibidos nas páginas públicas.
+    match /page_blocks/{blockId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
     // ========== FORUM TOPICS ==========
     match /forum_topics/{topicId} {
       allow read: if true;

@@ -1,12 +1,13 @@
-import { allArticles, categoryLabels, categoryColors } from '@/mocks/articles-full';
+import { categoryLabels, categoryColors, type Article } from '@/mocks/articles-full';
 
 interface ArticleFiltersProps {
   activeCategory: string;
   onChange: (category: string) => void;
+  articles: ReadonlyArray<Pick<Article, 'category'>>;
 }
 
-export default function ArticleFilters({ activeCategory, onChange }: ArticleFiltersProps) {
-  const categories = ['todas', ...Array.from(new Set(allArticles.map((a) => a.category)))];
+export default function ArticleFilters({ activeCategory, onChange, articles }: ArticleFiltersProps) {
+  const categories = ['todas', ...Array.from(new Set(articles.map((article) => article.category)))];
 
   return (
     <div className="flex flex-wrap items-center gap-2">

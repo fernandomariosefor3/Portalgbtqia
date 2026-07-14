@@ -20,9 +20,7 @@ const PLACEHOLDER_AUTHOR_PHOTO = `${import.meta.env.BASE_URL}favicon.svg`;
 function firestoreToCulture(doc: QueryDocumentSnapshot<DocumentData>): CultureItem {
   const d = doc.data();
   const date = d.published_at?.toDate?.()
-    ? d.published_at
-        .toDate()
-        .toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })
+    ? d.published_at.toDate().toISOString()
     : d.date || '';
   return {
     id: doc.id,

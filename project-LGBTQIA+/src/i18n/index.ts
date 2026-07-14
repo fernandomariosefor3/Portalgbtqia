@@ -2,10 +2,12 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { homeTranslations } from './homeTranslations';
+import { cultureTranslations } from './cultureTranslations';
 
 const resources = {
   'pt-BR': { translation: {
     ...homeTranslations['pt-BR'],
+    ...cultureTranslations['pt-BR'],
     'site.title': 'Portal LGBTQ+ Nordeste — Artigos, Cultura, Saúde e Comunidade',
     'site.description': 'Portal LGBTQ+ dedicado a informação, cultura, saúde, direitos e comunidade no Nordeste do Brasil.',
     'nav.articles': 'Artigos', 'nav.culture': 'Cultura', 'nav.events': 'Eventos', 'nav.health': 'Saúde',
@@ -17,6 +19,7 @@ const resources = {
   }},
   es: { translation: {
     ...homeTranslations.es,
+    ...cultureTranslations.es,
     'site.title': 'Portal LGBTQ+ Nordeste — Artículos, Cultura, Salud y Comunidad',
     'site.description': 'Portal LGBTQ+ con información, cultura, salud, derechos y comunidad en el Nordeste de Brasil.',
     'nav.articles': 'Artículos', 'nav.culture': 'Cultura', 'nav.events': 'Eventos', 'nav.health': 'Salud',
@@ -28,6 +31,7 @@ const resources = {
   }},
   en: { translation: {
     ...homeTranslations.en,
+    ...cultureTranslations.en,
     'site.title': 'LGBTQ+ Northeast Portal — Articles, Culture, Health and Community',
     'site.description': 'LGBTQ+ portal for information, culture, health, rights and community in Northeast Brazil.',
     'nav.articles': 'Articles', 'nav.culture': 'Culture', 'nav.events': 'Events', 'nav.health': 'Health',

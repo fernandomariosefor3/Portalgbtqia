@@ -22,10 +22,8 @@ const DEFAULT_ARTICLE_IMAGE =
 export function firestoreToArticle(doc: QueryDocumentSnapshot<DocumentData>): Article {
   const d = doc.data();
   const date = d.published_at?.toDate?.()
-    ? d.published_at
-        .toDate()
-        .toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })
-    : '';
+    ? d.published_at.toDate().toISOString()
+    : typeof d.published_at === 'string' ? d.published_at : '';
   return {
     id: doc.id,
     title: d.title || '',

@@ -5,6 +5,7 @@ import { getFirestoreArticleBySlug } from '@/lib/useArticles';
 import ArticleHeader from './components/ArticleHeader';
 import ArticleSidebar from './components/ArticleSidebar';
 import { sanitizeHtml } from '@/lib/sanitizeHtml';
+import ArticleSeo from './components/ArticleSeo';
 
 export default function ArticlePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -53,6 +54,7 @@ export default function ArticlePage() {
 
   return (
     <main className="w-full min-h-screen bg-surface font-inter pb-16">
+      <ArticleSeo article={article} />
       <ArticleHeader article={article} />
 
       <section className="w-full px-4 md:px-6 lg:px-10 pt-8 md:pt-12">

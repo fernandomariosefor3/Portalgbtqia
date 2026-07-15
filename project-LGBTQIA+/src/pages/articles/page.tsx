@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
 import ArticleCard from './components/ArticleCard';
 import ArticleFilters from './components/ArticleFilters';
 import ArticlesSidebar from './components/ArticlesSidebar';
@@ -9,9 +10,11 @@ const ARTICLES_PER_PAGE = 9;
 
 export default function ArticlesPage() {
   const { articles, loading: loadingArticles } = useArticles();
-  const [activeCategory, setActiveCategory] = useState('todas');
+  const { category } = useParams<{ category?: string }>();
+  const [searchParams] = useSearchParams();
+  const activeCategory = category && categoryLabels[category] ? category : 'todas';
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('busca') || '');
 
   const filteredArticles = useMemo(() => {
     let result = articles;
@@ -87,7 +90,7 @@ export default function ArticlesPage() {
             <ArticleFilters
               activeCategory={activeCategory}
               articles={articles}
-              onChange={(cat) => { setActiveCategory(cat); setCurrentPage(1); }}
+              onNavigate={() => setCurrentPage(1)}
             />
             <span className="text-xs text-dark-400">
               {filteredArticles.length} {filteredArticles.length === 1 ? 'artigo' : 'artigos'}

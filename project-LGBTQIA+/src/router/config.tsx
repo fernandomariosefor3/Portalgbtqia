@@ -33,6 +33,7 @@ const routes: RouteObject[] = [
   { path: "/", element: <Home /> },
   { path: "/sobre", element: <AboutPage /> },
   { path: "/artigos", element: <ArticlesPage /> },
+  { path: "/artigos/categoria/:category", element: <ArticlesPage /> },
   { path: "/artigos/:slug", element: <ArticlePage /> },
   { path: "/cultura", element: <CulturePage /> },
   { path: "/cultura/cinema", element: <CultureCategoryPage /> },

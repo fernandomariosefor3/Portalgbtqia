@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /login
+Disallow: /api/
+Disallow: /eventos/submeter
+Disallow: /guia-fortaleza/indicar
+
+Sitemap: https://portalgbtqia.vercel.app/sitemap.xml
+Host: https://portalgbtqia.vercel.app

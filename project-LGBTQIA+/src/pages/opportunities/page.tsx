@@ -8,7 +8,7 @@ const mockOpportunities = [
     organization: 'Tech Para Todes',
     state: 'CE',
     category: 'Tecnologia',
-    verified: true,
+    verified: false,
     deadline: '2026-08-30',
     description: 'Vaga afirmativa para pessoas trans. Trabalho remoto, mas com base e contratação no Ceará.'
   },
@@ -19,7 +19,7 @@ const mockOpportunities = [
     organization: 'Restaurante / Delivery',
     state: 'PE',
     category: 'Gastronomia',
-    verified: true,
+    verified: false,
     deadline: null,
     description: 'Comida regional pernambucana feita com afeto. Empreendimento focado em contratar pessoas LGBTQIA+ em vulnerabilidade.'
   },
@@ -30,7 +30,7 @@ const mockOpportunities = [
     organization: 'Instituto Elas',
     state: 'BA',
     category: 'Financiamento',
-    verified: true,
+    verified: false,
     deadline: '2026-09-15',
     description: 'Edital para financiamento de coletivos de mulheres lésbicas e bissexuais no Nordeste.'
   },
@@ -52,7 +52,7 @@ const mockOpportunities = [
     organization: 'ONG Cores do Amanhã',
     state: 'MA',
     category: 'Educação',
-    verified: true,
+    verified: false,
     deadline: '2026-10-01',
     description: 'Curso gratuito de 3 meses para jovens LGBTQIA+ periféricos.'
   }
@@ -81,6 +81,14 @@ export default function OpportunitiesPage() {
   return (
     <main className="w-full min-h-screen bg-surface font-inter pt-16 md:pt-20">
       <section className="relative w-full bg-dark-800 px-4 md:px-6 lg:px-10 pt-16 pb-12 md:pt-20 md:pb-16 overflow-hidden">
+        {/* Banner de Alerta de Demonstração */}
+        <div className="absolute top-0 left-0 w-full bg-red-600 text-white text-center py-2 px-4 z-20 shadow-md flex items-center justify-center gap-2">
+          <i className="ri-error-warning-fill text-lg"></i>
+          <span className="text-xs md:text-sm font-bold uppercase tracking-wide">
+            Oportunidades listadas são apenas exemplos ilustrativos de demonstração de interface.
+          </span>
+        </div>
+        
         <div className="absolute inset-0 opacity-30">
           <img
             src="https://readdy.ai/api/search-image?query=diverse%20group%20of%20people%20working%20in%20a%20modern%20bright%20coworking%20space%20collaborating%20happy%20professional%20editorial&width=1600&height=520&seq=opportunities-hero&orientation=landscape"

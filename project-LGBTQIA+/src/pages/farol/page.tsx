@@ -19,7 +19,7 @@ export default function FarolPage() {
     {
       id: 1,
       role: 'assistant',
-      content: 'Olá! Eu sou o **Farol LGBTQIA+**, seu assistente inteligente baseado *apenas* em fontes verificadas do nosso portal e dados governamentais. Como posso ajudar com orientação, direitos, ou serviços hoje?'
+      content: 'Olá! Eu sou o **Farol LGBTQIA+**, seu assistente em fase de **PROTÓTIPO DE DEMONSTRAÇÃO**. Não realizo buscas reais ainda, mas você pode testar exemplos sobre PrEP, discriminação no trabalho ou eventos em Fortaleza.'
     }
   ]);
   const [input, setInput] = useState('');
@@ -72,8 +72,11 @@ export default function FarolPage() {
                 <i className="ri-robot-2-line text-xl"></i>
               </div>
               <div>
-                <h1 className="font-bold text-lg leading-tight">Farol LGBTQIA+</h1>
-                <p className="text-xs text-white/80">Fontes 100% verificadas</p>
+                <div className="flex items-center gap-2">
+                  <h1 className="font-bold text-lg leading-tight">Farol LGBTQIA+</h1>
+                  <span className="px-1.5 py-0.5 bg-amber-500 text-dark-800 text-[10px] font-bold uppercase rounded">Protótipo</span>
+                </div>
+                <p className="text-xs text-white/80">Demonstração visual do assistente</p>
               </div>
             </div>
             <Link to="/sos" className="px-3 py-1.5 text-xs font-semibold bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors">

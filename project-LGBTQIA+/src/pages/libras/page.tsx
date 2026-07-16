@@ -4,28 +4,28 @@ const librasVideos = [
     title: 'Prevenção e PrEP em Libras',
     category: 'Saúde Sexual',
     duration: '3:45',
-    image: 'https://readdy.ai/api/search-image?query=a%20young%20person%20communicating%20in%20sign%20language%20with%20a%20smile%2C%20warm%20studio%20lighting%2C%20soft%20background%2C%20inclusive%20representation&width=600&height=400&seq=libras1&orientation=landscape',
+    image: 'https://readdy.ai/api/search-image?query=abstract%20graphic%20design%20with%20smooth%20vibrant%20gradients%20in%20blue%20and%20teal%20colors%20representing%20health%20and%20care%20minimalist&width=600&height=400&seq=libras1&orientation=landscape',
   },
   {
     id: 2,
     title: 'Direitos básicos: Nome Social',
     category: 'Meus Direitos',
     duration: '2:30',
-    image: 'https://readdy.ai/api/search-image?query=person%20making%20sign%20language%20gesture%20meaning%20identity%2C%20professional%20lighting%2C%20clean%20background&width=600&height=400&seq=libras2&orientation=landscape',
+    image: 'https://readdy.ai/api/search-image?query=abstract%20graphic%20design%20with%20interlocking%20geometric%20shapes%20in%20warm%20orange%20and%20yellow%20tones%20symbolizing%20identity%20and%20rights&width=600&height=400&seq=libras2&orientation=landscape',
   },
   {
     id: 3,
     title: 'Como denunciar LGBTfobia',
     category: 'Segurança',
     duration: '4:15',
-    image: 'https://readdy.ai/api/search-image?query=deaf%20person%20signing%20emphatically%2C%20serious%20expression%2C%20high%20quality%20editorial%20photography&width=600&height=400&seq=libras3&orientation=landscape',
+    image: 'https://readdy.ai/api/search-image?query=bold%20abstract%20shapes%20in%20red%20and%20magenta%20tones%20signifying%20strength%20and%20protection%20minimalist%20digital%20art&width=600&height=400&seq=libras3&orientation=landscape',
   },
   {
     id: 4,
     title: 'Glossário LGBTQIA+ em Libras',
     category: 'Cultura Surda',
     duration: '10:00',
-    image: 'https://readdy.ai/api/search-image?query=group%20of%20diverse%20young%20people%20signing%20and%20laughing%20together%2C%20colorful%20vibrant%20setting&width=600&height=400&seq=libras4&orientation=landscape',
+    image: 'https://readdy.ai/api/search-image?query=colorful%20abstract%20waves%20and%20particles%20in%20rainbow%20colors%20representing%20diversity%20and%20culture%20vibrant%20digital%20illustration&width=600&height=400&seq=libras4&orientation=landscape',
   },
 ];
 

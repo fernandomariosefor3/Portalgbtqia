@@ -27,6 +27,14 @@ export default function ObservatoryPage() {
   return (
     <main className="w-full min-h-screen bg-surface font-inter pt-16 md:pt-20">
       <section className="relative w-full bg-dark-800 px-4 md:px-6 lg:px-10 pt-16 pb-12 md:pt-20 md:pb-16 overflow-hidden">
+        {/* Banner de Alerta de Demonstração */}
+        <div className="absolute top-0 left-0 w-full bg-red-600 text-white text-center py-2 px-4 z-20 shadow-md flex items-center justify-center gap-2">
+          <i className="ri-error-warning-fill text-lg"></i>
+          <span className="text-xs md:text-sm font-bold uppercase tracking-wide">
+            Demonstração visual com dados ilustrativos. Não utilizar para análise ou tomada de decisão.
+          </span>
+        </div>
+        
         <div className="absolute inset-0 opacity-20">
           <img
             src="https://readdy.ai/api/search-image?query=abstract%20data%20visualization%20dashboard%20nodes%20glowing%20lines%20dark%20background%20technology%20information%20clean%20minimalist&width=1600&height=520&seq=observatory-hero&orientation=landscape"

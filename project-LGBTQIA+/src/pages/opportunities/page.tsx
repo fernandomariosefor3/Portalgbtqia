@@ -1,62 +1,6 @@
 import { useState, useMemo } from 'react';
 
-const mockOpportunities = [
-  {
-    id: 1,
-    type: 'vaga',
-    title: 'Desenvolvedor(a) Front-end Pleno',
-    organization: 'Tech Para Todes',
-    state: 'CE',
-    category: 'Tecnologia',
-    verified: false,
-    deadline: '2026-08-30',
-    description: 'Vaga afirmativa para pessoas trans. Trabalho remoto, mas com base e contratação no Ceará.'
-  },
-  {
-    id: 2,
-    type: 'empreendedor',
-    title: 'Cozinha da Bixa',
-    organization: 'Restaurante / Delivery',
-    state: 'PE',
-    category: 'Gastronomia',
-    verified: false,
-    deadline: null,
-    description: 'Comida regional pernambucana feita com afeto. Empreendimento focado em contratar pessoas LGBTQIA+ em vulnerabilidade.'
-  },
-  {
-    id: 3,
-    type: 'edital',
-    title: 'Fundo Elas+',
-    organization: 'Instituto Elas',
-    state: 'BA',
-    category: 'Financiamento',
-    verified: false,
-    deadline: '2026-09-15',
-    description: 'Edital para financiamento de coletivos de mulheres lésbicas e bissexuais no Nordeste.'
-  },
-  {
-    id: 4,
-    type: 'empreendedor',
-    title: 'Corte Inclusivo',
-    organization: 'Barbearia / Salão',
-    state: 'RN',
-    category: 'Beleza',
-    verified: false,
-    deadline: null,
-    description: 'Um espaço seguro para cortar o cabelo e fazer a barba. Focado no público transmasculino.'
-  },
-  {
-    id: 5,
-    type: 'curso',
-    title: 'Formação em Design Gráfico',
-    organization: 'ONG Cores do Amanhã',
-    state: 'MA',
-    category: 'Educação',
-    verified: false,
-    deadline: '2026-10-01',
-    description: 'Curso gratuito de 3 meses para jovens LGBTQIA+ periféricos.'
-  }
-];
+import { useOpportunities } from '@/lib/useOpportunities';
 
 export default function OpportunitiesPage() {
   const [filterType, setFilterType] = useState('todos');
@@ -70,13 +14,15 @@ export default function OpportunitiesPage() {
     { value: 'empreendedor', label: 'Empreendedores Locais' }
   ];
 
+  const { opportunities, loading, error } = useOpportunities();
+
   const filteredItems = useMemo(() => {
-    return mockOpportunities.filter(item => {
-      const matchType = filterType === 'todos' || item.type === filterType;
+    return opportunities.filter(item => {
+      const matchType = filterType === 'todos' || item.category.toLowerCase() === filterType;
       const matchState = filterState === 'todos' || item.state === filterState;
       return matchType && matchState;
     });
-  }, [filterType, filterState]);
+  }, [filterType, filterState, opportunities]);
 
   return (
     <main className="w-full min-h-screen bg-surface font-inter pt-16 md:pt-20">
@@ -142,16 +88,26 @@ export default function OpportunitiesPage() {
         </div>
 
         {/* List */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {loading ? (
+          <div className="py-20 flex justify-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-200 border-t-primary-600"></div>
+          </div>
+        ) : error ? (
+          <div className="py-20 text-center text-red-500">
+            <i className="ri-error-warning-line text-4xl mb-4"></i>
+            <p>{error}</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredItems.map(item => (
             <article key={item.id} className="bg-white rounded-2xl border border-dark-100 p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
               <div className="flex justify-between items-start mb-4">
                 <span className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded text-white ${
-                  item.type === 'vaga' ? 'bg-blue-600' :
-                  item.type === 'edital' ? 'bg-emerald-600' :
-                  item.type === 'curso' ? 'bg-purple-600' : 'bg-orange-500'
+                  item.category.toLowerCase() === 'vaga' || item.category.toLowerCase() === 'emprego' ? 'bg-blue-600' :
+                  item.category.toLowerCase() === 'edital' ? 'bg-emerald-600' :
+                  item.category.toLowerCase() === 'curso' ? 'bg-purple-600' : 'bg-orange-500'
                 }`}>
-                  {item.type}
+                  {item.category}
                 </span>
                 <div className="flex gap-2">
                   <span className="text-xs font-bold text-dark-400 bg-dark-50 px-2 py-1 rounded">{item.state}</span>
@@ -197,6 +153,7 @@ export default function OpportunitiesPage() {
             </div>
           )}
         </div>
+        )}
       </section>
     </main>
   );

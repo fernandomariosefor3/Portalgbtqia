@@ -1,28 +1,37 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const statesData = [
-  { state: 'CE', reports: 1240, color: 'bg-emerald-500', width: '85%' },
-  { state: 'BA', reports: 1105, color: 'bg-blue-500', width: '75%' },
-  { state: 'PE', reports: 980, color: 'bg-purple-500', width: '65%' },
-  { state: 'PB', reports: 450, color: 'bg-amber-500', width: '30%' },
-  { state: 'RN', reports: 380, color: 'bg-rose-500', width: '25%' },
-  { state: 'MA', reports: 310, color: 'bg-teal-500', width: '20%' },
-  { state: 'AL', reports: 290, color: 'bg-indigo-500', width: '18%' },
-  { state: 'PI', reports: 150, color: 'bg-pink-500', width: '10%' },
-  { state: 'SE', reports: 110, color: 'bg-orange-500', width: '8%' },
-];
-
-const categoryData = [
-  { name: 'Discriminação em serviço público', percentage: 35, color: 'bg-rose-500' },
-  { name: 'Violência física/ameaça', percentage: 28, color: 'bg-orange-500' },
-  { name: 'Discriminação no trabalho', percentage: 20, color: 'bg-amber-500' },
-  { name: 'Conflitos familiares', percentage: 12, color: 'bg-blue-500' },
-  { name: 'Outros', percentage: 5, color: 'bg-dark-300' },
-];
+import { useObservatory } from '@/lib/useObservatory';
 
 export default function ObservatoryPage() {
   const [activeTab, setActiveTab] = useState('denuncias');
+  const { metrics, loading, error } = useObservatory();
+
+  const statesData = metrics
+    .filter(m => m.indicator_name === 'denuncias_estado')
+    .sort((a, b) => b.value - a.value)
+    .map((m, index) => {
+      const colors = ['bg-emerald-500', 'bg-blue-500', 'bg-purple-500', 'bg-amber-500', 'bg-rose-500', 'bg-teal-500', 'bg-indigo-500', 'bg-pink-500', 'bg-orange-500'];
+      return {
+        state: m.state,
+        reports: m.value,
+        color: colors[index % colors.length]
+      };
+    });
+    
+  const maxStateReports = statesData.length > 0 ? Math.max(...statesData.map(d => d.reports)) : 1;
+
+  const categoryData = metrics
+    .filter(m => m.indicator_name === 'violacoes_categoria')
+    .sort((a, b) => b.value - a.value)
+    .map((m, index) => {
+      const colors = ['bg-rose-500', 'bg-orange-500', 'bg-amber-500', 'bg-blue-500', 'bg-dark-300'];
+      return {
+        name: m.state, // here state field might hold the category name or we just use state for now
+        percentage: m.value,
+        color: colors[index % colors.length]
+      };
+    });
 
   return (
     <main className="w-full min-h-screen bg-surface font-inter pt-16 md:pt-20">
@@ -101,6 +110,15 @@ export default function ObservatoryPage() {
                   </div>
                 </div>
                 
+                {loading ? (
+                  <div className="py-10 flex justify-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-4 border-primary-200 border-t-primary-600"></div>
+                  </div>
+                ) : error ? (
+                  <div className="text-red-500 text-center py-4">{error}</div>
+                ) : statesData.length === 0 ? (
+                  <div className="text-dark-400 text-center py-4 text-sm">Base de dados vazia. Adicione documentos no Firebase com indicator_name = 'denuncias_estado'.</div>
+                ) : (
                 <div className="space-y-4">
                   {statesData.map((item) => (
                     <div key={item.state} className="flex items-center gap-4">
@@ -108,13 +126,14 @@ export default function ObservatoryPage() {
                       <div className="flex-1 h-6 bg-dark-50 rounded-full overflow-hidden">
                         <div 
                           className={`h-full ${item.color} rounded-full`}
-                          style={{ width: item.width }}
+                          style={{ width: `${(item.reports / maxStateReports) * 100}%` }}
                         ></div>
                       </div>
                       <span className="w-12 text-right text-xs font-medium text-dark-500">{item.reports}</span>
                     </div>
                   ))}
                 </div>
+                )}
               </div>
             )}
 
@@ -125,6 +144,13 @@ export default function ObservatoryPage() {
                   <p className="text-sm text-dark-500 mt-1">Categorização de chamados na região Nordeste</p>
                 </div>
                 
+                {loading ? (
+                  <div className="py-10 flex justify-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-4 border-primary-200 border-t-primary-600"></div>
+                  </div>
+                ) : categoryData.length === 0 ? (
+                  <div className="text-dark-400 text-center py-4 text-sm">Base de dados vazia. Adicione documentos no Firebase com indicator_name = 'violacoes_categoria'.</div>
+                ) : (
                 <div className="space-y-5">
                   {categoryData.map((item) => (
                     <div key={item.name}>
@@ -141,6 +167,7 @@ export default function ObservatoryPage() {
                     </div>
                   ))}
                 </div>
+                )}
               </div>
             )}
           </div>

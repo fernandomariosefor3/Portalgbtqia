@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useFarol } from '@/lib/useFarol';
 
 type Message = {
   id: number;
@@ -25,6 +26,8 @@ export default function FarolPage() {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  const { searchKnowledge, loading } = useFarol();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -42,17 +45,22 @@ export default function FarolPage() {
     setInput('');
     setIsTyping(true);
 
-    // Mock response based on input
+    // Fetch response from Firebase hook
     setTimeout(() => {
-      let replyContent = "Desculpe, ainda estou aprendendo e só posso responder baseado nas cartilhas do portal. Tente perguntar sobre PrEP, discriminação no trabalho ou eventos em Fortaleza.";
-      const lowerText = text.toLowerCase();
+      if (loading) {
+        setMessages(prev => [...prev, { id: Date.now() + 1, role: 'assistant', content: 'Ainda estou carregando minha base de conhecimento. Tente novamente em alguns instantes.' }]);
+        setIsTyping(false);
+        return;
+      }
+
+      const knowledge = searchKnowledge(text);
+      let replyContent = "Desculpe, ainda não encontrei uma resposta curada para essa pergunta na minha base de dados. Tente usar outras palavras-chave ou acesse o Guia SOS para ajuda humana.";
       
-      if (lowerText.includes('prep') || lowerText.includes('pep')) {
-        replyContent = "**PrEP** (Profilaxia Pré-Exposição) é um método de prevenção à infecção pelo HIV. Você toma um comprimido antes da exposição.\n\n**Onde encontrar:** Você pode consultar a disponibilidade no posto de saúde mais próximo ou através da nossa página de [Mapa do Acolhimento](/guia-fortaleza).\n\n*Fonte: Ministério da Saúde (2025).*";
-      } else if (lowerText.includes('discriminação') || lowerText.includes('trabalho') || lowerText.includes('prova')) {
-        replyContent = "A discriminação por orientação sexual e identidade de gênero no ambiente de trabalho é crime de racismo (decisão do STF). \n\n**O que guardar como prova:** \n- Prints de conversas (WhatsApp, E-mail, Slack)\n- E-mails institucionais\n- Testemunhas (colegas que presenciaram)\n\n*Nota: Não sou advogado. Procure a Defensoria Pública para aconselhamento jurídico individual.*";
-      } else if (lowerText.includes('evento') || lowerText.includes('fortaleza')) {
-        replyContent = "Neste mês em Fortaleza, temos destaques como o **Seminário de Saúde Trans** no Campus do Pici. \n\nPara a lista completa e atualizada, por favor confira nossa aba de [Eventos](/eventos).";
+      if (knowledge) {
+        replyContent = knowledge.response_template;
+        if (knowledge.official_source_name) {
+          replyContent += `\n\n*Fonte: ${knowledge.official_source_name}*`;
+        }
       }
 
       setMessages(prev => [...prev, { id: Date.now() + 1, role: 'assistant', content: replyContent }]);

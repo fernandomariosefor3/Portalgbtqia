@@ -56,6 +56,14 @@ interface SiteSection {
   image: string;
   ctaLabel: string;
   ctaUrl: string;
+  title_en?: string;
+  subtitle_en?: string;
+  description_en?: string;
+  ctaLabel_en?: string;
+  title_es?: string;
+  subtitle_es?: string;
+  description_es?: string;
+  ctaLabel_es?: string;
 }
 
 interface CultureOverride {
@@ -115,6 +123,36 @@ const defaultSections: SiteSection[] = [
     image: "",
     ctaLabel: "Fale conosco",
     ctaUrl: "/comunidade",
+  },
+  {
+    key: "culture-hero",
+    label: "Cultura - Cabeçalho",
+    title: "Cultura e Entretenimento",
+    subtitle: "Vozes LGBTQIA+",
+    description: "Cinema, música, séries e a arte drag celebrando nossa diversidade e talento.",
+    image: "",
+    ctaLabel: "",
+    ctaUrl: "",
+  },
+  {
+    key: "events-hero",
+    label: "Eventos - Cabeçalho",
+    title: "Eventos & Agenda",
+    subtitle: "Agenda LGBTQ+ Nordeste",
+    description: "Descubra paradas, festas, encontros, workshops e celebrações da comunidade LGBTQ+ no Nordeste.",
+    image: "",
+    ctaLabel: "",
+    ctaUrl: "",
+  },
+  {
+    key: "health-hero",
+    label: "Saúde - Cabeçalho",
+    title: "Saúde e Bem-Estar",
+    subtitle: "Corpo e Mente",
+    description: "Informações verificadas sobre saúde integral, prevenção e acesso a serviços especializados.",
+    image: "",
+    ctaLabel: "",
+    ctaUrl: "",
   },
 ];
 
@@ -194,6 +232,7 @@ export default function AdminPage() {
   const [places, setPlaces] = useState<EditableRecord[]>([]);
   const [facebookText, setFacebookText] = useState("");
   const [facebookArticleUrl, setFacebookArticleUrl] = useState("");
+  const [editingLang, setEditingLang] = useState<"pt" | "en" | "es">("pt");
 
   const loadArticles = useCallback(async () => {
     const q = query(collection(db, "articles"), orderBy("published_at", "desc"));
@@ -1163,14 +1202,57 @@ export default function AdminPage() {
             ))}
           </div>
           <div className="bg-white border rounded-xl p-6 shadow-sm space-y-4">
-            <input value={sectionForm.title} onChange={(e) => setSectionForm({ ...sectionForm, title: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Titulo" />
-            <input value={sectionForm.subtitle} onChange={(e) => setSectionForm({ ...sectionForm, subtitle: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Subtitulo" />
-            <textarea value={sectionForm.description} onChange={(e) => setSectionForm({ ...sectionForm, description: e.target.value })} rows={5} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Descricao" />
-            <input value={sectionForm.image} onChange={(e) => setSectionForm({ ...sectionForm, image: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="URL da imagem" />
-            <div className="grid sm:grid-cols-2 gap-3">
-              <input value={sectionForm.ctaLabel} onChange={(e) => setSectionForm({ ...sectionForm, ctaLabel: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Texto do botao" />
-              <input value={sectionForm.ctaUrl} onChange={(e) => setSectionForm({ ...sectionForm, ctaUrl: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Link do botao" />
+            <div className="flex gap-2 mb-2">
+              {(["pt", "en", "es"] as const).map((lang) => (
+                <button
+                  key={lang}
+                  type="button"
+                  onClick={() => setEditingLang(lang)}
+                  className={`px-3 py-1 rounded text-xs font-medium uppercase ${editingLang === lang ? "bg-primary-500 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}
+                >
+                  {lang}
+                </button>
+              ))}
             </div>
+
+            {editingLang === "pt" && (
+              <>
+                <input value={sectionForm.title} onChange={(e) => setSectionForm({ ...sectionForm, title: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Titulo (PT)" />
+                <input value={sectionForm.subtitle} onChange={(e) => setSectionForm({ ...sectionForm, subtitle: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Subtitulo (PT)" />
+                <textarea value={sectionForm.description} onChange={(e) => setSectionForm({ ...sectionForm, description: e.target.value })} rows={5} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Descricao (PT)" />
+                <input value={sectionForm.image} onChange={(e) => setSectionForm({ ...sectionForm, image: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="URL da imagem (pode ser o mesmo para todos)" />
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <input value={sectionForm.ctaLabel} onChange={(e) => setSectionForm({ ...sectionForm, ctaLabel: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Texto do botao (PT)" />
+                  <input value={sectionForm.ctaUrl} onChange={(e) => setSectionForm({ ...sectionForm, ctaUrl: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Link do botao (pode ser o mesmo para todos)" />
+                </div>
+              </>
+            )}
+
+            {editingLang === "en" && (
+              <>
+                <input value={sectionForm.title_en || ""} onChange={(e) => setSectionForm({ ...sectionForm, title_en: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Titulo (EN)" />
+                <input value={sectionForm.subtitle_en || ""} onChange={(e) => setSectionForm({ ...sectionForm, subtitle_en: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Subtitulo (EN)" />
+                <textarea value={sectionForm.description_en || ""} onChange={(e) => setSectionForm({ ...sectionForm, description_en: e.target.value })} rows={5} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Descricao (EN)" />
+                <input value={sectionForm.image} onChange={(e) => setSectionForm({ ...sectionForm, image: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="URL da imagem (mesmo para todos)" />
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <input value={sectionForm.ctaLabel_en || ""} onChange={(e) => setSectionForm({ ...sectionForm, ctaLabel_en: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Texto do botao (EN)" />
+                  <input value={sectionForm.ctaUrl} onChange={(e) => setSectionForm({ ...sectionForm, ctaUrl: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Link do botao (mesmo para todos)" />
+                </div>
+              </>
+            )}
+
+            {editingLang === "es" && (
+              <>
+                <input value={sectionForm.title_es || ""} onChange={(e) => setSectionForm({ ...sectionForm, title_es: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Titulo (ES)" />
+                <input value={sectionForm.subtitle_es || ""} onChange={(e) => setSectionForm({ ...sectionForm, subtitle_es: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Subtitulo (ES)" />
+                <textarea value={sectionForm.description_es || ""} onChange={(e) => setSectionForm({ ...sectionForm, description_es: e.target.value })} rows={5} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Descricao (ES)" />
+                <input value={sectionForm.image} onChange={(e) => setSectionForm({ ...sectionForm, image: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="URL da imagem (mesmo para todos)" />
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <input value={sectionForm.ctaLabel_es || ""} onChange={(e) => setSectionForm({ ...sectionForm, ctaLabel_es: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Texto do botao (ES)" />
+                  <input value={sectionForm.ctaUrl} onChange={(e) => setSectionForm({ ...sectionForm, ctaUrl: e.target.value })} className="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Link do botao (mesmo para todos)" />
+                </div>
+              </>
+            )}
             <button onClick={saveSection} disabled={isPublishing} className="w-full py-3 bg-pink-600 text-white rounded-lg font-semibold text-sm disabled:opacity-50">
               {isPublishing ? "Salvando..." : "Salvar espaco"}
             </button>

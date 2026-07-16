@@ -12,7 +12,8 @@
     "type-check": "tsc --noEmit --project tsconfig.app.json",
     "test": "vitest run",
     "test:watch": "vitest",
-    "validate": "npm run type-check && npm run lint && npm run test"
+    "validate": "npm run type-check && npm run lint && npm run test",
+    "skill:check": "node scripts/check-portal-skill-sync.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

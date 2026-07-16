@@ -3,9 +3,21 @@ import { Link } from 'react-router-dom';
 import EventCard from './components/EventCard';
 import EventFilters from './components/EventFilters';
 import { useEvents } from '@/lib/useEvents';
+import { useSiteSection } from '@/lib/useSiteSection';
+
+const fallbackHero = {
+  title: 'Eventos & Agenda',
+  subtitle: 'Agenda LGBTQ+ Nordeste',
+  description: 'Descubra paradas, festas, encontros, workshops e celebrações da comunidade LGBTQ+ em Fortaleza e todo o Nordeste.',
+  image: 'https://readdy.ai/api/search-image?query=Aerial%20view%20of%20colorful%20LGBTQ%20pride%20parade%20crowd%20from%20above%2C%20confetti%20and%20rainbow%20flags%20filling%20the%20streets%2C%20warm%20tropical%20sunlight%2C%20editorial%20photography%2C%20high%20quality%2C%20vibrant%20warm%20tones&width=1400&height=500&seq=eventshero&orientation=landscape',
+  ctaLabel: 'Indicar evento',
+  ctaUrl: '/eventos/submeter',
+};
 
 export default function EventsPage() {
   const { events, loading } = useEvents();
+  const { content: heroContent } = useSiteSection('events-hero', fallbackHero);
+  
   const [activeCategory, setActiveCategory] = useState('todos');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeState, setActiveState] = useState('todos');
@@ -89,7 +101,7 @@ export default function EventsPage() {
       <section className="relative pt-20 md:pt-24 pb-10 md:pb-14 bg-dark-800 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
-            src="https://readdy.ai/api/search-image?query=Aerial%20view%20of%20colorful%20LGBTQ%20pride%20parade%20crowd%20from%20above%2C%20confetti%20and%20rainbow%20flags%20filling%20the%20streets%2C%20warm%20tropical%20sunlight%2C%20editorial%20photography%2C%20high%20quality%2C%20vibrant%20warm%20tones&width=1400&height=500&seq=eventshero&orientation=landscape"
+            src={heroContent.image || fallbackHero.image}
             alt=""
             className="w-full h-full object-cover object-top"
           />
@@ -99,21 +111,21 @@ export default function EventsPage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium text-primary-300 bg-primary-400/20 rounded-full mb-4">
-                <i className="ri-calendar-event-line" aria-hidden="true"></i> Agenda LGBTQ+ Nordeste
+                <i className="ri-calendar-event-line" aria-hidden="true"></i> {heroContent.subtitle || fallbackHero.subtitle}
               </span>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-white leading-tight">
-                Eventos & Agenda
+                {heroContent.title || fallbackHero.title}
               </h1>
               <p className="mt-3 text-base md:text-lg text-white/70 max-w-xl">
-                Descubra paradas, festas, encontros, workshops e celebrações da comunidade LGBTQ+ em Fortaleza e todo o Nordeste.
+                {heroContent.description || fallbackHero.description}
               </p>
             </div>
             <Link
-              to="/eventos/submeter"
+              to={heroContent.ctaUrl || fallbackHero.ctaUrl}
               className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap"
             >
               <i className="ri-add-circle-line" aria-hidden="true"></i>
-              Indicar evento
+              {heroContent.ctaLabel || fallbackHero.ctaLabel}
             </Link>
           </div>
         </div>

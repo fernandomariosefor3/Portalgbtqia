@@ -17,7 +17,13 @@ type MetadataTuple = [string, string];
 
 const definitions: Record<string, MetadataTuple> = {
   '/': ['Portal LGBTQ+ Nordeste — Informação, cultura, saúde e direitos', 'Jornalismo, cultura, saúde, direitos e comunidade LGBTQ+ no Nordeste do Brasil. Conteúdo confiável, acolhimento e representatividade.'],
-  '/sobre': ['Sobre o Portal LGBTQ+ Nordeste', 'Conheça a missão, os valores e a equipe do Portal LGBTQ+ Nordeste, uma iniciativa independente de informação e acolhimento.'],
+  '/quem-somos': ['Quem somos | Portal LGBTQ+ Nordeste', 'Conheça a missão, os valores e a equipe responsável pelo Portal LGBTQ+ Nordeste.'],
+  '/politica-editorial': ['Política editorial | Portal LGBTQ+ Nordeste', 'Saiba como escolhemos, produzimos, revisamos e atualizamos conteúdos sobre saúde, direitos e diversidade.'],
+  '/nossas-fontes': ['Nossas fontes | Portal LGBTQ+ Nordeste', 'Conheça os critérios usados para selecionar documentos oficiais, estudos, especialistas e fontes locais.'],
+  '/politica-de-correcoes': ['Política de correções | Portal LGBTQ+ Nordeste', 'Veja como solicitar a correção de informações e como sinalizamos mudanças relevantes nos artigos.'],
+  '/contato': ['Contato | Portal LGBTQ+ Nordeste', 'Entre em contato para enviar pautas, correções, dúvidas de privacidade ou relatar problemas técnicos.'],
+  '/privacidade': ['Política de privacidade | Portal LGBTQ+ Nordeste', 'Entenda quais dados o portal pode tratar, para quais finalidades e como exercer seus direitos.'],
+  '/termos-de-uso': ['Termos de uso | Portal LGBTQ+ Nordeste', 'Consulte as regras de acesso, participação, responsabilidade e uso dos conteúdos do portal.'],
   '/artigos': ['Artigos e opinião LGBTQ+ | Portal LGBTQ+ Nordeste', 'Reportagens, análises e histórias sobre política, cultura, saúde, direitos e vivências LGBTQ+ no Nordeste do Brasil.'],
   '/cultura': ['Cultura LGBTQ+: cinema, séries, música e drag', 'Notícias, críticas e histórias sobre cinema, séries, música, literatura e arte drag LGBTQ+ no Brasil.'],
   '/eventos': ['Eventos LGBTQ+ no Nordeste | Agenda e encontros', 'Encontre festas, encontros, atividades culturais e eventos LGBTQ+ em Fortaleza, no Ceará e no Nordeste.'],
@@ -131,7 +137,7 @@ export default function MultilingualSeo() {
           '@type': 'Person',
           '@id': `${SITE_URL}/#founder`,
           name: 'Fernando Mário da Silva Martins',
-          url: `${SITE_URL}/sobre`,
+          url: `${SITE_URL}/quem-somos`,
         },
         {
           '@type': 'WebSite',

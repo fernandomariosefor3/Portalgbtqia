@@ -6,6 +6,9 @@ interface EventFiltersProps {
   onCategoryChange: (cat: string) => void;
   searchQuery: string;
   onSearchChange: (q: string) => void;
+  activeState: string;
+  onStateChange: (state: string) => void;
+  states: string[];
   activeCity: string;
   onCityChange: (city: string) => void;
   cities: string[];
@@ -34,6 +37,9 @@ export default function EventFilters({
   onCategoryChange,
   searchQuery,
   onSearchChange,
+  activeState,
+  onStateChange,
+  states,
   activeCity,
   onCityChange,
   cities,
@@ -68,6 +74,19 @@ export default function EventFilters({
           Filtros
         </button>
         <div className={`${showFilters ? 'flex' : 'hidden'} sm:flex flex-col sm:flex-row gap-3`}>
+          <select
+            id="event-state"
+            name="event-state"
+            aria-label="Filtrar por estado"
+            value={activeState}
+            onChange={(e) => onStateChange(e.target.value)}
+            className="px-3 py-2.5 text-sm border border-dark-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 bg-white"
+          >
+            <option value="todos">Todos os estados</option>
+            {states.map((st) => (
+              <option key={st} value={st}>{st}</option>
+            ))}
+          </select>
           <select
             id="event-city"
             name="event-city"

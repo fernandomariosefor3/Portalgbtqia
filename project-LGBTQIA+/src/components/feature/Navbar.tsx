@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth, signOut } from '../../lib/auth';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './LanguageSelector';
+import SearchModal from '../Search/SearchModal';
 
 const navLinks = [
   { labelKey: 'nav.articles', path: '/artigos' },
@@ -15,13 +16,14 @@ const navLinks = [
   { labelKey: 'nav.routes', path: '/roteiros' },
   { labelKey: 'nav.parades', path: '/paradas' },
   { labelKey: 'nav.education', path: '/educacao' },
-  { labelKey: 'nav.about', path: '/sobre' },
+  { labelKey: 'nav.about', path: '/quem-somos' },
   { labelKey: 'nav.community', path: '/comunidade' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const { user, isAdmin } = useAuth();
   const { t } = useTranslation();
 
@@ -78,6 +80,7 @@ export default function Navbar() {
           </Link>
 
           <button
+            onClick={() => setSearchOpen(true)}
             className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
               scrolled ? 'text-dark-600 hover:bg-dark-50' : 'text-white/90 hover:bg-white/10'
             }`}
@@ -88,6 +91,15 @@ export default function Navbar() {
 
           {isAdmin ? (
             <div className="flex items-center gap-2">
+              <Link
+                to="/favoritos"
+                className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
+                  scrolled ? 'text-dark-600 hover:bg-dark-50' : 'text-white/90 hover:bg-white/10'
+                }`}
+                title="Meus Favoritos"
+              >
+                <i className="ri-bookmark-line text-lg" aria-hidden="true"></i>
+              </Link>
               <Link
                 to="/admin"
                 className="px-4 py-2 text-sm font-medium rounded-full bg-green-600 text-white hover:bg-green-700 transition-colors"
@@ -104,14 +116,25 @@ export default function Navbar() {
               </button>
             </div>
           ) : user ? (
-            <button
-              onClick={() => signOut()}
-              className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
-                scrolled ? 'text-dark-600 hover:bg-dark-50 border border-dark-200' : 'text-white/80 hover:bg-white/10 border border-white/20'
-              }`}
-            >
-              {t('nav.logout')}
-            </button>
+            <div className="flex items-center gap-2">
+              <Link
+                to="/favoritos"
+                className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
+                  scrolled ? 'text-dark-600 hover:bg-dark-50' : 'text-white/90 hover:bg-white/10'
+                }`}
+                title="Meus Favoritos"
+              >
+                <i className="ri-bookmark-line text-lg" aria-hidden="true"></i>
+              </Link>
+              <button
+                onClick={() => signOut()}
+                className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+                  scrolled ? 'text-dark-600 hover:bg-dark-50 border border-dark-200' : 'text-white/80 hover:bg-white/10 border border-white/20'
+                }`}
+              >
+                {t('nav.logout')}
+              </button>
+            </div>
           ) : (
             <Link
               to="/login"
@@ -131,6 +154,8 @@ export default function Navbar() {
         >
           <i className={mobileOpen ? 'ri-close-line text-2xl' : 'ri-menu-line text-2xl'}></i>
         </button>
+        {/* Modals & Overlays */}
+        <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
       </nav>
 
       {mobileOpen && (
@@ -168,12 +193,22 @@ export default function Navbar() {
               </Link>
             )}
             {user ? (
-              <button
-                onClick={() => { signOut(); setMobileOpen(false); }}
-                className="px-3 py-3 text-sm font-medium text-left text-dark-600 hover:bg-dark-50 rounded-md transition-colors"
-              >
-                {t('nav.logout')}
-              </button>
+              <>
+                <Link
+                  to="/favoritos"
+                  onClick={() => setMobileOpen(false)}
+                  className="px-3 py-3 text-sm font-medium text-left text-dark-600 hover:bg-dark-50 rounded-md transition-colors"
+                >
+                  <i className="ri-bookmark-line mr-2" aria-hidden="true"></i>
+                  Meus Favoritos
+                </Link>
+                <button
+                  onClick={() => { signOut(); setMobileOpen(false); }}
+                  className="px-3 py-3 text-sm font-medium text-left text-dark-600 hover:bg-dark-50 rounded-md transition-colors"
+                >
+                  {t('nav.logout')}
+                </button>
+              </>
             ) : (
               <Link
                 to="/login"

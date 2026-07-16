@@ -22,6 +22,7 @@ import { applyLegalGuideOverride, legalGuideToOverride, type LegalGuideOverride 
 import { queerRouteTypes, staticQueerRoutes, type QueerRoute, type QueerRouteType } from "../../mocks/queerRoutes";
 import { applyQueerRouteOverride, queerRouteToOverride, type QueerRouteOverride } from "../../lib/useQueerRoutes";
 import PageBlocksManager from "./components/PageBlocksManager";
+import ImageUpload from "./components/ImageUpload";
 
 interface ArticleItem {
   id: string;
@@ -728,16 +729,12 @@ export default function AdminPage() {
 
         {/* Imagem */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">URL da imagem</label>
-          <input
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
-            placeholder="https://..."
+          <label className="block text-sm font-medium text-gray-700 mb-1">Imagem Destaque</label>
+          <ImageUpload 
+            value={image} 
+            onChange={setImage} 
+            folder="articles" 
           />
-          {image && (
-            <img src={image} alt="preview" className="mt-2 h-28 w-full object-cover rounded-lg" onError={(e) => (e.currentTarget.style.display = "none")} />
-          )}
         </div>
 
         {/* Categoria */}

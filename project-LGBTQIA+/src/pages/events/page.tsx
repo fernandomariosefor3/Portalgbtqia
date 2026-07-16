@@ -8,14 +8,24 @@ export default function EventsPage() {
   const { events, loading } = useEvents();
   const [activeCategory, setActiveCategory] = useState('todos');
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeState, setActiveState] = useState('todos');
   const [activeCity, setActiveCity] = useState('todas');
   const [sortBy, setSortBy] = useState('date_asc');
   const [timeFilter, setTimeFilter] = useState('todos');
 
-  const cities = useMemo(() => {
-    const set = new Set(events.map((e) => e.city).filter(Boolean));
+  const states = useMemo(() => {
+    const set = new Set(events.map((e) => e.state).filter(Boolean));
     return Array.from(set).sort();
   }, [events]);
+
+  const cities = useMemo(() => {
+    let filtered = events;
+    if (activeState !== 'todos') {
+      filtered = filtered.filter(e => e.state === activeState);
+    }
+    const set = new Set(filtered.map((e) => e.city).filter(Boolean));
+    return Array.from(set).sort();
+  }, [events, activeState]);
 
   const filteredEvents = useMemo(() => {
     let result = [...events];
@@ -33,6 +43,10 @@ export default function EventsPage() {
           e.city.toLowerCase().includes(q) ||
           e.tags.some((t) => t.includes(q))
       );
+    }
+
+    if (activeState !== 'todos') {
+      result = result.filter((e) => e.state === activeState);
     }
 
     if (activeCity !== 'todas') {
@@ -65,7 +79,7 @@ export default function EventsPage() {
     });
 
     return result;
-  }, [events, activeCategory, searchQuery, activeCity, sortBy, timeFilter]);
+  }, [events, activeCategory, searchQuery, activeState, activeCity, sortBy, timeFilter]);
 
   const featured = filteredEvents.filter((e) => e.is_featured);
   const regular = filteredEvents.filter((e) => !e.is_featured);
@@ -123,6 +137,9 @@ export default function EventsPage() {
           onCategoryChange={setActiveCategory}
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
+          activeState={activeState}
+          onStateChange={(state) => { setActiveState(state); setActiveCity('todas'); }}
+          states={states}
           activeCity={activeCity}
           onCityChange={setActiveCity}
           cities={cities}

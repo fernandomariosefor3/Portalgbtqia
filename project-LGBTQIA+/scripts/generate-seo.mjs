@@ -9,7 +9,13 @@ const distDir = join(root, 'dist');
 
 const routeDefinitions = [
   ['/', 'Portal LGBTQ+ Nordeste — Informação, cultura, saúde e direitos', 'Jornalismo, cultura, saúde, direitos e comunidade LGBTQ+ no Nordeste do Brasil.'],
-  ['/sobre', 'Sobre o Portal LGBTQ+ Nordeste', 'Conheça a missão, os valores e a equipe do Portal LGBTQ+ Nordeste.'],
+  ['/quem-somos', 'Quem somos | Portal LGBTQ+ Nordeste', 'Conheça a missão, os valores e a equipe responsável pelo portal.', 'Produzimos jornalismo de serviço, cultura e informação para pessoas LGBTQ+ no Nordeste, com compromisso com dignidade, contexto regional e acesso gratuito.'],
+  ['/politica-editorial', 'Política editorial | Portal LGBTQ+ Nordeste', 'Como produzimos, revisamos e atualizamos conteúdos sensíveis.', 'Todo artigo deve identificar autoria, datas, fontes e revisão. Conteúdos com auxílio de inteligência artificial exigem checagem humana, regionalização e contribuição editorial própria antes da publicação.'],
+  ['/nossas-fontes', 'Nossas fontes | Portal LGBTQ+ Nordeste', 'Critérios para documentos oficiais, estudos, especialistas e fontes locais.', 'Priorizamos órgãos públicos, legislação, artigos científicos, universidades, instituições reconhecidas e especialistas identificados. Ferramentas de inteligência artificial não são tratadas como fonte.'],
+  ['/politica-de-correcoes', 'Política de correções | Portal LGBTQ+ Nordeste', 'Como solicitar correções e como sinalizamos mudanças relevantes.', 'Erros factuais confirmados são corrigidos e mudanças materiais recebem nota no artigo e nova data de atualização. Solicitações podem ser enviadas para contato@portallgbtq.com.br.'],
+  ['/contato', 'Contato | Portal LGBTQ+ Nordeste', 'Canais para pautas, correções, privacidade e problemas técnicos.', 'Escreva para contato@portallgbtq.com.br e identifique no assunto se a mensagem trata de pauta, correção, privacidade, parceria ou problema técnico.'],
+  ['/privacidade', 'Política de privacidade | Portal LGBTQ+ Nordeste', 'Como o portal trata dados pessoais e protege os direitos dos usuários.', 'Tratamos apenas dados necessários para operar, proteger e melhorar o portal, responder solicitações e moderar contribuições. Não vendemos dados pessoais.'],
+  ['/termos-de-uso', 'Termos de uso | Portal LGBTQ+ Nordeste', 'Regras de acesso, participação e uso dos conteúdos do portal.', 'O conteúdo tem finalidade informativa e educativa. Informações de saúde e direitos não substituem atendimento médico ou aconselhamento jurídico individual.'],
   ['/artigos', 'Artigos e opinião LGBTQ+', 'Reportagens, análises e histórias sobre vivências LGBTQ+ no Nordeste do Brasil.'],
   ['/cultura', 'Cultura LGBTQ+: cinema, séries, música e drag', 'Notícias, críticas e histórias sobre cultura LGBTQ+ no Brasil.'],
   ['/cultura/cinema', 'Cinema LGBTQ+ e queer', 'Críticas, notícias e histórias do cinema LGBTQ+ e queer.'],
@@ -101,10 +107,21 @@ const textOnly = (value = '') => String(value).replace(/<script[\s\S]*?<\/script
 
 function buildSitemap(siteUrl, articles) {
   const today = new Date().toISOString().slice(0, 10);
+  const validDate = (value) => {
+    const parsed = value ? new Date(value) : null;
+    return parsed && !Number.isNaN(parsed.getTime()) ? parsed.toISOString().slice(0, 10) : today;
+  };
+  const latestForCategory = (category) => {
+    const dates = articles
+      .filter((article) => article.category === category)
+      .map((article) => validDate(article.updated_at || article.published_at))
+      .sort();
+    return dates.at(-1) || today;
+  };
   const paths = [
     ...routeDefinitions.map(([path]) => ({ path, lastmod: today })),
-    ...categories.map((category) => ({ path: `/artigos/categoria/${category}`, lastmod: today })),
-    ...articles.map((article) => ({ path: `/artigos/${article.slug}`, lastmod: String(article.published_at || today).slice(0, 10) })),
+    ...categories.map((category) => ({ path: `/artigos/categoria/${category}`, lastmod: latestForCategory(category) })),
+    ...articles.map((article) => ({ path: `/artigos/${article.slug}`, lastmod: validDate(article.updated_at || article.published_at) })),
   ];
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${paths.map(({ path, lastmod }) =>
     `  <url><loc>${escapeHtml(siteUrl + path)}</loc><lastmod>${lastmod}</lastmod></url>`
@@ -141,7 +158,14 @@ function renderPage(template, page, siteUrl) {
     html = html.replace('</head>', `<script type="application/ld+json" data-generated-seo="true">${json}</script>\n</head>`);
   }
   const links = (page.articleLinks || []).map((article) => `<li><a href="/artigos/${escapeHtml(article.slug)}">${escapeHtml(article.title)}</a></li>`).join('');
-  const fallback = `<main data-seo-fallback><h1>${escapeHtml(page.heading || page.title)}</h1><p>${escapeHtml(page.description)}</p>${page.content ? `<p>${escapeHtml(textOnly(page.content))}</p>` : ''}${links ? `<ul>${links}</ul>` : ''}<p><a href="/artigos">Ver todos os artigos</a></p></main>`;
+  const sources = (page.sources || []).map((source) => `<li><a href="${escapeHtml(source.url)}">${escapeHtml(source.title || source.publisher || source.url)}</a></li>`).join('');
+  const trust = page.reviewerName
+    ? `<p>Revisão responsável: ${escapeHtml(page.reviewerName)}. Atualizado em ${escapeHtml(page.updatedAt || '')}.</p>`
+    : '';
+  const warning = page.healthDisclaimer
+    ? '<aside><strong>Informação de saúde:</strong> este conteúdo não substitui atendimento profissional.</aside>'
+    : '';
+  const fallback = `<main data-seo-fallback><h1>${escapeHtml(page.heading || page.title)}</h1><p>${escapeHtml(page.description)}</p>${trust}${page.content ? `<p>${escapeHtml(textOnly(page.content))}</p>` : ''}${warning}${sources ? `<section><h2>Fontes e documentos consultados</h2><ol>${sources}</ol></section>` : ''}${links ? `<ul>${links}</ul>` : ''}<p><a href="/artigos">Ver todos os artigos</a></p></main>`;
   return html.replace('<div id="root"></div>', `<div id="root">${fallback}</div>`);
 }
 
@@ -170,14 +194,14 @@ async function finalize() {
     '@context': 'https://schema.org',
     '@graph': [
       { '@type': 'Organization', '@id': `${siteUrl}/#organization`, name: 'Portal LGBTQ+ Nordeste', url: siteUrl },
-      { '@type': 'Person', '@id': `${siteUrl}/#founder`, name: 'Fernando Mário da Silva Martins', url: `${siteUrl}/sobre` },
+      { '@type': 'Person', '@id': `${siteUrl}/#founder`, name: 'Fernando Mário da Silva Martins', url: `${siteUrl}/quem-somos` },
       { '@type': 'WebSite', '@id': `${siteUrl}/#website`, name: 'Portal LGBTQ+ Nordeste', url: siteUrl, potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: `${siteUrl}/artigos?busca={search_term_string}` }, 'query-input': 'required name=search_term_string' } },
     ],
   };
 
-  for (const [path, title, description] of routeDefinitions) {
+  for (const [path, title, description, content] of routeDefinitions) {
     const articleLinks = path === '/' || path === '/artigos' ? articles : [];
-    await writeRoute(distDir, path, renderPage(template, { path, title, description, articleLinks, jsonLd: siteGraph }, siteUrl));
+    await writeRoute(distDir, path, renderPage(template, { path, title, description, content, articleLinks, jsonLd: siteGraph }, siteUrl));
   }
 
   for (const category of categories) {
@@ -198,10 +222,15 @@ async function finalize() {
     const path = `/artigos/${article.slug}`;
     const url = siteUrl + path;
     const description = String(article.excerpt || '').slice(0, 160);
+    const articleSources = Array.isArray(article.sources) && article.sources.length > 0
+      ? article.sources
+      : article.source_url
+        ? [{ title: 'Fonte original', url: article.source_url }]
+        : [];
     const jsonLd = {
       '@context': 'https://schema.org',
       '@graph': [
-        { '@type': 'Article', '@id': `${url}#article`, mainEntityOfPage: url, headline: article.title, description, image: [article.featured_image || `${siteUrl}/og-image.png`], datePublished: article.published_at, dateModified: article.updated_at || article.published_at, author: { '@type': 'Person', name: article.author || 'Fernando Mário da Silva Martins' }, publisher: { '@id': `${siteUrl}/#organization` } },
+        { '@type': 'Article', '@id': `${url}#article`, mainEntityOfPage: url, headline: article.title, description, image: [article.featured_image || `${siteUrl}/og-image.png`], datePublished: article.published_at, dateModified: article.updated_at || article.published_at, author: { '@type': 'Person', name: article.author || 'Fernando Mário da Silva Martins' }, editor: article.reviewer_name ? { '@type': 'Person', name: article.reviewer_name } : undefined, citation: articleSources.map((source) => source.url).filter(Boolean), publisher: { '@id': `${siteUrl}/#organization` } },
         { '@type': 'BreadcrumbList', itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Início', item: `${siteUrl}/` },
           { '@type': 'ListItem', position: 2, name: 'Artigos', item: `${siteUrl}/artigos` },
@@ -217,6 +246,10 @@ async function finalize() {
       image: article.featured_image,
       type: 'article',
       content: article.content,
+      sources: articleSources,
+      reviewerName: article.reviewer_name,
+      updatedAt: article.updated_at,
+      healthDisclaimer: article.health_disclaimer === true || article.category === 'saude',
       jsonLd,
     }, siteUrl));
   }

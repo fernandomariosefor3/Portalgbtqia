@@ -11,6 +11,7 @@ import {
 } from '@/mocks/safeSpaces';
 import { useSafeSpaces } from '@/lib/useSafeSpaces';
 import { createSafeSpaceReview, reportSafeSpace, verifySafeSpace } from '@/lib/safeSpaceCommunity';
+import FavoriteButton from '@/components/feature/FavoriteButton';
 
 const filters = ['Todos', ...safeSpaceCategories] as const;
 const priceFilters = ['Todos', '$', '$$', '$$$', '$$$$'] as const;
@@ -90,6 +91,7 @@ function GuideSpaceImage({ space }: { space: SafeSpace }) {
 
 export default function GuidePage() {
   const { spaces, loading } = useSafeSpaces();
+  const [activeState, setActiveState] = useState<string>('CE');
   const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>('Todos');
   const [query, setQuery] = useState('');
   const [activeBadge, setActiveBadge] = useState('Todos');
@@ -115,6 +117,7 @@ export default function GuidePage() {
   const visibleSpaces = useMemo(() => {
     const search = query.trim().toLowerCase();
     return spaces.filter((space) => {
+      const matchesState = space.state === activeState;
       const matchesCategory = activeFilter === 'Todos' || space.category === activeFilter;
       const matchesSearch =
         !search ||
@@ -130,6 +133,7 @@ export default function GuidePage() {
       const matchesWifi = !needsWifi || Boolean(space.wifi);
       const matchesOpen = !openNowOnly || Boolean(space.openNow);
       return (
+        matchesState &&
         matchesCategory &&
         matchesSearch &&
         matchesBadge &&
@@ -140,17 +144,25 @@ export default function GuidePage() {
         matchesOpen
       );
     });
-  }, [activeBadge, activeFilter, maxDistance, needsAccessibility, needsWifi, openNowOnly, priceFilter, query, spaces]);
+  }, [activeState, activeBadge, activeFilter, maxDistance, needsAccessibility, needsWifi, openNowOnly, priceFilter, query, spaces]);
 
   const categoryCounts = useMemo(() => {
-    return spaces.reduce<Record<string, number>>(
-      (acc, space) => {
-        acc.Todos += 1;
-        acc[space.category] = (acc[space.category] || 0) + 1;
-        return acc;
-      },
-      { Todos: 0 },
-    );
+    return spaces
+      .filter((space) => space.state === activeState)
+      .reduce<Record<string, number>>(
+        (acc, space) => {
+          acc.Todos += 1;
+          acc[space.category] = (acc[space.category] || 0) + 1;
+          return acc;
+        },
+        { Todos: 0 },
+      );
+  }, [spaces, activeState]);
+  
+  const availableStates = useMemo(() => {
+    const states = new Set(spaces.map(s => s.state).filter(Boolean));
+    if (states.size === 0) return ['CE'];
+    return Array.from(states).sort();
   }, [spaces]);
 
   function scoreFor(space: SafeSpace) {
@@ -240,15 +252,26 @@ export default function GuidePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/75" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-10 pt-20 md:pt-28 pb-12">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-medium rounded-full bg-white/15 text-white border border-white/25 backdrop-blur-sm mb-5">
-              <i className="ri-map-pin-heart-line" aria-hidden="true"></i>
-              Fortaleza, CE
-            </span>
+            <div className="flex items-center gap-2 mb-5">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-medium rounded-full bg-white/15 text-white border border-white/25 backdrop-blur-sm">
+                <i className="ri-map-pin-heart-line" aria-hidden="true"></i>
+                Guia Regional
+              </span>
+              <select 
+                value={activeState}
+                onChange={(e) => setActiveState(e.target.value)}
+                className="bg-white/15 text-white border border-white/25 backdrop-blur-sm px-3 py-1.5 text-xs font-medium rounded-full outline-none focus:ring-2 focus:ring-white/50 cursor-pointer"
+              >
+                {availableStates.map(st => (
+                  <option key={st} value={st} className="text-dark-800">{st}</option>
+                ))}
+              </select>
+            </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white leading-tight">
-              Mapa de espaços gays e LGBTQIA+ em Fortaleza
+              Mapa de espaços LGBTQIA+ no estado: {activeState}
             </h1>
             <p className="mt-4 md:mt-5 text-base md:text-lg text-white/80 max-w-2xl leading-relaxed">
-              Lugares de saúde, cultura, acolhimento, direitos e convivência organizados por circuitos da cidade, com rotas rápidas e controle editorial pelo portal.
+              Lugares de saúde, cultura, acolhimento, direitos e convivência. Selecione seu estado para encontrar rotas seguras e pontos verificados pela comunidade.
             </p>
             <div className="mt-8 grid grid-cols-3 gap-3 max-w-xl">
               {[
@@ -477,6 +500,18 @@ export default function GuidePage() {
                   <GuideSpaceImage space={space} />
                   <div className="absolute top-3 left-3 px-2.5 py-1 text-xs font-medium rounded-full bg-white/90 text-dark-700 backdrop-blur-sm">
                     {space.category}
+                  </div>
+                  <div className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm">
+                    <FavoriteButton 
+                      item={{
+                        id: space.slug,
+                        type: 'place',
+                        title: space.name,
+                        slug: space.slug,
+                        image: space.image,
+                        category: space.category
+                      }} 
+                    />
                   </div>
                 </div>
                 <div className="p-5 md:p-6">

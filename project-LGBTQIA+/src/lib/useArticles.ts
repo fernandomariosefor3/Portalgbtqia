@@ -24,6 +24,24 @@ export function firestoreToArticle(doc: QueryDocumentSnapshot<DocumentData>): Ar
   const date = d.published_at?.toDate?.()
     ? d.published_at.toDate().toISOString()
     : typeof d.published_at === 'string' ? d.published_at : '';
+  const updatedAt = d.updated_at?.toDate?.()
+    ? d.updated_at.toDate().toISOString()
+    : typeof d.updated_at === 'string' ? d.updated_at : date;
+  const reviewedAt = d.reviewed_at?.toDate?.()
+    ? d.reviewed_at.toDate().toISOString()
+    : typeof d.reviewed_at === 'string' ? d.reviewed_at : '';
+  const sources = Array.isArray(d.sources)
+    ? d.sources
+        .filter((source: unknown) => source && typeof source === 'object')
+        .map((source: Record<string, unknown>) => ({
+          title: String(source.title || source.publisher || 'Documento consultado'),
+          url: String(source.url || ''),
+          publisher: source.publisher ? String(source.publisher) : undefined,
+        }))
+        .filter((source: { url: string }) => source.url)
+    : d.source_url
+      ? [{ title: 'Fonte original', url: String(d.source_url) }]
+      : [];
   return {
     id: doc.id,
     title: d.title || '',
@@ -32,6 +50,8 @@ export function firestoreToArticle(doc: QueryDocumentSnapshot<DocumentData>): Ar
     category: d.category || 'artigos',
     subcategory: d.subcategory || '',
     date,
+    updatedAt,
+    reviewedAt,
     author: d.author || 'Fernando Mário da Silva Martins',
     authorRole: d.authorRole || 'Fundador',
     authorBio: '',
@@ -43,6 +63,13 @@ export function firestoreToArticle(doc: QueryDocumentSnapshot<DocumentData>): Ar
     tags: d.tags || [],
     content: d.content || '',
     sourceUrl: d.source_url || '',
+    sources,
+    reviewerName: d.reviewer_name || '',
+    reviewerRole: d.reviewer_role || 'Revisão editorial',
+    humanReviewed: d.human_reviewed === true,
+    aiAssisted: d.ai_assisted === true,
+    healthDisclaimer: d.health_disclaimer === true || d.category === 'saude',
+    regionalContext: d.regional_context || '',
   };
 }
 

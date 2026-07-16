@@ -1,4 +1,5 @@
 import { lazy } from "react";
+import { Navigate } from "react-router-dom";
 import type { RouteObject } from "react-router-dom";
 import AdminRoute from "./AdminRoute";
 
@@ -6,6 +7,7 @@ import AdminRoute from "./AdminRoute";
 // sob demanda. Isso reduz drasticamente o bundle inicial.
 const Home = lazy(() => import("../pages/home/page"));
 const AboutPage = lazy(() => import("../pages/about/page"));
+const InstitutionalPage = lazy(() => import("../pages/institutional/page"));
 const ArticlesPage = lazy(() => import("../pages/articles/page"));
 const ArticlePage = lazy(() => import("../pages/article/page"));
 const CulturePage = lazy(() => import("../pages/culture/page"));
@@ -27,11 +29,19 @@ const EducationPage = lazy(() => import("../pages/education/page"));
 const CommunityPage = lazy(() => import("../pages/community/page"));
 const AdminPage = lazy(() => import("../pages/admin/page"));
 const LoginPage = lazy(() => import("../pages/login/page"));
+const FavoritesPage = lazy(() => import("../pages/favorites/page"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 const routes: RouteObject[] = [
   { path: "/", element: <Home /> },
-  { path: "/sobre", element: <AboutPage /> },
+  { path: "/quem-somos", element: <AboutPage /> },
+  { path: "/sobre", element: <Navigate to="/quem-somos" replace /> },
+  { path: "/politica-editorial", element: <InstitutionalPage /> },
+  { path: "/nossas-fontes", element: <InstitutionalPage /> },
+  { path: "/politica-de-correcoes", element: <InstitutionalPage /> },
+  { path: "/contato", element: <InstitutionalPage /> },
+  { path: "/privacidade", element: <InstitutionalPage /> },
+  { path: "/termos-de-uso", element: <InstitutionalPage /> },
   { path: "/artigos", element: <ArticlesPage /> },
   { path: "/artigos/categoria/:category", element: <ArticlesPage /> },
   { path: "/artigos/:slug", element: <ArticlePage /> },
@@ -60,6 +70,7 @@ const routes: RouteObject[] = [
   { path: "/educacao", element: <EducationPage /> },
   { path: "/comunidade", element: <CommunityPage /> },
   { path: "/login", element: <LoginPage /> },
+  { path: "/favoritos", element: <FavoritesPage /> },
   { path: "/admin", element: <AdminRoute><AdminPage /></AdminRoute> },
   { path: "*", element: <NotFound /> },
 ];

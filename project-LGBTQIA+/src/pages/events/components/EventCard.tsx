@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import type { EventItem } from '@/mocks/events';
 import { eventCategories } from '@/mocks/events';
+import FavoriteButton from '@/components/feature/FavoriteButton';
 
 interface EventCardProps {
   event: EventItem;
@@ -48,10 +49,36 @@ export default function EventCard({ event, variant = 'default' }: EventCardProps
             </span>
           </div>
           {event.is_featured && (
-            <div className="absolute top-3 right-3">
+            <div className="absolute top-3 right-3 flex items-center gap-2">
               <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-amber-700 bg-amber-100 rounded-full">
                 <i className="ri-star-fill text-xs" aria-hidden="true"></i> Destaque
               </span>
+              <div className="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm">
+                <FavoriteButton 
+                  item={{
+                    id: String(event.id),
+                    type: 'event',
+                    title: event.title,
+                    slug: event.slug,
+                    image: event.image_url,
+                    category: event.category
+                  }} 
+                />
+              </div>
+            </div>
+          )}
+          {!event.is_featured && (
+            <div className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm">
+              <FavoriteButton 
+                item={{
+                  id: String(event.id),
+                  type: 'event',
+                  title: event.title,
+                  slug: event.slug,
+                  image: event.image_url,
+                  category: event.category
+                }} 
+              />
             </div>
           )}
         </div>
@@ -115,6 +142,18 @@ export default function EventCard({ event, variant = 'default' }: EventCardProps
                 <i className="ri-star-fill text-xs" aria-hidden="true"></i> Destaque
               </span>
             )}
+            <div className="ml-auto">
+              <FavoriteButton 
+                item={{
+                  id: String(event.id),
+                  type: 'event',
+                  title: event.title,
+                  slug: event.slug,
+                  image: event.image_url,
+                  category: event.category
+                }} 
+              />
+            </div>
           </div>
           <h3 className="text-sm md:text-base font-semibold text-dark-800 group-hover:text-primary-400 transition-colors line-clamp-2">
             {event.title}

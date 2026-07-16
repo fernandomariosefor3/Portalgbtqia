@@ -11,12 +11,27 @@ export interface Article {
   authorBio: string;
   authorPhoto: string;
   date: string;
+  updatedAt: string;
+  reviewedAt: string;
   readTime: number;
   image: string;
   featured: boolean;
   tags: string[];
   views: number;
   sourceUrl?: string;
+  sources: ArticleSource[];
+  reviewerName: string;
+  reviewerRole: string;
+  humanReviewed: boolean;
+  aiAssisted: boolean;
+  healthDisclaimer: boolean;
+  regionalContext: string;
+}
+
+export interface ArticleSource {
+  title: string;
+  url: string;
+  publisher?: string;
 }
 
 export const allArticles: Article[] = [];

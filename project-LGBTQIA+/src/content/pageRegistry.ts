@@ -6,7 +6,7 @@ export interface EditablePage {
 
 export const editablePages: EditablePage[] = [
   { key: 'home', label: 'Página inicial', matches: (path) => path === '/' },
-  { key: 'about', label: 'Sobre', matches: (path) => path === '/sobre' },
+  { key: 'about', label: 'Quem somos', matches: (path) => path === '/quem-somos' },
   { key: 'articles', label: 'Artigos', matches: (path) => path.startsWith('/artigos') },
   { key: 'culture', label: 'Cultura', matches: (path) => path.startsWith('/cultura') },
   { key: 'events', label: 'Eventos', matches: (path) => path.startsWith('/eventos') },

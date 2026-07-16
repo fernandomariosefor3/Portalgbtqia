@@ -4,6 +4,7 @@ import type { Article } from '@/mocks/articles-full';
 import { getFirestoreArticleBySlug } from '@/lib/useArticles';
 import ArticleHeader from './components/ArticleHeader';
 import ArticleSidebar from './components/ArticleSidebar';
+import RelatedArticles from './components/RelatedArticles';
 import { sanitizeHtml } from '@/lib/sanitizeHtml';
 import ArticleSeo from './components/ArticleSeo';
 
@@ -79,6 +80,8 @@ export default function ArticlePage() {
                   </a>
                 </div>
               )}
+
+              <RelatedArticles currentArticle={article} />
 
               <div className="mt-10 pt-8 border-t border-dark-100">
                 <Link

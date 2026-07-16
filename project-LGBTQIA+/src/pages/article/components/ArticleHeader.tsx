@@ -1,23 +1,24 @@
-import { useMemo } from 'react';
 import type { Article } from '@/mocks/articles-full';
 import { categoryLabels } from '@/mocks/articles-full';
+import FavoriteButton from '@/components/feature/FavoriteButton';
 
 interface ArticleHeaderProps {
   article: Article;
 }
 
 export default function ArticleHeader({ article }: ArticleHeaderProps) {
-  const formattedDate = useMemo(() => {
-    if (!article.date) return 'Publicado recentemente';
-    const parsed = new Date(article.date);
-    if (Number.isNaN(parsed.getTime())) return article.date;
-
+  const formatDate = (value: string, fallback: string) => {
+    if (!value) return fallback;
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) return value;
     return parsed.toLocaleDateString('pt-BR', {
       day: 'numeric',
       month: 'long',
       year: 'numeric',
     });
-  }, [article.date]);
+  };
+  const formattedDate = formatDate(article.date, 'Publicado recentemente');
+  const formattedUpdatedAt = formatDate(article.updatedAt, '');
 
   return (
     <header className="relative w-full">
@@ -33,15 +34,28 @@ export default function ArticleHeader({ article }: ArticleHeaderProps) {
       <div className="relative -mt-24 md:-mt-32 px-4 md:px-6 lg:px-10">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-xl border border-dark-100 p-6 md:p-10 shadow-sm">
-            <div className="flex items-center gap-2 mb-4 flex-wrap">
-              <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700`}>
-                {categoryLabels[article.category] || article.category}
-              </span>
-              {article.subcategory && (
-                <span className="text-xs text-dark-400">
-                  {article.subcategory}
+            <div className="flex items-center justify-between gap-4 mb-4 flex-wrap">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700`}>
+                  {categoryLabels[article.category] || article.category}
                 </span>
-              )}
+                {article.subcategory && (
+                  <span className="text-xs text-dark-400">
+                    {article.subcategory}
+                  </span>
+                )}
+              </div>
+              <FavoriteButton 
+                item={{
+                  id: article.id,
+                  type: 'article',
+                  title: article.title,
+                  slug: article.slug,
+                  image: article.image,
+                  category: article.category
+                }} 
+                showText 
+              />
             </div>
 
             <h1 className="text-2xl md:text-4xl font-playfair font-bold text-dark-700 leading-tight">
@@ -68,8 +82,14 @@ export default function ArticleHeader({ article }: ArticleHeaderProps) {
               <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs text-dark-400">
                 <span className="flex items-center gap-1">
                   <i className="ri-calendar-line" aria-hidden="true"></i>
-                  {formattedDate}
+                  Publicado em {formattedDate}
                 </span>
+                {formattedUpdatedAt && article.updatedAt !== article.date && (
+                  <span className="flex items-center gap-1">
+                    <i className="ri-refresh-line" aria-hidden="true"></i>
+                    Atualizado em {formattedUpdatedAt}
+                  </span>
+                )}
                 <span className="flex items-center gap-1">
                   <i className="ri-time-line" aria-hidden="true"></i>
                   {article.readTime} min de leitura

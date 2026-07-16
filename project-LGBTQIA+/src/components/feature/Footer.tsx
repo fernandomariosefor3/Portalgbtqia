@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import NewsletterForm from './NewsletterForm';
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -7,7 +8,7 @@ export default function Footer() {
   return (
     <footer className="w-full bg-dark-700 text-white">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-8">
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 text-xl font-playfair font-bold">
               <span className="w-8 h-8 flex items-center justify-center rounded-full bg-primary-500 text-white text-sm">
@@ -80,8 +81,11 @@ export default function Footer() {
               {t('footer.institutional')}
             </h4>
             <ul className="space-y-2.5">
-              <li><Link to="/sobre" className="text-sm text-white/60 hover:text-primary-300 transition-colors">{t('footer.about')}</Link></li>
-              <li><a href="mailto:contato@portallgbtq.com.br" className="text-sm text-white/60 hover:text-primary-300 transition-colors">{t('footer.contact')}</a></li>
+              <li><Link to="/quem-somos" className="text-sm text-white/60 hover:text-primary-300 transition-colors">Quem somos</Link></li>
+              <li><Link to="/politica-editorial" className="text-sm text-white/60 hover:text-primary-300 transition-colors">Política editorial</Link></li>
+              <li><Link to="/nossas-fontes" className="text-sm text-white/60 hover:text-primary-300 transition-colors">Nossas fontes</Link></li>
+              <li><Link to="/politica-de-correcoes" className="text-sm text-white/60 hover:text-primary-300 transition-colors">Correções</Link></li>
+              <li><Link to="/contato" className="text-sm text-white/60 hover:text-primary-300 transition-colors">{t('footer.contact')}</Link></li>
             </ul>
           </div>
 
@@ -100,6 +104,10 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+
+          <div>
+            <NewsletterForm />
+          </div>
         </div>
       </div>
 
@@ -109,7 +117,7 @@ export default function Footer() {
             © 2026 Portal LGBTQ+ Nordeste. {t('footer.rights')}{" "}
             {t('footer.createdBy')}{" "}
             <a
-              href="/sobre"
+              href="/quem-somos"
               className="text-white/60 hover:text-primary-300 transition-colors"
             >
               Fernando Mário da Silva Martins
@@ -117,9 +125,9 @@ export default function Footer() {
             .
           </p>
           <div className="flex items-center gap-4 text-xs text-white/40">
-            <Link to="/sobre" className="hover:text-white/60 transition-colors">{t('footer.privacy')}</Link>
-            <Link to="/sobre" className="hover:text-white/60 transition-colors">{t('footer.terms')}</Link>
-            <Link to="/sobre" className="hover:text-white/60 transition-colors">{t('footer.accessibility')}</Link>
+            <Link to="/privacidade" className="hover:text-white/60 transition-colors">{t('footer.privacy')}</Link>
+            <Link to="/termos-de-uso" className="hover:text-white/60 transition-colors">{t('footer.terms')}</Link>
+            <Link to="/contato" className="hover:text-white/60 transition-colors">{t('footer.accessibility')}</Link>
           </div>
         </div>
       </div>

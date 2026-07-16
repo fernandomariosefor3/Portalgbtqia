@@ -147,10 +147,20 @@ export interface Article {
   author_name?: string;
   featured_image?: string;
   published_at?: string;
+  updated_at?: string;
+  reviewed_at?: string;
   status: string;
   tags: string[];
   views?: number;
   createdAt?: string;
+  author?: string;
+  reviewer_name?: string;
+  reviewer_role?: string;
+  human_reviewed?: boolean;
+  ai_assisted?: boolean;
+  health_disclaimer?: boolean;
+  regional_context?: string;
+  sources?: Array<{ title: string; url: string; publisher?: string }>;
 }
 
 export async function getArticles(filters?: {

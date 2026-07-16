@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { legalCategories } from '@/mocks/legalRights';
 import { useLegalGuides } from '@/lib/useLegalGuides';
+import RightsAssistant from './components/RightsAssistant';
 
 const filters = ['Todos', ...legalCategories] as const;
 
@@ -71,30 +72,21 @@ export default function RightsPage() {
         <div className="relative max-w-7xl mx-auto">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-400/20 text-primary-200 text-xs font-medium uppercase tracking-wider mb-4">
             <i className="ri-scales-3-line" aria-hidden="true"></i>
-            Guia jurídico
+            Meus Direitos LGBTQIA+
           </span>
           <h1 className="text-3xl md:text-5xl font-playfair font-bold text-white max-w-3xl leading-tight">
-            Direitos LGBTQIA+ explicados de forma prática
+            Direitos explicados sem juridiquês
           </h1>
           <p className="mt-4 text-base text-white/70 max-w-2xl leading-relaxed">
-            Um ponto de partida para entender direitos, reunir documentos, preservar provas e encontrar canais de apoio no Nordeste.
+            Um ponto de partida para entender seus direitos, reunir documentos, preservar provas e encontrar canais de apoio no Nordeste. Não substitui atendimento jurídico individual.
           </p>
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 py-8">
-        <div className="rounded-xl border border-amber-100 bg-amber-50 p-4 md:p-5 flex items-start gap-3 mb-6">
-          <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-amber-100 text-amber-700 shrink-0">
-            <i className="ri-information-line text-lg" aria-hidden="true"></i>
-          </div>
-          <div>
-            <p className="text-sm font-semibold text-dark-700">Informação inicial, não substitui atendimento jurídico</p>
-            <p className="mt-1 text-xs text-dark-500 leading-relaxed">
-              Em caso de risco imediato, ligue 190. Para orientação individual, procure Defensoria Pública, advogado, ONG parceira ou órgão competente.
-            </p>
-          </div>
-        </div>
+      {/* Interactive Assistant */}
+      <RightsAssistant />
 
+      <section className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 py-8">
         <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
           <div className="relative w-full lg:max-w-sm">
             <i className="ri-search-line absolute left-3.5 top-1/2 -translate-y-1/2 text-dark-300" aria-hidden="true"></i>
@@ -152,6 +144,8 @@ export default function RightsPage() {
                       onClick={() => {
                         setActiveFilter(category);
                         setActiveSlug(guide.slug);
+                        // Scroll down to the guide content
+                        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
                       }}
                       className="block w-full rounded-lg bg-dark-50 px-3 py-2 text-left text-xs font-medium text-dark-600 hover:bg-primary-50 hover:text-primary-600"
                     >

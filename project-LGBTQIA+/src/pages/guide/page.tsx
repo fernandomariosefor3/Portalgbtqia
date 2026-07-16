@@ -172,9 +172,11 @@ export default function GuidePage() {
   }, [spaces, activeState]);
   
   const availableStates = useMemo(() => {
-    const states = new Set(spaces.map(s => s.state).filter(Boolean));
-    if (states.size === 0) return ['CE'];
-    return Array.from(states).sort();
+    const defaultNortheastStates = ['AL', 'BA', 'CE', 'MA', 'PB', 'PE', 'PI', 'RN', 'SE'];
+    const statesFromData = new Set(spaces.map(s => s.state).filter(Boolean));
+    // Merge data states with the 9 northeastern states
+    defaultNortheastStates.forEach(st => statesFromData.add(st));
+    return Array.from(statesFromData).sort();
   }, [spaces]);
 
   function scoreFor(space: SafeSpace) {
@@ -439,7 +441,7 @@ export default function GuidePage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-500">Regiões mapeadas</p>
-              <h2 className="mt-2 text-xl md:text-2xl font-semibold text-dark-800">Circuitos iniciais de Fortaleza</h2>
+              <h2 className="mt-2 text-xl md:text-2xl font-semibold text-dark-800">Circuitos iniciais</h2>
             </div>
             <p className="text-sm text-dark-500 max-w-2xl leading-relaxed">
               O guia começa pelos territórios mais citados na cena cultural, no acolhimento e nos serviços públicos. Cada circuito pode receber novos pontos sem apagar os existentes.

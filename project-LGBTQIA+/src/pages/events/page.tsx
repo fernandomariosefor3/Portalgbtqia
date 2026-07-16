@@ -26,8 +26,10 @@ export default function EventsPage() {
   const [timeFilter, setTimeFilter] = useState('todos');
 
   const states = useMemo(() => {
-    const set = new Set(events.map((e) => e.state).filter(Boolean));
-    return Array.from(set).sort();
+    const defaultNortheastStates = ['AL', 'BA', 'CE', 'MA', 'PB', 'PE', 'PI', 'RN', 'SE'];
+    const statesFromData = new Set(events.map(e => e.state).filter(Boolean));
+    defaultNortheastStates.forEach(st => statesFromData.add(st));
+    return Array.from(statesFromData).sort();
   }, [events]);
 
   const cities = useMemo(() => {

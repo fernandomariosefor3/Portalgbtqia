@@ -7,6 +7,7 @@ import Footer from "./components/feature/Footer";
 import MusicPlayer from "./components/feature/MusicPlayer";
 import MultilingualSeo from "./components/feature/MultilingualSeo";
 import ManagedPageBlocks from "./components/feature/ManagedPageBlocks";
+import QuickExit from "./components/feature/QuickExit";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
@@ -29,6 +30,7 @@ function App() {
           </div>
           <Footer />
           <MusicPlayer />
+          <QuickExit />
           <Analytics />
           <SpeedInsights />
         </div>

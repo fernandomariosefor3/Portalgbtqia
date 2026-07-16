@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import HeroSection from './components/HeroSection';
+import OnboardingSelector from './components/OnboardingSelector';
 import FeaturedArticles from './components/FeaturedArticles';
 import SectionsGrid from './components/SectionsGrid';
 import CommunityCTA from './components/CommunityCTA';
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <main className="w-full min-h-screen bg-surface font-inter">
       <HeroSection />
+      <OnboardingSelector />
       <FeaturedArticles />
       <SectionsGrid />
       <CommunityCTA />

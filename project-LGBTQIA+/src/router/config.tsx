@@ -31,6 +31,9 @@ const AdminPage = lazy(() => import("../pages/admin/page"));
 const LoginPage = lazy(() => import("../pages/login/page"));
 const FavoritesPage = lazy(() => import("../pages/favorites/page"));
 const LibrasPage = lazy(() => import("../pages/libras/page"));
+const ObservatoryPage = lazy(() => import("../pages/observatory/page"));
+const FarolPage = lazy(() => import("../pages/farol/page"));
+const OpportunitiesPage = lazy(() => import("../pages/opportunities/page"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 const routes: RouteObject[] = [
@@ -73,6 +76,9 @@ const routes: RouteObject[] = [
   { path: "/login", element: <LoginPage /> },
   { path: "/favoritos", element: <FavoritesPage /> },
   { path: "/libras", element: <LibrasPage /> },
+  { path: "/observatorio", element: <ObservatoryPage /> },
+  { path: "/farol", element: <FarolPage /> },
+  { path: "/oportunidades", element: <OpportunitiesPage /> },
   { path: "/admin", element: <AdminRoute><AdminPage /></AdminRoute> },
   { path: "*", element: <NotFound /> },
 ];

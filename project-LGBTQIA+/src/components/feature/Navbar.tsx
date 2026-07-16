@@ -17,6 +17,9 @@ const navLinks = [
   { labelKey: 'nav.parades', path: '/paradas' },
   { labelKey: 'nav.education', path: '/educacao' },
   { labelKey: 'nav.libras', path: '/libras' },
+  { labelKey: 'nav.observatory', path: '/observatorio' },
+  { labelKey: 'nav.farol', path: '/farol' },
+  { labelKey: 'nav.opportunities', path: '/oportunidades' },
   { labelKey: 'nav.community', path: '/comunidade' },
 ];
 

@@ -1,11 +1,23 @@
 import { Link } from 'react-router-dom';
+import { useSiteSection } from '@/lib/useSiteSection';
+
+const fallbackHero = {
+  title: 'Saúde LGBTQ+',
+  subtitle: 'Cuidado e informação',
+  description: 'Guias completos e baseados em evidências sobre PrEP, saúde mental, cuidados trans e educação sexual. Informação que protege e empodera.',
+  image: 'https://readdy.ai/api/search-image?query=warm%20healthcare%20wellness%20center%20interior%20with%20plants%20natural%20light%20peaceful%20healing%20environment%20editorial%20photography%20clean%20minimal%20aesthetic%20soft%20warm%20tones%20inviting%20atmosphere&width=1400&height=500&seq=healthhero&orientation=landscape',
+  ctaLabel: '',
+  ctaUrl: '',
+};
 
 export default function HealthHero() {
+  const { content } = useSiteSection('health-hero', fallbackHero);
+
   return (
     <section className="relative w-full overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="https://readdy.ai/api/search-image?query=warm%20healthcare%20wellness%20center%20interior%20with%20plants%20natural%20light%20peaceful%20healing%20environment%20editorial%20photography%20clean%20minimal%20aesthetic%20soft%20warm%20tones%20inviting%20atmosphere&width=1400&height=500&seq=healthhero&orientation=landscape"
+          src={content.image || fallbackHero.image}
           alt="Saúde e bem-estar"
           className="w-full h-full object-cover object-top"
         />
@@ -16,14 +28,13 @@ export default function HealthHero() {
         <div className="max-w-2xl">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent-400/90 text-white text-xs font-medium mb-5">
             <i className="ri-heart-pulse-line" aria-hidden="true"></i>
-            Cuidado e informação
+            {content.subtitle || fallbackHero.subtitle}
           </span>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-white leading-tight">
-            Saúde LGBTQ+
+            {content.title || fallbackHero.title}
           </h1>
           <p className="mt-4 text-base md:text-lg text-white/80 leading-relaxed max-w-xl">
-            Guias completos e baseados em evidências sobre PrEP, saúde mental, 
-            cuidados trans e educação sexual. Informação que protege e empodera.
+            {content.description || fallbackHero.description}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link

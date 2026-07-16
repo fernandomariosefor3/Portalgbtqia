@@ -12,6 +12,16 @@ import {
 import { useSafeSpaces } from '@/lib/useSafeSpaces';
 import { createSafeSpaceReview, reportSafeSpace, verifySafeSpace } from '@/lib/safeSpaceCommunity';
 import FavoriteButton from '@/components/feature/FavoriteButton';
+import { useSiteSection } from '@/lib/useSiteSection';
+
+const fallbackHero = {
+  title: 'Mapa de espaços LGBTQIA+ no estado: {activeState}',
+  subtitle: 'Guia Regional',
+  description: 'Lugares de saúde, cultura, acolhimento, direitos e convivência. Selecione seu estado para encontrar rotas seguras e pontos verificados pela comunidade.',
+  image: guideHeroImage,
+  ctaLabel: 'Sugerir espaço',
+  ctaUrl: '/guia/submeter',
+};
 
 const filters = ['Todos', ...safeSpaceCategories] as const;
 const priceFilters = ['Todos', '$', '$$', '$$$', '$$$$'] as const;
@@ -91,6 +101,8 @@ function GuideSpaceImage({ space }: { space: SafeSpace }) {
 
 export default function GuidePage() {
   const { spaces, loading } = useSafeSpaces();
+  const { content } = useSiteSection('guide-hero', fallbackHero);
+  
   const [activeState, setActiveState] = useState<string>('CE');
   const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>('Todos');
   const [query, setQuery] = useState('');
@@ -246,7 +258,7 @@ export default function GuidePage() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url("${guideHeroImage}")`,
+            backgroundImage: `url("${content.image || fallbackHero.image}")`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/75" />
@@ -255,7 +267,7 @@ export default function GuidePage() {
             <div className="flex items-center gap-2 mb-5">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-medium rounded-full bg-white/15 text-white border border-white/25 backdrop-blur-sm">
                 <i className="ri-map-pin-heart-line" aria-hidden="true"></i>
-                Guia Regional
+                {content.subtitle || fallbackHero.subtitle}
               </span>
               <select 
                 value={activeState}
@@ -268,10 +280,10 @@ export default function GuidePage() {
               </select>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white leading-tight">
-              Mapa de espaços LGBTQIA+ no estado: {activeState}
+              {(content.title || fallbackHero.title).replace('{activeState}', activeState)}
             </h1>
             <p className="mt-4 md:mt-5 text-base md:text-lg text-white/80 max-w-2xl leading-relaxed">
-              Lugares de saúde, cultura, acolhimento, direitos e convivência. Selecione seu estado para encontrar rotas seguras e pontos verificados pela comunidade.
+              {content.description || fallbackHero.description}
             </p>
             <div className="mt-8 grid grid-cols-3 gap-3 max-w-xl">
               {[

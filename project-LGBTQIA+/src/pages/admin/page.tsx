@@ -154,6 +154,16 @@ const defaultSections: SiteSection[] = [
     ctaLabel: "",
     ctaUrl: "",
   },
+  {
+    key: "guide-hero",
+    label: "Guia - Cabeçalho",
+    title: "Guia LGBTQ+ Nordeste",
+    subtitle: "Espaços Seguros",
+    description: "Descubra lugares acolhedores, profissionais aliados e serviços focados na nossa comunidade.",
+    image: "",
+    ctaLabel: "Sugerir espaço",
+    ctaUrl: "/guia/submeter",
+  },
 ];
 
 const emptyArticle = {

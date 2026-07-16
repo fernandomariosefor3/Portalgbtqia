@@ -36,6 +36,9 @@ const definitions: Record<string, MetadataTuple> = {
   '/paradas': ['Paradas LGBTQ+ | Calendário, história e notícias', 'Calendário, notícias e história das paradas do orgulho LGBTQ+ no Ceará, no Nordeste e no Brasil.'],
   '/educacao': ['Educação e diversidade LGBTQ+ | Conteúdo educativo', 'Guias, conceitos e materiais educativos sobre diversidade sexual, identidade de gênero e inclusão LGBTQ+.'],
   '/comunidade': ['Comunidade LGBTQ+ | Redes, apoio e participação', 'Conexões, iniciativas, redes de apoio e oportunidades de participação para a comunidade LGBTQ+.'],
+  '/observatorio': ['Observatório LGBTQ+ Nordeste | Painel de Dados', 'Métricas e indicadores sobre violações de direitos, violência e políticas públicas para pessoas LGBTQIA+ no Nordeste.'],
+  '/farol': ['Farol LGBTQ+ | Assistente Inteligente', 'Assistente inteligente baseado em fontes verificadas para tirar dúvidas sobre direitos, serviços e saúde.'],
+  '/oportunidades': ['Oportunidades e Empreendedores LGBTQ+ Nordeste', 'Guia de vagas afirmativas, editais, cursos e diretório de empreendedores locais da comunidade LGBTQIA+.'],
 };
 
 const pages = Object.fromEntries(

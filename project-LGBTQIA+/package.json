@@ -17,7 +17,9 @@
     "skill:check": "node scripts/check-agent-skills.mjs",
     "mcp:dev": "tsx mcp/portal-lgbtqia-knowledge-mcp/index.ts",
     "mcp:type-check": "tsc -p tsconfig.mcp.json --noEmit",
-    "mcp:test": "vitest run -c vitest.mcp.config.ts"
+    "mcp:test": "vitest run -c vitest.mcp.config.ts",
+    "registry:validate": "tsx scripts/validate-trust-registry.ts",
+    "registry:report": "tsx scripts/generate-trust-registry-report.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",

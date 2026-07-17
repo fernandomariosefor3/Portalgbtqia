@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ev_thina_rodrigues",
+    "entity_id": "srv_thina_rodrigues",
+    "entity_type": "service",
+    "source_url": "https://www.diversidade.ce.gov.br",
+    "consultation_date": "2026-07-17T18:00:00Z",
+    "extracted_info": "O Centro Estadual de Referência LGBTI+ Thina Rodrigues é um equipamento da Secretaria da Diversidade.",
+    "limitations": "Endereço e horários exatos não conferidos na página principal.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_janaina_dutra",
+    "entity_id": "srv_janaina_dutra",
+    "entity_type": "service",
+    "source_url": "https://direitoshumanos.fortaleza.ce.gov.br",
+    "consultation_date": "2026-07-17T18:00:00Z",
+    "extracted_info": "Centro Municipal de Referência LGBTQIA+ Janaína Dutra administrado pela Prefeitura de Fortaleza.",
+    "limitations": "Falta confirmar telefone atual e se os atendimentos presenciais seguem o mesmo fluxo pós-2025.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_acesso_saude_prep_pep",
+    "entity_id": "srv_acesso_saude_prep_pep",
+    "entity_type": "service",
+    "source_url": "https://www.saude.ce.gov.br",
+    "consultation_date": "2026-07-17T18:00:00Z",
+    "extracted_info": "A Secretaria da Saúde do Ceará promove programas de PrEP e PEP.",
+    "limitations": "Não foi confirmada a lista exata de locais físicos do Acesso Saúde CE que oferecem no momento.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_teleprep_telepep",
+    "entity_id": "srv_teleprep_telepep",
+    "entity_type": "service",
+    "source_url": "https://www.saude.ce.gov.br",
+    "consultation_date": "2026-07-17T18:00:00Z",
+    "extracted_info": "TelePrEP/TelePEP mencionados como iniciativas da Sesa para expansão do acesso.",
+    "limitations": "Número de whatsapp/telefone do serviço TelePrEP não coletado na evidência base.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_dpe_direitos_humanos",
+    "entity_id": "srv_dpe_direitos_humanos",
+    "entity_type": "service",
+    "source_url": "https://www.defensoria.ce.def.br",
+    "consultation_date": "2026-07-17T18:00:00Z",
+    "extracted_info": "A Defensoria atua na retificação de nome social e defesa dos direitos humanos.",
+    "limitations": "O núcleo exato (NUDHAM) e seus canais diretos precisam ser auditados na página oficial.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_hsj_infectologia",
+    "entity_id": "srv_hsj_infectologia",
+    "entity_type": "service",
+    "source_url": "https://www.hsj.ce.gov.br",
+    "consultation_date": "2026-07-17T18:00:00Z",
+    "extracted_info": "O HSJ é a referência estadual em doenças infecciosas.",
+    "limitations": "A oferta direta de PrEP/PEP porta aberta não foi confirmada. Será tratado apenas como infectologia até confirmação.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_sertrans",
+    "entity_id": "srv_sertrans",
+    "entity_type": "service",
+    "source_url": "https://www.saude.ce.gov.br",
+    "consultation_date": "2026-07-17T18:00:00Z",
+    "extracted_info": "O Sertrans é citado como serviço ambulatorial do estado.",
+    "limitations": "Necessário confirmar fluxo atual de encaminhamento e local exato.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_casa_transformar_acolhimento",
+    "entity_id": "srv_casa_transformar_acolhimento",
+    "entity_type": "service",
+    "source_url": "https://www.instagram.com/casatransformar",
+    "consultation_date": "2026-07-17T18:00:00Z",
+    "extracted_info": "Página do Instagram lista o projeto como acolhimento e suporte para LGBTQIAPN+.",
+    "limitations": "Instagram é fonte complementar, requer confirmação direta de funcionamento atual e critérios de ingresso.",
+    "needs_additional_confirmation": true
+  }
+]

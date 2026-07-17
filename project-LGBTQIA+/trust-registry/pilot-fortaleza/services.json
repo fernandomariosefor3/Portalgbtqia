@@ -1,0 +1,90 @@
+[
+  {
+    "id": "srv_thina_rodrigues",
+    "organization_id": "org_sec_div_ce",
+    "name": "Centro Estadual de Referência LGBTI+ Thina Rodrigues",
+    "description": "Apoio social e atendimento voltado à população LGBTI+.",
+    "category": ["acolhimento_social", "direitos"],
+    "status": "under_review",
+    "created_at": "2026-07-17T18:00:00Z",
+    "updated_at": "2026-07-17T18:00:00Z",
+    "source_id": "src_sec_div_ce"
+  },
+  {
+    "id": "srv_janaina_dutra",
+    "organization_id": "org_smdhds_fortaleza",
+    "name": "Centro Municipal de Referência LGBTQIA+ Janaína Dutra",
+    "description": "Serviço municipal de proteção e defesa dos direitos LGBTQIA+.",
+    "category": ["acolhimento_social", "direitos"],
+    "status": "under_review",
+    "created_at": "2026-07-17T18:00:00Z",
+    "updated_at": "2026-07-17T18:00:00Z",
+    "source_id": "src_smdhds_fortaleza"
+  },
+  {
+    "id": "srv_acesso_saude_prep_pep",
+    "organization_id": "org_sesa_ce",
+    "name": "Acesso Saúde CE — PrEP/PEP",
+    "description": "Programa de acesso à Profilaxia Pré-Exposição e Pós-Exposição.",
+    "category": ["saude", "prevencao_hiv"],
+    "status": "under_review",
+    "created_at": "2026-07-17T18:00:00Z",
+    "updated_at": "2026-07-17T18:00:00Z",
+    "source_id": "src_sesa_ce"
+  },
+  {
+    "id": "srv_teleprep_telepep",
+    "organization_id": "org_sesa_ce",
+    "name": "TelePrEP / TelePEP",
+    "description": "Atendimento remoto para profilaxia do HIV.",
+    "category": ["saude", "prevencao_hiv"],
+    "status": "under_review",
+    "created_at": "2026-07-17T18:00:00Z",
+    "updated_at": "2026-07-17T18:00:00Z",
+    "source_id": "src_sesa_ce"
+  },
+  {
+    "id": "srv_dpe_direitos_humanos",
+    "organization_id": "org_dpe_ce",
+    "name": "Atendimento de Direitos Humanos (Nome Social/Cidadania)",
+    "description": "Atendimento jurídico e assistência em retificação de nome social.",
+    "category": ["direitos", "atendimento_juridico"],
+    "status": "under_review",
+    "created_at": "2026-07-17T18:00:00Z",
+    "updated_at": "2026-07-17T18:00:00Z",
+    "source_id": "src_dpe_ce"
+  },
+  {
+    "id": "srv_hsj_infectologia",
+    "organization_id": "org_hsj_ce",
+    "name": "Serviços de Infectologia - Hospital São José",
+    "description": "Atendimento focado em doenças infecciosas e acompanhamento.",
+    "category": ["saude"],
+    "status": "under_review",
+    "created_at": "2026-07-17T18:00:00Z",
+    "updated_at": "2026-07-17T18:00:00Z",
+    "source_id": "src_hsj_ce"
+  },
+  {
+    "id": "srv_sertrans",
+    "organization_id": "org_sesa_ce",
+    "name": "Serviço Ambulatorial Transdisciplinar para Pessoas Transgênero (Sertrans)",
+    "description": "Atendimento ambulatorial voltado a pessoas transgênero.",
+    "category": ["saude", "saude_trans"],
+    "status": "under_review",
+    "created_at": "2026-07-17T18:00:00Z",
+    "updated_at": "2026-07-17T18:00:00Z",
+    "source_id": "src_sesa_ce"
+  },
+  {
+    "id": "srv_casa_transformar_acolhimento",
+    "organization_id": "org_casa_transformar",
+    "name": "Acolhimento Institucional Casa Transformar",
+    "description": "Acolhimento para pessoas LGBTQIAPN+ em situação de vulnerabilidade.",
+    "category": ["acolhimento_social"],
+    "status": "under_review",
+    "created_at": "2026-07-17T18:00:00Z",
+    "updated_at": "2026-07-17T18:00:00Z",
+    "source_id": "src_casa_transformar"
+  }
+]

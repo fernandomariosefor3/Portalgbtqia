@@ -1,0 +1,83 @@
+[
+  {
+    "id": "src_gov_ce",
+    "name": "Governo do Estado do Ceará",
+    "url": "https://www.ceara.gov.br",
+    "type": "government",
+    "reliability_score": 100,
+    "last_verified": "2026-07-17T18:00:00Z",
+    "status": "under_review"
+  },
+  {
+    "id": "src_sec_div_ce",
+    "name": "Secretaria da Diversidade do Ceará",
+    "url": "https://www.diversidade.ce.gov.br",
+    "type": "government",
+    "reliability_score": 100,
+    "last_verified": "2026-07-17T18:00:00Z",
+    "status": "under_review"
+  },
+  {
+    "id": "src_pref_fortaleza",
+    "name": "Prefeitura de Fortaleza",
+    "url": "https://www.fortaleza.ce.gov.br",
+    "type": "government",
+    "reliability_score": 100,
+    "last_verified": "2026-07-17T18:00:00Z",
+    "status": "under_review"
+  },
+  {
+    "id": "src_smdhds_fortaleza",
+    "name": "Secretaria Municipal dos Direitos Humanos e Desenvolvimento Social de Fortaleza",
+    "url": "https://direitoshumanos.fortaleza.ce.gov.br",
+    "type": "government",
+    "reliability_score": 100,
+    "last_verified": "2026-07-17T18:00:00Z",
+    "status": "under_review"
+  },
+  {
+    "id": "src_sesa_ce",
+    "name": "Secretaria da Saúde do Ceará (Sesa)",
+    "url": "https://www.saude.ce.gov.br",
+    "type": "government",
+    "reliability_score": 100,
+    "last_verified": "2026-07-17T18:00:00Z",
+    "status": "under_review"
+  },
+  {
+    "id": "src_hsj_ce",
+    "name": "Hospital São José de Doenças Infecciosas",
+    "url": "https://www.hsj.ce.gov.br",
+    "type": "government",
+    "reliability_score": 100,
+    "last_verified": "2026-07-17T18:00:00Z",
+    "status": "under_review"
+  },
+  {
+    "id": "src_dpe_ce",
+    "name": "Defensoria Pública do Estado do Ceará",
+    "url": "https://www.defensoria.ce.def.br",
+    "type": "government",
+    "reliability_score": 100,
+    "last_verified": "2026-07-17T18:00:00Z",
+    "status": "under_review"
+  },
+  {
+    "id": "src_huwc_ce",
+    "name": "Hospital Universitário do Ceará",
+    "url": "https://www.gov.br/ebserh/pt-br/hospitais-universitarios/regiao-nordeste/ch-ufc",
+    "type": "government",
+    "reliability_score": 100,
+    "last_verified": "2026-07-17T18:00:00Z",
+    "status": "under_review"
+  },
+  {
+    "id": "src_casa_transformar",
+    "name": "Casa Transformar",
+    "url": "https://www.instagram.com/casatransformar",
+    "type": "ngo",
+    "reliability_score": 70,
+    "last_verified": "2026-07-17T18:00:00Z",
+    "status": "submitted"
+  }
+]

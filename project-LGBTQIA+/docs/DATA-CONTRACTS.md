@@ -29,11 +29,14 @@ Para enviar dados para o frontend atual ou para um futuro MCP de leitura públic
 - `PublicTrustContent`
 Esses tipos utilizam o `Omit` do TypeScript para arrancar estruturalmente os campos privados. A conversão de dados deve passar pelas funções em `src/lib/trust.ts` (ex: `toPublicService`).
 
-## 3. Limitação de Tempo de Execução (Runtime Validation)
+## 3. Validação em Tempo de Execução (Runtime Validation) - Introduzida na Fase 4A
 
-**Atenção**: Na Fase 1 atual, o projeto define contratos TypeScript puros (`interface` e `type`). O TypeScript não valida dados recebidos no tempo de execução (runtime). 
-- Caso o projeto receba payloads externos (por APIs no Next.js ou Vercel Functions) no futuro, **será necessária a adoção de schemas validados (ex: Zod ou Yup)** para garantir que o formato bata com o contrato em tempo de execução.
-- Por enquanto, isso atende os requisitos tipados para desenvolvimento da UI, dos Agentes locais e dos fluxos.
+Na Fase 4A, o projeto incluiu a biblioteca **Zod** para assegurar que dados carregados estaticamente no Trust Registry ou recebidos futuramente passem por validação de runtime estrita, refletindo os contratos do TypeScript.
+
+- As definições encontram-se em `trust-registry/schemas/index.ts`.
+- Validações de domínio estão ativas: `url`, `email`, limites e literais estritos para status.
+- Campos como `publicAddressAllowed` foram codificados para prevenir divulgação inadvertida.
+- As integrações futuras de rede e MCP farão uso direto destes schemas para blindar o sistema contra formatos corrompidos ou maliciosos.
 
 ## 4. Migração e Quarentena dos Modelos Legados (Fase 2)
 

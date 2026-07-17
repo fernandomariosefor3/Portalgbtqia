@@ -13,15 +13,16 @@ Para que uma informação, serviço ou evento faça parte da camada "Fundação 
 - **Ação:** Sistema ou revisor júnior descarta duplicações óbvias, lixo ou spam (conteúdos que não possuem aderência temática ou faltam dados básicos obrigatórios como localização).
 - **Status resultantes:** Transição para `under_review` ou `rejected`.
 
-### 3. Coleta de Evidências
-- **Ação:** O revisor designa as URLs oficiais ou documentos que provam a existência do Serviço ou a veracidade da Notícia/Direito.
-- **Registro:** O array `sourceIds` na entidade é preenchido apontando para registros `TrustSource`.
+### 3. Coleta de Evidências e Fila de Revisão (Review Queue)
+- **Ação:** As evidências (URLs, documentos, atas) são cadastradas na entidade. Caso haja dados incompletos ou incertos (ex: telefone, confirmação porta-aberta), o registro é encaminhado para a Fila de Revisão (`review-queue.json`).
+- **Registro:** O array `sourceIds` e/ou `evidence.json` são preenchidos.
+- **Limitação:** Nenhuma entidade com pendência humana ou informações ausentes sensíveis progride além de `under_review`.
 
-### 4. Revisão e Validação (Review and Validation)
-- **Ação:** O time editorial, jurídico ou de saúde analisa o conteúdo.
-- **Registro:** Um `TrustValidation` documentando quem aprovou e com base em quais evidências.
+### 4. Revisão e Validação Humana (Human Validation)
+- **Ação:** Um revisor humano (time editorial, jurídico, ou de saúde) analisa as pendências na fila de revisão. Apenas após a confirmação manual, o registro avança.
+- **Registro:** Um registro em `validations.json` documentando quem aprovou, com base em quais evidências, e a data.
 - **Status:** Transição para `validated`, `verified_basic` ou `community_reviewed`.
-- **Efeito:** A informação agora pode ser lida pela IA e listada no frontend.
+- **Efeito:** A informação agora é tratada como confiável e pode ser lida pela IA (MCP) ou frontend (após integração).
 
 ### 5. Publicação (Publication)
 - As funções de projeção (`toPublicContent`, `toPublicService`) removem as anotações sensíveis. A entidade tipada é consumida pela plataforma pública e o Farol (MCP).

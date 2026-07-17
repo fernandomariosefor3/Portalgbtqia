@@ -5,16 +5,15 @@
 - Data: 17 de Julho de 2026
 - Ferramenta: Google Antigravity
 - Agente: portalgbtqia-product-engineer (Auditor de Código)
-- Branch: antigravity/fase-3b-mcp-hardening
-- Objetivo: Fase 3B - Hardening, Avaliação Adversarial e Conformidade do MCP da Rede Farol.
+- Branch: antigravity/fase-4a-registro-confianca-piloto
+- Objetivo: Fase 4A - Registro de Confiança Piloto e Curadoria Humana.
 - Status: Concluído e Auditado
+- Auditoria de Agentes: Por decisão do responsável pelo projeto, a auditoria externa do Claude Code sobre as fases anteriores foi pulada neste momento.
 - Arquitetura e Defesas:
-  - Servidor seguro isolado em `mcp/portal-lgbtqia-knowledge-mcp/` sobre `stdio`.
-  - Tratamento de exceções (`uncaughtException`, `unhandledRejection`) validado com Exit Code 1.
-  - Payload limits aplicados deterministicamente com teto de 2MB. Excede com o erro controlado estrito.
-  - Códigos de erro limitados à Allowlist (INTERNAL_ERROR, NOT_FOUND, LIMIT_EXCEEDED, TEMPORARILY_UNAVAILABLE).
-  - Cobertura validada e documentação finalizada em `docs/MCP-SECURITY-AUDIT.md`.
-- Riscos e Pontos para Claude Code (Fase 4 - Integração Firestore):
-  - Claude, os adaptadores e o servidor MCP foram completamente blindados nesta fase 3B. A próxima etapa natural é iniciar a conexão com o Firebase, substituindo os `MemoryRepositories`.
-  - Lembre-se de validar se o limite de dados (Payload Size) não acarretará picos nas reads do Firestore (implemente cursores no Firebase Server SDK se necessário).
-
+  - Servidor MCP continua congelado, sem alterações, sem bugs inseridos.
+  - O `trust-registry` foi implementado em ambiente isolado.
+  - Zod Schemas limitam status (impedindo `validated` prematuro).
+  - Testes da Fase 4 (Vitest) passando corretamente de forma unitária.
+- Riscos e Pontos para próxima Fase:
+  - Os dados no `trust-registry` (Fortaleza) estão repletos de "pending_questions" na Fila de Revisão, esperando humanos.
+  - Na Fase 4B ou 5 será feito o parsing deste JSON estático para dentro do Firebase ou Memory Repository, mas sem expor publicamente ainda. 

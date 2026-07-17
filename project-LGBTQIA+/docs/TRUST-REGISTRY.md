@@ -1,6 +1,6 @@
 # Trust Registry (Registro de Confiança)
 
-O Trust Registry é o repositório de verdade da Rede Farol. Ele mantém o cadastro central de fontes oficiais, organizações verificadas e serviços de acolhimento de forma curada, auditável e segura.
+O Trust Registry é o repositório de verdade da Rede Farol. Ele mantém o cadastro central de fontes institucionais verificáveis, organizações verificadas e serviços de acolhimento de forma curada, auditável e segura.
 
 ## Propósito
 - Garantir que todos os dados oferecidos ao público tenham **fontes rastreáveis**.

@@ -1,6 +1,6 @@
 # Relatório do Piloto de Confiança - Fortaleza CE
 
-Gerado em: 2026-07-17T21:52:55.679Z
+Gerado em: 2026-07-17T22:03:06.123Z
 
 ## Resumo
 - Fontes pesquisadas: 9

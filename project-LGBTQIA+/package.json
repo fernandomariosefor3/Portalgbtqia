@@ -19,6 +19,8 @@
     "mcp:type-check": "tsc -p tsconfig.mcp.json --noEmit",
     "mcp:test": "vitest run -c vitest.mcp.config.ts",
     "registry:validate": "tsx scripts/validate-trust-registry.ts",
+    "registry:prepare-reviews": "tsx scripts/prepare-registry-review-packets.ts",
+    "registry:check-reviews": "tsx scripts/check-registry-reviews.ts",
     "registry:report": "tsx scripts/generate-trust-registry-report.ts"
   },
   "dependencies": {

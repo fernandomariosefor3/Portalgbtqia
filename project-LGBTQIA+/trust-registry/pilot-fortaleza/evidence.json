@@ -1,5 +1,45 @@
 [
   {
+    "id": "ev_org_gov_ce",
+    "entity_id": "org_gov_ce",
+    "entity_type": "organization",
+    "source_url": "https://www.ce.gov.br",
+    "consultation_date": "2026-07-17T22:30:00Z",
+    "extracted_info": "Instituição Governo do Estado do Ceará. Organização pública estadual vinculada à sua fonte correspondente (src_gov_ce), confirmando sua jurisdição estadual e identidade pública.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_src_pref_fortaleza",
+    "entity_id": "src_pref_fortaleza",
+    "entity_type": "source",
+    "source_url": "https://www.fortaleza.ce.gov.br",
+    "consultation_date": "2026-07-17T22:25:00Z",
+    "extracted_info": "Página apresenta-se como portal institucional da Prefeitura Municipal de Fortaleza. Confirmação do domínio institucional governamental municipal e da jurisdição de Fortaleza, Ceará. Apresenta a estrutura de órgãos municipais.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_src_sec_div_ce",
+    "entity_id": "src_sec_div_ce",
+    "entity_type": "source",
+    "source_url": "https://www.diversidade.ce.gov.br",
+    "consultation_date": "2026-07-17T22:20:00Z",
+    "extracted_info": "Página identifica-se como portal institucional da Secretaria da Diversidade do Ceará. Domínio governamental e presença no organograma oficial do Governo do Estado confirmados.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_src_gov_ce",
+    "entity_id": "src_gov_ce",
+    "entity_type": "source",
+    "source_url": "https://www.ce.gov.br",
+    "consultation_date": "2026-07-17T22:15:00Z",
+    "extracted_info": "Página oficial apresenta-se como o portal institucional do Governo do Estado do Ceará (redirecionado de ceara.gov.br).",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
     "id": "ev_thina_rodrigues",
     "entity_id": "srv_thina_rodrigues",
     "entity_type": "service",

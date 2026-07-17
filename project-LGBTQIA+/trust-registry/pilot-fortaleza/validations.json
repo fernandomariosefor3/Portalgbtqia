@@ -1,1 +1,99 @@
-[]
+[
+  {
+    "id": "val_src_gov_ce_001",
+    "entityType": "source",
+    "entityId": "src_gov_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-17T22:15:00Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_gov_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "url",
+      "type"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da fonte institucional Governo do Estado do Ceará. Domínio oficial e natureza governamental confirmados.",
+    "validUntil": "2027-07-17T22:15:00Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "2786facb426326f6",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_src_sec_div_ce_001",
+    "entityType": "source",
+    "entityId": "src_sec_div_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-17T22:18:00Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_sec_div_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "url",
+      "type"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da fonte institucional Secretaria da Diversidade do Ceará. Domínio oficial e natureza governamental confirmados.",
+    "validUntil": "2027-07-17T22:20:00Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "3a935714a23740b0",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_src_pref_fortaleza_001",
+    "entityType": "source",
+    "entityId": "src_pref_fortaleza",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-17T22:21:00Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_pref_fortaleza"
+    ],
+    "confirmedFields": [
+      "name",
+      "url",
+      "type"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da fonte institucional Prefeitura Municipal de Fortaleza. Domínio oficial municipal e jurisdição confirmados.",
+    "validUntil": "2027-07-17T22:21:00Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "c992da85c4313c82",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_org_gov_ce_001",
+    "entityType": "organization",
+    "entityId": "org_gov_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-17T22:25:00Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_org_gov_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "type",
+      "contact.website",
+      "source_id"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da organização Governo do Estado do Ceará.",
+    "validUntil": "2027-07-17T22:25:00Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "959513d3ec5441f1",
+    "evidenceFingerprint": "e10808d43975dc40"
+  }
+]

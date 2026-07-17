@@ -16,7 +16,7 @@ Nesta fase, o único meio de transporte habilitado é `stdio`. O servidor se com
 2. `get_validated_content`: Traz informações textuais completas (se autorizado).
 3. `search_verified_services`: Busca por `TrustService` (`verified_basic` ou `partner`).
 4. `get_verified_service`: Retorna os dados públicos do serviço.
-5. `search_verified_sources`: Lista as fontes oficiais (`TrustSource`) sem restrições ativas.
+5. `search_verified_sources`: Lista as fontes institucionais verificáveis (`TrustSource`) sem restrições ativas.
 6. `check_information_freshness`: Diz se a informação expirou sem vazar o real motivo de suspensão.
 
 ## Limites e Políticas (Quarentena)

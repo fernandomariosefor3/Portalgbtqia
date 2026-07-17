@@ -103,7 +103,7 @@ async function validateRegistry() {
 
   parsedValidations.forEach((v: any) => {
     checkId(v.id, 'validations');
-    if (!allEntities.has(v.entity_id)) addError(`Validation ${v.id} references missing entity: ${v.entity_id}`);
+    if (!allEntities.has(v.entityId)) addError(`Validation ${v.id} references missing entity: ${v.entityId}`);
   });
 
   parsedReviewQueue.forEach((rq: any) => {

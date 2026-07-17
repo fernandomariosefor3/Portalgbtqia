@@ -75,16 +75,52 @@ export const reviewQueueItemSchema = z.object({
   human_decision_pending: z.boolean().default(true)
 });
 
+export const humanReviewDecisionSchema = z.enum([
+  'approved_basic',
+  'needs_more_evidence',
+  'correction_required',
+  'blocked',
+  'rejected'
+]);
+
+export const humanReviewerRoleSchema = z.enum([
+  'registry_reviewer',
+  'health_reviewer',
+  'legal_reviewer',
+  'privacy_reviewer',
+  'service_verifier'
+]);
+
+export const humanReviewerSchema = z.object({
+  id: z.string().min(1),
+  role: humanReviewerRoleSchema,
+  active: z.boolean(),
+  authorizedEntityTypes: z.array(z.enum(['source', 'organization', 'service'])),
+  authorizedCategories: z.array(z.string()).optional(),
+  createdAt: z.string().datetime(),
+  expiresAt: z.string().datetime().optional()
+});
+
 export const validationSchema = z.object({
   id: z.string().min(1),
-  entity_id: z.string().min(1),
-  validator_id: z.string(), // e.g. 'human-review-pending'
-  validator_role: z.string(),
-  decision: z.enum(['approved', 'rejected', 'more_info_needed']),
-  validation_date: z.string().datetime(),
-  observations: z.string().nullable().optional(),
-  valid_until: z.string().datetime().nullable().optional(),
-  evidence_examined: z.array(z.string())
+  entityType: z.enum(['source', 'organization', 'service', 'content']),
+  entityId: z.string().min(1),
+  reviewerId: z.string().min(1),
+  reviewerRole: humanReviewerRoleSchema,
+  reviewedAt: z.string().datetime(),
+  decision: humanReviewDecisionSchema,
+  evidenceIds: z.array(z.string()),
+  confirmedFields: z.array(z.string()),
+  unconfirmedFields: z.array(z.string()),
+  publicNotes: z.string().nullable().optional(),
+  internalNotes: z.string().nullable().optional(),
+  validUntil: z.string().datetime().nullable().optional(),
+  requiresFollowUp: z.boolean().default(false),
+  followUpAt: z.string().datetime().nullable().optional(),
+  previousValidationId: z.string().nullable().optional(),
+  reviewPacketVersion: z.string().min(1),
+  entityFingerprint: z.string().min(1),
+  evidenceFingerprint: z.string().min(1)
 });
 
 export const registrySchema = z.object({

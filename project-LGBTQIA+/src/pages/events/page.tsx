@@ -141,7 +141,7 @@ export default function EventsPage() {
           <div>
             <p className="text-sm font-semibold text-dark-700">Agenda em construção</p>
             <p className="mt-1 text-xs text-dark-500 leading-relaxed">
-              Estamos construindo nossa agenda de eventos com parcerias locais. Envie sugestões de paradas, festas, rodas de conversa e workshops da comunidade LGBTQ+ no Nordeste.
+              Os eventos listados abaixo são apenas exemplos ilustrativos. Estamos construindo nossa agenda com parcerias locais.
             </p>
           </div>
         </div>

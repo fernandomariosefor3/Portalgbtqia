@@ -12,7 +12,7 @@ import { db } from './firebase';
 import { allCulture, type CultureItem } from '@/mocks/culture';
 
 const DEFAULT_IMAGE =
-  'https://readdy.ai/api/search-image?query=LGBTQ+queer+culture+art+colorful&width=800&height=500&seq=culture-default&orientation=landscape';
+  '';
 
 const PLACEHOLDER_AUTHOR_PHOTO = `${import.meta.env.BASE_URL}favicon.svg`;
 

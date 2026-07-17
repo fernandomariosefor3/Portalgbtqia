@@ -283,6 +283,14 @@ export default function SosPage() {
 
   return (
     <main className="w-full min-h-screen bg-surface font-inter pt-16 md:pt-20">
+      {/* Banner de Aviso Real */}
+      <div className="w-full bg-red-600 text-white text-center py-2 px-4 shadow-md flex items-center justify-center gap-2 relative z-20">
+        <i className="ri-alarm-warning-fill text-lg"></i>
+        <span className="text-xs md:text-sm font-bold uppercase tracking-wide">
+          Recurso experimental: esta ferramenta não aciona automaticamente a polícia, ambulância ou serviço público de emergência. Em emergência policial, ligue 190. Os recursos de gravação, localização e contato possuem limitações descritas nesta página.
+        </span>
+      </div>
+
       <section className="relative overflow-hidden bg-dark-900 px-4 md:px-6 lg:px-10 py-10 md:py-16">
         <div className="absolute inset-0">
           <img
@@ -489,7 +497,7 @@ export default function SosPage() {
         <aside className="space-y-6">
           <section className="rounded-2xl border border-dark-100 bg-white p-5">
             <h2 className="text-xl font-playfair font-bold text-dark-800">Evidência em áudio</h2>
-            <p className="mt-1 text-sm text-dark-500">Gravação local de até 30 segundos.</p>
+            <p className="mt-1 text-sm text-dark-500">A gravação fica salva temporariamente apenas na memória deste dispositivo e é perdida ao fechar a página. Nenhuma prova é enviada para servidores externos ou autoridades.</p>
             <button
               type="button"
               onClick={isRecording ? stopRecording : startRecording}

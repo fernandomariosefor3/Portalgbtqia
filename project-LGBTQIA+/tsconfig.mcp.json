@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist/mcp",
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": [
+    "mcp/**/*",
+    "src/types/trust.ts",
+    "src/lib/trust.ts",
+    "src/types/migration.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/pages",
+    "src/components",
+    "src/mocks"
+  ]
+}

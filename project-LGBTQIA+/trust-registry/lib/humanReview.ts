@@ -125,6 +125,18 @@ export function compareFingerprint(
     if (storedHash === v2Hash) {
       return { matches: true, storedVersion: 'v2', matchedVersion: 'v2', migrationRecommended: false, reason: 'MATCH' };
     }
+
+    // Fallback for promoted entities: Check if the mismatch is purely due to administrative promotion
+    if (currentData && currentData.status === 'verified_basic') {
+      const rollbackData = { ...currentData, status: 'under_review' };
+      delete rollbackData.publicListingAllowed;
+      delete rollbackData.publicationStatus;
+      const rollbackHash = computeFingerprintV2(rollbackData);
+      if (storedHash === rollbackHash) {
+        return { matches: true, storedVersion: 'v2', matchedVersion: 'v2', migrationRecommended: false, reason: 'MATCH' };
+      }
+    }
+
     return { matches: false, storedVersion: 'v2', migrationRecommended: false, reason: 'CONTENT_CHANGED' };
   }
 

@@ -1,0 +1,365 @@
+{
+  "metadata": {
+    "generatedAt": "2026-07-18T23:51:56.523Z",
+    "asOf": "2026-07-18T23:38:00.000Z",
+    "isDryRun": true,
+    "totalCandidates": 8,
+    "totalExcluded": 10
+  },
+  "lots": {
+    "lotePA_sources": [],
+    "lotePB_organizations": [
+      {
+        "id": "org_gov_ce",
+        "name": "Governo do Estado do Ceará",
+        "type": "organization",
+        "currentStatus": "under_review",
+        "proposedStatus": "verified_basic",
+        "publicationAllowed": false,
+        "publicationStatus": "not_published",
+        "effectiveValidationId": "val_org_gov_ce_002",
+        "entityIntegrityDigest": "938f6394e68849111c95415c144da566dec66e9e379e4a0a93f23165063b926b",
+        "evidenceIds": [
+          "ev_org_gov_ce"
+        ],
+        "dependencyEntityIds": [
+          "src_gov_ce"
+        ],
+        "effectiveValidUntil": "2027-07-17T22:15:00Z",
+        "warnings": [
+          "EXPIRY_NOT_EXPLICIT"
+        ],
+        "changedFields": [
+          "status"
+        ],
+        "unchangedFields": [
+          "id",
+          "name",
+          "created_at",
+          "updated_at",
+          "description"
+        ],
+        "rollbackProposed": {
+          "restoreStatus": "under_review",
+          "restoreValidationId": "val_org_gov_ce_002",
+          "responsible": "system_rollback",
+          "reason": "dry_run_specification_only",
+          "auditTrail": "rollback_of_promotion"
+        }
+      },
+      {
+        "id": "org_sec_div_ce",
+        "name": "Secretaria da Diversidade do Ceará",
+        "type": "organization",
+        "currentStatus": "under_review",
+        "proposedStatus": "verified_basic",
+        "publicationAllowed": false,
+        "publicationStatus": "not_published",
+        "effectiveValidationId": "val_org_sec_div_ce_002",
+        "entityIntegrityDigest": "159f72319c4db558490913c793f086b1f480b6e9b27232c50154c8ffa12fa793",
+        "evidenceIds": [
+          "ev_org_sec_div_ce_portal",
+          "ev_org_sec_div_ce_organograma"
+        ],
+        "dependencyEntityIds": [
+          "src_sec_div_ce"
+        ],
+        "effectiveValidUntil": "2027-07-17T22:20:00Z",
+        "warnings": [],
+        "changedFields": [
+          "status"
+        ],
+        "unchangedFields": [
+          "id",
+          "name",
+          "created_at",
+          "updated_at",
+          "description"
+        ],
+        "rollbackProposed": {
+          "restoreStatus": "under_review",
+          "restoreValidationId": "val_org_sec_div_ce_002",
+          "responsible": "system_rollback",
+          "reason": "dry_run_specification_only",
+          "auditTrail": "rollback_of_promotion"
+        }
+      },
+      {
+        "id": "org_pref_fortaleza",
+        "name": "Prefeitura de Fortaleza",
+        "type": "organization",
+        "currentStatus": "under_review",
+        "proposedStatus": "verified_basic",
+        "publicationAllowed": false,
+        "publicationStatus": "not_published",
+        "effectiveValidationId": "val_org_pref_fortaleza_002",
+        "entityIntegrityDigest": "41431e21afa732955c8ac52d244f1e38520b1d2c99b38431688d6ada6a21a22d",
+        "evidenceIds": [
+          "ev_org_pref_fortaleza"
+        ],
+        "dependencyEntityIds": [
+          "src_pref_fortaleza"
+        ],
+        "effectiveValidUntil": "2027-07-17T22:21:00Z",
+        "warnings": [
+          "EXPIRY_NOT_EXPLICIT"
+        ],
+        "changedFields": [
+          "status"
+        ],
+        "unchangedFields": [
+          "id",
+          "name",
+          "created_at",
+          "updated_at",
+          "description"
+        ],
+        "rollbackProposed": {
+          "restoreStatus": "under_review",
+          "restoreValidationId": "val_org_pref_fortaleza_002",
+          "responsible": "system_rollback",
+          "reason": "dry_run_specification_only",
+          "auditTrail": "rollback_of_promotion"
+        }
+      },
+      {
+        "id": "org_smdhds_fortaleza",
+        "name": "Secretaria Municipal dos Direitos Humanos e Desenvolvimento Social",
+        "type": "organization",
+        "currentStatus": "under_review",
+        "proposedStatus": "verified_basic",
+        "publicationAllowed": false,
+        "publicationStatus": "not_published",
+        "effectiveValidationId": "val_org_smdhds_fortaleza_002",
+        "entityIntegrityDigest": "7e8002d0f3e0a8f22652964a5c91f78a6cc8efd7e10c5661fb9ff2fb8a137c5d",
+        "evidenceIds": [
+          "ev_org_smdhds_fortaleza"
+        ],
+        "dependencyEntityIds": [
+          "src_smdhds_fortaleza"
+        ],
+        "effectiveValidUntil": "2027-07-18T11:23:46Z",
+        "warnings": [
+          "EXPIRY_NOT_EXPLICIT"
+        ],
+        "changedFields": [
+          "status"
+        ],
+        "unchangedFields": [
+          "id",
+          "name",
+          "created_at",
+          "updated_at",
+          "description"
+        ],
+        "rollbackProposed": {
+          "restoreStatus": "under_review",
+          "restoreValidationId": "val_org_smdhds_fortaleza_002",
+          "responsible": "system_rollback",
+          "reason": "dry_run_specification_only",
+          "auditTrail": "rollback_of_promotion"
+        }
+      },
+      {
+        "id": "org_sesa_ce",
+        "name": "Secretaria da Saúde do Ceará",
+        "type": "organization",
+        "currentStatus": "under_review",
+        "proposedStatus": "verified_basic",
+        "publicationAllowed": false,
+        "publicationStatus": "not_published",
+        "effectiveValidationId": "val_org_sesa_ce_002",
+        "entityIntegrityDigest": "76045b24c547d09de80eee5ee4ce73c026f94d75cde73b60303feeaf3fa8fc57",
+        "evidenceIds": [
+          "ev_org_sesa_ce"
+        ],
+        "dependencyEntityIds": [
+          "src_sesa_ce"
+        ],
+        "effectiveValidUntil": "2027-07-18T10:37:16Z",
+        "warnings": [
+          "EXPIRY_NOT_EXPLICIT"
+        ],
+        "changedFields": [
+          "status"
+        ],
+        "unchangedFields": [
+          "id",
+          "name",
+          "created_at",
+          "updated_at",
+          "description"
+        ],
+        "rollbackProposed": {
+          "restoreStatus": "under_review",
+          "restoreValidationId": "val_org_sesa_ce_002",
+          "responsible": "system_rollback",
+          "reason": "dry_run_specification_only",
+          "auditTrail": "rollback_of_promotion"
+        }
+      },
+      {
+        "id": "org_hsj_ce",
+        "name": "Hospital São José de Doenças Infecciosas",
+        "type": "organization",
+        "currentStatus": "under_review",
+        "proposedStatus": "verified_basic",
+        "publicationAllowed": false,
+        "publicationStatus": "not_published",
+        "effectiveValidationId": "val_org_hsj_ce_002",
+        "entityIntegrityDigest": "1cdc66f100a230ceef6b51f723a9a924f4c2a12bd3573a2bf6c9032fcd29d544",
+        "evidenceIds": [
+          "ev_org_hsj_ce"
+        ],
+        "dependencyEntityIds": [
+          "src_hsj_ce"
+        ],
+        "effectiveValidUntil": "2027-07-18T11:44:20Z",
+        "warnings": [
+          "EXPIRY_NOT_EXPLICIT"
+        ],
+        "changedFields": [
+          "status"
+        ],
+        "unchangedFields": [
+          "id",
+          "name",
+          "created_at",
+          "updated_at",
+          "description"
+        ],
+        "rollbackProposed": {
+          "restoreStatus": "under_review",
+          "restoreValidationId": "val_org_hsj_ce_002",
+          "responsible": "system_rollback",
+          "reason": "dry_run_specification_only",
+          "auditTrail": "rollback_of_promotion"
+        }
+      },
+      {
+        "id": "org_dpe_ce",
+        "name": "Defensoria Pública do Estado do Ceará",
+        "type": "organization",
+        "currentStatus": "under_review",
+        "proposedStatus": "verified_basic",
+        "publicationAllowed": false,
+        "publicationStatus": "not_published",
+        "effectiveValidationId": "val_org_dpe_ce_002",
+        "entityIntegrityDigest": "de98e0bfe9418878277a2308f2fa385922c0fd20a816a85633850317d96e2cdd",
+        "evidenceIds": [
+          "ev_org_dpe_ce"
+        ],
+        "dependencyEntityIds": [
+          "src_dpe_ce"
+        ],
+        "effectiveValidUntil": "2027-07-18T10:56:29Z",
+        "warnings": [
+          "EXPIRY_NOT_EXPLICIT"
+        ],
+        "changedFields": [
+          "status"
+        ],
+        "unchangedFields": [
+          "id",
+          "name",
+          "created_at",
+          "updated_at",
+          "description"
+        ],
+        "rollbackProposed": {
+          "restoreStatus": "under_review",
+          "restoreValidationId": "val_org_dpe_ce_002",
+          "responsible": "system_rollback",
+          "reason": "dry_run_specification_only",
+          "auditTrail": "rollback_of_promotion"
+        }
+      },
+      {
+        "id": "org_huwc_ce",
+        "name": "Complexo Hospitalar da Universidade Federal do Ceará — CH-UFC",
+        "type": "organization",
+        "currentStatus": "under_review",
+        "proposedStatus": "verified_basic",
+        "publicationAllowed": false,
+        "publicationStatus": "not_published",
+        "effectiveValidationId": "val_org_huwc_ce_002",
+        "entityIntegrityDigest": "5d9eaa63981b13ce64752308921fe480f58e8de7ebf3877e0af9a8631720a991",
+        "evidenceIds": [
+          "ev_org_huwc_ce"
+        ],
+        "dependencyEntityIds": [
+          "src_huwc_ce"
+        ],
+        "effectiveValidUntil": "2027-07-18T11:12:19Z",
+        "warnings": [
+          "EXPIRY_NOT_EXPLICIT"
+        ],
+        "changedFields": [
+          "status"
+        ],
+        "unchangedFields": [
+          "id",
+          "name",
+          "created_at",
+          "updated_at",
+          "description"
+        ],
+        "rollbackProposed": {
+          "restoreStatus": "under_review",
+          "restoreValidationId": "val_org_huwc_ce_002",
+          "responsible": "system_rollback",
+          "reason": "dry_run_specification_only",
+          "auditTrail": "rollback_of_promotion"
+        }
+      }
+    ]
+  },
+  "excluded": [
+    {
+      "id": "src_gov_ce",
+      "blockingReason": "ALREADY_PROMOTED_OR_ARCHIVED"
+    },
+    {
+      "id": "src_sec_div_ce",
+      "blockingReason": "ALREADY_PROMOTED_OR_ARCHIVED"
+    },
+    {
+      "id": "src_pref_fortaleza",
+      "blockingReason": "ALREADY_PROMOTED_OR_ARCHIVED"
+    },
+    {
+      "id": "src_smdhds_fortaleza",
+      "blockingReason": "ALREADY_PROMOTED_OR_ARCHIVED"
+    },
+    {
+      "id": "src_sesa_ce",
+      "blockingReason": "ALREADY_PROMOTED_OR_ARCHIVED"
+    },
+    {
+      "id": "src_hsj_ce",
+      "blockingReason": "ALREADY_PROMOTED_OR_ARCHIVED"
+    },
+    {
+      "id": "src_dpe_ce",
+      "blockingReason": "ALREADY_PROMOTED_OR_ARCHIVED"
+    },
+    {
+      "id": "src_huwc_ce",
+      "blockingReason": "ALREADY_PROMOTED_OR_ARCHIVED"
+    },
+    {
+      "id": "src_casa_transformar",
+      "blockingReason": "ALREADY_PROMOTED_OR_ARCHIVED"
+    },
+    {
+      "id": "org_casa_transformar",
+      "blockingReason": "ELIGIBILITY_FAILED",
+      "reasons": [
+        "PROTECTED_DATA_RISK",
+        "V2_REATTESTATION_REQUIRED",
+        "SECOND_REVIEW_MISSING",
+        "SOURCE_NOT_ELIGIBLE"
+      ]
+    }
+  ]
+}

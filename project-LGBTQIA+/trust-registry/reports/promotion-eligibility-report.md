@@ -1,6 +1,6 @@
 # Relatório de Elegibilidade para Promoção (Fase 5A.1)
 
-- **Data de Referência (asOf):** 2026-07-18T16:00:00.000Z
+- **Data de Referência (asOf):** 2026-07-18T23:38:00.000Z
 - **Versão da Política:** 1.0.0
 
 ## Contagens Isoladas
@@ -63,14 +63,14 @@
 
 ## Entidades Elegíveis
 
-- `src_gov_ce` (source) - Status: under_review | Avisos: EXPIRY_NOT_EXPLICIT
-- `src_sec_div_ce` (source) - Status: under_review | Avisos: EXPIRY_NOT_EXPLICIT
-- `src_pref_fortaleza` (source) - Status: under_review | Avisos: EXPIRY_NOT_EXPLICIT
-- `src_smdhds_fortaleza` (source) - Status: under_review | Avisos: EXPIRY_NOT_EXPLICIT
-- `src_sesa_ce` (source) - Status: under_review | Avisos: EXPIRY_NOT_EXPLICIT
-- `src_hsj_ce` (source) - Status: under_review | Avisos: EXPIRY_NOT_EXPLICIT
-- `src_dpe_ce` (source) - Status: under_review | Avisos: EXPIRY_NOT_EXPLICIT
-- `src_huwc_ce` (source) - Status: under_review | Avisos: EXPIRY_NOT_EXPLICIT
+- `src_gov_ce` (source) - Status: verified_basic | Avisos: EXPIRY_NOT_EXPLICIT
+- `src_sec_div_ce` (source) - Status: verified_basic | Avisos: EXPIRY_NOT_EXPLICIT
+- `src_pref_fortaleza` (source) - Status: verified_basic | Avisos: EXPIRY_NOT_EXPLICIT
+- `src_smdhds_fortaleza` (source) - Status: verified_basic | Avisos: EXPIRY_NOT_EXPLICIT
+- `src_sesa_ce` (source) - Status: verified_basic | Avisos: EXPIRY_NOT_EXPLICIT
+- `src_hsj_ce` (source) - Status: verified_basic | Avisos: EXPIRY_NOT_EXPLICIT
+- `src_dpe_ce` (source) - Status: verified_basic | Avisos: EXPIRY_NOT_EXPLICIT
+- `src_huwc_ce` (source) - Status: verified_basic | Avisos: EXPIRY_NOT_EXPLICIT
 - `org_gov_ce` (organization) - Status: under_review | Avisos: EXPIRY_NOT_EXPLICIT
 - `org_sec_div_ce` (organization) - Status: under_review
 - `org_pref_fortaleza` (organization) - Status: under_review | Avisos: EXPIRY_NOT_EXPLICIT

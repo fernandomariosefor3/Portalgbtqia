@@ -12,6 +12,8 @@ import {
 export const trustStatusSchema = z.enum(['submitted', 'under_review', 'verified_basic', 'community_reviewed', 'validated', 'partner', 'rejected', 'archived']);
 export const trustLevelSchema = z.enum(['none', 'basic', 'verified', 'certified']);
 
+export const publicationStatusSchema = z.enum(['published', 'not_published', 'archived']);
+
 export const trustSourceSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
@@ -19,7 +21,9 @@ export const trustSourceSchema = z.object({
   type: z.enum(['government', 'ngo', 'academic', 'media', 'community', 'other']),
   reliability_score: z.number().min(0).max(100),
   last_verified: z.string().datetime(),
-  status: trustStatusSchema
+  status: trustStatusSchema,
+  publicListingAllowed: z.boolean().default(false).optional(),
+  publicationStatus: publicationStatusSchema.default('not_published').optional()
 });
 
 export const trustOrganizationSchema = z.object({
@@ -35,7 +39,9 @@ export const trustOrganizationSchema = z.object({
   }).optional(),
   created_at: z.string().datetime(),
   updated_at: z.string().datetime(),
-  source_id: z.string()
+  source_id: z.string(),
+  publicListingAllowed: z.boolean().default(false).optional(),
+  publicationStatus: publicationStatusSchema.default('not_published').optional()
 });
 
 export const trustServiceSchema = z.object({
@@ -47,7 +53,9 @@ export const trustServiceSchema = z.object({
   status: trustStatusSchema,
   created_at: z.string().datetime(),
   updated_at: z.string().datetime(),
-  source_id: z.string()
+  source_id: z.string(),
+  publicListingAllowed: z.boolean().default(false).optional(),
+  publicationStatus: publicationStatusSchema.default('not_published').optional()
 });
 
 export const evidenceSchema = z.object({
@@ -149,6 +157,30 @@ export const fingerprintMigrationRecordSchema = z.object({
   notes: z.string().optional()
 });
 
+export const promotionEventSchema = z.object({
+  id: z.string().min(1),
+  entityId: z.string().min(1),
+  entityType: z.enum(['source', 'organization', 'service']),
+  previousStatus: trustStatusSchema,
+  newStatus: trustStatusSchema,
+  effectiveValidationId: z.string().min(1),
+  compactFingerprint: z.string().min(16),
+  integrityDigest: z.string().min(64),
+  evidenceIds: z.array(z.string()),
+  effectiveValidUntil: z.string().datetime(),
+  promotedBy: z.string().min(1),
+  promotedAt: z.string().datetime(),
+  reason: z.string(),
+  publicationAllowed: z.boolean(),
+  batchId: z.string().min(1),
+  rollbackSpecification: z.object({
+    statusRollbackTo: trustStatusSchema,
+    requiresNewEvent: z.boolean()
+  }),
+  policyVersion: z.string().min(1),
+  notes: z.string().optional()
+});
+
 export const registrySchema = z.object({
   sources: z.array(trustSourceSchema),
   organizations: z.array(trustOrganizationSchema),
@@ -156,5 +188,6 @@ export const registrySchema = z.object({
   evidence: z.array(evidenceSchema),
   validations: z.array(validationSchema),
   reviewQueue: z.array(reviewQueueItemSchema),
-  migrations: z.array(fingerprintMigrationRecordSchema).optional()
+  migrations: z.array(fingerprintMigrationRecordSchema).optional(),
+  promotionEvents: z.array(promotionEventSchema).optional()
 });

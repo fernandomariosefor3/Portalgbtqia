@@ -6,7 +6,9 @@
     "type": "government",
     "reliability_score": 100,
     "last_verified": "2026-07-17T18:00:00Z",
-    "status": "under_review"
+    "status": "verified_basic",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "src_sec_div_ce",
@@ -15,7 +17,9 @@
     "type": "government",
     "reliability_score": 100,
     "last_verified": "2026-07-17T18:00:00Z",
-    "status": "under_review"
+    "status": "verified_basic",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "src_pref_fortaleza",
@@ -24,7 +28,9 @@
     "type": "government",
     "reliability_score": 100,
     "last_verified": "2026-07-17T18:00:00Z",
-    "status": "under_review"
+    "status": "verified_basic",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "src_smdhds_fortaleza",
@@ -33,7 +39,9 @@
     "type": "government",
     "reliability_score": 100,
     "last_verified": "2026-07-17T18:00:00Z",
-    "status": "under_review"
+    "status": "verified_basic",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "src_sesa_ce",
@@ -42,7 +50,9 @@
     "type": "government",
     "reliability_score": 100,
     "last_verified": "2026-07-17T18:00:00Z",
-    "status": "under_review"
+    "status": "verified_basic",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "src_hsj_ce",
@@ -52,7 +62,9 @@
     "description": "public_state_hospital: Hospital público estadual integrante da rede da Secretaria da Saúde do Ceará (Sesa). URL anterior (alias documentado): https://www.hsj.ce.gov.br",
     "reliability_score": 100,
     "last_verified": "2026-07-17T18:00:00Z",
-    "status": "under_review"
+    "status": "verified_basic",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "src_dpe_ce",
@@ -62,7 +74,9 @@
     "description": "public_autonomous_institution: Instituição pública estadual autônoma, essencial à função jurisdicional do Estado, atuando como fonte institucional pública.",
     "reliability_score": 100,
     "last_verified": "2026-07-17T18:00:00Z",
-    "status": "under_review"
+    "status": "verified_basic",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "src_huwc_ce",
@@ -72,7 +86,9 @@
     "description": "federal_university_hospital_complex: Complexo hospitalar universitário federal, vinculado à Universidade Federal do Ceará, integrante da Rede Ebserh e administrado pela Ebserh (empresa pública vinculada ao Ministério da Educação). Composto por: Hospital Universitário Walter Cantídio — HUWC; e Maternidade-Escola Assis Chateaubriand — MEAC.",
     "reliability_score": 100,
     "last_verified": "2026-07-17T18:00:00Z",
-    "status": "under_review"
+    "status": "verified_basic",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "src_casa_transformar",

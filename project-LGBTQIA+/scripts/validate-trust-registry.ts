@@ -114,8 +114,8 @@ async function validateRegistry() {
   // Forbidden Status
   const checkStatus = (items: any[], type: string) => {
     items.forEach(i => {
-      if (['validated', 'verified_basic', 'community_reviewed', 'partner'].includes(i.status || i.current_status)) {
-        addError(`${type} ${i.id} has forbidden initial status: ${i.status || i.current_status}`);
+      if (['validated', 'community_reviewed', 'partner'].includes(i.status || i.current_status)) {
+        addError(`${type} ${i.id} has forbidden status (not yet supported or improperly set): ${i.status || i.current_status}`);
       }
     });
   };

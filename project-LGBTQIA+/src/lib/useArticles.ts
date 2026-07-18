@@ -14,7 +14,7 @@ const PLACEHOLDER_AUTHOR_PHOTO =
   'https://ui-avatars.com/api/?name=Fernando+Mario&background=E94E77&color=fff&size=64';
 
 const DEFAULT_ARTICLE_IMAGE =
-  'https://readdy.ai/api/search-image?query=LGBTQ+pride+community+Brazil+colorful&width=800&height=500&seq=art-default&orientation=landscape';
+  '';
 
 /**
  * Converte um documento do Firestore para o formato `Article` usado pela UI.

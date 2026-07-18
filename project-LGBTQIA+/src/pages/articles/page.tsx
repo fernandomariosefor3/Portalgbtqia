@@ -53,6 +53,11 @@ export default function ArticlesPage() {
           />
         </div>
         <div className="relative max-w-7xl mx-auto">
+          <div className="mb-6 inline-block w-full max-w-md p-3 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-100 text-sm">
+            <i className="ri-information-line mr-2"></i>
+            Os artigos exibidos abaixo são exemplos ilustrativos para demonstração.
+          </div>
+          <br/>
           <span className="inline-block px-3 py-1 rounded-full bg-primary-400/20 text-primary-300 text-xs font-medium uppercase tracking-wider mb-4">
             Artigos & Opinião
           </span>

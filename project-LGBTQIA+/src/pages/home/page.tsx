@@ -34,27 +34,13 @@ export default function Home() {
           <form
             data-readdy-form
             id="newsletter-form"
-            action="https://readdy.ai/api/form/d850jd1n2eikjpjtqh80"
-            method="POST"
             className="mt-8 flex flex-col sm:flex-row items-center gap-3 max-w-lg mx-auto"
             onSubmit={(e) => {
               e.preventDefault();
+              setFormStatus('success');
               const form = e.currentTarget;
-              const formData = new FormData(form);
-              fetch(form.action, {
-                method: 'POST',
-                body: new URLSearchParams(formData as any),
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-              })
-                .then(() => {
-                  setFormStatus('success');
-                  form.reset();
-                  setTimeout(() => setFormStatus('idle'), 5000);
-                })
-                .catch(() => {
-                  setFormStatus('error');
-                  setTimeout(() => setFormStatus('idle'), 5000);
-                });
+              form.reset();
+              setTimeout(() => setFormStatus('idle'), 5000);
             }}
           >
             <input
@@ -73,7 +59,7 @@ export default function Home() {
           </form>
           {formStatus === 'success' && (
             <p className="mt-3 text-sm font-medium text-accent-500">
-              {t('home.newsletter.success')}
+              A newsletter ainda está em preparação. Nenhum endereço de e-mail foi enviado ou armazenado.
             </p>
           )}
           {formStatus === 'error' && (

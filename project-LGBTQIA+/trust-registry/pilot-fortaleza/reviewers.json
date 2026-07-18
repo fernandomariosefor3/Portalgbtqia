@@ -1,0 +1,18 @@
+[
+  {
+    "id": "reviewer-owner-001",
+    "role": "registry_reviewer",
+    "active": true,
+    "authorizedEntityTypes": [
+      "source",
+      "organization",
+      "service"
+    ],
+    "authorizedCategories": [
+      "institutional_identity",
+      "service_registration",
+      "public_contact"
+    ],
+    "createdAt": "2026-07-17T22:07:00.000Z"
+  }
+]

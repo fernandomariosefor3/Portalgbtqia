@@ -42,13 +42,13 @@ export const categoryIcons: Record<HealthGuide['category'], string> = {
 
 export const categoryImages: Record<HealthGuide['category'], string> = {
   'prep-pep':
-    'https://readdy.ai/api/search-image?query=welcoming%20public%20health%20clinic%20consultation%20diverse%20lgbtqia%20adults%20soft%20natural%20light%20documentary%20photography%20clean%20modern%20brazil&width=1200&height=720&seq=health-prep-pep-photo&orientation=landscape',
+    '',
   'saude-mental':
-    'https://readdy.ai/api/search-image?query=affirmative%20mental%20health%20therapy%20session%20diverse%20lgbtqia%20people%20warm%20calm%20room%20professional%20documentary%20photography&width=1200&height=720&seq=health-mental-photo&orientation=landscape',
+    '',
   'saude-trans':
-    'https://readdy.ai/api/search-image?query=respectful%20trans%20healthcare%20consultation%20doctor%20and%20trans%20patient%20inclusive%20clinic%20warm%20editorial%20photography%20brazil&width=1200&height=720&seq=health-trans-photo&orientation=landscape',
+    '',
   'educacao-sexual':
-    'https://readdy.ai/api/search-image?query=inclusive%20sexual%20health%20education%20workshop%20diverse%20young%20adults%20community%20center%20warm%20documentary%20photography&width=1200&height=720&seq=health-sexual-photo&orientation=landscape',
+    '',
 };
 
 export const categoryDescriptions: Record<HealthGuide['category'], string> = {

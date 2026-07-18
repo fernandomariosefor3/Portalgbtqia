@@ -1,0 +1,644 @@
+[
+  {
+    "id": "val_src_gov_ce_001",
+    "entityType": "source",
+    "entityId": "src_gov_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-17T22:15:00Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_gov_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "url",
+      "type"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da fonte institucional Governo do Estado do Ceará. Domínio oficial e natureza governamental confirmados.",
+    "validUntil": "2027-07-17T22:15:00Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "2786facb426326f6",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_src_sec_div_ce_001",
+    "entityType": "source",
+    "entityId": "src_sec_div_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-17T22:18:00Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_sec_div_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "url",
+      "type"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da fonte institucional Secretaria da Diversidade do Ceará. Domínio oficial e natureza governamental confirmados.",
+    "validUntil": "2027-07-17T22:20:00Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "3a935714a23740b0",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_src_pref_fortaleza_001",
+    "entityType": "source",
+    "entityId": "src_pref_fortaleza",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-17T22:21:00Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_pref_fortaleza"
+    ],
+    "confirmedFields": [
+      "name",
+      "url",
+      "type"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da fonte institucional Prefeitura Municipal de Fortaleza. Domínio oficial municipal e jurisdição confirmados.",
+    "validUntil": "2027-07-17T22:21:00Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "c992da85c4313c82",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_org_gov_ce_001",
+    "entityType": "organization",
+    "entityId": "org_gov_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-17T22:25:00Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_org_gov_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "type",
+      "contact.website",
+      "source_id"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da organização Governo do Estado do Ceará.",
+    "validUntil": "2027-07-17T22:25:00Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "959513d3ec5441f1",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_org_sec_div_ce_001",
+    "entityType": "organization",
+    "entityId": "org_sec_div_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T10:23:33Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_sec_div_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "type",
+      "contact.website",
+      "source_id"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da organização Secretaria da Diversidade do Ceará. Identidade institucional, natureza pública estadual, website oficial e vínculo com a fonte aprovada confirmados.",
+    "validUntil": "2027-07-18T10:23:33Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "a981f529e39b978e",
+    "evidenceFingerprint": "4f53cda18c2baa0c"
+  },
+  {
+    "id": "val_srv_thina_rodrigues_001",
+    "entityType": "service",
+    "entityId": "srv_thina_rodrigues",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T10:31:22Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_thina_rodrigues"
+    ],
+    "confirmedFields": [
+      "name",
+      "organization_id",
+      "source_id",
+      "contact.phone",
+      "contact.email",
+      "contact.address",
+      "operating_hours",
+      "access_method"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica do Centro Estadual de Referência LGBTI+ Thina Rodrigues. Confirmados existência, vínculo institucional e dados operacionais divulgados. Segunda revisão (jurídica/privacidade) é obrigatória antes da ativação pública.",
+    "validUntil": "2027-01-18T00:00:00Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "04ca4f5f39f8a865",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_src_sesa_ce_001",
+    "entityType": "source",
+    "entityId": "src_sesa_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T10:37:16Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_sesa_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "url",
+      "type"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da fonte institucional Secretaria da Saúde do Ceará (Sesa). Domínio oficial, identidade e natureza pública estadual confirmados. Esta aprovação não atesta nem valida automaticamente informações clínicas, unidades, fluxos ou disponibilidade de serviços no domínio.",
+    "validUntil": "2027-07-18T10:37:16Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "69b9deaf727f94e2",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_org_sesa_ce_001",
+    "entityType": "organization",
+    "entityId": "org_sesa_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T10:44:32Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_org_sesa_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "type",
+      "contact.website",
+      "source_id"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da organização Secretaria da Saúde do Ceará (Sesa). Confirmação administrativa de identidade corporativa, vinculação de fonte governamental e natureza de organização pública estadual. Esta aprovação não atesta nem valida automaticamente serviços clínicos, protocolos de saúde, unidades vinculadas, PrEP/PEP, atendimento trans ou qualquer efetividade operacional.",
+    "validUntil": "2027-07-18T10:44:32Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "a97071963504be80",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_src_dpe_ce_001",
+    "entityType": "source",
+    "entityId": "src_dpe_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T10:56:29Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_dpe_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "url",
+      "type",
+      "description"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da fonte institucional Defensoria Pública do Estado do Ceará. Identidade institucional, domínio oficial e natureza de instituição pública estadual autônoma, permanente e essencial à função jurisdicional do Estado confirmados. Esta aprovação administrativa não valida de forma automática orientações jurídicas específicas, interpretações legais, núcleos de atendimento, fluxos de acesso, elegibilidade de usuários ou resultados de assistência.",
+    "validUntil": "2027-07-18T10:56:29Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "ee444912adeca484",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_org_dpe_ce_001",
+    "entityType": "organization",
+    "entityId": "org_dpe_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T11:04:05Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_org_dpe_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "type",
+      "contact.website",
+      "source_id"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da organização Defensoria Pública do Estado do Ceará. Confirmação administrativa de identidade corporativa e autonomia institucional atrelada à sua fonte governamental autônoma primária. Esta aprovação certifica tão somente a existência institucional e de forma alguma valida automaticamente serviços, núcleos, orientações jurídicas ou confere qualquer garantia de representação ou atendimento aos usuários.",
+    "validUntil": "2027-07-18T11:04:05Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "b75fb6c69bc00ba7",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_src_huwc_ce_001",
+    "entityType": "source",
+    "entityId": "src_huwc_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T11:12:19Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_huwc_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "url",
+      "type",
+      "description"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da fonte institucional Complexo Hospitalar da Universidade Federal do Ceará — CH-UFC. Identidade corporativa, URL institucional (gov.br/hubrasil), vínculo com a Universidade Federal do Ceará, integração à rede federal da Ebserh e composição (HUWC e MEAC) confirmados. Esta validação administrativa da fonte ratifica a confiabilidade referencial do domínio institucional, mas NÃO implica de modo algum em aprovação automática de serviços clínicos, ambulatórios especializados, cirurgias, protocolos de atendimento à população trans, regulação de vagas ou qualquer procedimento médico ofertado sob esta chancela. Tais serviços exigirão rigorosa revisão clínica autônoma.",
+    "validUntil": "2027-07-18T11:12:19Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "3703b440aaf44d60",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_org_pref_fortaleza_001",
+    "entityType": "organization",
+    "entityId": "org_pref_fortaleza",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T11:23:46Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_org_pref_fortaleza"
+    ],
+    "confirmedFields": [
+      "name",
+      "type",
+      "contact.website",
+      "source_id"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da organização Prefeitura Municipal de Fortaleza. Identidade institucional, nome, natureza de organização pública municipal, website institucional e jurisdição de Fortaleza/CE confirmados. Esta validação NÃO aprova automaticamente secretarias, políticas, programas, equipamentos ou serviços municipais; NÃO representa avaliação de qualidade, disponibilidade ou financiamento; e NÃO autoriza integração ou publicação automática.",
+    "validUntil": "2027-07-18T11:23:46Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "bc5bccaa9be5f09d",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_src_smdhds_fortaleza_001",
+    "entityType": "source",
+    "entityId": "src_smdhds_fortaleza",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T11:23:46Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_smdhds_fortaleza"
+    ],
+    "confirmedFields": [
+      "name",
+      "type",
+      "url"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da fonte Secretaria Municipal dos Direitos Humanos e Desenvolvimento Social — SDHDS. Identidade institucional, domínio governamental e vínculo com a Prefeitura de Fortaleza confirmados. Esta validação NÃO aprova automaticamente políticas de assistência social ou direitos humanos; NÃO valida equipamentos, contatos, horários ou serviços vinculados; e NÃO constitui aprovação jurídica, social ou de acolhimento.",
+    "validUntil": "2027-07-18T11:23:46Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "ca99f54ef9a9ee2d",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_org_smdhds_fortaleza_001",
+    "entityType": "organization",
+    "entityId": "org_smdhds_fortaleza",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T11:23:46Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_org_smdhds_fortaleza"
+    ],
+    "confirmedFields": [
+      "name",
+      "type",
+      "contact.website",
+      "source_id"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da organização Secretaria Municipal dos Direitos Humanos e Desenvolvimento Social — SDHDS. Identidade institucional, nome, natureza de organização pública municipal e integração à Prefeitura confirmados. Esta validação NÃO aprova automaticamente o Centro Janaína Dutra; NÃO valida serviços de acolhimento ou assistência; e NÃO confirma disponibilidade ou fluxo de atendimento. Cada serviço subordinado exigirá revisão própria.",
+    "validUntil": "2027-07-18T11:23:46Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "91b8e2e26a4c390f",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_org_huwc_ce_001",
+    "entityType": "organization",
+    "entityId": "org_huwc_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T11:23:46Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_org_huwc_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "type",
+      "contact.website",
+      "source_id"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da organização Complexo Hospitalar da Universidade Federal do Ceará — CH-UFC. Identidade institucional, natureza de complexo hospitalar universitário federal, URL canônica e integração à Rede HU Brasil confirmados. Esta validação NÃO valida ambulatórios, procedimentos ou protocolos clínicos; NÃO aprova serviços hormonais, psicológicos ou cirúrgicos; e NÃO confirma disponibilidade. Todo serviço clínico deverá passar por revisão própria.",
+    "validUntil": "2027-07-18T11:23:46Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "d3144a889f04823b",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_src_hsj_ce_001",
+    "entityType": "source",
+    "entityId": "src_hsj_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T11:44:20Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_hsj_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "url",
+      "type",
+      "source_id"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da fonte institucional Hospital São José de Doenças Infecciosas. URL canônica padronizada, vínculo oficial com a Sesa e identidade institucional confirmados. Esta validação é estritamente documental e NÃO corrobora nenhum conteúdo clínico publicado. NÃO confirma disponibilidade ou eficácia de serviços médicos, infectologia, emergência, profilaxias, ambulatórios, consultas ou horários.",
+    "validUntil": "2027-07-18T11:44:20Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "11bac9a264481cc8",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_org_hsj_ce_001",
+    "entityType": "organization",
+    "entityId": "org_hsj_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T11:44:20Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_org_hsj_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "type",
+      "contact.website",
+      "source_id"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da organização Hospital São José de Doenças Infecciosas. Existência institucional na rede pública da Sesa e website canônico confirmados. Esta certificação limita-se à estrutura mantenedora hospitalar estadual. NÃO aprova nem sugere o endosso a protocolos clínicos de infectologia, PrEP/PEP, atendimento porta-aberta, disponibilidade de leitos emergenciais, marcações de exames ou horários funcionais. Serviços individualizados exigirão verificações e chancelas exclusivas.",
+    "validUntil": "2027-07-18T11:44:20Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "1d8a025eed628a32",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_src_casa_transformar_001",
+    "entityType": "source",
+    "entityId": "src_casa_transformar",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T11:54:46Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_casa_transformar",
+      "ev_src_casa_transformar_mapa"
+    ],
+    "confirmedFields": [
+      "name",
+      "url",
+      "type"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica de fonte comunitária. Existência pública da iniciativa identificada em fonte independente (ACNUR/LGBT+Movimento) atuando em Fortaleza, Ceará. Canal social mantido como referência de contato. A aprovação reconhece a existência cadastral mas NÃO confirma funcionamento em tempo real, vagas, capacidade operacional, localização física, infraestrutura, personalidade jurídica formal ou certificação governamental. Segunda revisão obrigatória antes de integração pública.",
+    "internalNotes": "requiresSecondReview: true",
+    "validUntil": "2027-01-18T11:54:46Z",
+    "requiresFollowUp": true,
+    "followUpAt": "2026-08-18T11:54:46Z",
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "d3932a9c7ab31d61",
+    "evidenceFingerprint": "d827049039f82a8b"
+  },
+  {
+    "id": "val_org_casa_transformar_001",
+    "entityType": "organization",
+    "entityId": "org_casa_transformar",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T11:54:46Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_org_casa_transformar",
+      "ev_org_casa_transformar_mapa"
+    ],
+    "confirmedFields": [
+      "name",
+      "type",
+      "contact.website",
+      "source_id"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral restrita a organização comunitária (collective). Identificada atuação pública declarada em Fortaleza, Ceará, em mapeamento independente. formalLegalStatusConfirmed: false. Nenhuma confirmação de CNPJ, representação legal, vagas, financiamento ou atendimento porta-aberta. Localização ABSOLUTAMENTE PROTEGIDA: nenhuma referência espacial inserida. Esta decisão NÃO é certificação, recomendação ou garantia de serviços físicos. Segunda revisão de privacidade e auditoria operacional são mandatórias.",
+    "internalNotes": "requiresSecondReview: true; publicAddressAllowed: false mandatório",
+    "validUntil": "2027-01-18T11:54:46Z",
+    "requiresFollowUp": true,
+    "followUpAt": "2026-08-18T11:54:46Z",
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "d4c962010579b3e0",
+    "evidenceFingerprint": "d827049039f82a8b"
+  },
+  {
+    "id": "val_srv_dpe_direitos_humanos_001",
+    "entityType": "service",
+    "entityId": "srv_dpe_direitos_humanos",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T12:09:33Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_srv_dpe_direitos_humanos"
+    ],
+    "confirmedFields": [
+      "name",
+      "organization_id",
+      "category"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral restrita confirmando a existência institucional do Núcleo de Direitos Humanos e Ações Coletivas — NDHAC, vinculado à Defensoria Pública do Estado do Ceará, e sua atuação. NÃO confirma atendimento direto sem triagem, canal exclusivo LGBTQIA+, documentos exigidos, regras de agendamento, elegibilidade, prazo, representação processual garantida ou resultado judicial. Não constitui orientação jurídica nem promessa de gratuidade irrestrita. Aprovação puramente administrativa do catálogo de áreas de atuação do órgão.",
+    "internalNotes": "requiresSecondReview: true",
+    "validUntil": "2027-01-18T12:09:33Z",
+    "requiresFollowUp": true,
+    "followUpAt": "2026-08-18T12:09:33Z",
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "5cc2ce379f7371cd",
+    "evidenceFingerprint": "d827049039f82a8b"
+  },
+  {
+    "id": "val_srv_janaina_dutra_001",
+    "entityType": "service",
+    "entityId": "srv_janaina_dutra",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T12:09:33Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_srv_janaina_dutra"
+    ],
+    "confirmedFields": [
+      "name",
+      "organization_id",
+      "category"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral confirmando a existência do Centro de Referência LGBTQIA+ Janaína Dutra (equipamento público municipal vinculado à Coordenadoria Especial da Diversidade Sexual/SDHDS), endereço oficial (Rua Jaime Benévolo, 21, 2º andar, Fortaleza–CE) e WhatsApp ((85) 98970-4621). NÃO certifica nem garante atendimento imediato 24h, abrigo emergencial, alimentação, auxílio financeiro, proteção policial ou vagas. O equipamento não é certificado isoladamente, tem contatos sujeitos a alteração e depende dos fluxos municipais padrão. publicAddressAllowed: true para a referida secretaria.",
+    "internalNotes": "requiresSecondReview: true",
+    "validUntil": "2027-01-18T12:09:33Z",
+    "requiresFollowUp": true,
+    "followUpAt": "2026-08-18T12:09:33Z",
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "1f8e58a5de82fd80",
+    "evidenceFingerprint": "d827049039f82a8b"
+  },
+  {
+    "id": "val_srv_teleprep_telepep_001",
+    "entityType": "service",
+    "entityId": "srv_teleprep_telepep",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T12:29:52Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_teleprep_telepep"
+    ],
+    "confirmedFields": [
+      "name",
+      "organization_id",
+      "category",
+      "description"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica confirmando a existência do serviço TelePrEP e TelePEP mantido pela Sesa em modalidade remota. Canais governamentais de acesso vinculados (Acesso Saúde CE, Saúde Digital, Ceará App). A aprovação atesta o catálogo, mas NÃO confirma elegibilidade clínica, prescrição, posologia, estoque ou fornecimento garantido. A PEP é uma medida de urgência (limite 72h). Este cadastro NÃO substitui avaliação médica profissional. Se o canal digital falhar, o usuário deve buscar atendimento presencial imediato.",
+    "internalNotes": "requiresSecondReview: true; legacyId srv_acesso_saude_prep_pep consolidado neste registro.",
+    "validUntil": "2027-01-18T12:29:52Z",
+    "requiresFollowUp": true,
+    "followUpAt": "2026-08-18T12:29:52Z",
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "fe5b52f625d60cd1",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_srv_hsj_infectologia_001",
+    "entityType": "service",
+    "entityId": "srv_hsj_infectologia",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T12:47:28Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_hsj_infectologia"
+    ],
+    "confirmedFields": [
+      "name",
+      "organization_id",
+      "category",
+      "description"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica limitada estritamente ao Atendimento de emergência em infectologia do HSJ (Sesa). Endereço: Rua Nestor Barbosa, 315, Amadeu Furtado, Fortaleza–CE. Contato: (85) 3106-3393. Horário: 24h. O cadastro confirma a existência da emergência em infectologia e os dados institucionais divulgados. O atendimento depende de avaliação e triagem profissional, e este registro não garante elegibilidade, internação, exames, medicamentos ou atendimento imediato. NÃO SE CONFIRMA acesso porta-aberta universal, regulação exata, exames eletivos (carga viral/CD4) ou rotinas de PrEP/PEP in loco.",
+    "internalNotes": "requiresSecondReview: true",
+    "validUntil": "2027-01-18T12:47:28Z",
+    "requiresFollowUp": true,
+    "followUpAt": "2026-08-18T12:47:28Z",
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "80abf0c70597cc95",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_srv_sertrans_001",
+    "entityType": "service",
+    "entityId": "srv_sertrans",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T12:59:20Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_sertrans"
+    ],
+    "confirmedFields": [
+      "name",
+      "organization_id",
+      "category",
+      "description"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Este cadastro confirma a existência e o fluxo administrativo divulgado do Sertrans. Ele não substitui avaliação profissional, não garante consulta, prescrição, terapia hormonal, exames, cirurgias ou prazo de atendimento. Para solicitar acesso, a pessoa deve procurar uma Unidade Básica de Saúde. O encaminhamento ao serviço especializado depende da avaliação profissional e do fluxo de regulação do SUS. NÃO SÃO CONFIRMADOS: contato telefônico direto do ambulatório, dias e horários exatos, especialidades exatas sem enumeração direta na fonte, prazo na fila de regulação, atendimento imediato, disponibilidade de vagas ou acesso porta-aberta.",
+    "internalNotes": "requiresSecondReview: true",
+    "validUntil": "2027-01-18T12:59:20Z",
+    "requiresFollowUp": true,
+    "followUpAt": "2026-08-18T12:59:20Z",
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "a9ccc80e8b7e6e40",
+    "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_srv_casa_transformar_001",
+    "entityType": "service",
+    "entityId": "srv_casa_transformar_acolhimento",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T14:10:53Z",
+    "decision": "needs_more_evidence",
+    "evidenceIds": [
+      "ev_casa_transformar_acolhimento"
+    ],
+    "confirmedFields": [
+      "name",
+      "organization_id",
+      "category",
+      "source_id"
+    ],
+    "unconfirmedFields": [
+      "description",
+      "status"
+    ],
+    "publicNotes": "Há evidência pública da existência da Casa Transformar e de sua atuação declarada com acolhimento comunitário em Fortaleza. O funcionamento atual, a disponibilidade e o fluxo de entrada ainda precisam de confirmação. Não se dirija a uma possível localização física sem orientação direta e atual da própria organização.",
+    "internalNotes": "requiresSecondReview: true; publicAddressAllowed: false",
+    "validUntil": "2027-01-18T14:10:53Z",
+    "requiresFollowUp": true,
+    "followUpAt": "2027-01-18T14:10:53Z",
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "e52a45cb8b35f243",
+    "evidenceFingerprint": "e10808d43975dc40"
+  }
+]

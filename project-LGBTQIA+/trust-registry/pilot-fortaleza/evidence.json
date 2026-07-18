@@ -1,0 +1,292 @@
+[
+  {
+    "id": "ev_org_gov_ce",
+    "entity_id": "org_gov_ce",
+    "entity_type": "organization",
+    "source_url": "https://www.ce.gov.br",
+    "consultation_date": "2026-07-17T22:30:00Z",
+    "extracted_info": "Instituição Governo do Estado do Ceará. Organização pública estadual vinculada à sua fonte correspondente (src_gov_ce), confirmando sua jurisdição estadual e identidade pública.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_src_pref_fortaleza",
+    "entity_id": "src_pref_fortaleza",
+    "entity_type": "source",
+    "source_url": "https://www.fortaleza.ce.gov.br",
+    "consultation_date": "2026-07-17T22:25:00Z",
+    "extracted_info": "Página apresenta-se como portal institucional da Prefeitura Municipal de Fortaleza. Confirmação do domínio institucional governamental municipal e da jurisdição de Fortaleza, Ceará. Apresenta a estrutura de órgãos municipais.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_src_sec_div_ce",
+    "entity_id": "src_sec_div_ce",
+    "entity_type": "source",
+    "source_url": "https://www.diversidade.ce.gov.br",
+    "consultation_date": "2026-07-17T22:20:00Z",
+    "extracted_info": "Página identifica-se como portal institucional da Secretaria da Diversidade do Ceará. Domínio governamental e presença no organograma oficial do Governo do Estado confirmados.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_src_gov_ce",
+    "entity_id": "src_gov_ce",
+    "entity_type": "source",
+    "source_url": "https://www.ce.gov.br",
+    "consultation_date": "2026-07-17T22:15:00Z",
+    "extracted_info": "Página oficial apresenta-se como o portal institucional do Governo do Estado do Ceará (redirecionado de ceara.gov.br).",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_thina_rodrigues",
+    "entity_id": "srv_thina_rodrigues",
+    "entity_type": "service",
+    "source_url": "https://www.diversidade.ce.gov.br",
+    "consultation_date": "2026-07-18T10:29:38Z",
+    "extracted_info": "O Centro Estadual de Referência LGBTI+ Thina Rodrigues é um equipamento da Secretaria da Diversidade. Dados operacionais confirmados na fonte: telefone (85) 98993-3884, e-mail cerlgbt@diversidade.ce.gov.br, funcionamento de segunda a sexta-feira, das 8h às 17h, endereço Rua Valdetário Mota, 970, Papicu, Fortaleza–CE. Acesso mediante agendamento, presencial ou por meio eletrônico.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_janaina_dutra",
+    "entity_id": "srv_janaina_dutra",
+    "entity_type": "service",
+    "source_url": "https://direitoshumanos.fortaleza.ce.gov.br",
+    "consultation_date": "2026-07-17T18:00:00Z",
+    "extracted_info": "Centro Municipal de Referência LGBTQIA+ Janaína Dutra administrado pela Prefeitura de Fortaleza.",
+    "limitations": "Falta confirmar telefone atual e se os atendimentos presenciais seguem o mesmo fluxo pós-2025.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_acesso_saude_prep_pep",
+    "entity_id": "srv_acesso_saude_prep_pep",
+    "entity_type": "service",
+    "source_url": "https://www.saude.ce.gov.br",
+    "consultation_date": "2026-07-17T18:00:00Z",
+    "extracted_info": "A Secretaria da Saúde do Ceará promove programas de PrEP e PEP.",
+    "limitations": "Não foi confirmada a lista exata de locais físicos do Acesso Saúde CE que oferecem no momento.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_teleprep_telepep",
+    "entity_id": "srv_teleprep_telepep",
+    "entity_type": "service",
+    "source_url": "https://www.saude.ce.gov.br",
+    "consultation_date": "2026-07-18T12:21:04Z",
+    "extracted_info": "Confirmação do serviço de prevenção combinada do HIV por teleconsulta (TelePrEP e TelePEP) mantido pela Sesa. Atendimento conduzido por profissional de saúde remotamente. Canais oficiais encontrados: Acesso Saúde CE, portal Saúde Digital e Ceará App. Necessidade de cadastro via plataforma e possibilidade de solicitação de exames e avaliação profissional.",
+    "limitations": "NÃO comprova: estoque garantido, dispensação irrestrita de medicamentos locais, elegibilidade automática, funcionamento 24h contínuo ou prazo de entrega. TelePEP é restrita a 72 horas após exposição e o cadastro NÃO prescreve nem garante disponibilidade do canal. Uma indisponibilidade tecnológica não impede a busca presencial.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_dpe_direitos_humanos",
+    "entity_id": "srv_dpe_direitos_humanos",
+    "entity_type": "service",
+    "source_url": "https://www.defensoria.ce.def.br",
+    "consultation_date": "2026-07-17T18:00:00Z",
+    "extracted_info": "A Defensoria atua na retificação de nome social e defesa dos direitos humanos.",
+    "limitations": "O núcleo exato (NUDHAM) e seus canais diretos precisam ser auditados na página oficial.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_hsj_infectologia",
+    "entity_id": "srv_hsj_infectologia",
+    "entity_type": "service",
+    "source_url": "https://www.ce.gov.br/hsj/",
+    "consultation_date": "2026-07-18T12:31:47Z",
+    "extracted_info": "Registro do 'Atendimento de emergência em infectologia do HSJ', listado nominalmente nos serviços em destaque no site oficial. Localizado na Rua Nestor Barbosa, 315, Amadeu Furtado – Fortaleza, CE. Horário da emergência: 24 horas. Contato oficial: (85) 3106-3393.",
+    "limitations": "Aprovação limitada unicamente ao atendimento de emergência em infectologia. NÃO é garantia de disponibilidade de PrEP/PEP, carga viral de HIV ou atendimento psicológico imediato, os quais possuem fluxos e cadastros ambulatoriais distintos. Nenhuma orientação médica de elegibilidade clínica pode ser inferida.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_sertrans",
+    "entity_id": "srv_sertrans",
+    "entity_type": "service",
+    "source_url": "https://www.saude.ce.gov.br",
+    "consultation_date": "2026-07-18T12:56:32Z",
+    "extracted_info": "O Serviço Ambulatorial Transdisciplinar para Pessoas Transgênero (Sertrans) é uma unidade oficial do estado. Evidências atuais de 2025 indicam que foi transferido para o Hospital Universitário do Ceará (HUC). Possui caráter multiprofissional para acompanhamento e afirmação de gênero. O fluxo de acesso depende da Central de Regulação (iniciado na rede básica/UBS), não configurando porta-aberta.",
+    "limitations": "O cadastro atesta somente a existência institucional do ambulatório. NÃO constitui promessa de tratamento hormonal garantido, marcação cirúrgica a curto prazo ou acesso direto sem encaminhamento médico prévio pela Atenção Básica.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_casa_transformar_acolhimento",
+    "entity_id": "srv_casa_transformar_acolhimento",
+    "entity_type": "service",
+    "source_url": "https://www.instagram.com/casatransformar",
+    "consultation_date": "2026-07-17T18:00:00Z",
+    "extracted_info": "Página do Instagram lista o projeto como acolhimento e suporte para LGBTQIAPN+.",
+    "limitations": "Instagram é fonte complementar, requer confirmação direta de funcionamento atual e critérios de ingresso.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_src_sesa_ce",
+    "entity_id": "src_sesa_ce",
+    "entity_type": "source",
+    "source_url": "https://www.saude.ce.gov.br",
+    "consultation_date": "2026-07-18T10:36:11Z",
+    "extracted_info": "Página oficial institucional da Secretaria da Saúde do Ceará (Sesa). Domínio governamental e natureza oficial de saúde do estado confirmados.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_org_sesa_ce",
+    "entity_id": "org_sesa_ce",
+    "entity_type": "organization",
+    "source_url": "https://www.saude.ce.gov.br",
+    "consultation_date": "2026-07-18T10:43:21Z",
+    "extracted_info": "Instituição Secretaria da Saúde do Ceará (Sesa). Organização pública estadual atrelada à fonte institucional oficial, confirmando sua identidade e atuação na administração de saúde do estado.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_src_dpe_ce",
+    "entity_id": "src_dpe_ce",
+    "entity_type": "source",
+    "source_url": "https://www.defensoria.ce.def.br",
+    "consultation_date": "2026-07-18T10:52:11Z",
+    "extracted_info": "Página oficial institucional da Defensoria Pública do Estado do Ceará, com domínio governamental https://www.defensoria.ce.def.br. A identidade foi confirmada no próprio portal, atestando sua natureza de instituição pública estadual autônoma e sua função institucional essencial à jurisdição do Estado. Esta validação cadastral não implica em aprovação automática dos serviços jurídicos ou orientações publicadas.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_org_dpe_ce",
+    "entity_id": "org_dpe_ce",
+    "entity_type": "organization",
+    "source_url": "https://www.defensoria.ce.def.br",
+    "consultation_date": "2026-07-18T11:02:22Z",
+    "extracted_info": "Instituição Defensoria Pública do Estado do Ceará. Organização pública estadual autônoma atrelada à fonte institucional oficial (.def.br), atestando sua identidade corporativa e autonomia.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_src_huwc_ce",
+    "entity_id": "src_huwc_ce",
+    "entity_type": "source",
+    "source_url": "https://www.gov.br/hubrasil/pt-br/hospitais-universitarios/regiao-nordeste/ch-ufc",
+    "consultation_date": "2026-07-18T11:09:18Z",
+    "extracted_info": "Página oficial do Complexo Hospitalar da Universidade Federal do Ceará — CH-UFC. Vínculo confirmado com a UFC e a Rede HU Brasil. Identificadas as unidades integrantes: Hospital Universitário Walter Cantídio (HUWC) e Maternidade-Escola Assis Chateaubriand (MEAC). Esta validação cadastral da fonte restringe-se ao domínio institucional e não aprova automaticamente serviços clínicos, ambulatórios, cirurgias ou fluxos de atendimento vinculados.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_org_pref_fortaleza",
+    "entity_id": "org_pref_fortaleza",
+    "entity_type": "organization",
+    "source_url": "https://www.fortaleza.ce.gov.br",
+    "consultation_date": "2026-07-18T11:14:53Z",
+    "extracted_info": "Instituição corporativa da Prefeitura Municipal de Fortaleza. Organização pública municipal atrelada à fonte institucional oficial do município, atestando sua existência jurídica e administrativa.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_src_smdhds_fortaleza",
+    "entity_id": "src_smdhds_fortaleza",
+    "entity_type": "source",
+    "source_url": "https://direitoshumanos.fortaleza.ce.gov.br",
+    "consultation_date": "2026-07-18T11:19:59Z",
+    "extracted_info": "Página oficial institucional da Secretaria Municipal dos Direitos Humanos e Desenvolvimento Social de Fortaleza. Domínio municipal confirmado.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_org_smdhds_fortaleza",
+    "entity_id": "org_smdhds_fortaleza",
+    "entity_type": "organization",
+    "source_url": "https://direitoshumanos.fortaleza.ce.gov.br",
+    "consultation_date": "2026-07-18T11:19:59Z",
+    "extracted_info": "Organização pública municipal correspondente à Secretaria Municipal dos Direitos Humanos e Desenvolvimento Social, confirmada via portal institucional.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_org_huwc_ce",
+    "entity_id": "org_huwc_ce",
+    "entity_type": "organization",
+    "source_url": "https://www.gov.br/hubrasil/pt-br/hospitais-universitarios/regiao-nordeste/ch-ufc",
+    "consultation_date": "2026-07-18T11:19:59Z",
+    "extracted_info": "Organização correspondente ao Complexo Hospitalar da Universidade Federal do Ceará — CH-UFC. Vínculo confirmado com a UFC e a Rede HU Brasil, mantendo HUWC e MEAC.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_src_hsj_ce",
+    "entity_id": "src_hsj_ce",
+    "entity_type": "source",
+    "source_url": "https://www.ce.gov.br/hsj/",
+    "consultation_date": "2026-07-18T11:41:18Z",
+    "extracted_info": "Página oficial do Hospital São José de Doenças Infecciosas. URL originalmente consultada: https://www.hsj.ce.gov.br. URL final após redirecionamento: https://www.ce.gov.br/hsj/. Domínio estadual correspondente a hospital público estadual da rede da Secretaria da Saúde do Ceará (Sesa).",
+    "limitations": "Esta validação atesta exclusivamente o domínio institucional; não valida serviços clínicos de forma automática.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_org_hsj_ce",
+    "entity_id": "org_hsj_ce",
+    "entity_type": "organization",
+    "source_url": "https://www.ce.gov.br/hsj/",
+    "consultation_date": "2026-07-18T11:41:18Z",
+    "extracted_info": "Instituição administrativa correspondente ao Hospital São José de Doenças Infecciosas. Organização pública estadual atrelada à Secretaria da Saúde do Ceará (Sesa).",
+    "limitations": "Esta evidência valida apenas a identidade da organização mantenedora; não autoriza nem atesta serviços ambulatoriais, hospitalares ou emergenciais.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_src_casa_transformar",
+    "entity_id": "src_casa_transformar",
+    "entity_type": "source",
+    "source_url": "https://www.instagram.com/casatransformar",
+    "consultation_date": "2026-07-18T11:47:03Z",
+    "extracted_info": "Página social no Instagram da Casa Transformar, utilizada como fonte inicial. Não atesta certificação governamental, vagas, acolhimento porta-aberta ou localização.",
+    "limitations": "Fonte não-governamental primária. Restrita a fins de contato. A publicação desta fonte não autoriza a exibição de endereço em sistemas públicos e exige revisão secundária rigorosa para a confirmação de qualquer serviço de acolhimento.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_org_casa_transformar",
+    "entity_id": "org_casa_transformar",
+    "entity_type": "organization",
+    "source_url": "https://www.instagram.com/casatransformar",
+    "consultation_date": "2026-07-18T11:47:03Z",
+    "extracted_info": "Organização não-governamental (NGO) Casa Transformar identificada. Registro exclusivamente administrativo de sua existência.",
+    "limitations": "Endereço publicAddressAllowed: false mandatório. Não confirma vagas, capacidade de acolhimento, infraestrutura ou atendimento imediato. Segunda revisão de privacidade obrigatória.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_src_casa_transformar_mapa",
+    "entity_id": "src_casa_transformar",
+    "entity_type": "source",
+    "source_url": "https://www.acnur.org/portugues/mapa-lgbtqi-ceara-2026",
+    "consultation_date": "2026-07-18T11:51:53Z",
+    "extracted_info": "Identificação da Casa Transformar no 'Mapa das Redes Comunitárias e de Serviços para Pessoas Refugiadas e Migrantes LGBTQI+ — Ceará 2026' (ACNUR e LGBT+Movimento). Confirmação de fonte independente da própria organização, classificando o espaço como casa de apoio em Fortaleza e confirmando o canal @casatransformar.",
+    "limitations": "O mapa constitui evidência documental independente da existência institucional primária. Contudo, NÃO confirma disponibilidade, vagas ou funcionamento em tempo real.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_org_casa_transformar_mapa",
+    "entity_id": "org_casa_transformar",
+    "entity_type": "organization",
+    "source_url": "https://www.acnur.org/portugues/mapa-lgbtqi-ceara-2026",
+    "consultation_date": "2026-07-18T11:51:53Z",
+    "extracted_info": "Identificação corporativa/comunitária da Casa Transformar no 'Mapa das Redes Comunitárias e de Serviços para Pessoas Refugiadas e Migrantes LGBTQI+ — Ceará 2026'. Confirmação de existência pública em Fortaleza por fonte independente (ACNUR/LGBT+Movimento).",
+    "limitations": "Evidência estrita de existência em mapeamento. NÃO confirma representação legal formal, CNPJ, disponibilidade atual de acolhimento ou capacidade operacional.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_srv_dpe_direitos_humanos",
+    "entity_id": "srv_dpe_direitos_humanos",
+    "entity_type": "service",
+    "source_url": "https://www.defensoria.ce.def.br",
+    "consultation_date": "2026-07-18T12:02:20Z",
+    "extracted_info": "Registro de atendimento institucional da Defensoria Pública em direitos humanos (Núcleo de Direitos Humanos e Ações Coletivas). A fonte atual não comprova um serviço específico isolado com o nome de 'Atendimento de Direitos Humanos — Nome Social/Cidadania', mas sim o fluxo geral do Núcleo.",
+    "limitations": "A confirmação limita-se à existência administrativa do atendimento institucional. NÃO atesta tempos de resposta, concessão judicial de retificação, horários específicos de plantão, nem aprova fluxos processuais. Nenhuma orientação jurídica é produzida, nem gratuidade garantida sem triagem.",
+    "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_srv_janaina_dutra",
+    "entity_id": "srv_janaina_dutra",
+    "entity_type": "service",
+    "source_url": "https://direitoshumanos.fortaleza.ce.gov.br",
+    "consultation_date": "2026-07-18T12:02:20Z",
+    "extracted_info": "Registro do Centro de Referência LGBTQIA+ Janaína Dutra, vinculado à Coordenadoria Especial da Diversidade Sexual e à SDHDS. Endereço institucional divulgado em 2025: Rua Jaime Benévolo, 21, 2º andar, Fortaleza–CE. WhatsApp institucional: (85) 98970-4621.",
+    "limitations": "Validação exclusivamente administrativa do equipamento municipal. Contatos e funcionamento podem sofrer alterações. NÃO infere abrigo emergencial, atendimento 24 horas, alimentação, auxílio financeiro, disponibilidade imediata, proteção policial ou vaga em acolhimento.",
+    "needs_additional_confirmation": true
+  }
+]

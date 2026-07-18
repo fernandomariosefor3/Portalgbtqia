@@ -1,10 +1,11 @@
-import { Validation, computeFingerprint, detectStaleReviewPacket } from './humanReview.js';
+import { Validation, detectStaleReviewPacket } from './humanReview.js';
 import { 
   PromotionEligibilityResult, 
   PromotionBlockReason, 
   PromotionWarning, 
   CURRENT_POLICY_VERSION, 
-  parseAliasFromDescription 
+  parseAliasFromDescription,
+  InheritedPromotionBlock
 } from './promotionPolicies.js';
 
 export interface PromotionContext {
@@ -28,7 +29,7 @@ function resolveEffectiveValidation(entityId: string, context: PromotionContext)
 }
 
 function resolveEvidence(entityId: string, context: PromotionContext): any[] {
-  return context.registry.evidence.filter(e => e.entityId === entityId);
+  return context.registry.evidence.filter(e => e.entity_id === entityId);
 }
 
 function checkValidUntil(validUntil: string | null | undefined, asOf: Date): boolean {
@@ -59,6 +60,7 @@ export function evaluatePromotionEligibility(
     currentStatus: entity.status,
     eligible: false,
     blockingReasons: [],
+    inheritedBlockingReasons: [],
     warnings: [],
     validationIds: [],
     evidenceIds: [],
@@ -126,8 +128,23 @@ export function evaluatePromotionEligibility(
   }
 
   // Stale check
-  if (detectStaleReviewPacket(effectiveValidation, entity, evidences)) {
+  const staleResult = detectStaleReviewPacket(effectiveValidation, entity, evidences);
+  if (staleResult.isStale) {
     result.blockingReasons.push('STALE_REVIEW_PACKET');
+  } else if (staleResult.entityComparison.reason === 'MATCH_LEGACY' || staleResult.evidenceComparison.reason === 'MATCH_LEGACY') {
+    result.warnings.push({ code: 'LEGACY_FINGERPRINT_VERSION', message: 'The validation fingerprint is using a legacy version and should be migrated.' });
+  }
+
+  // Evidence Expiration Check
+  for (const ev of evidences) {
+    const effectiveEvValidUntil = ev.validUntil || ev.nextReviewAt;
+    if (effectiveEvValidUntil) {
+       if (!checkValidUntil(effectiveEvValidUntil, context.asOf)) {
+         result.blockingReasons.push('EVIDENCE_EXPIRED');
+       }
+    } else {
+       result.warnings.push({ code: 'EXPIRY_NOT_EXPLICIT', message: `Evidence ${ev.id} lacks explicit validUntil or nextReviewAt.` });
+    }
   }
 
   // 4. Dependencies
@@ -142,7 +159,12 @@ export function evaluatePromotionEligibility(
     } else {
        const sourceRes = evaluatePromotionEligibility(source, 'source', context);
        if (!sourceRes.eligible) {
-         result.blockingReasons.push('SOURCE_NOT_ELIGIBLE');
+         result.inheritedBlockingReasons.push({
+           reason: 'SOURCE_NOT_ELIGIBLE',
+           dependencyEntityId: source.id,
+           dependencyType: 'source',
+           rootBlockingReasons: sourceRes.blockingReasons
+         });
        }
        if (sourceRes.validUntil) {
          result.validUntil = sourceRes.validUntil;
@@ -156,7 +178,12 @@ export function evaluatePromotionEligibility(
     } else {
        const orgRes = evaluatePromotionEligibility(org, 'organization', context);
        if (!orgRes.eligible) {
-         result.blockingReasons.push('ORGANIZATION_NOT_ELIGIBLE');
+         result.inheritedBlockingReasons.push({
+           reason: 'ORGANIZATION_NOT_ELIGIBLE',
+           dependencyEntityId: org.id,
+           dependencyType: 'organization',
+           rootBlockingReasons: orgRes.blockingReasons
+         });
        }
        // If source logic applies transitively, it's evaluated inside org.
        if (orgRes.validUntil) {
@@ -181,7 +208,7 @@ export function evaluatePromotionEligibility(
   }
 
   // 6. Eligibility Final Computation
-  result.eligible = result.blockingReasons.length === 0;
+  result.eligible = result.blockingReasons.length === 0 && result.inheritedBlockingReasons.length === 0;
 
   if (result.eligible) {
     result.proposedStatus = 'verified_basic';

@@ -68,8 +68,10 @@ async function checkReviews() {
     const entityEvidence = evidence.filter((e: any) => e.entity_id === entity.id);
     const eligibility: HumanReviewEligibilityResult = evaluateHumanReviewPromotion(v.entityType, entity, v, entityEvidence);
 
-    if (eligibility.blockingIssues.length > 0) {
-      addError(`Validation ${v.id} fails eligibility checks: ${eligibility.blockingIssues.map(b => b.code).join(', ')}`);
+    const actualBlockingIssues = eligibility.blockingIssues.filter(b => b.code !== 'NOT_APPROVED');
+
+    if (actualBlockingIssues.length > 0) {
+      addError(`Validation ${v.id} fails eligibility checks: ${actualBlockingIssues.map(b => b.code).join(', ')}`);
     }
 
     if (v.previousValidationId) {

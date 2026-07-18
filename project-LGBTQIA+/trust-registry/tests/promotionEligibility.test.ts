@@ -43,7 +43,8 @@ describe('Promotion Eligibility Engine', () => {
 
     const result = evaluatePromotionEligibility(service, 'service', ctx);
     expect(result.eligible).toBe(false);
-    expect(result.blockingReasons).toContain('ORGANIZATION_NOT_ELIGIBLE');
+    expect(result.inheritedBlockingReasons.length).toBeGreaterThan(0);
+    expect(result.inheritedBlockingReasons[0].reason).toBe('ORGANIZATION_NOT_ELIGIBLE');
   });
 
   it('entity without approved_basic is ineligible', () => {
@@ -144,6 +145,59 @@ describe('Promotion Eligibility Engine', () => {
     const result = evaluatePromotionEligibility(org, 'organization', ctx);
     expect(result.eligible).toBe(false);
     expect(result.blockingReasons).toContain('NO_APPROVED_BASIC_REVIEW');
+  });
+
+  it('absence of validUntil does not expire automatically', () => {
+    const ctx = createBaseContext();
+    const service = { id: 'srv_1', status: 'under_review', organization_id: 'org_1' };
+    const evidence = { id: 'ev_1', entityId: 'srv_1' }; // No validUntil or nextReviewAt
+    ctx.registry.services.push(service);
+    ctx.registry.evidence.push(evidence);
+    ctx.registry.validations.push(createValidation({ entityId: 'srv_1' })); // Also no validUntil
+
+    const result = evaluatePromotionEligibility(service, 'service', ctx);
+    
+    // Should NOT have VALIDATION_EXPIRED or EVIDENCE_EXPIRED
+    expect(result.blockingReasons).not.toContain('VALIDATION_EXPIRED');
+    expect(result.blockingReasons).not.toContain('EVIDENCE_EXPIRED');
+    // But it should have a warning
+    expect(result.warnings.some(w => w.code === 'EXPIRY_NOT_EXPLICIT')).toBe(true);
+  });
+
+  it('2027 validUntil does not expire in 2026', () => {
+    const ctx = createBaseContext(); // ctx is 2026-07-18
+    const service = { id: 'srv_1', status: 'under_review' };
+    ctx.registry.services.push(service);
+    ctx.registry.validations.push(createValidation({ entityId: 'srv_1', validUntil: '2027-01-01T00:00:00Z' }));
+
+    const result = evaluatePromotionEligibility(service, 'service', ctx);
+    
+    expect(result.blockingReasons).not.toContain('VALIDATION_EXPIRED');
+  });
+
+  it('source block does not affect unrelated entity', () => {
+    const ctx = createBaseContext();
+    const source1 = { id: 'src_1', status: 'under_review' };
+    const org1 = { id: 'org_1', status: 'under_review', source_id: 'src_1' };
+    
+    const source2 = { id: 'src_2', status: 'under_review' };
+    const org2 = { id: 'org_2', status: 'under_review', source_id: 'src_2' };
+    
+    ctx.registry.sources.push(source1, source2);
+    ctx.registry.organizations.push(org1, org2);
+
+    ctx.registry.validations.push(createValidation({ entityId: 'src_1' }));
+    ctx.registry.validations.push(createValidation({ entityId: 'org_1' }));
+    
+    ctx.registry.validations.push(createValidation({ entityId: 'src_2', decision: 'needs_more_evidence' }));
+    ctx.registry.validations.push(createValidation({ entityId: 'org_2' }));
+
+    const res1 = evaluatePromotionEligibility(org1, 'organization', ctx);
+    expect(res1.eligible).toBe(true);
+
+    const res2 = evaluatePromotionEligibility(org2, 'organization', ctx);
+    expect(res2.eligible).toBe(false);
+    expect(res2.inheritedBlockingReasons[0].reason).toBe('SOURCE_NOT_ELIGIBLE');
   });
 
 });

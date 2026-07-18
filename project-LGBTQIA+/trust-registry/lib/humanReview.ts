@@ -24,10 +24,112 @@ export interface HumanReviewEligibilityResult {
   requiredReviewerRoles: HumanReviewerRole[];
 }
 
-export function computeFingerprint(data: any): string {
-  // Hash determinístico sem segredos
+export type FingerprintVersion = 'v1' | 'v2';
+
+export interface FingerprintComparisonResult {
+  matches: boolean;
+  storedVersion: FingerprintVersion;
+  matchedVersion?: FingerprintVersion;
+  migrationRecommended: boolean;
+  reason?:
+    | 'MATCH'
+    | 'MATCH_LEGACY'
+    | 'CONTENT_CHANGED'
+    | 'UNSUPPORTED_VERSION'
+    | 'FINGERPRINT_MISSING';
+}
+
+export function computeFingerprintV1(data: any): string {
+  // Algoritmo legado preservado exatamente como estava
   const str = JSON.stringify(data, Object.keys(data).sort());
   return crypto.createHash('sha256').update(str).digest('hex').substring(0, 16);
+}
+
+const UNORDERED_ARRAY_PATHS = new Set([
+  'evidenceIds',
+  'sourceIds',
+  'confirmedFields',
+  'unconfirmedFields',
+  'tags',
+  'authorizedEntityTypes',
+  'authorizedCategories'
+]);
+
+function deepCanonicalize(data: any, path: string = ''): any {
+  if (data === null || data === undefined) return data;
+  if (typeof data !== 'object') return data;
+
+  if (Array.isArray(data)) {
+    const isUnordered = UNORDERED_ARRAY_PATHS.has(path) || path.endsWith('Ids');
+    const mapped = data.map((item, index) => deepCanonicalize(item, `${path}[${index}]`));
+    
+    if (isUnordered) {
+      mapped.sort((a, b) => {
+        const strA = typeof a === 'object' ? JSON.stringify(a) : String(a);
+        const strB = typeof b === 'object' ? JSON.stringify(b) : String(b);
+        return strA.localeCompare(strB);
+      });
+    }
+    return mapped;
+  }
+
+  const keys = Object.keys(data).sort();
+  const result: Record<string, any> = {};
+
+  const IGNORED_FIELDS = new Set([
+    'generatedAt',
+    'evaluatedAt',
+    'reportGeneratedAt'
+  ]);
+
+  for (const key of keys) {
+    if (IGNORED_FIELDS.has(key)) continue;
+    result[key] = deepCanonicalize(data[key], key);
+  }
+
+  return result;
+}
+
+export function computeFingerprintV2(data: any): string {
+  const canonical = deepCanonicalize(data);
+  const str = JSON.stringify(canonical);
+  return crypto.createHash('sha256').update(str).digest('hex').substring(0, 16);
+}
+
+export function compareFingerprint(
+  storedHash: string | undefined,
+  storedVersion: FingerprintVersion | undefined,
+  currentData: any
+): FingerprintComparisonResult {
+  if (!storedHash) {
+    return {
+      matches: false,
+      storedVersion: 'v1',
+      migrationRecommended: false,
+      reason: 'FINGERPRINT_MISSING'
+    };
+  }
+
+  const effectiveVersion = storedVersion || 'v1';
+  
+  if (effectiveVersion === 'v2') {
+    const v2Hash = computeFingerprintV2(currentData);
+    if (storedHash === v2Hash) {
+      return { matches: true, storedVersion: 'v2', matchedVersion: 'v2', migrationRecommended: false, reason: 'MATCH' };
+    }
+    return { matches: false, storedVersion: 'v2', migrationRecommended: false, reason: 'CONTENT_CHANGED' };
+  }
+
+  // Version is v1 (legacy)
+  const v1Hash = computeFingerprintV1(currentData);
+  if (storedHash === v1Hash) {
+    return { matches: true, storedVersion: 'v1', matchedVersion: 'v1', migrationRecommended: true, reason: 'MATCH_LEGACY' };
+  }
+
+  // Even if it doesn't match v1, maybe it matches v2? 
+  // "nunca considerar um registro stale apenas porque o algoritmo atual passou a ser v2" 
+  // It only matches if it matched its own version. If v1 doesn't match, it's stale.
+  return { matches: false, storedVersion: 'v1', migrationRecommended: false, reason: 'CONTENT_CHANGED' };
 }
 
 export function sanitizeReviewPacket(entityType: string, entity: any): any {
@@ -54,14 +156,15 @@ export function prepareReviewPacket(
   evidenceList: any[], 
   reviewQueueItem?: any
 ) {
-  const entityFingerprint = computeFingerprint(entity);
-  const evidenceFingerprint = computeFingerprint(evidenceList);
+  const entityFingerprint = computeFingerprintV2(entity);
+  const evidenceFingerprint = computeFingerprintV2(evidenceList);
 
   const packetVersion = '1.0.0';
   
   return {
     metadata: {
       packetVersion,
+      fingerprintVersion: 'v2',
       generatedAt: new Date().toISOString(),
       entityUpdatedAt: entity.updated_at || entity.last_verified || new Date().toISOString(),
       entityFingerprint,
@@ -76,14 +179,24 @@ export function prepareReviewPacket(
   };
 }
 
-export function detectStaleReviewPacket(validation: Validation, currentEntity: any, currentEvidenceList: any[]): boolean {
-  const currentEntityFingerprint = computeFingerprint(currentEntity);
-  const currentEvidenceFingerprint = computeFingerprint(currentEvidenceList);
+export function detectStaleReviewPacket(
+  validation: Validation & { fingerprintVersion?: FingerprintVersion }, 
+  currentEntity: any, 
+  currentEvidenceList: any[]
+): { isStale: boolean; entityComparison: FingerprintComparisonResult; evidenceComparison: FingerprintComparisonResult } {
+  
+  const entityComparison = compareFingerprint(validation.entityFingerprint, validation.fingerprintVersion, currentEntity);
+  const evidenceComparison = compareFingerprint(validation.evidenceFingerprint, validation.fingerprintVersion, currentEvidenceList);
 
-  if (validation.entityFingerprint !== currentEntityFingerprint) return true;
-  if (validation.evidenceFingerprint !== currentEvidenceFingerprint) return true;
+  return {
+    isStale: !entityComparison.matches || !evidenceComparison.matches,
+    entityComparison,
+    evidenceComparison
+  };
+}
 
-  return false;
+export interface HumanReviewEvaluationContext {
+  asOf: Date;
 }
 
 export function evaluateHumanReviewPromotion(
@@ -104,16 +217,13 @@ export function evaluateHumanReviewPromotion(
     result.blockingIssues.push({ code: 'NOT_APPROVED', message: 'Validation decision is not approved_basic' });
   }
 
-  if (detectStaleReviewPacket(validation, entity, evidenceList)) {
+  if (detectStaleReviewPacket(validation, entity, evidenceList).isStale) {
     result.blockingIssues.push({ code: 'STALE_REVIEW_PACKET', message: 'The entity or evidence changed since validation' });
   }
 
   // Verifica expiração
-  const now = new Date();
-  if (validation.validUntil && new Date(validation.validUntil) < now) {
-    result.blockingIssues.push({ code: 'VALIDATION_EXPIRED', message: 'Validation has expired' });
-  }
-
+  // Não usa new Date() aqui mais para ser fixo se necessário, mas asOf deve ser passado.
+  // Vamos adaptar `evaluateHumanReviewPromotion` para aceitar `asOf` via context parameter.
   // Sensibilidade
   if (entityType === 'service') {
     const isSensitive = entity.category?.some((c: string) => ['saude', 'direitos', 'acolhimento_social', 'saude_trans', 'prevencao_hiv'].includes(c));
@@ -137,6 +247,23 @@ export function evaluateHumanReviewPromotion(
     result.proposedStatus = 'verified_basic';
   }
 
+  return result;
+}
+
+export function evaluateHumanReviewPromotionWithContext(
+  entityType: 'source' | 'organization' | 'service',
+  entity: any,
+  validation: Validation,
+  evidenceList: any[],
+  context: { asOf: Date }
+): HumanReviewEligibilityResult {
+  const result = evaluateHumanReviewPromotion(entityType, entity, validation, evidenceList);
+  
+  if (validation.validUntil && new Date(validation.validUntil).getTime() < context.asOf.getTime()) {
+    result.blockingIssues.push({ code: 'VALIDATION_EXPIRED', message: 'Validation has expired' });
+    result.eligible = false;
+  }
+  
   return result;
 }
 

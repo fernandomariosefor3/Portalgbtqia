@@ -22,6 +22,13 @@ export interface PromotionWarning {
   message: string;
 }
 
+export interface InheritedPromotionBlock {
+  reason: 'SOURCE_NOT_ELIGIBLE' | 'ORGANIZATION_NOT_ELIGIBLE';
+  dependencyEntityId: string;
+  dependencyType: 'source' | 'organization';
+  rootBlockingReasons: PromotionBlockReason[];
+}
+
 export interface RegistryAlias {
   legacyId: string;
   canonicalEntityId: string;
@@ -43,6 +50,7 @@ export interface PromotionEligibilityResult {
   eligible: boolean;
   proposedStatus?: 'verified_basic';
   blockingReasons: PromotionBlockReason[];
+  inheritedBlockingReasons: InheritedPromotionBlock[];
   warnings: PromotionWarning[];
   validationIds: string[];
   evidenceIds: string[];

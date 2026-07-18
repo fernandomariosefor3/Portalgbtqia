@@ -1,429 +1,69 @@
-# Relatório de Elegibilidade para Promoção (Fase 5A)
+# Relatório de Elegibilidade para Promoção (Fase 5A.1)
 
-- **Data de Avaliação:** 2026-07-18T14:31:26.952Z
+- **Data de Referência (asOf):** 2026-07-18T12:00:00.000Z
 - **Versão da Política:** 1.0.0
 
-## Resumo Totais
-- Entidades Avaliadas: 26
-- Fontes Elegíveis: 0
-- Organizações Elegíveis: 0
-- Serviços Elegíveis: 0
-- Exigindo Segunda Revisão: 9
-- Em `needs_more_evidence`: 1
-- Aliases não publicáveis: 1
-- Registros Vencidos ou Desatualizados: 24
+## Contagens Isoladas
 
-## Elegíveis Administrativamente
+- **Registros Físicos Avaliados:** 26
+- **Entidades Canônicas Elegíveis:** 16
+- **Fontes Elegíveis:** 8
+- **Organizações Elegíveis:** 8
+- **Serviços Elegíveis:** 0
 
-Nenhum registro.
+### Bloqueios Mapeados (uma entidade pode ter mais de um bloqueio)
 
-## Exigem Segunda Revisão
+- **SECOND_REVIEW_MISSING:** 9 ocorrência(s)
+- **PROTECTED_DATA_RISK:** 2 ocorrência(s)
+- **HERDADO_SOURCE_NOT_ELIGIBLE:** 1 ocorrência(s)
+- **LEGACY_ALIAS_NOT_PUBLIC:** 1 ocorrência(s)
+- **NEEDS_MORE_EVIDENCE:** 1 ocorrência(s)
+- **HERDADO_ORGANIZATION_NOT_ELIGIBLE:** 1 ocorrência(s)
 
-### [ORGANIZATION] org_casa_transformar
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** src_casa_transformar
-- **Validade Efetiva:** 2027-01-18T11:54:46Z
-- **Bloqueios:**
-  - `PROTECTED_DATA_RISK`
-  - `STALE_REVIEW_PACKET`
-  - `SOURCE_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
+## Detalhamento por Código de Bloqueio
 
-### [SERVICE] srv_casa_transformar_acolhimento
-- **Status Atual:** under_review
-- **Decisão:** needs_more_evidence
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_casa_transformar
-- **Validade Efetiva:** 2027-01-18T11:54:46Z
-- **Bloqueios:**
-  - `NEEDS_MORE_EVIDENCE`
-  - `PROTECTED_DATA_RISK`
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
+### SECOND_REVIEW_MISSING
+- `src_casa_transformar` (source) - Status: submitted | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT, EXPIRY_NOT_EXPLICIT
+- `org_casa_transformar` (organization) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT, EXPIRY_NOT_EXPLICIT
+- `srv_thina_rodrigues` (service) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `srv_janaina_dutra` (service) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT, EXPIRY_NOT_EXPLICIT
+- `srv_teleprep_telepep` (service) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `srv_dpe_direitos_humanos` (service) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT, EXPIRY_NOT_EXPLICIT
+- `srv_hsj_infectologia` (service) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `srv_sertrans` (service) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `srv_casa_transformar_acolhimento` (service) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
 
-### [SERVICE] srv_dpe_direitos_humanos
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_dpe_ce
-- **Validade Efetiva:** 2027-01-18T12:09:33Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
+### PROTECTED_DATA_RISK
+- `org_casa_transformar` (organization) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT, EXPIRY_NOT_EXPLICIT
+- `srv_casa_transformar_acolhimento` (service) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
 
-### [SERVICE] srv_hsj_infectologia
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_hsj_ce
-- **Validade Efetiva:** 2027-01-18T12:47:28Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
+### HERDADO_SOURCE_NOT_ELIGIBLE
+- `org_casa_transformar` (organization) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT, EXPIRY_NOT_EXPLICIT
 
-### [SERVICE] srv_janaina_dutra
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_smdhds_fortaleza
-- **Validade Efetiva:** 2027-01-18T12:09:33Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
+### LEGACY_ALIAS_NOT_PUBLIC
+- `srv_acesso_saude_prep_pep` (service) - Status: archived
 
-### [SERVICE] srv_sertrans
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_sesa_ce
-- **Validade Efetiva:** 2027-01-18T12:59:20Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
+### NEEDS_MORE_EVIDENCE
+- `srv_casa_transformar_acolhimento` (service) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
 
-### [SERVICE] srv_teleprep_telepep
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_sesa_ce
-- **Validade Efetiva:** 2027-01-18T12:29:52Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
+### HERDADO_ORGANIZATION_NOT_ELIGIBLE
+- `srv_casa_transformar_acolhimento` (service) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
 
-### [SERVICE] srv_thina_rodrigues
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_sec_div_ce
-- **Validade Efetiva:** 2027-01-18T00:00:00Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
+## Entidades Elegíveis
 
-### [SOURCE] src_casa_transformar
-- **Status Atual:** submitted
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Validade Efetiva:** 2027-01-18T11:54:46Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
-
-## Necessitam Evidência
-
-### [SERVICE] srv_casa_transformar_acolhimento
-- **Status Atual:** under_review
-- **Decisão:** needs_more_evidence
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_casa_transformar
-- **Validade Efetiva:** 2027-01-18T11:54:46Z
-- **Bloqueios:**
-  - `NEEDS_MORE_EVIDENCE`
-  - `PROTECTED_DATA_RISK`
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
-
-## Não Publicáveis (Aliases / Histórico)
-
-### [SERVICE] srv_acesso_saude_prep_pep
-- **Status Atual:** archived
-- **Decisão:** N/A
-- **Elegibilidade:** ❌ Não Elegível
-- **ID Canônico:** srv_teleprep_telepep
-- **Bloqueios:**
-  - `LEGACY_ALIAS_NOT_PUBLIC`
-- **Próxima Ação:** Manter arquivado (Não publicar)
-
-## Vencidos ou Desatualizados
-
-### [ORGANIZATION] org_casa_transformar
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** src_casa_transformar
-- **Validade Efetiva:** 2027-01-18T11:54:46Z
-- **Bloqueios:**
-  - `PROTECTED_DATA_RISK`
-  - `STALE_REVIEW_PACKET`
-  - `SOURCE_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
-
-### [ORGANIZATION] org_dpe_ce
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** src_dpe_ce
-- **Validade Efetiva:** 2027-07-18T10:56:29Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `SOURCE_NOT_ELIGIBLE`
-- **Próxima Ação:** Nenhuma
-
-### [ORGANIZATION] org_gov_ce
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** src_gov_ce
-- **Validade Efetiva:** 2027-07-17T22:15:00Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `SOURCE_NOT_ELIGIBLE`
-- **Próxima Ação:** Nenhuma
-
-### [ORGANIZATION] org_hsj_ce
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** src_hsj_ce
-- **Validade Efetiva:** 2027-07-18T11:44:20Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `SOURCE_NOT_ELIGIBLE`
-- **Próxima Ação:** Nenhuma
-
-### [ORGANIZATION] org_huwc_ce
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** src_huwc_ce
-- **Validade Efetiva:** 2027-07-18T11:12:19Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `SOURCE_NOT_ELIGIBLE`
-- **Próxima Ação:** Nenhuma
-
-### [ORGANIZATION] org_pref_fortaleza
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** src_pref_fortaleza
-- **Validade Efetiva:** 2027-07-17T22:21:00Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `SOURCE_NOT_ELIGIBLE`
-- **Próxima Ação:** Nenhuma
-
-### [ORGANIZATION] org_sesa_ce
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** src_sesa_ce
-- **Validade Efetiva:** 2027-07-18T10:37:16Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `SOURCE_NOT_ELIGIBLE`
-- **Próxima Ação:** Nenhuma
-
-### [ORGANIZATION] org_smdhds_fortaleza
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** src_smdhds_fortaleza
-- **Validade Efetiva:** 2027-07-18T11:23:46Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `SOURCE_NOT_ELIGIBLE`
-- **Próxima Ação:** Nenhuma
-
-### [SERVICE] srv_casa_transformar_acolhimento
-- **Status Atual:** under_review
-- **Decisão:** needs_more_evidence
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_casa_transformar
-- **Validade Efetiva:** 2027-01-18T11:54:46Z
-- **Bloqueios:**
-  - `NEEDS_MORE_EVIDENCE`
-  - `PROTECTED_DATA_RISK`
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
-
-### [SERVICE] srv_dpe_direitos_humanos
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_dpe_ce
-- **Validade Efetiva:** 2027-01-18T12:09:33Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
-
-### [SERVICE] srv_hsj_infectologia
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_hsj_ce
-- **Validade Efetiva:** 2027-01-18T12:47:28Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
-
-### [SERVICE] srv_janaina_dutra
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_smdhds_fortaleza
-- **Validade Efetiva:** 2027-01-18T12:09:33Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
-
-### [SERVICE] srv_sertrans
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_sesa_ce
-- **Validade Efetiva:** 2027-01-18T12:59:20Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
-
-### [SERVICE] srv_teleprep_telepep
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_sesa_ce
-- **Validade Efetiva:** 2027-01-18T12:29:52Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
-
-### [SERVICE] srv_thina_rodrigues
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** org_sec_div_ce
-- **Validade Efetiva:** 2027-01-18T00:00:00Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `ORGANIZATION_NOT_ELIGIBLE`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
-
-### [SOURCE] src_casa_transformar
-- **Status Atual:** submitted
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Validade Efetiva:** 2027-01-18T11:54:46Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-  - `SECOND_REVIEW_MISSING`
-- **Próxima Ação:** Obter revisão especializada
-
-### [SOURCE] src_dpe_ce
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Validade Efetiva:** 2027-07-18T10:56:29Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-- **Próxima Ação:** Nenhuma
-
-### [SOURCE] src_gov_ce
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Validade Efetiva:** 2027-07-17T22:15:00Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-- **Próxima Ação:** Nenhuma
-
-### [SOURCE] src_hsj_ce
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Validade Efetiva:** 2027-07-18T11:44:20Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-- **Próxima Ação:** Nenhuma
-
-### [SOURCE] src_huwc_ce
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Validade Efetiva:** 2027-07-18T11:12:19Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-- **Próxima Ação:** Nenhuma
-
-### [SOURCE] src_pref_fortaleza
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Validade Efetiva:** 2027-07-17T22:21:00Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-- **Próxima Ação:** Nenhuma
-
-### [SOURCE] src_sec_div_ce
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Validade Efetiva:** 2027-07-17T22:20:00Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-- **Próxima Ação:** Nenhuma
-
-### [SOURCE] src_sesa_ce
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Validade Efetiva:** 2027-07-18T10:37:16Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-- **Próxima Ação:** Nenhuma
-
-### [SOURCE] src_smdhds_fortaleza
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Validade Efetiva:** 2027-07-18T11:23:46Z
-- **Bloqueios:**
-  - `STALE_REVIEW_PACKET`
-- **Próxima Ação:** Nenhuma
-
-## Bloqueados por Outras Restrições
-
-### [ORGANIZATION] org_sec_div_ce
-- **Status Atual:** under_review
-- **Decisão:** approved_basic
-- **Elegibilidade:** ❌ Não Elegível
-- **Dependências:** src_sec_div_ce
-- **Validade Efetiva:** 2027-07-17T22:20:00Z
-- **Bloqueios:**
-  - `SOURCE_NOT_ELIGIBLE`
-- **Próxima Ação:** Nenhuma
-
+- `src_gov_ce` (source) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `src_sec_div_ce` (source) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `src_pref_fortaleza` (source) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `src_smdhds_fortaleza` (source) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `src_sesa_ce` (source) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `src_hsj_ce` (source) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `src_dpe_ce` (source) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `src_huwc_ce` (source) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `org_gov_ce` (organization) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `org_sec_div_ce` (organization) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION
+- `org_pref_fortaleza` (organization) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `org_smdhds_fortaleza` (organization) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `org_sesa_ce` (organization) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `org_hsj_ce` (organization) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `org_dpe_ce` (organization) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT
+- `org_huwc_ce` (organization) - Status: under_review | Avisos: LEGACY_FINGERPRINT_VERSION, EXPIRY_NOT_EXPLICIT

@@ -70,8 +70,14 @@ async function checkReviews() {
 
     const actualBlockingIssues = eligibility.blockingIssues.filter(b => b.code !== 'NOT_APPROVED');
 
+    const isSuperseded = validations.some((nv: any) => nv.previousValidationId === v.id);
+
     if (actualBlockingIssues.length > 0) {
-      addError(`Validation ${v.id} fails eligibility checks: ${actualBlockingIssues.map(b => b.code).join(', ')}`);
+      if (isSuperseded && actualBlockingIssues.every(b => b.code === 'STALE_REVIEW_PACKET')) {
+        // It is expected that a superseded validation might be stale if evidence changed later
+      } else {
+        addError(`Validation ${v.id} fails eligibility checks: ${actualBlockingIssues.map(b => b.code).join(', ')}`);
+      }
     }
 
     if (v.previousValidationId) {

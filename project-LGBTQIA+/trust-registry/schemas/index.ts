@@ -83,6 +83,13 @@ export const humanReviewDecisionSchema = z.enum([
   'rejected'
 ]);
 
+export const fingerprintReattestationDecisionSchema = z.enum([
+  'reattest_approved_basic_v2',
+  'full_review_required',
+  'needs_more_evidence',
+  'blocked'
+]);
+
 export const humanReviewerRoleSchema = z.enum([
   'registry_reviewer',
   'health_reviewer',
@@ -119,8 +126,27 @@ export const validationSchema = z.object({
   followUpAt: z.string().datetime().nullable().optional(),
   previousValidationId: z.string().nullable().optional(),
   reviewPacketVersion: z.string().min(1),
+  fingerprintVersion: z.enum(['v1', 'v2']).optional(),
   entityFingerprint: z.string().min(1),
   evidenceFingerprint: z.string().min(1)
+});
+
+export const fingerprintMigrationRecordSchema = z.object({
+  id: z.string().min(1),
+  entityId: z.string().min(1),
+  previousValidationId: z.string().min(1),
+  previousFingerprint: z.string().min(1),
+  previousVersion: z.literal('v1'),
+  newValidationId: z.string().min(1),
+  newFingerprint: z.string().min(1),
+  newVersion: z.literal('v2'),
+  migrationType: z.literal('human_reattestation'),
+  reviewedBy: z.string().min(1),
+  reviewedAt: z.string().datetime(),
+  evidenceIds: z.array(z.string()),
+  contentChanged: z.boolean(),
+  changedFields: z.array(z.string()),
+  notes: z.string().optional()
 });
 
 export const registrySchema = z.object({
@@ -129,5 +155,6 @@ export const registrySchema = z.object({
   services: z.array(trustServiceSchema),
   evidence: z.array(evidenceSchema),
   validations: z.array(validationSchema),
-  reviewQueue: z.array(reviewQueueItemSchema)
+  reviewQueue: z.array(reviewQueueItemSchema),
+  migrations: z.array(fingerprintMigrationRecordSchema).optional()
 });

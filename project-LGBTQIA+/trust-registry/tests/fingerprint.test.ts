@@ -83,4 +83,45 @@ describe('Fingerprint Algorithm', () => {
     expect(result.matches).toBe(false);
     expect(result.reason).toBe('CONTENT_CHANGED');
   });
+
+  describe('Integrity Digest v2', () => {
+    it('computeIntegrityDigestV2 returns full 64 character SHA-256 string', () => {
+      const data = { id: 'test' };
+      const digest = computeIntegrityDigestV2(data);
+      expect(digest).toHaveLength(64);
+      expect(/^[0-9a-f]{64}$/.test(digest)).toBe(true);
+    });
+
+    it('compact fingerprints are exactly 16 characters', () => {
+      const data = { id: 'test' };
+      const compact = computeFingerprintV2(data);
+      expect(compact).toHaveLength(16);
+    });
+
+    it('prefix of integrity digest exactly matches compact fingerprint', () => {
+      const data = { id: 'test' };
+      const digest = computeIntegrityDigestV2(data);
+      const compact = computeFingerprintV2(data);
+      expect(digest.startsWith(compact)).toBe(true);
+    });
+
+    it('adding evidence changes both compact and integral fingerprints', () => {
+      const ev1 = { id: 'ev1' };
+      const ev2 = { id: 'ev2' };
+      
+      const digestA = computeIntegrityDigestV2([ev1]);
+      const compactA = computeFingerprintV2([ev1]);
+      
+      const digestB = computeIntegrityDigestV2([ev1, ev2]);
+      const compactB = computeFingerprintV2([ev1, ev2]);
+      
+      expect(digestA).not.toBe(digestB);
+      expect(compactA).not.toBe(compactB);
+      
+      // also tests that scenario C produces a completely new hash
+      expect(digestB).toHaveLength(64);
+      expect(compactB).toHaveLength(16);
+    });
+  });
 });
+

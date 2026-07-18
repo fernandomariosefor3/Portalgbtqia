@@ -1,6 +1,6 @@
 # Relatório do Piloto de Confiança - Fortaleza CE
 
-Gerado em: 2026-07-18T14:31:27.775Z
+Gerado em: 2026-07-18T19:17:25.875Z
 
 ## Resumo Estrutural
 - Registros físicos totais: 26
@@ -10,10 +10,10 @@ Gerado em: 2026-07-18T14:31:27.775Z
 - Organizações físicas: 9
 - Serviços físicos: 8
 - Serviços canônicos: 7
-- Evidências cadastradas: 29
+- Evidências cadastradas: 31
 
 ## Decisões Humanas (Validações)
-- `approved_basic`: 24
+- `approved_basic`: 40
 - `needs_more_evidence`: 1
 - `correction_required`: 0
 - `blocked`: 0

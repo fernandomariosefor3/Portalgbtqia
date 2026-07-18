@@ -200,4 +200,27 @@ describe('Promotion Eligibility Engine', () => {
     expect(res2.inheritedBlockingReasons[0].reason).toBe('SOURCE_NOT_ELIGIBLE');
   });
 
+  it('rejects evidence whose consultedAt is in the future relative to asOf', () => {
+    const ctx = createBaseContext();
+    const source = { id: 'src_1', status: 'under_review' };
+    
+    // Mock the stale check to isolate FUTURE_EVIDENCE block
+    ctx.registry.sources.push(source);
+    ctx.registry.evidence.push({
+      id: 'ev_1',
+      entity_id: 'src_1',
+      consultation_date: '2026-07-18T15:56:54Z',
+      validUntil: '2027-01-01T00:00:00Z'
+    });
+    ctx.registry.validations.push(createValidation({ entityId: 'src_1', entityType: 'source' }));
+    
+    // The base context has dummyDate 2026-07-18T10:00:00Z
+    // The consultation_date is 2026-07-18T15:56:54Z which is > 10:00:00Z
+
+    const res = evaluatePromotionEligibility(source, 'source', ctx);
+    
+    expect(res.eligible).toBe(false);
+    expect(res.blockingReasons).toContain('FUTURE_EVIDENCE');
+  });
+
 });

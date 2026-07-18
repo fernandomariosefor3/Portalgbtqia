@@ -8,16 +8,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_src_gov_ce lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_src_gov_ce_001"
+      "val_src_gov_ce_002"
     ],
     "evidenceIds": [
       "ev_src_gov_ce"
@@ -25,7 +21,7 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-17T22:15:00Z",
@@ -40,16 +36,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_src_sec_div_ce lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_src_sec_div_ce_001"
+      "val_src_sec_div_ce_002"
     ],
     "evidenceIds": [
       "ev_src_sec_div_ce"
@@ -57,7 +49,7 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-17T22:20:00Z",
@@ -72,16 +64,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_src_pref_fortaleza lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_src_pref_fortaleza_001"
+      "val_src_pref_fortaleza_002"
     ],
     "evidenceIds": [
       "ev_src_pref_fortaleza"
@@ -89,7 +77,7 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-17T22:21:00Z",
@@ -104,16 +92,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_src_smdhds_fortaleza lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_src_smdhds_fortaleza_001"
+      "val_src_smdhds_fortaleza_002"
     ],
     "evidenceIds": [
       "ev_src_smdhds_fortaleza"
@@ -121,7 +105,7 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-18T11:23:46Z",
@@ -136,16 +120,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_src_sesa_ce lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_src_sesa_ce_001"
+      "val_src_sesa_ce_002"
     ],
     "evidenceIds": [
       "ev_src_sesa_ce"
@@ -153,7 +133,7 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-18T10:37:16Z",
@@ -168,16 +148,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_src_hsj_ce lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_src_hsj_ce_001"
+      "val_src_hsj_ce_002"
     ],
     "evidenceIds": [
       "ev_src_hsj_ce"
@@ -185,7 +161,7 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-18T11:44:20Z",
@@ -200,16 +176,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_src_dpe_ce lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_src_dpe_ce_001"
+      "val_src_dpe_ce_002"
     ],
     "evidenceIds": [
       "ev_src_dpe_ce"
@@ -217,7 +189,7 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-18T10:56:29Z",
@@ -232,16 +204,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_src_huwc_ce lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_src_huwc_ce_001"
+      "val_src_huwc_ce_002"
     ],
     "evidenceIds": [
       "ev_src_huwc_ce"
@@ -249,7 +217,7 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-18T11:12:19Z",
@@ -261,6 +229,7 @@
     "currentStatus": "submitted",
     "eligible": false,
     "blockingReasons": [
+      "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
     "inheritedBlockingReasons": [],
@@ -288,7 +257,7 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T11:54:46Z"
@@ -302,16 +271,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_org_gov_ce lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_org_gov_ce_001"
+      "val_org_gov_ce_002"
     ],
     "evidenceIds": [
       "ev_org_gov_ce"
@@ -321,7 +286,7 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-17T22:15:00Z",
@@ -334,22 +299,20 @@
     "eligible": true,
     "blockingReasons": [],
     "inheritedBlockingReasons": [],
-    "warnings": [
-      {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      }
-    ],
+    "warnings": [],
     "validationIds": [
-      "val_org_sec_div_ce_001"
+      "val_org_sec_div_ce_002"
     ],
-    "evidenceIds": [],
+    "evidenceIds": [
+      "ev_org_sec_div_ce_portal",
+      "ev_org_sec_div_ce_organograma"
+    ],
     "dependencyEntityIds": [
       "src_sec_div_ce"
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-17T22:20:00Z",
@@ -364,16 +327,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_org_pref_fortaleza lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_org_pref_fortaleza_001"
+      "val_org_pref_fortaleza_002"
     ],
     "evidenceIds": [
       "ev_org_pref_fortaleza"
@@ -383,7 +342,7 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-17T22:21:00Z",
@@ -398,16 +357,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_org_smdhds_fortaleza lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_org_smdhds_fortaleza_001"
+      "val_org_smdhds_fortaleza_002"
     ],
     "evidenceIds": [
       "ev_org_smdhds_fortaleza"
@@ -417,7 +372,7 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-18T11:23:46Z",
@@ -432,16 +387,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_org_sesa_ce lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_org_sesa_ce_001"
+      "val_org_sesa_ce_002"
     ],
     "evidenceIds": [
       "ev_org_sesa_ce"
@@ -451,7 +402,7 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-18T10:37:16Z",
@@ -466,16 +417,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_org_hsj_ce lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_org_hsj_ce_001"
+      "val_org_hsj_ce_002"
     ],
     "evidenceIds": [
       "ev_org_hsj_ce"
@@ -485,7 +432,7 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-18T11:44:20Z",
@@ -500,16 +447,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_org_dpe_ce lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_org_dpe_ce_001"
+      "val_org_dpe_ce_002"
     ],
     "evidenceIds": [
       "ev_org_dpe_ce"
@@ -519,7 +462,7 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-18T10:56:29Z",
@@ -534,16 +477,12 @@
     "inheritedBlockingReasons": [],
     "warnings": [
       {
-        "code": "LEGACY_FINGERPRINT_VERSION",
-        "message": "The validation fingerprint is using a legacy version and should be migrated."
-      },
-      {
         "code": "EXPIRY_NOT_EXPLICIT",
         "message": "Evidence ev_org_huwc_ce lacks explicit validUntil or nextReviewAt."
       }
     ],
     "validationIds": [
-      "val_org_huwc_ce_001"
+      "val_org_huwc_ce_002"
     ],
     "evidenceIds": [
       "ev_org_huwc_ce"
@@ -553,7 +492,7 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-07-18T11:12:19Z",
@@ -566,6 +505,7 @@
     "eligible": false,
     "blockingReasons": [
       "PROTECTED_DATA_RISK",
+      "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
     "inheritedBlockingReasons": [
@@ -574,6 +514,7 @@
         "dependencyEntityId": "src_casa_transformar",
         "dependencyType": "source",
         "rootBlockingReasons": [
+          "V2_REATTESTATION_REQUIRED",
           "SECOND_REVIEW_MISSING"
         ]
       }
@@ -604,7 +545,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T11:54:46Z"
@@ -615,6 +556,7 @@
     "currentStatus": "under_review",
     "eligible": false,
     "blockingReasons": [
+      "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
     "inheritedBlockingReasons": [],
@@ -639,7 +581,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T00:00:00Z"
@@ -650,6 +592,7 @@
     "currentStatus": "under_review",
     "eligible": false,
     "blockingReasons": [
+      "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
     "inheritedBlockingReasons": [],
@@ -679,7 +622,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T12:09:33Z"
@@ -699,7 +642,7 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "canonicalEntityId": "srv_teleprep_telepep"
   },
@@ -709,6 +652,7 @@
     "currentStatus": "under_review",
     "eligible": false,
     "blockingReasons": [
+      "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
     "inheritedBlockingReasons": [],
@@ -733,7 +677,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T12:29:52Z"
@@ -744,6 +688,7 @@
     "currentStatus": "under_review",
     "eligible": false,
     "blockingReasons": [
+      "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
     "inheritedBlockingReasons": [],
@@ -773,7 +718,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T12:09:33Z"
@@ -784,6 +729,7 @@
     "currentStatus": "under_review",
     "eligible": false,
     "blockingReasons": [
+      "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
     "inheritedBlockingReasons": [],
@@ -808,7 +754,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T12:47:28Z"
@@ -819,6 +765,7 @@
     "currentStatus": "under_review",
     "eligible": false,
     "blockingReasons": [
+      "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
     "inheritedBlockingReasons": [],
@@ -843,7 +790,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T12:59:20Z"
@@ -856,6 +803,7 @@
     "blockingReasons": [
       "NEEDS_MORE_EVIDENCE",
       "PROTECTED_DATA_RISK",
+      "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
     "inheritedBlockingReasons": [
@@ -865,6 +813,7 @@
         "dependencyType": "organization",
         "rootBlockingReasons": [
           "PROTECTED_DATA_RISK",
+          "V2_REATTESTATION_REQUIRED",
           "SECOND_REVIEW_MISSING"
         ]
       }
@@ -890,7 +839,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T12:00:00.000Z",
+    "evaluatedAt": "2026-07-18T16:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "needs_more_evidence",
     "validUntil": "2027-01-18T11:54:46Z"

@@ -288,5 +288,27 @@
     "extracted_info": "Registro do Centro de Referência LGBTQIA+ Janaína Dutra, vinculado à Coordenadoria Especial da Diversidade Sexual e à SDHDS. Endereço institucional divulgado em 2025: Rua Jaime Benévolo, 21, 2º andar, Fortaleza–CE. WhatsApp institucional: (85) 98970-4621.",
     "limitations": "Validação exclusivamente administrativa do equipamento municipal. Contatos e funcionamento podem sofrer alterações. NÃO infere abrigo emergencial, atendimento 24 horas, alimentação, auxílio financeiro, disponibilidade imediata, proteção policial ou vaga em acolhimento.",
     "needs_additional_confirmation": true
+  },
+  {
+    "id": "ev_org_sec_div_ce_portal",
+    "entity_id": "org_sec_div_ce",
+    "entity_type": "organization",
+    "source_url": "https://www.ce.gov.br/diversidade/institucional/",
+    "consultation_date": "2026-07-18T15:56:54Z",
+    "validUntil": "2027-07-18T10:23:33Z",
+    "extracted_info": "A página oficial identifica a Secretaria da Diversidade do Ceará, descreve sua natureza institucional e registra sua atuação como órgão estadual voltado às políticas públicas para a população LGBTI+.",
+    "limitations": "Não confirma qualidade das políticas, efetividade, serviços específicos, equipamentos, atendimento, contatos operacionais de serviços, nem garantia de direitos ou resultados.",
+    "needs_additional_confirmation": false
+  },
+  {
+    "id": "ev_org_sec_div_ce_organograma",
+    "entity_id": "org_sec_div_ce",
+    "entity_type": "organization",
+    "source_url": "https://www.ce.gov.br/organograma/poder-executivo/",
+    "consultation_date": "2026-07-18T15:56:54Z",
+    "validUntil": "2027-07-18T10:23:33Z",
+    "extracted_info": "O organograma oficial do Poder Executivo do Ceará lista a Secretaria da Diversidade — Sediv entre as Secretarias de Estado da administração direta.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
   }
 ]

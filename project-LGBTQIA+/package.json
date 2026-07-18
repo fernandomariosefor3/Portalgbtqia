@@ -21,6 +21,7 @@
     "registry:validate": "tsx scripts/validate-trust-registry.ts",
     "registry:prepare-reviews": "tsx scripts/prepare-registry-review-packets.ts",
     "registry:check-reviews": "tsx scripts/check-registry-reviews.ts",
+    "registry:prepare-v2-reattestation": "tsx scripts/prepare-v2-reattestation.ts",
     "registry:evaluate-promotion": "tsx scripts/evaluate-registry-promotion.ts",
     "registry:report": "tsx scripts/generate-trust-registry-report.ts"
   },

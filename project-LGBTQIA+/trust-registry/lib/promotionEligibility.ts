@@ -135,8 +135,18 @@ export function evaluatePromotionEligibility(
     result.warnings.push({ code: 'LEGACY_FINGERPRINT_VERSION', message: 'The validation fingerprint is using a legacy version and should be migrated.' });
   }
 
-  // Evidence Expiration Check
+  // Version check
+  if (!effectiveValidation.fingerprintVersion || effectiveValidation.fingerprintVersion === 'v1') {
+    result.blockingReasons.push('V2_REATTESTATION_REQUIRED');
+  }
+
+  // Evidence Expiration and Future Check
   for (const ev of evidences) {
+    const effectiveEvConsultedAt = ev.consultation_date || ev.consultedAt;
+    if (effectiveEvConsultedAt && new Date(effectiveEvConsultedAt).getTime() > context.asOf.getTime()) {
+      result.blockingReasons.push('FUTURE_EVIDENCE');
+    }
+
     const effectiveEvValidUntil = ev.validUntil || ev.nextReviewAt;
     if (effectiveEvValidUntil) {
        if (!checkValidUntil(effectiveEvValidUntil, context.asOf)) {

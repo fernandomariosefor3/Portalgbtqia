@@ -2,13 +2,17 @@ import crypto from 'crypto';
 import { z } from 'zod';
 import { 
   humanReviewDecisionSchema, 
+  fingerprintReattestationDecisionSchema,
   humanReviewerRoleSchema,
-  validationSchema 
+  validationSchema,
+  fingerprintMigrationRecordSchema
 } from '../schemas/index.js';
 
 export type HumanReviewDecision = z.infer<typeof humanReviewDecisionSchema>;
+export type FingerprintReattestationDecision = z.infer<typeof fingerprintReattestationDecisionSchema>;
 export type HumanReviewerRole = z.infer<typeof humanReviewerRoleSchema>;
 export type Validation = z.infer<typeof validationSchema>;
+export type FingerprintMigrationRecord = z.infer<typeof fingerprintMigrationRecordSchema>;
 
 export interface HumanReviewIssue {
   code: string;
@@ -90,10 +94,14 @@ function deepCanonicalize(data: any, path: string = ''): any {
   return result;
 }
 
-export function computeFingerprintV2(data: any): string {
+export function computeIntegrityDigestV2(data: any): string {
   const canonical = deepCanonicalize(data);
   const str = JSON.stringify(canonical);
-  return crypto.createHash('sha256').update(str).digest('hex').substring(0, 16);
+  return crypto.createHash('sha256').update(str).digest('hex');
+}
+
+export function computeFingerprintV2(data: any): string {
+  return computeIntegrityDigestV2(data).substring(0, 16);
 }
 
 export function compareFingerprint(

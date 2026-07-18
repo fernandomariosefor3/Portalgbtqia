@@ -7,6 +7,7 @@ export type PromotionBlockReason =
   | 'SECOND_REVIEW_MISSING'
   | 'VALIDATION_EXPIRED'
   | 'EVIDENCE_EXPIRED'
+  | 'FUTURE_EVIDENCE'
   | 'STALE_REVIEW_PACKET'
   | 'SOURCE_NOT_ELIGIBLE'
   | 'ORGANIZATION_NOT_ELIGIBLE'
@@ -15,7 +16,8 @@ export type PromotionBlockReason =
   | 'PROTECTED_DATA_RISK'
   | 'CRITICAL_FIELD_MISSING'
   | 'CONFLICTING_VALIDATIONS'
-  | 'BLOCKED_BY_POLICY';
+  | 'BLOCKED_BY_POLICY'
+  | 'V2_REATTESTATION_REQUIRED';
 
 export interface PromotionWarning {
   code: string;

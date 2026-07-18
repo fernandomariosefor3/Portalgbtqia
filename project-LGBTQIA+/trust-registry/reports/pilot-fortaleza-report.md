@@ -1,6 +1,6 @@
 # Relatório do Piloto de Confiança - Fortaleza CE
 
-Gerado em: 2026-07-18T14:24:17.687Z
+Gerado em: 2026-07-18T14:31:27.775Z
 
 ## Resumo Estrutural
 - Registros físicos totais: 26

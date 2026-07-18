@@ -1,14 +1,14 @@
-# Review Packet: Serviços de Infectologia - Hospital São José
+# Review Packet: Atendimento de emergência em infectologia do HSJ
 
 **Tipo**: service
 **Status Atual**: under_review
-**Gerado em**: 2026-07-18T10:34:54.206Z
+**Gerado em**: 2026-07-18T14:24:16.111Z
 **Versão do Pacote**: 1.0.0
 
 ## Evidências
-- Fonte: https://www.hsj.ce.gov.br (Consultado em: 2026-07-17T18:00:00Z)
-  - Info extraída: O HSJ é a referência estadual em doenças infecciosas.
-  - Limitações: A oferta direta de PrEP/PEP porta aberta não foi confirmada. Será tratado apenas como infectologia até confirmação.
+- Fonte: https://www.ce.gov.br/hsj/ (Consultado em: 2026-07-18T12:31:47Z)
+  - Info extraída: Registro do 'Atendimento de emergência em infectologia do HSJ', listado nominalmente nos serviços em destaque no site oficial. Localizado na Rua Nestor Barbosa, 315, Amadeu Furtado – Fortaleza, CE. Horário da emergência: 24 horas. Contato oficial: (85) 3106-3393.
+  - Limitações: Aprovação limitada unicamente ao atendimento de emergência em infectologia. NÃO é garantia de disponibilidade de PrEP/PEP, carga viral de HIV ou atendimento psicológico imediato, os quais possuem fluxos e cadastros ambulatoriais distintos. Nenhuma orientação médica de elegibilidade clínica pode ser inferida.
 
 ## Itens na Fila de Revisão
 - **Campos Ausentes**: horario_funcionamento_ambulatorio

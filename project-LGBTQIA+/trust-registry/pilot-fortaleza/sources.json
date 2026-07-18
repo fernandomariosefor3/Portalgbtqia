@@ -47,8 +47,9 @@
   {
     "id": "src_hsj_ce",
     "name": "Hospital São José de Doenças Infecciosas",
-    "url": "https://www.hsj.ce.gov.br",
+    "url": "https://www.ce.gov.br/hsj/",
     "type": "government",
+    "description": "public_state_hospital: Hospital público estadual integrante da rede da Secretaria da Saúde do Ceará (Sesa). URL anterior (alias documentado): https://www.hsj.ce.gov.br",
     "reliability_score": 100,
     "last_verified": "2026-07-17T18:00:00Z",
     "status": "under_review"
@@ -58,15 +59,17 @@
     "name": "Defensoria Pública do Estado do Ceará",
     "url": "https://www.defensoria.ce.def.br",
     "type": "government",
+    "description": "public_autonomous_institution: Instituição pública estadual autônoma, essencial à função jurisdicional do Estado, atuando como fonte institucional pública.",
     "reliability_score": 100,
     "last_verified": "2026-07-17T18:00:00Z",
     "status": "under_review"
   },
   {
     "id": "src_huwc_ce",
-    "name": "Hospital Universitário do Ceará",
-    "url": "https://www.gov.br/ebserh/pt-br/hospitais-universitarios/regiao-nordeste/ch-ufc",
+    "name": "Complexo Hospitalar da Universidade Federal do Ceará — CH-UFC",
+    "url": "https://www.gov.br/hubrasil/pt-br/hospitais-universitarios/regiao-nordeste/ch-ufc",
     "type": "government",
+    "description": "federal_university_hospital_complex: Complexo hospitalar universitário federal, vinculado à Universidade Federal do Ceará, integrante da Rede Ebserh e administrado pela Ebserh (empresa pública vinculada ao Ministério da Educação). Composto por: Hospital Universitário Walter Cantídio — HUWC; e Maternidade-Escola Assis Chateaubriand — MEAC.",
     "reliability_score": 100,
     "last_verified": "2026-07-17T18:00:00Z",
     "status": "under_review"
@@ -75,7 +78,8 @@
     "id": "src_casa_transformar",
     "name": "Casa Transformar",
     "url": "https://www.instagram.com/casatransformar",
-    "type": "ngo",
+    "type": "community",
+    "description": "independent_community_initiative: Coletivo comunitário independente atuante em Fortaleza. Canal institucional autodeclarado e de contato complementar mantido via Instagram.",
     "reliability_score": 70,
     "last_verified": "2026-07-17T18:00:00Z",
     "status": "submitted"

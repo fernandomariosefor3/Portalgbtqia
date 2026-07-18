@@ -2,10 +2,13 @@
 
 **Tipo**: organization
 **Status Atual**: under_review
-**Gerado em**: 2026-07-18T10:34:54.200Z
+**Gerado em**: 2026-07-18T14:24:16.100Z
 **Versão do Pacote**: 1.0.0
 
 ## Evidências
+- Fonte: https://www.saude.ce.gov.br (Consultado em: 2026-07-18T10:43:21Z)
+  - Info extraída: Instituição Secretaria da Saúde do Ceará (Sesa). Organização pública estadual atrelada à fonte institucional oficial, confirmando sua identidade e atuação na administração de saúde do estado.
+  - Limitações: Nenhuma limitação impeditiva identificada.
 
 ## Decisão Humana
 O revisor deve inserir sua decisão no arquivo `validations.json`. Este markdown é apenas leitura.

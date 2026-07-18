@@ -1,8 +1,8 @@
-# Review Packet: Acesso Saúde CE — PrEP/PEP
+# Review Packet: Acesso Saúde CE (Canal Legado)
 
 **Tipo**: service
-**Status Atual**: under_review
-**Gerado em**: 2026-07-18T10:34:54.204Z
+**Status Atual**: archived
+**Gerado em**: 2026-07-18T14:24:16.107Z
 **Versão do Pacote**: 1.0.0
 
 ## Evidências

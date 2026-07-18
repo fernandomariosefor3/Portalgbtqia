@@ -1,14 +1,14 @@
-# Review Packet: TelePrEP / TelePEP
+# Review Packet: TelePrEP e TelePEP
 
 **Tipo**: service
 **Status Atual**: under_review
-**Gerado em**: 2026-07-18T10:34:54.204Z
+**Gerado em**: 2026-07-18T14:24:16.108Z
 **Versão do Pacote**: 1.0.0
 
 ## Evidências
-- Fonte: https://www.saude.ce.gov.br (Consultado em: 2026-07-17T18:00:00Z)
-  - Info extraída: TelePrEP/TelePEP mencionados como iniciativas da Sesa para expansão do acesso.
-  - Limitações: Número de whatsapp/telefone do serviço TelePrEP não coletado na evidência base.
+- Fonte: https://www.saude.ce.gov.br (Consultado em: 2026-07-18T12:21:04Z)
+  - Info extraída: Confirmação do serviço de prevenção combinada do HIV por teleconsulta (TelePrEP e TelePEP) mantido pela Sesa. Atendimento conduzido por profissional de saúde remotamente. Canais oficiais encontrados: Acesso Saúde CE, portal Saúde Digital e Ceará App. Necessidade de cadastro via plataforma e possibilidade de solicitação de exames e avaliação profissional.
+  - Limitações: NÃO comprova: estoque garantido, dispensação irrestrita de medicamentos locais, elegibilidade automática, funcionamento 24h contínuo ou prazo de entrega. TelePEP é restrita a 72 horas após exposição e o cadastro NÃO prescreve nem garante disponibilidade do canal. Uma indisponibilidade tecnológica não impede a busca presencial.
 
 ## Itens na Fila de Revisão
 - **Campos Ausentes**: contato.phone

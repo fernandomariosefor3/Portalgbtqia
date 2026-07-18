@@ -2,10 +2,13 @@
 
 **Tipo**: organization
 **Status Atual**: under_review
-**Gerado em**: 2026-07-18T10:34:54.199Z
+**Gerado em**: 2026-07-18T14:24:16.099Z
 **Versão do Pacote**: 1.0.0
 
 ## Evidências
+- Fonte: https://direitoshumanos.fortaleza.ce.gov.br (Consultado em: 2026-07-18T11:19:59Z)
+  - Info extraída: Organização pública municipal correspondente à Secretaria Municipal dos Direitos Humanos e Desenvolvimento Social, confirmada via portal institucional.
+  - Limitações: Nenhuma limitação impeditiva identificada.
 
 ## Decisão Humana
 O revisor deve inserir sua decisão no arquivo `validations.json`. Este markdown é apenas leitura.

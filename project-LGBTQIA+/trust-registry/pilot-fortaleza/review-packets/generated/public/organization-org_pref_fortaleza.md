@@ -2,10 +2,13 @@
 
 **Tipo**: organization
 **Status Atual**: under_review
-**Gerado em**: 2026-07-18T10:34:54.198Z
+**Gerado em**: 2026-07-18T14:24:16.098Z
 **Versão do Pacote**: 1.0.0
 
 ## Evidências
+- Fonte: https://www.fortaleza.ce.gov.br (Consultado em: 2026-07-18T11:14:53Z)
+  - Info extraída: Instituição corporativa da Prefeitura Municipal de Fortaleza. Organização pública municipal atrelada à fonte institucional oficial do município, atestando sua existência jurídica e administrativa.
+  - Limitações: Nenhuma limitação impeditiva identificada.
 
 ## Decisão Humana
 O revisor deve inserir sua decisão no arquivo `validations.json`. Este markdown é apenas leitura.

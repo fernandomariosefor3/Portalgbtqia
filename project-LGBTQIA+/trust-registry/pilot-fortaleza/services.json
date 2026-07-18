@@ -6,8 +6,17 @@
     "description": "Apoio social e atendimento voltado à população LGBTI+.",
     "category": ["acolhimento_social", "direitos"],
     "status": "under_review",
+    "contact": {
+      "phone": "(85) 98993-3884",
+      "email": "cerlgbt@diversidade.ce.gov.br",
+      "address": "Rua Valdetário Mota, 970, Papicu, Fortaleza–CE",
+      "publicAddressAllowed": true
+    },
+    "operating_hours": "segunda a sexta-feira, das 8h às 17h",
+    "access_method": "atendimento mediante agendamento, presencial ou por meio eletrônico",
+    "next_review_date": "2027-01-18T00:00:00Z",
     "created_at": "2026-07-17T18:00:00Z",
-    "updated_at": "2026-07-17T18:00:00Z",
+    "updated_at": "2026-07-18T10:29:38Z",
     "source_id": "src_sec_div_ce"
   },
   {

@@ -95,5 +95,59 @@
     "reviewPacketVersion": "1.0.0",
     "entityFingerprint": "959513d3ec5441f1",
     "evidenceFingerprint": "e10808d43975dc40"
+  },
+  {
+    "id": "val_org_sec_div_ce_001",
+    "entityType": "organization",
+    "entityId": "org_sec_div_ce",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T10:23:33Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_src_sec_div_ce"
+    ],
+    "confirmedFields": [
+      "name",
+      "type",
+      "contact.website",
+      "source_id"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica da organização Secretaria da Diversidade do Ceará. Identidade institucional, natureza pública estadual, website oficial e vínculo com a fonte aprovada confirmados.",
+    "validUntil": "2027-07-18T10:23:33Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "a981f529e39b978e",
+    "evidenceFingerprint": "4f53cda18c2baa0c"
+  },
+  {
+    "id": "val_srv_thina_rodrigues_001",
+    "entityType": "service",
+    "entityId": "srv_thina_rodrigues",
+    "reviewerId": "reviewer-owner-001",
+    "reviewerRole": "registry_reviewer",
+    "reviewedAt": "2026-07-18T10:31:22Z",
+    "decision": "approved_basic",
+    "evidenceIds": [
+      "ev_thina_rodrigues"
+    ],
+    "confirmedFields": [
+      "name",
+      "organization_id",
+      "source_id",
+      "contact.phone",
+      "contact.email",
+      "contact.address",
+      "operating_hours",
+      "access_method"
+    ],
+    "unconfirmedFields": [],
+    "publicNotes": "Aprovação cadastral básica do Centro Estadual de Referência LGBTI+ Thina Rodrigues. Confirmados existência, vínculo institucional e dados operacionais divulgados. Segunda revisão (jurídica/privacidade) é obrigatória antes da ativação pública.",
+    "validUntil": "2027-01-18T00:00:00Z",
+    "requiresFollowUp": false,
+    "reviewPacketVersion": "1.0.0",
+    "entityFingerprint": "04ca4f5f39f8a865",
+    "evidenceFingerprint": "e10808d43975dc40"
   }
 ]

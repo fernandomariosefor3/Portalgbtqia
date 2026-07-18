@@ -44,10 +44,10 @@
     "entity_id": "srv_thina_rodrigues",
     "entity_type": "service",
     "source_url": "https://www.diversidade.ce.gov.br",
-    "consultation_date": "2026-07-17T18:00:00Z",
-    "extracted_info": "O Centro Estadual de Referência LGBTI+ Thina Rodrigues é um equipamento da Secretaria da Diversidade.",
-    "limitations": "Endereço e horários exatos não conferidos na página principal.",
-    "needs_additional_confirmation": true
+    "consultation_date": "2026-07-18T10:29:38Z",
+    "extracted_info": "O Centro Estadual de Referência LGBTI+ Thina Rodrigues é um equipamento da Secretaria da Diversidade. Dados operacionais confirmados na fonte: telefone (85) 98993-3884, e-mail cerlgbt@diversidade.ce.gov.br, funcionamento de segunda a sexta-feira, das 8h às 17h, endereço Rua Valdetário Mota, 970, Papicu, Fortaleza–CE. Acesso mediante agendamento, presencial ou por meio eletrônico.",
+    "limitations": "Nenhuma limitação impeditiva identificada.",
+    "needs_additional_confirmation": false
   },
   {
     "id": "ev_janaina_dutra",

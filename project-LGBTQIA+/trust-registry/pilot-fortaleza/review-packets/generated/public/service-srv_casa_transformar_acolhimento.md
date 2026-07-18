@@ -2,7 +2,7 @@
 
 **Tipo**: service
 **Status Atual**: under_review
-**Gerado em**: 2026-07-17T22:24:32.263Z
+**Gerado em**: 2026-07-18T10:34:54.207Z
 **Versão do Pacote**: 1.0.0
 
 ## Evidências

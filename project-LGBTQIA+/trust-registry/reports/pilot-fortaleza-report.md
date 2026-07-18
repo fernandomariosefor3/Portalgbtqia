@@ -1,17 +1,17 @@
 # Relatório do Piloto de Confiança - Fortaleza CE
 
-Gerado em: 2026-07-17T22:03:06.123Z
+Gerado em: 2026-07-18T10:34:56.165Z
 
 ## Resumo
 - Fontes pesquisadas: 9
 - Organizações encontradas: 9
 - Serviços cadastrados: 8
-- Evidências: 8
-- Validações completas: 0
+- Evidências: 12
+- Validações completas: 6
 - Itens na Fila de Revisão: 8
 
 ## Fontes Pesquisadas
-- **Governo do Estado do Ceará** (https://www.ceara.gov.br) - Status: under_review
+- **Governo do Estado do Ceará** (https://www.ce.gov.br) - Status: under_review
 - **Secretaria da Diversidade do Ceará** (https://www.diversidade.ce.gov.br) - Status: under_review
 - **Prefeitura de Fortaleza** (https://www.fortaleza.ce.gov.br) - Status: under_review
 - **Secretaria Municipal dos Direitos Humanos e Desenvolvimento Social de Fortaleza** (https://direitoshumanos.fortaleza.ce.gov.br) - Status: under_review

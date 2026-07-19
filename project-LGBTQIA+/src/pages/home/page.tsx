@@ -15,12 +15,22 @@ const THEMES = [
 export default function Home() {
   const { articles, loading } = useArticles();
 
+  // Validação defensiva: apenas artigos com metadados essenciais
+  const validArticles = articles.filter(a => 
+    a && 
+    typeof a.id === 'string' && a.id.trim() !== '' &&
+    typeof a.slug === 'string' && a.slug.trim() !== '' &&
+    typeof a.title === 'string' && a.title.trim() !== '' &&
+    typeof a.excerpt === 'string' && a.excerpt.trim() !== '' &&
+    typeof a.category === 'string' && a.category.trim() !== ''
+  );
+
   // Seleção Determinística
-  // 1. Hero: O primeiro destacado
-  const heroArticle = articles.find(a => a.featured) || articles[0];
+  // 1. Hero: O primeiro destacado, ou o primeiro válido
+  const heroArticle = validArticles.find(a => a.featured) || validArticles[0];
   
   // 2. Destaques: Próximos 3 artigos mais recentes (ignorando o hero)
-  const availableForHighlights = articles.filter(a => a.id !== heroArticle?.id);
+  const availableForHighlights = validArticles.filter(a => a.id !== heroArticle?.id);
   const highlights = availableForHighlights.slice(0, 3);
   
   // 3. Recentes: Próximos 6 a 9 artigos (ignorando hero e destaques)
@@ -28,7 +38,7 @@ export default function Home() {
     ...(heroArticle ? [heroArticle.id] : []),
     ...highlights.map(h => h.id)
   ]);
-  const recentArticles = articles.filter(a => !usedIds.has(a.id)).slice(0, 6);
+  const recentArticles = validArticles.filter(a => !usedIds.has(a.id)).slice(0, 6);
 
   return (
     <main className="w-full min-h-screen bg-surface font-inter">

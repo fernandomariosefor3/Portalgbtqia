@@ -15,6 +15,7 @@ export interface Article {
   reviewedAt: string;
   readTime: number;
   image: string;
+  imageAlt?: string;
   featured: boolean;
   tags: string[];
   views: number;

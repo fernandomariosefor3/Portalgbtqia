@@ -11,8 +11,10 @@ export interface CultureItem {
   authorBio: string;
   authorPhoto: string;
   date: string;
+  reviewedAt?: string;
   readTime: number;
   image: string;
+  imageAlt?: string;
   featured: boolean;
   tags: string[];
   views: number;
@@ -63,6 +65,8 @@ export const allCulture: CultureItem[] = [
     readTime: 8,
     image: '',
     featured: true,
+    reviewedAt: '2026-07-19',
+    imageAlt: 'Pôster do filme Moonlight com perfil iluminado',
     tags: ['cinema', 'Moonlight', 'representação negra', 'Oscar', 'Barry Jenkins', 'queer'],
     views: 18500,
     year: 2016,
@@ -105,6 +109,8 @@ export const allCulture: CultureItem[] = [
     readTime: 7,
     image: '',
     featured: true,
+    reviewedAt: '2026-07-19',
+    imageAlt: 'Cena noturna de filme destacando o ator principal',
     tags: ['cinema', 'Brasil', 'Salvador', 'Pedro Dias', 'queer', 'independente'],
     views: 14200,
     year: 2024,
@@ -206,7 +212,7 @@ export const allCulture: CultureItem[] = [
     slug: 'heartstopper-representacao-jovem-lgbtq',
     title: 'Heartstopper: a representação jovem LGBTQ+ que o mundo precisava',
     subtitle: 'Como uma série de quadrinhos se tornou o fenômeno global de representação sáfica e gay juvenil',
-    excerpt: 'A análise da série da Netflix que está mudando como jovens LGBTQ+ se veem na televisão mundial.',
+    excerpt: 'A análise detalhada da série da Netflix que está mudando profundamente como os jovens LGBTQ+ se veem representados na televisão mundial e na cultura pop.',
     content: `
       <p class="lead">Em um cenário televisivo onde histórias jovens LGBTQ+ frequentemente terminam em tragédia, <strong>Heartstopper</strong> chegou como um abraço. Baseada nos quadrinhos de <strong>Alice Oseman</strong>, a série da Netflix não apenas mostra jovens gays e lésbicas felizes — ela mostra que essa felicidade é possível, normal e merecida.</p>
 
@@ -244,6 +250,8 @@ export const allCulture: CultureItem[] = [
     readTime: 7,
     image: '',
     featured: true,
+    reviewedAt: '2026-07-19',
+    imageAlt: 'Dois adolescentes sorridentes conversando',
     tags: ['séries', 'Netflix', 'jovens', 'gay', 'lesbica', 'representação'],
     views: 23400,
     year: 2022,
@@ -306,7 +314,7 @@ export const allCulture: CultureItem[] = [
     slug: 'its-a-sin-aids-historia-lgbtq-britanica',
     title: "It's a Sin: a história da AIDS que o Reino Unido precisava contar",
     subtitle: 'Russell T Davies criou uma série sobre a epidemia que é ao mesmo tempo engraçada, devastadora e necessária',
-    excerpt: 'A minissérie britânica que retrata a chegada da AIDS em Londres nos anos 1980 com humor, raiva e um amor inesquecível.',
+    excerpt: 'Uma análise da minissérie britânica que retrata de forma visceral a chegada da epidemia de AIDS em Londres nos anos 1980, mesclando humor, raiva e amor inesquecível.',
     content: `
       <p class="lead">A epidemia de AIDS dos anos 1980 foi, para muitos, um capítulo histórico distante. Mas para quem viveu — para os jovens gays que viram amigos morrerem enquanto governo e mídia riam — foi um holocausto silencioso. <strong>Russell T Davies</strong>, criador de "Queer as Folk" e "Years and Years", decidiu que essa história precisava ser contada. E <strong>"It's a Sin"</strong> não é apenas contada; é gritada, cantada, dançada e chorada.</p>
 
@@ -342,6 +350,8 @@ export const allCulture: CultureItem[] = [
     readTime: 8,
     image: '',
     featured: false,
+    reviewedAt: '2026-07-19',
+    imageAlt: 'Grupo de amigos celebrando em uma festa dos anos 80',
     tags: ['séries', 'AIDS', 'história', 'LGBTQ+', 'Reino Unido', 'drama'],
     views: 15600,
     year: 2021,
@@ -403,7 +413,7 @@ export const allCulture: CultureItem[] = [
     slug: 'liniker-pop-negra-queer-brasileira',
     title: 'Liniker: a voz do pop negra e queer brasileiro',
     subtitle: 'Como a artista de Araraquara se tornou o símbolo de uma geração que exige espaço na música brasileira',
-    excerpt: 'A trajetória de Liniker, desde os covers no YouTube até os palcos do Lollapalooza e Grammy Latino.',
+    excerpt: 'Conheça a trajetória fascinante de Liniker, desde os seus primeiros covers no YouTube até a consagração nos palcos do Lollapalooza e sua vitória histórica no Grammy Latino.',
     content: `
       <p class="lead">Se há uma artista que personifica a nova música brasileira — negra, queer, independente e profundamente emocional — essa artista é <strong>Liniker</strong>. De Araraquara para o mundo, ela construiu uma carreira que desafia categorias: é MPB, é soul, é pop, é brega, é tudo isso ao mesmo tempo. E, acima de tudo, é honesta.</p>
 
@@ -439,6 +449,8 @@ export const allCulture: CultureItem[] = [
     readTime: 7,
     image: '',
     featured: true,
+    reviewedAt: '2026-07-19',
+    imageAlt: 'Liniker no palco iluminada por luzes douradas',
     tags: ['música', 'Liniker', 'pop', 'MPB', 'trans', 'negra'],
     views: 31200,
     year: 2015,

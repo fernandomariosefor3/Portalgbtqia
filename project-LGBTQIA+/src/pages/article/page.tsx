@@ -51,7 +51,41 @@ export default function ArticlePage() {
     return <Navigate to="/artigos" replace />;
   }
 
-  const contentHtml = article.content?.trim() || `<p class="lead">${article.excerpt}</p>`;
+  // Helper for ID generation
+  const normalizeString = (str: string) => {
+    return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  };
+
+  const rawHtml = article.content?.trim() || `<p class="lead">${article.excerpt}</p>`;
+  
+  // Extração de subtítulos (h2)
+  const h2Regex = /<h2[^>]*>(.*?)<\/h2>/gi;
+  const headings: { id: string; text: string }[] = [];
+  let match;
+  
+  while ((match = h2Regex.exec(rawHtml)) !== null) {
+    const text = match[1].replace(/<[^>]+>/g, '').trim();
+    if (text) {
+      const id = normalizeString(text).replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      headings.push({ id, text });
+    }
+  }
+
+  let contentHtml = rawHtml;
+  if (headings.length >= 3) {
+    let index = 0;
+    contentHtml = rawHtml.replace(/<h2[^>]*>(.*?)<\/h2>/gi, (original, innerText) => {
+      if (index < headings.length) {
+        const heading = headings[index++];
+        return `<h2 id="${heading.id}">${innerText}</h2>`;
+      }
+      return original;
+    });
+  }
+
+  // Regras de disclaimer
+  const showHealthDisclaimer = article.healthDisclaimer || article.category === 'saude';
+  const showLegalDisclaimer = article.category === 'direitos';
 
   return (
     <main className="w-full min-h-screen bg-surface font-inter pb-16">
@@ -62,6 +96,56 @@ export default function ArticlePage() {
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-12">
             <article className="flex-1 min-w-0">
+              
+              {showHealthDisclaimer && (
+                <div className="mb-8 p-4 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-sm flex gap-3 items-start">
+                  <i className="ri-error-warning-line text-lg flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                  <div>
+                    <strong className="block font-semibold mb-1">Aviso sobre Saúde</strong>
+                    <p>
+                      As informações publicadas neste portal têm caráter exclusivamente informativo e educativo. 
+                      Não substituem, em nenhuma hipótese, a consulta, diagnóstico ou orientação de um profissional 
+                      de saúde qualificado. Em caso de dúvidas sobre sua saúde, procure atendimento médico ou psicológico.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {showLegalDisclaimer && (
+                <div className="mb-8 p-4 rounded-lg bg-blue-50 border border-blue-200 text-blue-800 text-sm flex gap-3 items-start">
+                  <i className="ri-scales-3-line text-lg flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                  <div>
+                    <strong className="block font-semibold mb-1">Aviso Legal</strong>
+                    <p>
+                      O conteúdo desta página possui finalidade informativa e não constitui aconselhamento jurídico. 
+                      As leis, normativas e procedimentos podem sofrer alterações sem aviso prévio. 
+                      Para casos concretos, recomenda-se a orientação de um advogado ou da Defensoria Pública.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {headings.length >= 3 && (
+                <nav className="mb-8 p-6 bg-dark-50 rounded-xl border border-dark-100" aria-label="Sumário do artigo">
+                  <h3 className="text-sm font-bold text-dark-800 uppercase tracking-wider mb-4 flex items-center gap-2">
+                    <i className="ri-list-ordered" aria-hidden="true"></i>
+                    Neste artigo
+                  </h3>
+                  <ul className="flex flex-col gap-3">
+                    {headings.map((heading) => (
+                      <li key={heading.id}>
+                        <a
+                          href={`#${heading.id}`}
+                          className="text-dark-600 hover:text-primary-500 transition-colors text-sm hover:underline underline-offset-4"
+                        >
+                          {heading.text}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              )}
+
               <div
                 className="article-content prose prose-lg max-w-none"
                 dangerouslySetInnerHTML={{ __html: sanitizeHtml(contentHtml) }}
@@ -73,7 +157,7 @@ export default function ArticlePage() {
                     href={article.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-primary-500 text-white text-sm font-semibold hover:bg-primary-600 transition-colors"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-primary-500 text-white text-sm font-semibold hover:bg-primary-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400"
                   >
                     Acessar fonte original
                     <i className="ri-external-link-line" aria-hidden="true"></i>
@@ -86,7 +170,7 @@ export default function ArticlePage() {
               <div className="mt-10 pt-8 border-t border-dark-100">
                 <Link
                   to="/artigos"
-                  className="inline-flex items-center gap-2 text-sm text-dark-500 hover:text-primary-500 transition-colors"
+                  className="inline-flex items-center gap-2 text-sm text-dark-500 hover:text-primary-500 transition-colors focus:outline-none focus:underline"
                 >
                   <i className="ri-arrow-left-line text-lg flex-shrink-0" aria-hidden="true"></i>
                   Voltar para artigos

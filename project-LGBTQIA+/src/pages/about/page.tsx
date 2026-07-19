@@ -7,7 +7,7 @@ const fallbackAbout = {
   title: "Quem somos",
   subtitle: "Institucional",
   description:
-    "Jornalismo de serviço, cultura e acolhimento comunitário para a diversidade no Nordeste do Brasil.",
+    "A Rede Farol - Portal LGBTQIA+ faz jornalismo de serviço, cultura e acolhimento comunitário para a diversidade no Nordeste do Brasil.",
   image:
     "https://readdy.ai/api/search-image?query=diverse%20crowd%20of%20brazilian%20people%20marching%20in%20pride%20parade%20colorful%20flags%20and%20banners%20warm%20sunset%20light%20urban%20street%20editorial%20photography%20inclusive%20celebration%20joyful%20atmosphere%20high%20quality&width=1200&height=520&seq=about-hero&orientation=landscape",
   ctaLabel: "Fale conosco",

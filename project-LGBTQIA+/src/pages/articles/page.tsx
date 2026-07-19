@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import ArticleCard from './components/ArticleCard';
 import ArticleFilters from './components/ArticleFilters';
 import ArticlesSidebar from './components/ArticlesSidebar';
@@ -8,13 +8,19 @@ import { useArticles } from '@/lib/useArticles';
 
 const ARTICLES_PER_PAGE = 9;
 
+// Helper to normalize strings (remove accents and lower case)
+const normalizeString = (str: string) => {
+  return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+};
+
 export default function ArticlesPage() {
   const { articles, loading: loadingArticles } = useArticles();
-  const { category } = useParams<{ category?: string }>();
-  const [searchParams] = useSearchParams();
-  const activeCategory = category && categoryLabels[category] ? category : 'todas';
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryParam = searchParams.get('categoria');
+  const activeCategory = categoryParam && categoryLabels[categoryParam] ? categoryParam : 'todas';
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState(searchParams.get('busca') || '');
+  const searchQuery = searchParams.get('busca') || '';
+  const sortOrder = searchParams.get('ordem') || 'recentes';
 
   const filteredArticles = useMemo(() => {
     let result = articles;
@@ -22,23 +28,32 @@ export default function ArticlesPage() {
       result = result.filter((a) => a.category === activeCategory);
     }
     if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
+      const q = normalizeString(searchQuery.trim());
       result = result.filter(
         (a) =>
-          a.title.toLowerCase().includes(q) ||
-          a.excerpt.toLowerCase().includes(q) ||
-          a.author.toLowerCase().includes(q) ||
-          a.tags.some((t) => t.toLowerCase().includes(q))
+          normalizeString(a.title).includes(q) ||
+          normalizeString(a.excerpt).includes(q) ||
+          normalizeString(a.author).includes(q) ||
+          a.tags.some((t) => normalizeString(t).includes(q))
       );
     }
+
+    if (sortOrder === 'leitura') {
+      result.sort((a, b) => (a.readTime || 5) - (b.readTime || 5));
+    } else if (sortOrder === 'alfabetica') {
+      result.sort((a, b) => a.title.localeCompare(b.title, 'pt-BR'));
+    } else {
+      result.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    }
+
     return result;
-  }, [articles, activeCategory, searchQuery]);
+  }, [articles, activeCategory, searchQuery, sortOrder]);
 
   const paginatedArticles = filteredArticles.slice(0, currentPage * ARTICLES_PER_PAGE);
   const hasMore = paginatedArticles.length < filteredArticles.length;
 
   const featuredArticle = filteredArticles.find((a) => a.featured);
-  const gridArticles = featuredArticle
+  const gridArticles = featuredArticle && sortOrder === 'recentes' && !searchQuery && activeCategory === 'todas'
     ? paginatedArticles.filter((a) => a.id !== featuredArticle.id)
     : paginatedArticles;
 
@@ -69,7 +84,22 @@ export default function ArticlesPage() {
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 max-w-lg">
-            <div className="relative w-full sm:flex-1">
+            <form 
+              className="relative w-full sm:flex-1"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const formData = new FormData(e.currentTarget);
+                const query = formData.get('article-search') as string;
+                const newParams = new URLSearchParams(searchParams);
+                if (query.trim()) {
+                  newParams.set('busca', query.trim());
+                } else {
+                  newParams.delete('busca');
+                }
+                setSearchParams(newParams);
+                setCurrentPage(1);
+              }}
+            >
               <i className="ri-search-line absolute left-3.5 top-1/2 -translate-y-1/2 text-dark-300" aria-hidden="true"></i>
               <input
                 type="text"
@@ -77,30 +107,47 @@ export default function ArticlesPage() {
                 name="article-search"
                 placeholder="Buscar artigos, autores, tags..."
                 aria-label="Buscar artigos, autores, tags"
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setCurrentPage(1);
-                }}
+                defaultValue={searchQuery}
                 className="w-full pl-10 pr-4 py-3 text-sm rounded-full bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-primary-400/40 focus:border-primary-400 transition-all"
               />
-            </div>
+              <button type="submit" className="sr-only">Pesquisar</button>
+            </form>
           </div>
         </div>
       </section>
 
       <section className="w-full py-8 px-4 md:px-6 lg:px-10 border-b border-dark-100 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <ArticleFilters
               activeCategory={activeCategory}
               articles={articles}
-              onNavigate={() => setCurrentPage(1)}
             />
-            <span className="text-xs text-dark-400">
-              {filteredArticles.length} {filteredArticles.length === 1 ? 'artigo' : 'artigos'}
-              {activeCategory !== 'todas' && ` em ${categoryLabels[activeCategory]}`}
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-dark-400 hidden sm:inline">
+                {filteredArticles.length} {filteredArticles.length === 1 ? 'artigo' : 'artigos'}
+                {activeCategory !== 'todas' && ` em ${categoryLabels[activeCategory]}`}
+              </span>
+              <select
+                value={sortOrder}
+                onChange={(e) => {
+                  const newParams = new URLSearchParams(searchParams);
+                  if (e.target.value === 'recentes') {
+                    newParams.delete('ordem');
+                  } else {
+                    newParams.set('ordem', e.target.value);
+                  }
+                  setSearchParams(newParams);
+                  setCurrentPage(1);
+                }}
+                className="text-sm bg-white border border-dark-200 text-dark-600 rounded-md px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400"
+                aria-label="Ordenar artigos"
+              >
+                <option value="recentes">Mais recentes</option>
+                <option value="leitura">Tempo de leitura</option>
+                <option value="alfabetica">A-Z</option>
+              </select>
+            </div>
           </div>
         </div>
       </section>

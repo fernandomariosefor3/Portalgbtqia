@@ -9,12 +9,18 @@ import {
 } from 'firebase/firestore';
 import { db } from './firebase';
 import type { Article } from '@/mocks/articles-full';
+import { featuredArticles, latestArticles } from '@/mocks/articles';
 
 const PLACEHOLDER_AUTHOR_PHOTO =
   'https://ui-avatars.com/api/?name=Fernando+Mario&background=E94E77&color=fff&size=64';
 
 const DEFAULT_ARTICLE_IMAGE =
-  'https://readdy.ai/api/search-image?query=LGBTQ+pride+community+Brazil+colorful&width=800&height=500&seq=art-default&orientation=landscape';
+  '';
+
+function normalizeSlug(slug: string): string {
+  if (!slug) return '';
+  return slug.trim().toLowerCase().replace(/^\/+|\/+$/g, '').split('?')[0];
+}
 
 /**
  * Converte um documento do Firestore para o formato `Article` usado pela UI.
@@ -76,7 +82,7 @@ export function firestoreToArticle(doc: QueryDocumentSnapshot<DocumentData>): Ar
 export async function getFirestoreArticleBySlug(slug: string): Promise<Article | null> {
   const q = query(collection(db, 'articles'), where('status', '==', 'published'));
   const snapshot = await getDocs(q);
-  const found = snapshot.docs.find((doc) => (doc.data().slug || doc.id) === slug);
+  const found = snapshot.docs.find((doc) => normalizeSlug(doc.data().slug || doc.id) === normalizeSlug(slug));
   return found ? firestoreToArticle(found) : null;
 }
 
@@ -108,18 +114,47 @@ export function useArticles(): UseArticlesResult {
         if (!active) return;
 
         const fetched = snapshot.docs.map(firestoreToArticle);
-        fetched.sort((a, b) => b.date.localeCompare(a.date));
+        
+        const localArticles = [...featuredArticles, ...latestArticles] as Article[];
+        const localBySlug = new Map(
+          localArticles.map((article) => [normalizeSlug(article.slug), article])
+        );
 
-        if (fetched.length > 0) {
-          fetched[0].featured = true;
+        const uniqueRemoteArticles = fetched.filter(
+          (article) => article.slug && !localBySlug.has(normalizeSlug(article.slug))
+        );
+
+        const mergedArticles = [
+          ...localArticles,
+          ...uniqueRemoteArticles,
+        ];
+        
+        mergedArticles.sort((a, b) => b.date.localeCompare(a.date));
+
+        if (mergedArticles.length > 0) {
+          mergedArticles[0].featured = true;
+          for (let i = 1; i < mergedArticles.length; i++) {
+            mergedArticles[i].featured = false;
+          }
         }
-        setArticles(fetched);
+        
+        setArticles(mergedArticles);
         setUsingFallback(false);
       } catch (err) {
         if (!active) return;
         console.error('Erro ao buscar artigos do Firestore:', err);
-        setArticles([]);
-        setUsingFallback(false);
+        
+        const localArticles = [...featuredArticles, ...latestArticles] as Article[];
+        localArticles.sort((a, b) => b.date.localeCompare(a.date));
+        if (localArticles.length > 0) {
+          localArticles[0].featured = true;
+          for (let i = 1; i < localArticles.length; i++) {
+            localArticles[i].featured = false;
+          }
+        }
+        
+        setArticles(localArticles);
+        setUsingFallback(true);
         setError(err instanceof Error ? err.message : 'Erro desconhecido');
       } finally {
         if (active) setLoading(false);

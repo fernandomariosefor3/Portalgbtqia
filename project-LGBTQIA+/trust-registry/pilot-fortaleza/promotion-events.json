@@ -1,0 +1,387 @@
+[
+  {
+    "id": "promo_src_gov_ce_001",
+    "entityId": "src_gov_ce",
+    "entityType": "source",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_src_gov_ce_002",
+    "compactFingerprint": "2786facb426326f6",
+    "integrityDigest": "2786facb426326f674aee4a666cfd8de93462bc6f185e4c4cb6921869471c1b6",
+    "evidenceIds": [
+      "ev_src_gov_ce"
+    ],
+    "effectiveValidUntil": "2027-07-17T22:15:00Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-18T23:37:32.929Z",
+    "reason": "Administrative Promotion Lote P-A",
+    "publicationAllowed": false,
+    "batchId": "P-A",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_src_sec_div_ce_001",
+    "entityId": "src_sec_div_ce",
+    "entityType": "source",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_src_sec_div_ce_002",
+    "compactFingerprint": "3a935714a23740b0",
+    "integrityDigest": "3a935714a23740b075008949fc3d8108fe209983e554ff7ceb224c6051caeca7",
+    "evidenceIds": [
+      "ev_src_sec_div_ce"
+    ],
+    "effectiveValidUntil": "2027-07-17T22:20:00Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-18T23:37:32.929Z",
+    "reason": "Administrative Promotion Lote P-A",
+    "publicationAllowed": false,
+    "batchId": "P-A",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_src_pref_fortaleza_001",
+    "entityId": "src_pref_fortaleza",
+    "entityType": "source",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_src_pref_fortaleza_002",
+    "compactFingerprint": "c992da85c4313c82",
+    "integrityDigest": "c992da85c4313c821cf7189ced6c2f77aecb814a00b3a585b10d3601b14c7605",
+    "evidenceIds": [
+      "ev_src_pref_fortaleza"
+    ],
+    "effectiveValidUntil": "2027-07-17T22:21:00Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-18T23:37:32.929Z",
+    "reason": "Administrative Promotion Lote P-A",
+    "publicationAllowed": false,
+    "batchId": "P-A",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_src_smdhds_fortaleza_001",
+    "entityId": "src_smdhds_fortaleza",
+    "entityType": "source",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_src_smdhds_fortaleza_002",
+    "compactFingerprint": "ca99f54ef9a9ee2d",
+    "integrityDigest": "ca99f54ef9a9ee2da87e23fa6dd93011b2ff649f6bb74e9840abb9c180aca0ff",
+    "evidenceIds": [
+      "ev_src_smdhds_fortaleza"
+    ],
+    "effectiveValidUntil": "2027-07-18T11:23:46Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-18T23:37:32.929Z",
+    "reason": "Administrative Promotion Lote P-A",
+    "publicationAllowed": false,
+    "batchId": "P-A",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_src_sesa_ce_001",
+    "entityId": "src_sesa_ce",
+    "entityType": "source",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_src_sesa_ce_002",
+    "compactFingerprint": "69b9deaf727f94e2",
+    "integrityDigest": "69b9deaf727f94e2b9c6b2ae0a7ad70048b88c8f3c237ce8ef27e327a5bbed14",
+    "evidenceIds": [
+      "ev_src_sesa_ce"
+    ],
+    "effectiveValidUntil": "2027-07-18T10:37:16Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-18T23:37:32.929Z",
+    "reason": "Administrative Promotion Lote P-A",
+    "publicationAllowed": false,
+    "batchId": "P-A",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_src_hsj_ce_001",
+    "entityId": "src_hsj_ce",
+    "entityType": "source",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_src_hsj_ce_002",
+    "compactFingerprint": "11bac9a264481cc8",
+    "integrityDigest": "11bac9a264481cc80cc1a60c0d6e9e841f88924359ea0d1845e75af53f46ad40",
+    "evidenceIds": [
+      "ev_src_hsj_ce"
+    ],
+    "effectiveValidUntil": "2027-07-18T11:44:20Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-18T23:37:32.929Z",
+    "reason": "Administrative Promotion Lote P-A",
+    "publicationAllowed": false,
+    "batchId": "P-A",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_src_dpe_ce_001",
+    "entityId": "src_dpe_ce",
+    "entityType": "source",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_src_dpe_ce_002",
+    "compactFingerprint": "ee444912adeca484",
+    "integrityDigest": "ee444912adeca484d6afc0310bc5993a0d34fcf415d2daf9fcdc6404d4a5509b",
+    "evidenceIds": [
+      "ev_src_dpe_ce"
+    ],
+    "effectiveValidUntil": "2027-07-18T10:56:29Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-18T23:37:32.929Z",
+    "reason": "Administrative Promotion Lote P-A",
+    "publicationAllowed": false,
+    "batchId": "P-A",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_src_huwc_ce_001",
+    "entityId": "src_huwc_ce",
+    "entityType": "source",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_src_huwc_ce_002",
+    "compactFingerprint": "3703b440aaf44d60",
+    "integrityDigest": "3703b440aaf44d6005505d34573e87bb0960dc321fa122e354b1b4ef0e03b72c",
+    "evidenceIds": [
+      "ev_src_huwc_ce"
+    ],
+    "effectiveValidUntil": "2027-07-18T11:12:19Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-18T23:37:32.929Z",
+    "reason": "Administrative Promotion Lote P-A",
+    "publicationAllowed": false,
+    "batchId": "P-A",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_org_gov_ce_001",
+    "entityId": "org_gov_ce",
+    "entityType": "organization",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_org_gov_ce_002",
+    "compactFingerprint": "938f6394e6884911",
+    "integrityDigest": "938f6394e68849111c95415c144da566dec66e9e379e4a0a93f23165063b926b",
+    "evidenceIds": [
+      "ev_org_gov_ce"
+    ],
+    "effectiveValidUntil": "2027-07-17T22:15:00Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-19T12:46:09.235Z",
+    "reason": "Administrative Promotion Lote P-B",
+    "publicationAllowed": false,
+    "batchId": "P-B",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_org_sec_div_ce_001",
+    "entityId": "org_sec_div_ce",
+    "entityType": "organization",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_org_sec_div_ce_002",
+    "compactFingerprint": "159f72319c4db558",
+    "integrityDigest": "159f72319c4db558490913c793f086b1f480b6e9b27232c50154c8ffa12fa793",
+    "evidenceIds": [
+      "ev_org_sec_div_ce_portal",
+      "ev_org_sec_div_ce_organograma"
+    ],
+    "effectiveValidUntil": "2027-07-17T22:20:00Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-19T12:46:09.235Z",
+    "reason": "Administrative Promotion Lote P-B",
+    "publicationAllowed": false,
+    "batchId": "P-B",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_org_pref_fortaleza_001",
+    "entityId": "org_pref_fortaleza",
+    "entityType": "organization",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_org_pref_fortaleza_002",
+    "compactFingerprint": "41431e21afa73295",
+    "integrityDigest": "41431e21afa732955c8ac52d244f1e38520b1d2c99b38431688d6ada6a21a22d",
+    "evidenceIds": [
+      "ev_org_pref_fortaleza"
+    ],
+    "effectiveValidUntil": "2027-07-17T22:21:00Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-19T12:46:09.235Z",
+    "reason": "Administrative Promotion Lote P-B",
+    "publicationAllowed": false,
+    "batchId": "P-B",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_org_smdhds_fortaleza_001",
+    "entityId": "org_smdhds_fortaleza",
+    "entityType": "organization",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_org_smdhds_fortaleza_002",
+    "compactFingerprint": "7e8002d0f3e0a8f2",
+    "integrityDigest": "7e8002d0f3e0a8f22652964a5c91f78a6cc8efd7e10c5661fb9ff2fb8a137c5d",
+    "evidenceIds": [
+      "ev_org_smdhds_fortaleza"
+    ],
+    "effectiveValidUntil": "2027-07-18T11:23:46Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-19T12:46:09.235Z",
+    "reason": "Administrative Promotion Lote P-B",
+    "publicationAllowed": false,
+    "batchId": "P-B",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_org_sesa_ce_001",
+    "entityId": "org_sesa_ce",
+    "entityType": "organization",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_org_sesa_ce_002",
+    "compactFingerprint": "76045b24c547d09d",
+    "integrityDigest": "76045b24c547d09de80eee5ee4ce73c026f94d75cde73b60303feeaf3fa8fc57",
+    "evidenceIds": [
+      "ev_org_sesa_ce"
+    ],
+    "effectiveValidUntil": "2027-07-18T10:37:16Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-19T12:46:09.235Z",
+    "reason": "Administrative Promotion Lote P-B",
+    "publicationAllowed": false,
+    "batchId": "P-B",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_org_hsj_ce_001",
+    "entityId": "org_hsj_ce",
+    "entityType": "organization",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_org_hsj_ce_002",
+    "compactFingerprint": "1cdc66f100a230ce",
+    "integrityDigest": "1cdc66f100a230ceef6b51f723a9a924f4c2a12bd3573a2bf6c9032fcd29d544",
+    "evidenceIds": [
+      "ev_org_hsj_ce"
+    ],
+    "effectiveValidUntil": "2027-07-18T11:44:20Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-19T12:46:09.235Z",
+    "reason": "Administrative Promotion Lote P-B",
+    "publicationAllowed": false,
+    "batchId": "P-B",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_org_dpe_ce_001",
+    "entityId": "org_dpe_ce",
+    "entityType": "organization",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_org_dpe_ce_002",
+    "compactFingerprint": "de98e0bfe9418878",
+    "integrityDigest": "de98e0bfe9418878277a2308f2fa385922c0fd20a816a85633850317d96e2cdd",
+    "evidenceIds": [
+      "ev_org_dpe_ce"
+    ],
+    "effectiveValidUntil": "2027-07-18T10:56:29Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-19T12:46:09.235Z",
+    "reason": "Administrative Promotion Lote P-B",
+    "publicationAllowed": false,
+    "batchId": "P-B",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  },
+  {
+    "id": "promo_org_huwc_ce_001",
+    "entityId": "org_huwc_ce",
+    "entityType": "organization",
+    "previousStatus": "under_review",
+    "newStatus": "verified_basic",
+    "effectiveValidationId": "val_org_huwc_ce_002",
+    "compactFingerprint": "5d9eaa63981b13ce",
+    "integrityDigest": "5d9eaa63981b13ce64752308921fe480f58e8de7ebf3877e0af9a8631720a991",
+    "evidenceIds": [
+      "ev_org_huwc_ce"
+    ],
+    "effectiveValidUntil": "2027-07-18T11:12:19Z",
+    "promotedBy": "reviewer-owner-001",
+    "promotedAt": "2026-07-19T12:46:09.235Z",
+    "reason": "Administrative Promotion Lote P-B",
+    "publicationAllowed": false,
+    "batchId": "P-B",
+    "rollbackSpecification": {
+      "statusRollbackTo": "under_review",
+      "requiresNewEvent": true
+    },
+    "policyVersion": "1.0.0"
+  }
+]

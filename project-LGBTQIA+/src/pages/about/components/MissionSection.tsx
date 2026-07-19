@@ -14,9 +14,9 @@ export default function MissionSection() {
               <span className="italic text-primary-500">voz própria</span>
             </h2>
             <p className="mt-5 text-sm md:text-base text-dark-500 leading-relaxed">
-              Este portal é uma iniciativa digital dedicada a reunir e
+              A Rede Farol é uma iniciativa digital dedicada a reunir e
               compartilhar informações de qualidade sobre cultura, saúde,
-              direitos e comunidade para a população LGBTQ+ no Nordeste do
+              direitos e comunidade para a população LGBTQIA+ no Nordeste do
               Brasil. Nosso objetivo é tornar visíveis as narrativas,
               resistências e conquistas de cidades como Fortaleza, Recife,
               Salvador e Natal — que muitas vezes não recebem a atenção
@@ -31,13 +31,13 @@ export default function MissionSection() {
             <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <Link
                 to="/artigos"
-                className="px-6 py-3 text-sm font-semibold rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap"
+                className="px-6 py-3 text-sm font-semibold rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-primary-400"
               >
                 Explorar conteúdo
               </Link>
               <Link
                 to="/eventos"
-                className="px-6 py-3 text-sm font-semibold rounded-full border border-dark-200 text-dark-700 hover:bg-dark-50 transition-colors whitespace-nowrap"
+                className="px-6 py-3 text-sm font-semibold rounded-full border border-dark-200 text-dark-700 hover:bg-dark-50 transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-dark-400"
               >
                 Fazer parte
               </Link>
@@ -47,7 +47,7 @@ export default function MissionSection() {
             <div className="rounded-2xl overflow-hidden">
               <img
                 src="https://readdy.ai/api/search-image?query=diverse%20group%20of%20young%20brazilian%20people%20gathered%20around%20table%20working%20on%20laptops%20and%20notebooks%20collaborative%20editorial%20meeting%20warm%20natural%20light%20indoor%20cozy%20modern%20workspace%20inclusive%20environment&width=600&height=450&seq=about1&orientation=landscape"
-                alt="Equipe colaborativa do Portal LGBTQ+ em reunião editorial"
+                alt="Equipe colaborativa da Rede Farol em reunião editorial"
                 className="w-full h-auto object-cover"
               />
             </div>

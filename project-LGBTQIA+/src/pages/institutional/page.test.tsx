@@ -22,7 +22,7 @@ describe('InstitutionalPage', () => {
   it('publica canais claros para correções', () => {
     renderPage('/politica-de-correcoes');
     expect(screen.getByRole('heading', { level: 1, name: 'Política de correções' })).toBeInTheDocument();
-    expect(screen.getByText(/contato@portallgbtq.com.br/)).toBeInTheDocument();
+    expect(screen.getByText(/contato@redefarol.com.br/)).toBeInTheDocument();
     expect(screen.getByText(/Correções materiais recebem uma nota/)).toBeInTheDocument();
   });
 

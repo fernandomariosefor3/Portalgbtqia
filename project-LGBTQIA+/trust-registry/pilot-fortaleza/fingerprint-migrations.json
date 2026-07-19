@@ -1,0 +1,288 @@
+[
+  {
+    "id": "mig_056ea3fb",
+    "entityId": "src_gov_ce",
+    "previousValidationId": "val_src_gov_ce_001",
+    "previousFingerprint": "2786facb426326f6",
+    "previousVersion": "v1",
+    "newValidationId": "val_src_gov_ce_002",
+    "newFingerprint": "2786facb426326f6",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:24:25.161Z",
+    "evidenceIds": [
+      "ev_src_gov_ce"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_226352f0",
+    "entityId": "src_sec_div_ce",
+    "previousValidationId": "val_src_sec_div_ce_001",
+    "previousFingerprint": "3a935714a23740b0",
+    "previousVersion": "v1",
+    "newValidationId": "val_src_sec_div_ce_002",
+    "newFingerprint": "3a935714a23740b0",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:24:25.161Z",
+    "evidenceIds": [
+      "ev_src_sec_div_ce"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_f8e5b88a",
+    "entityId": "src_pref_fortaleza",
+    "previousValidationId": "val_src_pref_fortaleza_001",
+    "previousFingerprint": "c992da85c4313c82",
+    "previousVersion": "v1",
+    "newValidationId": "val_src_pref_fortaleza_002",
+    "newFingerprint": "c992da85c4313c82",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:24:25.161Z",
+    "evidenceIds": [
+      "ev_src_pref_fortaleza"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_6fd018f7",
+    "entityId": "src_smdhds_fortaleza",
+    "previousValidationId": "val_src_smdhds_fortaleza_001",
+    "previousFingerprint": "ca99f54ef9a9ee2d",
+    "previousVersion": "v1",
+    "newValidationId": "val_src_smdhds_fortaleza_002",
+    "newFingerprint": "ca99f54ef9a9ee2d",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:24:25.161Z",
+    "evidenceIds": [
+      "ev_src_smdhds_fortaleza"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_6b583d57",
+    "entityId": "src_sesa_ce",
+    "previousValidationId": "val_src_sesa_ce_001",
+    "previousFingerprint": "69b9deaf727f94e2",
+    "previousVersion": "v1",
+    "newValidationId": "val_src_sesa_ce_002",
+    "newFingerprint": "69b9deaf727f94e2",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:24:25.161Z",
+    "evidenceIds": [
+      "ev_src_sesa_ce"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_d6497a1f",
+    "entityId": "src_hsj_ce",
+    "previousValidationId": "val_src_hsj_ce_001",
+    "previousFingerprint": "11bac9a264481cc8",
+    "previousVersion": "v1",
+    "newValidationId": "val_src_hsj_ce_002",
+    "newFingerprint": "11bac9a264481cc8",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:24:25.161Z",
+    "evidenceIds": [
+      "ev_src_hsj_ce"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_ab85be3a",
+    "entityId": "src_dpe_ce",
+    "previousValidationId": "val_src_dpe_ce_001",
+    "previousFingerprint": "ee444912adeca484",
+    "previousVersion": "v1",
+    "newValidationId": "val_src_dpe_ce_002",
+    "newFingerprint": "ee444912adeca484",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:24:25.161Z",
+    "evidenceIds": [
+      "ev_src_dpe_ce"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_5e7cb1f1",
+    "entityId": "src_huwc_ce",
+    "previousValidationId": "val_src_huwc_ce_001",
+    "previousFingerprint": "3703b440aaf44d60",
+    "previousVersion": "v1",
+    "newValidationId": "val_src_huwc_ce_002",
+    "newFingerprint": "3703b440aaf44d60",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:24:25.161Z",
+    "evidenceIds": [
+      "ev_src_huwc_ce"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_0519995e",
+    "entityId": "org_gov_ce",
+    "previousValidationId": "val_org_gov_ce_001",
+    "previousFingerprint": "959513d3ec5441f1",
+    "previousVersion": "v1",
+    "newValidationId": "val_org_gov_ce_002",
+    "newFingerprint": "938f6394e6884911",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:34:47.348Z",
+    "evidenceIds": [
+      "ev_org_gov_ce"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_40d463b1",
+    "entityId": "org_pref_fortaleza",
+    "previousValidationId": "val_org_pref_fortaleza_001",
+    "previousFingerprint": "bc5bccaa9be5f09d",
+    "previousVersion": "v1",
+    "newValidationId": "val_org_pref_fortaleza_002",
+    "newFingerprint": "41431e21afa73295",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:34:47.348Z",
+    "evidenceIds": [
+      "ev_org_pref_fortaleza"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_d4a54fa3",
+    "entityId": "org_smdhds_fortaleza",
+    "previousValidationId": "val_org_smdhds_fortaleza_001",
+    "previousFingerprint": "91b8e2e26a4c390f",
+    "previousVersion": "v1",
+    "newValidationId": "val_org_smdhds_fortaleza_002",
+    "newFingerprint": "7e8002d0f3e0a8f2",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:34:47.348Z",
+    "evidenceIds": [
+      "ev_org_smdhds_fortaleza"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_c328ab1b",
+    "entityId": "org_sesa_ce",
+    "previousValidationId": "val_org_sesa_ce_001",
+    "previousFingerprint": "a97071963504be80",
+    "previousVersion": "v1",
+    "newValidationId": "val_org_sesa_ce_002",
+    "newFingerprint": "76045b24c547d09d",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:34:47.348Z",
+    "evidenceIds": [
+      "ev_org_sesa_ce"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_ceaa72fe",
+    "entityId": "org_hsj_ce",
+    "previousValidationId": "val_org_hsj_ce_001",
+    "previousFingerprint": "1d8a025eed628a32",
+    "previousVersion": "v1",
+    "newValidationId": "val_org_hsj_ce_002",
+    "newFingerprint": "1cdc66f100a230ce",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:34:47.348Z",
+    "evidenceIds": [
+      "ev_org_hsj_ce"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_e93c441a",
+    "entityId": "org_dpe_ce",
+    "previousValidationId": "val_org_dpe_ce_001",
+    "previousFingerprint": "b75fb6c69bc00ba7",
+    "previousVersion": "v1",
+    "newValidationId": "val_org_dpe_ce_002",
+    "newFingerprint": "de98e0bfe9418878",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:34:47.348Z",
+    "evidenceIds": [
+      "ev_org_dpe_ce"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "id": "mig_06661af2",
+    "entityId": "org_huwc_ce",
+    "previousValidationId": "val_org_huwc_ce_001",
+    "previousFingerprint": "d3144a889f04823b",
+    "previousVersion": "v1",
+    "newValidationId": "val_org_huwc_ce_002",
+    "newFingerprint": "5d9eaa63981b13ce",
+    "newVersion": "v2",
+    "migrationType": "human_reattestation",
+    "reviewedBy": "reviewer-owner-001",
+    "reviewedAt": "2026-07-18T18:34:47.348Z",
+    "evidenceIds": [
+      "ev_org_huwc_ce"
+    ],
+    "contentChanged": false,
+    "changedFields": []
+  },
+  {
+    "migrationType": "human_reattestation",
+    "entityId": "org_sec_div_ce",
+    "previousValidationId": "val_org_sec_div_ce_001",
+    "newValidationId": "val_org_sec_div_ce_002",
+    "compactEntityFingerprint": "159f72319c4db558",
+    "compactEvidenceFingerprint": "4745bc41935f4eed",
+    "contentChanged": true,
+    "materialChange": false,
+    "changedFields": [
+      "evidenceIds"
+    ],
+    "justification": "Regularização evidenciária administrativa",
+    "migratedAt": "2026-07-18T19:08:02.426Z",
+    "integrityManifestRef": "trust-registry/pilot-fortaleza/fingerprint-integrity-manifest.json"
+  }
+]

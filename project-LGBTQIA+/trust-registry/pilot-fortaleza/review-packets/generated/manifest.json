@@ -1,0 +1,189 @@
+{
+  "generatedAt": "2026-07-18T14:24:16.073Z",
+  "schemaVersion": "1.0.0",
+  "totalPackets": 26,
+  "packets": [
+    {
+      "entityId": "src_gov_ce",
+      "entityType": "source",
+      "entityFingerprint": "2786facb426326f6",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "src_sec_div_ce",
+      "entityType": "source",
+      "entityFingerprint": "3a935714a23740b0",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "src_pref_fortaleza",
+      "entityType": "source",
+      "entityFingerprint": "c992da85c4313c82",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "src_smdhds_fortaleza",
+      "entityType": "source",
+      "entityFingerprint": "ca99f54ef9a9ee2d",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "src_sesa_ce",
+      "entityType": "source",
+      "entityFingerprint": "69b9deaf727f94e2",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "src_hsj_ce",
+      "entityType": "source",
+      "entityFingerprint": "11bac9a264481cc8",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "src_dpe_ce",
+      "entityType": "source",
+      "entityFingerprint": "ee444912adeca484",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "src_huwc_ce",
+      "entityType": "source",
+      "entityFingerprint": "3703b440aaf44d60",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "src_casa_transformar",
+      "entityType": "source",
+      "entityFingerprint": "d3932a9c7ab31d61",
+      "evidenceFingerprint": "d827049039f82a8b",
+      "isProtected": false
+    },
+    {
+      "entityId": "org_gov_ce",
+      "entityType": "organization",
+      "entityFingerprint": "959513d3ec5441f1",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "org_sec_div_ce",
+      "entityType": "organization",
+      "entityFingerprint": "a981f529e39b978e",
+      "evidenceFingerprint": "4f53cda18c2baa0c",
+      "isProtected": false
+    },
+    {
+      "entityId": "org_pref_fortaleza",
+      "entityType": "organization",
+      "entityFingerprint": "bc5bccaa9be5f09d",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "org_smdhds_fortaleza",
+      "entityType": "organization",
+      "entityFingerprint": "91b8e2e26a4c390f",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "org_sesa_ce",
+      "entityType": "organization",
+      "entityFingerprint": "a97071963504be80",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "org_hsj_ce",
+      "entityType": "organization",
+      "entityFingerprint": "1d8a025eed628a32",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "org_dpe_ce",
+      "entityType": "organization",
+      "entityFingerprint": "b75fb6c69bc00ba7",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "org_huwc_ce",
+      "entityType": "organization",
+      "entityFingerprint": "d3144a889f04823b",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "org_casa_transformar",
+      "entityType": "organization",
+      "entityFingerprint": "d4c962010579b3e0",
+      "evidenceFingerprint": "d827049039f82a8b",
+      "isProtected": true
+    },
+    {
+      "entityId": "srv_thina_rodrigues",
+      "entityType": "service",
+      "entityFingerprint": "04ca4f5f39f8a865",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "srv_janaina_dutra",
+      "entityType": "service",
+      "entityFingerprint": "1f8e58a5de82fd80",
+      "evidenceFingerprint": "d827049039f82a8b",
+      "isProtected": false
+    },
+    {
+      "entityId": "srv_acesso_saude_prep_pep",
+      "entityType": "service",
+      "entityFingerprint": "4a530e7fbfe2fa5e",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "srv_teleprep_telepep",
+      "entityType": "service",
+      "entityFingerprint": "fe5b52f625d60cd1",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "srv_dpe_direitos_humanos",
+      "entityType": "service",
+      "entityFingerprint": "5cc2ce379f7371cd",
+      "evidenceFingerprint": "d827049039f82a8b",
+      "isProtected": false
+    },
+    {
+      "entityId": "srv_hsj_infectologia",
+      "entityType": "service",
+      "entityFingerprint": "80abf0c70597cc95",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "srv_sertrans",
+      "entityType": "service",
+      "entityFingerprint": "a9ccc80e8b7e6e40",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    },
+    {
+      "entityId": "srv_casa_transformar_acolhimento",
+      "entityType": "service",
+      "entityFingerprint": "e52a45cb8b35f243",
+      "evidenceFingerprint": "e10808d43975dc40",
+      "isProtected": false
+    }
+  ]
+}

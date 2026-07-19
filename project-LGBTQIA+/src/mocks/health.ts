@@ -4,15 +4,17 @@ export interface HealthGuide {
   title: string;
   excerpt: string;
   content: string;
-  category: 'prep-pep' | 'saude-mental' | 'saude-trans' | 'educacao-sexual';
+  category: 'prep-pep' | 'saude-mental' | 'saude-trans' | 'educacao-sexual' | 'saude-intersexo' | 'saude-lesbica';
   subcategory?: string;
   image: string;
+  imageAlt?: string;
   author: string;
   authorPhoto: string;
   authorBio: string;
   readTime: number;
   views: number;
   publishedAt: string;
+  reviewedAt?: string;
   featured: boolean;
   tags: string[];
   sources?: string[];
@@ -24,6 +26,8 @@ export const categoryLabels: Record<HealthGuide['category'], string> = {
   'saude-mental': 'Saúde Mental',
   'saude-trans': 'Saúde Trans',
   'educacao-sexual': 'Educação Sexual',
+  'saude-intersexo': 'Saúde Intersexo',
+  'saude-lesbica': 'Saúde Lésbica',
 };
 
 export const categoryColors: Record<HealthGuide['category'], string> = {
@@ -31,6 +35,8 @@ export const categoryColors: Record<HealthGuide['category'], string> = {
   'saude-mental': 'bg-primary-100 text-primary-600',
   'saude-trans': 'bg-secondary-100 text-secondary-600',
   'educacao-sexual': 'bg-dark-100 text-dark-600',
+  'saude-intersexo': 'bg-primary-50 text-primary-600',
+  'saude-lesbica': 'bg-secondary-50 text-secondary-600',
 };
 
 export const categoryIcons: Record<HealthGuide['category'], string> = {
@@ -38,17 +44,17 @@ export const categoryIcons: Record<HealthGuide['category'], string> = {
   'saude-mental': 'ri-mental-health-line',
   'saude-trans': 'ri-user-heart-line',
   'educacao-sexual': 'ri-heart-pulse-line',
+  'saude-intersexo': 'ri-body-scan-line',
+  'saude-lesbica': 'ri-women-line',
 };
 
 export const categoryImages: Record<HealthGuide['category'], string> = {
-  'prep-pep':
-    'https://readdy.ai/api/search-image?query=welcoming%20public%20health%20clinic%20consultation%20diverse%20lgbtqia%20adults%20soft%20natural%20light%20documentary%20photography%20clean%20modern%20brazil&width=1200&height=720&seq=health-prep-pep-photo&orientation=landscape',
-  'saude-mental':
-    'https://readdy.ai/api/search-image?query=affirmative%20mental%20health%20therapy%20session%20diverse%20lgbtqia%20people%20warm%20calm%20room%20professional%20documentary%20photography&width=1200&height=720&seq=health-mental-photo&orientation=landscape',
-  'saude-trans':
-    'https://readdy.ai/api/search-image?query=respectful%20trans%20healthcare%20consultation%20doctor%20and%20trans%20patient%20inclusive%20clinic%20warm%20editorial%20photography%20brazil&width=1200&height=720&seq=health-trans-photo&orientation=landscape',
-  'educacao-sexual':
-    'https://readdy.ai/api/search-image?query=inclusive%20sexual%20health%20education%20workshop%20diverse%20young%20adults%20community%20center%20warm%20documentary%20photography&width=1200&height=720&seq=health-sexual-photo&orientation=landscape',
+  'prep-pep': '',
+  'saude-mental': '',
+  'saude-trans': '',
+  'educacao-sexual': '',
+  'saude-intersexo': '',
+  'saude-lesbica': '',
 };
 
 export const categoryDescriptions: Record<HealthGuide['category'], string> = {
@@ -56,6 +62,8 @@ export const categoryDescriptions: Record<HealthGuide['category'], string> = {
   'saude-mental': 'Acolhimento psicológico, crise, apoio emocional e redes de cuidado afirmativo.',
   'saude-trans': 'Nome social no atendimento, hormonização, acompanhamento multiprofissional e direitos no SUS.',
   'educacao-sexual': 'Consentimento, prevenção de ISTs, testagem regular e cuidado nas relações.',
+  'saude-intersexo': 'Cuidado integral, direitos corporais e abordagens não patologizantes para pessoas intersexo.',
+  'saude-lesbica': 'Atenção integral e especificidades na prevenção e no acompanhamento ginecológico.',
 };
 
 const authorPhoto = `${import.meta.env.BASE_URL}favicon.svg`;
@@ -65,32 +73,33 @@ export const allHealthGuides: HealthGuide[] = [
     id: 'health-prep-pep',
     slug: 'prep-pep-prevencao-combinada',
     title: 'PrEP e PEP: prevenção combinada pelo SUS',
-    excerpt:
-      'Entenda a diferença entre PrEP e PEP, quando procurar atendimento e quais cuidados manter junto com testagem regular.',
+    excerpt: 'Compreenda a diferença clínica entre a PrEP e a PEP, saiba quando buscar o serviço de saúde e como manter o acompanhamento seguro com testagem regular.',
     content: `
       <p>A prevenção combinada reúne várias estratégias para reduzir riscos de HIV e outras ISTs. A <strong>PrEP</strong> é usada antes de exposições de risco, de forma planejada e acompanhada por profissional de saúde. A <strong>PEP</strong> é uma urgência: deve ser iniciada o quanto antes, em até 72 horas após uma possível exposição ao HIV.</p>
       <h3>Quando buscar PrEP?</h3>
-      <p>Procure uma unidade de referência quando houver exposição frequente, parceiro com HIV, dificuldade de uso regular de preservativo ou outras situações de vulnerabilidade. O serviço deve orientar sem julgamento.</p>
+      <p>Procure uma unidade de referência quando houver exposição frequente ou outras situações de vulnerabilidade. O serviço deve orientar sobre acompanhamento, exames regulares e adaptação sem julgamento.</p>
       <h3>Quando buscar PEP?</h3>
-      <p>Busque atendimento imediatamente após relação sem preservativo, rompimento de camisinha, violência sexual ou outro contato de risco. Quanto mais cedo começar, melhor.</p>
+      <p>Busque atendimento imediatamente após relação sem preservativo, rompimento de camisinha ou violência sexual. Quanto mais cedo começar, melhor.</p>
       <h3>Cuidados importantes</h3>
-      <p>PrEP e PEP não substituem testagem, preservativo e vacinação quando indicada. Acompanhamento médico é essencial.</p>
+      <p>Esses métodos compõem a prevenção combinada e não eliminam a importância da vacinação (quando indicada) e do rastreio de outras ISTs. O acompanhamento médico é fundamental.</p>
     `,
     category: 'prep-pep',
     image: categoryImages['prep-pep'],
+    imageAlt: 'Ilustração de frasco de comprimidos simbolizando prevenção',
     author: 'Portal LGBTQ+ Nordeste',
     authorPhoto,
     authorBio: 'Conteúdo informativo de saúde e cidadania do Portal LGBTQ+ Nordeste.',
     readTime: 5,
     views: 0,
-    publishedAt: '2026-07-09',
+    publishedAt: '2025-07-09',
+    reviewedAt: '2026-07-19',
     featured: true,
-    tags: ['PrEP', 'PEP', 'HIV', 'SUS', 'testagem'],
-    sources: ['Disque Saúde 136', 'Serviços locais de CTA/SAE'],
+    tags: ['prevenção combinada', 'saúde sexual', 'PrEP', 'PEP'],
+    sources: ['Disque Saúde 136', 'Ministério da Saúde - CTA'],
     faqs: [
       {
         question: 'PEP pode ser tomada depois de 72 horas?',
-        answer: 'Em regra, a PEP deve ser iniciada em até 72 horas. Mesmo depois desse prazo, procure serviço de saúde para avaliação e testagem.',
+        answer: 'O protocolo clínico estabelece o início da PEP em até 72 horas para eficácia. Mesmo após o prazo, procure serviço de saúde para avaliação e testagem geral.',
       },
     ],
   },
@@ -98,75 +107,130 @@ export const allHealthGuides: HealthGuide[] = [
     id: 'health-mental',
     slug: 'saude-mental-e-apoio-emocional',
     title: 'Saúde mental LGBTQIA+: sinais de alerta e apoio',
-    excerpt:
-      'Como reconhecer sofrimento emocional, onde buscar apoio e por que acolhimento afirmativo faz diferença.',
+    excerpt: 'Aprenda a reconhecer sinais de sofrimento emocional prolongado, saiba onde buscar redes de apoio profissional e compreenda o valor do cuidado afirmativo.',
     content: `
-      <p>Saúde mental LGBTQIA+ precisa ser tratada com cuidado, sem patologizar identidade ou orientação sexual. Sofrimento emocional pode ser agravado por rejeição familiar, violência, isolamento e discriminação.</p>
+      <p>A saúde mental da população LGBTQIA+ deve ser compreendida em seu contexto social. O sofrimento emocional frequentemente decorre de fatores externos como estresse de minoria, discriminação e rejeição, e não da identidade da pessoa.</p>
       <h3>Sinais de alerta</h3>
-      <p>Tristeza persistente, ansiedade intensa, isolamento, autolesão, abuso de álcool ou drogas e pensamentos suicidas exigem atenção. Em crise, procure ajuda imediatamente.</p>
+      <p>Episódios de tristeza profunda e persistente, ansiedade intensa, autolesão, mudanças bruscas de humor ou pensamentos de morte exigem avaliação de um profissional. Nunca ignore esses sinais.</p>
       <h3>Onde buscar ajuda</h3>
-      <p>CAPS, UBS, serviços universitários, psicólogos afirmativos, ONGs e redes de apoio comunitário podem ser pontos de cuidado. O CVV atende 24h pelo 188.</p>
+      <p>A rede pública (como os CAPS) e os serviços universitários de psicologia oferecem acolhimento gratuito. Para momentos de crise aguda e apoio imediato, o Centro de Valorização da Vida (CVV) atende 24h pelo número 188.</p>
     `,
     category: 'saude-mental',
     image: categoryImages['saude-mental'],
+    imageAlt: 'Símbolo gráfico de acolhimento e escuta ativa',
     author: 'Portal LGBTQ+ Nordeste',
     authorPhoto,
     authorBio: 'Conteúdo informativo de saúde e cidadania do Portal LGBTQ+ Nordeste.',
     readTime: 4,
     views: 0,
-    publishedAt: '2026-07-09',
+    publishedAt: '2025-07-09',
+    reviewedAt: '2026-07-19',
     featured: true,
-    tags: ['saúde mental', 'CVV', 'acolhimento', 'CAPS'],
+    tags: ['saúde mental', 'psicologia', 'CVV', 'apoio emocional'],
     sources: ['CVV 188', 'Rede SUS'],
   },
   {
     id: 'health-trans',
     slug: 'saude-trans-atendimento-respeitoso',
-    title: 'Saúde trans: atendimento respeitoso e caminhos no SUS',
-    excerpt:
-      'Nome social, acolhimento, hormonização e direitos básicos no atendimento de saúde para pessoas trans e travestis.',
+    title: 'Saúde trans: terapia de afirmação e direitos no SUS',
+    excerpt: 'Diretrizes gerais sobre o direito ao nome social, acolhimento integral, terapia afirmativa de gênero e as etapas para o acesso à rede pública de saúde.',
     content: `
-      <p>Pessoas trans e travestis têm direito a atendimento digno, sigiloso e respeitoso. O uso do nome social deve ser observado nos cadastros e na chamada para atendimento.</p>
-      <h3>Acompanhamento em saúde</h3>
-      <p>O cuidado pode envolver clínica geral, endocrinologia, psicologia, assistência social e outros serviços conforme necessidade. A automedicação hormonal traz riscos e deve ser evitada.</p>
+      <p>Pessoas trans e travestis têm o direito garantido ao atendimento humanizado e livre de discriminação. O uso do nome social é obrigatório em todos os serviços do SUS, independentemente de retificação civil.</p>
+      <h3>Terapia de Afirmação de Gênero</h3>
+      <p>O processo transexualizador no SUS inclui apoio psicológico, fonoterapia, endocrinologia e procedimentos cirúrgicos, quando indicados. A hormonização deve ser sempre orientada e acompanhada por profissionais de saúde, pois doses e respostas corporais variam. Decisões clínicas são individualizadas e dependem exclusivamente da avaliação conjunta entre paciente e equipe.</p>
       <h3>Se houver discriminação</h3>
-      <p>Anote data, local, nome do serviço e, se possível, protocolo. Procure a Ouvidoria do SUS, Defensoria Pública ou entidades de direitos humanos.</p>
+      <p>Registre data, local, nome dos profissionais envolvidos e número de protocolo. Denúncias podem ser formalizadas na Ouvidoria do SUS e acompanhadas pela Defensoria Pública.</p>
     `,
     category: 'saude-trans',
     image: categoryImages['saude-trans'],
+    imageAlt: 'Ilustração com símbolos da diversidade trans e saúde',
     author: 'Portal LGBTQ+ Nordeste',
     authorPhoto,
     authorBio: 'Conteúdo informativo de saúde e cidadania do Portal LGBTQ+ Nordeste.',
     readTime: 5,
     views: 0,
-    publishedAt: '2026-07-09',
+    publishedAt: '2025-07-09',
+    reviewedAt: '2026-07-19',
     featured: false,
-    tags: ['saúde trans', 'nome social', 'SUS', 'hormonização'],
-    sources: ['Ouvidoria do SUS', 'Defensoria Pública'],
+    tags: ['saúde trans', 'afirmação de gênero', 'nome social', 'SUS'],
+    sources: ['Ouvidoria do SUS', 'Ministério da Saúde - Saúde Trans'],
   },
   {
     id: 'health-sexual',
     slug: 'consentimento-testagem-e-prevencao',
     title: 'Consentimento, testagem e prevenção de ISTs',
-    excerpt:
-      'Saúde sexual envolve autonomia, comunicação, testagem regular, prevenção e respeito aos limites de cada pessoa.',
+    excerpt: 'Um guia prático sobre autonomia corporal nas relações íntimas, estratégias de prevenção combinada e a rotina recomendada para testagem de infecções.',
     content: `
-      <p>Consentimento precisa ser livre, informado, específico e contínuo. Em relações afetivas e sexuais, conversar sobre limites, prevenção e testagem é parte do cuidado.</p>
-      <h3>Prevenção combinada</h3>
-      <p>Preservativos, PrEP, PEP, vacinação, testagem e tratamento adequado formam uma rede de proteção. Nenhuma estratégia sozinha responde a todas as situações.</p>
-      <h3>Testagem</h3>
-      <p>CTAs, UBS e campanhas de saúde oferecem testagem para HIV, sífilis e hepatites. Pessoas com múltiplos parceiros ou em maior vulnerabilidade devem testar com mais regularidade.</p>
+      <p>A saúde sexual saudável começa com a comunicação aberta. O consentimento precisa ser contínuo e respeitado em todos os momentos, sem pressões ou presunções.</p>
+      <h3>Estratégias de prevenção</h3>
+      <p>A testagem regular, o uso de preservativos internos ou externos, a vacinação e a profilaxia (PrEP/PEP) são as bases da prevenção combinada. Conhecer seu próprio corpo e dialogar com parcerias reforça a segurança de todos os envolvidos.</p>
+      <h3>Rotina de testagem</h3>
+      <p>Exames rápidos para HIV, sífilis e hepatites B e C estão disponíveis gratuitamente na rede pública. O intervalo da testagem deve ser alinhado com o profissional de saúde, dependendo do perfil de exposições.</p>
     `,
     category: 'educacao-sexual',
     image: categoryImages['educacao-sexual'],
+    imageAlt: 'Ilustração representativa de diálogo e cuidado mútuo',
     author: 'Portal LGBTQ+ Nordeste',
     authorPhoto,
     authorBio: 'Conteúdo informativo de saúde e cidadania do Portal LGBTQ+ Nordeste.',
     readTime: 4,
     views: 0,
-    publishedAt: '2026-07-09',
+    publishedAt: '2025-07-09',
+    reviewedAt: '2026-07-19',
     featured: false,
-    tags: ['consentimento', 'ISTs', 'testagem', 'prevenção'],
-    sources: ['CTA', 'Disque Saúde 136'],
+    tags: ['saúde sexual', 'testagem regular', 'prevenção', 'consentimento'],
+    sources: ['CTA/SAE', 'Disque Saúde 136'],
   },
+  {
+    id: 'health-intersex',
+    slug: 'saude-intersexo-cuidado-integral',
+    title: 'Saúde intersexo: cuidado integral e autonomia corporal',
+    excerpt: 'Esclarecimentos fundamentais sobre as variações intersexo e a necessidade de preservar a autonomia corporal de bebês, crianças e adultos.',
+    content: `
+      <p>Variações das características sexuais (intersexo) são desenvolvimentos naturais do corpo humano e não devem ser tratadas automaticamente como doenças ou emergências cirúrgicas. O direito fundamental de uma pessoa intersexo é o de manter a integridade física de seu corpo intacta até que possua idade para compreender e tomar decisões autônomas, caso deseje intervir.</p>
+      <h3>Abordagem Médica Afirmativa</h3>
+      <p>O foco da atenção à saúde deve ser no bem-estar fisiológico e psicológico, evitando cirurgias cosméticas infantis de "normalização". Apenas intervenções motivadas por necessidades estritamente clínicas e de preservação de vida devem ocorrer na primeira infância.</p>
+      <h3>Rede de Apoio</h3>
+      <p>O suporte multiprofissional contínuo e a troca de informações transparentes e precisas com familiares evitam traumas médicos e asseguram a construção saudável do desenvolvimento psicossocial do paciente.</p>
+    `,
+    category: 'saude-intersexo',
+    image: categoryImages['saude-intersexo'],
+    imageAlt: 'Símbolo intersexo em ilustração vetorial simples',
+    author: 'Portal LGBTQ+ Nordeste',
+    authorPhoto,
+    authorBio: 'Conteúdo informativo de saúde e cidadania do Portal LGBTQ+ Nordeste.',
+    readTime: 5,
+    views: 0,
+    publishedAt: '2025-07-09',
+    reviewedAt: '2026-07-19',
+    featured: false,
+    tags: ['pessoas intersexo', 'autonomia corporal', 'direitos na saúde'],
+    sources: ['ABRAI - Associação Brasileira Intersexo'],
+  },
+  {
+    id: 'health-lesbica',
+    slug: 'saude-lesbica-prevencao-ginecolociga',
+    title: 'Saúde da mulher lésbica: prevenção e acompanhamento',
+    excerpt: 'Orientações práticas para o acompanhamento ginecológico, incluindo dicas de prevenção de ISTs e desmistificação de cuidados essenciais.',
+    content: `
+      <p>A atenção integral à saúde de mulheres lésbicas frequentemente sofre com mitos em consultórios médicos. O acompanhamento ginecológico regular, que inclui o rastreamento do câncer de colo de útero (Papanicolau) e prevenção do câncer de mama, é indicado para todas, independentemente de estarem em relacionamentos com pessoas com pênis.</p>
+      <h3>Prevenção de ISTs</h3>
+      <p>Infecções sexualmente transmissíveis podem ser transmitidas por contato pele a pele ou através do compartilhamento de objetos pessoais durante as relações sexuais. A higienização adequada de brinquedos e o uso de barreiras de proteção são métodos eficazes de prevenção.</p>
+      <h3>Atendimento sem preconceito</h3>
+      <p>É importante que a paciente encontre um ambiente acolhedor, onde possa relatar com naturalidade suas práticas sexuais ao ginecologista, possibilitando que as abordagens preventivas e de acompanhamento sejam efetivas e ajustadas à sua realidade.</p>
+    `,
+    category: 'saude-lesbica',
+    image: categoryImages['saude-lesbica'],
+    imageAlt: 'Ilustração minimalista de saúde e cuidado preventivo feminino',
+    author: 'Portal LGBTQ+ Nordeste',
+    authorPhoto,
+    authorBio: 'Conteúdo informativo de saúde e cidadania do Portal LGBTQ+ Nordeste.',
+    readTime: 4,
+    views: 0,
+    publishedAt: '2025-07-09',
+    reviewedAt: '2026-07-19',
+    featured: false,
+    tags: ['saúde da mulher', 'mulheres lésbicas', 'prevenção ginecológica', 'cuidado'],
+    sources: ['Rede SUS', 'Políticas para Saúde da Mulher'],
+  }
 ];

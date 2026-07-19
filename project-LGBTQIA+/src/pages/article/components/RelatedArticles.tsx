@@ -9,10 +9,30 @@ interface RelatedArticlesProps {
 export default function RelatedArticles({ currentArticle }: RelatedArticlesProps) {
   const { articles } = useArticles();
 
-  // Find articles in the same category, excluding the current one
+  // Artigos relacionados - lógica determinística e estrita
   const related = articles
-    .filter((a) => a.id !== currentArticle.id && a.category === currentArticle.category)
-    .slice(0, 3);
+    .filter((a) => a.id !== currentArticle.id)
+    .sort((a, b) => {
+      // 1. mesma categoria
+      const aSameCategory = a.category === currentArticle.category ? 1 : 0;
+      const bSameCategory = b.category === currentArticle.category ? 1 : 0;
+      if (aSameCategory !== bSameCategory) return bSameCategory - aSameCategory;
+
+      // 2. maior quantidade de tags ou palavras-chave em comum
+      const currentTags = currentArticle.tags || [];
+      const aCommonTags = (a.tags || []).filter((t) => currentTags.includes(t)).length;
+      const bCommonTags = (b.tags || []).filter((t) => currentTags.includes(t)).length;
+      if (aCommonTags !== bCommonTags) return bCommonTags - aCommonTags;
+
+      // 3. mais recentes
+      const aDate = new Date(a.date).getTime();
+      const bDate = new Date(b.date).getTime();
+      if (aDate !== bDate) return bDate - aDate;
+
+      // 4. fallback determinístico pelo ID
+      return a.id.localeCompare(b.id);
+    })
+    .slice(0, 3); // 5. limite de três artigos (nenhuma duplicidade já garantida pelo ID)
 
   if (related.length === 0) return null;
 

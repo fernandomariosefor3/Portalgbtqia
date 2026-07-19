@@ -20,7 +20,7 @@ export default function FarolPage() {
     {
       id: 1,
       role: 'assistant',
-      content: 'Olá! Eu sou o **Farol LGBTQIA+**, seu assistente em fase de **PROTÓTIPO DE DEMONSTRAÇÃO**. Não realizo buscas reais ainda, mas você pode testar exemplos sobre PrEP, discriminação no trabalho ou eventos em Fortaleza.'
+      content: 'Olá! Eu sou o **Farol LGBTQIA+**. **Demonstração:** este assistente utiliza respostas previamente configuradas e ainda não está conectado a inteligência artificial, serviços ou bases verificadas. Não utilize estas informações como aconselhamento médico, jurídico ou de emergência.'
     }
   ]);
   const [input, setInput] = useState('');

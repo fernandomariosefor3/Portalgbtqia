@@ -8,9 +8,7 @@ const sectionNavKeys: Record<string, string> = {
 };
 
 export default function SectionsGrid() {
-  const { i18n, t } = useTranslation();
-  const isPortuguese = (i18n.resolvedLanguage || 'pt-BR').startsWith('pt');
-
+  const { t } = useTranslation();
   return (
     <section className="w-full bg-surface-warm py-14 md:py-20 px-4 md:px-6 lg:px-10">
       <div className="max-w-7xl mx-auto">
@@ -47,11 +45,11 @@ export default function SectionsGrid() {
                   {t(`nav.${sectionNavKeys[section.id]}`)}
                 </h3>
                 <p className="mt-2 text-sm text-dark-400 leading-relaxed line-clamp-2">
-                  {isPortuguese ? section.description : t(`home.sections.${section.id}.description`)}
+                  {t(`home.sections.${section.id}.description`)}
                 </p>
                 <div className="mt-auto pt-3 flex items-center justify-between">
                   <span className="text-xs font-medium text-primary-500">
-                    {isPortuguese ? section.stats : t(`home.sections.${section.id}.stats`)}
+                    {t(`home.sections.${section.id}.stats`)}
                   </span>
                   <span className="w-7 h-7 flex items-center justify-center rounded-full bg-dark-50 text-dark-500 group-hover:bg-primary-400 group-hover:text-white transition-colors">
                     <i className="ri-arrow-right-line text-sm" aria-hidden="true"></i>

@@ -25,6 +25,7 @@
     "registry:audit-administrative-mutations": "tsx scripts/audit-administrative-mutations.ts",
     "registry:plan-promotion": "tsx scripts/plan-registry-promotion.ts",
     "registry:evaluate-promotion": "tsx scripts/evaluate-registry-promotion.ts",
+    "registry:public-preview": "tsx scripts/generate-public-registry-preview.ts",
     "registry:report": "tsx scripts/generate-trust-registry-report.ts"
   },
   "dependencies": {

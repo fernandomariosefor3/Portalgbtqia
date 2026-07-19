@@ -1,0 +1,154 @@
+[
+  {
+    "entityId": "src_gov_ce",
+    "entityName": "Governo do Estado do Ceará",
+    "validationId": "val_src_gov_ce_002",
+    "eventId": "promo_src_gov_ce_001",
+    "previousStatus": "under_review",
+    "currentStatus": "verified_basic",
+    "snapshotAvailable": true,
+    "changedAdministrativePaths": [
+      "status"
+    ],
+    "unauthorizedChanges": [],
+    "publicationStatus": "changed",
+    "publicListingAllowed": "changed",
+    "digestCadastral": "2786facb426326f674aee4a666cfd8de93462bc6f185e4c4cb6921869471c1b6",
+    "administrative_transition_verified": true,
+    "errors": [],
+    "policyApplied": "1.0.0"
+  },
+  {
+    "entityId": "src_sec_div_ce",
+    "entityName": "Secretaria da Diversidade do Ceará",
+    "validationId": "val_src_sec_div_ce_002",
+    "eventId": "promo_src_sec_div_ce_001",
+    "previousStatus": "under_review",
+    "currentStatus": "verified_basic",
+    "snapshotAvailable": true,
+    "changedAdministrativePaths": [
+      "status"
+    ],
+    "unauthorizedChanges": [],
+    "publicationStatus": "changed",
+    "publicListingAllowed": "changed",
+    "digestCadastral": "3a935714a23740b075008949fc3d8108fe209983e554ff7ceb224c6051caeca7",
+    "administrative_transition_verified": true,
+    "errors": [],
+    "policyApplied": "1.0.0"
+  },
+  {
+    "entityId": "src_pref_fortaleza",
+    "entityName": "Prefeitura de Fortaleza",
+    "validationId": "val_src_pref_fortaleza_002",
+    "eventId": "promo_src_pref_fortaleza_001",
+    "previousStatus": "under_review",
+    "currentStatus": "verified_basic",
+    "snapshotAvailable": true,
+    "changedAdministrativePaths": [
+      "status"
+    ],
+    "unauthorizedChanges": [],
+    "publicationStatus": "changed",
+    "publicListingAllowed": "changed",
+    "digestCadastral": "c992da85c4313c821cf7189ced6c2f77aecb814a00b3a585b10d3601b14c7605",
+    "administrative_transition_verified": true,
+    "errors": [],
+    "policyApplied": "1.0.0"
+  },
+  {
+    "entityId": "src_smdhds_fortaleza",
+    "entityName": "Secretaria Municipal dos Direitos Humanos e Desenvolvimento Social de Fortaleza",
+    "validationId": "val_src_smdhds_fortaleza_002",
+    "eventId": "promo_src_smdhds_fortaleza_001",
+    "previousStatus": "under_review",
+    "currentStatus": "verified_basic",
+    "snapshotAvailable": true,
+    "changedAdministrativePaths": [
+      "status"
+    ],
+    "unauthorizedChanges": [],
+    "publicationStatus": "changed",
+    "publicListingAllowed": "changed",
+    "digestCadastral": "ca99f54ef9a9ee2da87e23fa6dd93011b2ff649f6bb74e9840abb9c180aca0ff",
+    "administrative_transition_verified": true,
+    "errors": [],
+    "policyApplied": "1.0.0"
+  },
+  {
+    "entityId": "src_sesa_ce",
+    "entityName": "Secretaria da Saúde do Ceará (Sesa)",
+    "validationId": "val_src_sesa_ce_002",
+    "eventId": "promo_src_sesa_ce_001",
+    "previousStatus": "under_review",
+    "currentStatus": "verified_basic",
+    "snapshotAvailable": true,
+    "changedAdministrativePaths": [
+      "status"
+    ],
+    "unauthorizedChanges": [],
+    "publicationStatus": "changed",
+    "publicListingAllowed": "changed",
+    "digestCadastral": "69b9deaf727f94e2b9c6b2ae0a7ad70048b88c8f3c237ce8ef27e327a5bbed14",
+    "administrative_transition_verified": true,
+    "errors": [],
+    "policyApplied": "1.0.0"
+  },
+  {
+    "entityId": "src_hsj_ce",
+    "entityName": "Hospital São José de Doenças Infecciosas",
+    "validationId": "val_src_hsj_ce_002",
+    "eventId": "promo_src_hsj_ce_001",
+    "previousStatus": "under_review",
+    "currentStatus": "verified_basic",
+    "snapshotAvailable": true,
+    "changedAdministrativePaths": [
+      "status"
+    ],
+    "unauthorizedChanges": [],
+    "publicationStatus": "changed",
+    "publicListingAllowed": "changed",
+    "digestCadastral": "11bac9a264481cc80cc1a60c0d6e9e841f88924359ea0d1845e75af53f46ad40",
+    "administrative_transition_verified": true,
+    "errors": [],
+    "policyApplied": "1.0.0"
+  },
+  {
+    "entityId": "src_dpe_ce",
+    "entityName": "Defensoria Pública do Estado do Ceará",
+    "validationId": "val_src_dpe_ce_002",
+    "eventId": "promo_src_dpe_ce_001",
+    "previousStatus": "under_review",
+    "currentStatus": "verified_basic",
+    "snapshotAvailable": true,
+    "changedAdministrativePaths": [
+      "status"
+    ],
+    "unauthorizedChanges": [],
+    "publicationStatus": "changed",
+    "publicListingAllowed": "changed",
+    "digestCadastral": "ee444912adeca484d6afc0310bc5993a0d34fcf415d2daf9fcdc6404d4a5509b",
+    "administrative_transition_verified": true,
+    "errors": [],
+    "policyApplied": "1.0.0"
+  },
+  {
+    "entityId": "src_huwc_ce",
+    "entityName": "Complexo Hospitalar da Universidade Federal do Ceará — CH-UFC",
+    "validationId": "val_src_huwc_ce_002",
+    "eventId": "promo_src_huwc_ce_001",
+    "previousStatus": "under_review",
+    "currentStatus": "verified_basic",
+    "snapshotAvailable": true,
+    "changedAdministrativePaths": [
+      "status"
+    ],
+    "unauthorizedChanges": [],
+    "publicationStatus": "changed",
+    "publicListingAllowed": "changed",
+    "digestCadastral": "3703b440aaf44d6005505d34573e87bb0960dc321fa122e354b1b4ef0e03b72c",
+    "administrative_transition_verified": true,
+    "errors": [],
+    "policyApplied": "1.0.0"
+  }
+]

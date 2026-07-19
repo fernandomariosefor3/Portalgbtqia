@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { validateHumanReview, evaluateHumanReviewPromotion, HumanReviewEligibilityResult } from '../trust-registry/lib/humanReview.js';
 import { validationSchema } from '../trust-registry/schemas/index.js';
+import { parseArgs } from 'util';
 
 const PILOT_DIR = path.resolve('trust-registry', 'pilot-fortaleza');
 
@@ -20,6 +21,15 @@ async function checkReviews() {
   const orgs = loadJson('organizations.json');
   const services = loadJson('services.json');
   const evidence = loadJson('evidence.json');
+  const promotionEvents = loadJson('promotion-events.json');
+  const integrityManifest = loadJson('fingerprint-integrity-manifest.json');
+
+  const { values } = parseArgs({
+    options: {
+      'as-of': { type: 'string' }
+    }
+  });
+  const asOf = values['as-of'] ? new Date(values['as-of']) : new Date();
 
   let hasErrors = false;
   const errors: string[] = [];
@@ -66,14 +76,35 @@ async function checkReviews() {
 
     // Avalia promoção
     const entityEvidence = evidence.filter((e: any) => e.entity_id === entity.id);
-    const eligibility: HumanReviewEligibilityResult = evaluateHumanReviewPromotion(v.entityType, entity, v, entityEvidence);
+    
+    // Load snapshot for mutation context if available
+    let snapshot;
+    const internalDir = path.join(PILOT_DIR, 'review-packets', 'generated', 'internal');
+    const snapshotPath = path.join(internalDir, `${v.entityType}-${v.entityId}.json`);
+    if (fs.existsSync(snapshotPath)) {
+      try {
+        const packet = JSON.parse(fs.readFileSync(snapshotPath, 'utf8'));
+        snapshot = packet.entity;
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    const mutationContext = snapshot && promotionEvents.length > 0 ? {
+      asOf,
+      validatedEntitySnapshot: snapshot,
+      promotionEvents,
+      integrityManifest
+    } : undefined;
+
+    const eligibility: HumanReviewEligibilityResult = evaluateHumanReviewPromotion(v.entityType, entity, v, entityEvidence, mutationContext);
 
     const actualBlockingIssues = eligibility.blockingIssues.filter(b => b.code !== 'NOT_APPROVED');
 
     const isSuperseded = validations.some((nv: any) => nv.previousValidationId === v.id);
 
     if (actualBlockingIssues.length > 0) {
-      if (isSuperseded && actualBlockingIssues.every(b => b.code === 'STALE_REVIEW_PACKET')) {
+      if (isSuperseded && actualBlockingIssues.every(b => b.code === 'STALE_REVIEW_PACKET' || b.code === 'INVALID_ADMINISTRATIVE_MUTATION')) {
         // It is expected that a superseded validation might be stale if evidence changed later
       } else {
         addError(`Validation ${v.id} fails eligibility checks: ${actualBlockingIssues.map(b => b.code).join(', ')}`);

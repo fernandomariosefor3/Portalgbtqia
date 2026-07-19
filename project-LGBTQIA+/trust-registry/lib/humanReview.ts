@@ -126,17 +126,6 @@ export function compareFingerprint(
       return { matches: true, storedVersion: 'v2', matchedVersion: 'v2', migrationRecommended: false, reason: 'MATCH' };
     }
 
-    // Fallback for promoted entities: Check if the mismatch is purely due to administrative promotion
-    if (currentData && currentData.status === 'verified_basic') {
-      const rollbackData = { ...currentData, status: 'under_review' };
-      delete rollbackData.publicListingAllowed;
-      delete rollbackData.publicationStatus;
-      const rollbackHash = computeFingerprintV2(rollbackData);
-      if (storedHash === rollbackHash) {
-        return { matches: true, storedVersion: 'v2', matchedVersion: 'v2', migrationRecommended: false, reason: 'MATCH' };
-      }
-    }
-
     return { matches: false, storedVersion: 'v2', migrationRecommended: false, reason: 'CONTENT_CHANGED' };
   }
 
@@ -199,19 +188,57 @@ export function prepareReviewPacket(
   };
 }
 
+import type { AdministrativeMutationContext, AdministrativeMutationResult } from './administrativeMutation.js';
+import { validateAdministrativeMutation } from './administrativeMutation.js';
+
 export function detectStaleReviewPacket(
   validation: Validation & { fingerprintVersion?: FingerprintVersion }, 
   currentEntity: any, 
-  currentEvidenceList: any[]
-): { isStale: boolean; entityComparison: FingerprintComparisonResult; evidenceComparison: FingerprintComparisonResult } {
+  currentEvidenceList: any[],
+  mutationContext?: Pick<AdministrativeMutationContext, 'asOf' | 'validatedEntitySnapshot' | 'promotionEvents' | 'integrityManifest'>
+): { 
+  isStale: boolean; 
+  administrative_transition_verified?: boolean;
+  entityComparison: FingerprintComparisonResult; 
+  evidenceComparison: FingerprintComparisonResult;
+  mutationResult?: AdministrativeMutationResult;
+  mutationErrors?: string[];
+} {
   
   const entityComparison = compareFingerprint(validation.entityFingerprint, validation.fingerprintVersion, currentEntity);
   const evidenceComparison = compareFingerprint(validation.evidenceFingerprint, validation.fingerprintVersion, currentEvidenceList);
 
+  let isStale = !entityComparison.matches || !evidenceComparison.matches;
+  let administrative_transition_verified = false;
+  let mutationResult: AdministrativeMutationResult | undefined;
+  let mutationErrors: string[] = [];
+
+  // If entity is stale (mismatched) but we have mutation context, check if it's an authorized administrative mutation
+  if (!entityComparison.matches && evidenceComparison.matches && mutationContext) {
+    const fullContext: AdministrativeMutationContext = {
+      ...mutationContext,
+      effectiveValidation: validation,
+      currentEntity,
+      currentEvidence: currentEvidenceList
+    };
+
+    mutationResult = validateAdministrativeMutation(fullContext);
+
+    if (mutationResult.valid) {
+      isStale = false;
+      administrative_transition_verified = true;
+    } else {
+      mutationErrors = mutationResult.errors.map(e => `${e.code}: ${e.message}`);
+    }
+  }
+
   return {
-    isStale: !entityComparison.matches || !evidenceComparison.matches,
+    isStale,
+    administrative_transition_verified,
     entityComparison,
-    evidenceComparison
+    evidenceComparison,
+    mutationResult,
+    mutationErrors
   };
 }
 
@@ -223,7 +250,8 @@ export function evaluateHumanReviewPromotion(
   entityType: 'source' | 'organization' | 'service',
   entity: any,
   validation: Validation,
-  evidenceList: any[]
+  evidenceList: any[],
+  mutationContext?: Pick<AdministrativeMutationContext, 'asOf' | 'validatedEntitySnapshot' | 'promotionEvents' | 'integrityManifest'>
 ): HumanReviewEligibilityResult {
   const result: HumanReviewEligibilityResult = {
     eligible: false,
@@ -237,8 +265,13 @@ export function evaluateHumanReviewPromotion(
     result.blockingIssues.push({ code: 'NOT_APPROVED', message: 'Validation decision is not approved_basic' });
   }
 
-  if (detectStaleReviewPacket(validation, entity, evidenceList).isStale) {
-    result.blockingIssues.push({ code: 'STALE_REVIEW_PACKET', message: 'The entity or evidence changed since validation' });
+  const staleResult = detectStaleReviewPacket(validation, entity, evidenceList, mutationContext);
+  if (staleResult.isStale) {
+    if (staleResult.mutationErrors && staleResult.mutationErrors.length > 0) {
+      result.blockingIssues.push({ code: 'INVALID_ADMINISTRATIVE_MUTATION', message: staleResult.mutationErrors.join(' | ') });
+    } else {
+      result.blockingIssues.push({ code: 'STALE_REVIEW_PACKET', message: 'The entity or evidence changed since validation' });
+    }
   }
 
   // Verifica expiração
@@ -275,9 +308,21 @@ export function evaluateHumanReviewPromotionWithContext(
   entity: any,
   validation: Validation,
   evidenceList: any[],
-  context: { asOf: Date }
+  context: { 
+    asOf: Date;
+    validatedEntitySnapshot?: any;
+    promotionEvents?: any[];
+    integrityManifest?: any[];
+  }
 ): HumanReviewEligibilityResult {
-  const result = evaluateHumanReviewPromotion(entityType, entity, validation, evidenceList);
+  const mutationContext = context.validatedEntitySnapshot && context.promotionEvents ? {
+    asOf: context.asOf,
+    validatedEntitySnapshot: context.validatedEntitySnapshot,
+    promotionEvents: context.promotionEvents,
+    integrityManifest: context.integrityManifest || []
+  } : undefined;
+
+  const result = evaluateHumanReviewPromotion(entityType, entity, validation, evidenceList, mutationContext);
   
   if (validation.validUntil && new Date(validation.validUntil).getTime() < context.asOf.getTime()) {
     result.blockingIssues.push({ code: 'VALIDATION_EXPIRED', message: 'Validation has expired' });

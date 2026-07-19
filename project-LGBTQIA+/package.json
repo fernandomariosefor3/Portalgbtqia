@@ -22,6 +22,7 @@
     "registry:prepare-reviews": "tsx scripts/prepare-registry-review-packets.ts",
     "registry:check-reviews": "tsx scripts/check-registry-reviews.ts",
     "registry:prepare-v2-reattestation": "tsx scripts/prepare-v2-reattestation.ts",
+    "registry:audit-administrative-mutations": "tsx scripts/audit-administrative-mutations.ts",
     "registry:plan-promotion": "tsx scripts/plan-registry-promotion.ts",
     "registry:evaluate-promotion": "tsx scripts/evaluate-registry-promotion.ts",
     "registry:report": "tsx scripts/generate-trust-registry-report.ts"

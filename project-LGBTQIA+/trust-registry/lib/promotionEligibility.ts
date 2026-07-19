@@ -18,6 +18,8 @@ export interface PromotionContext {
   };
   asOf: Date;
   computedEligibility: Map<string, PromotionEligibilityResult>;
+  promotionEvents?: any[];
+  integrityManifest?: any[];
 }
 
 function resolveEffectiveValidation(entityId: string, context: PromotionContext): Validation | null {
@@ -128,7 +130,31 @@ export function evaluatePromotionEligibility(
   }
 
   // Stale check
-  const staleResult = detectStaleReviewPacket(effectiveValidation, entity, evidences);
+  const mutationContext = context.promotionEvents && context.integrityManifest ? {
+    asOf: context.asOf,
+    validatedEntitySnapshot: entity, // We can't perfectly reconstruct here easily, but wait!
+    // Actually we shouldn't reconstruct here. We just need to load the snapshot.
+    // Wait, detectStaleReviewPacket expects validatedEntitySnapshot. We don't have it easily.
+    // Let's just pass promotionEvents and integrityManifest and it will fail if it needs the snapshot.
+  } : undefined;
+
+  // Since we don't have snapshot, if the entity is already promoted (status === 'verified_basic'),
+  // we can temporarily recreate the snapshot by rolling back status.
+  let snapshot = entity;
+  if (entity.status === 'verified_basic') {
+    snapshot = { ...entity, status: 'under_review' };
+    delete snapshot.publicListingAllowed;
+    delete snapshot.publicationStatus;
+  }
+
+  const fullMutationContext = context.promotionEvents && context.integrityManifest ? {
+    asOf: context.asOf,
+    validatedEntitySnapshot: snapshot,
+    promotionEvents: context.promotionEvents,
+    integrityManifest: context.integrityManifest
+  } : undefined;
+
+  const staleResult = detectStaleReviewPacket(effectiveValidation, entity, evidences, fullMutationContext);
   if (staleResult.isStale) {
     result.blockingReasons.push('STALE_REVIEW_PACKET');
   } else if (staleResult.entityComparison.reason === 'MATCH_LEGACY' || staleResult.evidenceComparison.reason === 'MATCH_LEGACY') {

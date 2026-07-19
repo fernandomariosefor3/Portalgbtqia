@@ -3,8 +3,10 @@
     "entityId": "src_gov_ce",
     "entityType": "source",
     "currentStatus": "verified_basic",
-    "eligible": true,
-    "blockingReasons": [],
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
     "inheritedBlockingReasons": [],
     "warnings": [
       {
@@ -21,18 +23,19 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-17T22:15:00Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-17T22:15:00Z"
   },
   {
     "entityId": "src_sec_div_ce",
     "entityType": "source",
     "currentStatus": "verified_basic",
-    "eligible": true,
-    "blockingReasons": [],
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
     "inheritedBlockingReasons": [],
     "warnings": [
       {
@@ -49,18 +52,19 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-17T22:20:00Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-17T22:20:00Z"
   },
   {
     "entityId": "src_pref_fortaleza",
     "entityType": "source",
     "currentStatus": "verified_basic",
-    "eligible": true,
-    "blockingReasons": [],
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
     "inheritedBlockingReasons": [],
     "warnings": [
       {
@@ -77,18 +81,19 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-17T22:21:00Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-17T22:21:00Z"
   },
   {
     "entityId": "src_smdhds_fortaleza",
     "entityType": "source",
     "currentStatus": "verified_basic",
-    "eligible": true,
-    "blockingReasons": [],
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
     "inheritedBlockingReasons": [],
     "warnings": [
       {
@@ -105,18 +110,19 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-18T11:23:46Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-18T11:23:46Z"
   },
   {
     "entityId": "src_sesa_ce",
     "entityType": "source",
     "currentStatus": "verified_basic",
-    "eligible": true,
-    "blockingReasons": [],
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
     "inheritedBlockingReasons": [],
     "warnings": [
       {
@@ -133,18 +139,19 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-18T10:37:16Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-18T10:37:16Z"
   },
   {
     "entityId": "src_hsj_ce",
     "entityType": "source",
     "currentStatus": "verified_basic",
-    "eligible": true,
-    "blockingReasons": [],
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
     "inheritedBlockingReasons": [],
     "warnings": [
       {
@@ -161,18 +168,19 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-18T11:44:20Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-18T11:44:20Z"
   },
   {
     "entityId": "src_dpe_ce",
     "entityType": "source",
     "currentStatus": "verified_basic",
-    "eligible": true,
-    "blockingReasons": [],
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
     "inheritedBlockingReasons": [],
     "warnings": [
       {
@@ -189,18 +197,19 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-18T10:56:29Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-18T10:56:29Z"
   },
   {
     "entityId": "src_huwc_ce",
     "entityType": "source",
     "currentStatus": "verified_basic",
-    "eligible": true,
-    "blockingReasons": [],
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
     "inheritedBlockingReasons": [],
     "warnings": [
       {
@@ -217,11 +226,10 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-18T11:12:19Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-18T11:12:19Z"
   },
   {
     "entityId": "src_casa_transformar",
@@ -257,7 +265,7 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T11:54:46Z"
@@ -265,10 +273,21 @@
   {
     "entityId": "org_gov_ce",
     "entityType": "organization",
-    "currentStatus": "under_review",
-    "eligible": true,
-    "blockingReasons": [],
-    "inheritedBlockingReasons": [],
+    "currentStatus": "verified_basic",
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "SOURCE_NOT_ELIGIBLE",
+        "dependencyEntityId": "src_gov_ce",
+        "dependencyType": "source",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [
       {
         "code": "EXPIRY_NOT_EXPLICIT",
@@ -286,19 +305,29 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-17T22:15:00Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-17T22:15:00Z"
   },
   {
     "entityId": "org_sec_div_ce",
     "entityType": "organization",
-    "currentStatus": "under_review",
-    "eligible": true,
-    "blockingReasons": [],
-    "inheritedBlockingReasons": [],
+    "currentStatus": "verified_basic",
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "SOURCE_NOT_ELIGIBLE",
+        "dependencyEntityId": "src_sec_div_ce",
+        "dependencyType": "source",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [],
     "validationIds": [
       "val_org_sec_div_ce_002"
@@ -312,19 +341,29 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-17T22:20:00Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-17T22:20:00Z"
   },
   {
     "entityId": "org_pref_fortaleza",
     "entityType": "organization",
-    "currentStatus": "under_review",
-    "eligible": true,
-    "blockingReasons": [],
-    "inheritedBlockingReasons": [],
+    "currentStatus": "verified_basic",
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "SOURCE_NOT_ELIGIBLE",
+        "dependencyEntityId": "src_pref_fortaleza",
+        "dependencyType": "source",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [
       {
         "code": "EXPIRY_NOT_EXPLICIT",
@@ -342,19 +381,29 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-17T22:21:00Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-17T22:21:00Z"
   },
   {
     "entityId": "org_smdhds_fortaleza",
     "entityType": "organization",
-    "currentStatus": "under_review",
-    "eligible": true,
-    "blockingReasons": [],
-    "inheritedBlockingReasons": [],
+    "currentStatus": "verified_basic",
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "SOURCE_NOT_ELIGIBLE",
+        "dependencyEntityId": "src_smdhds_fortaleza",
+        "dependencyType": "source",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [
       {
         "code": "EXPIRY_NOT_EXPLICIT",
@@ -372,19 +421,29 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-18T11:23:46Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-18T11:23:46Z"
   },
   {
     "entityId": "org_sesa_ce",
     "entityType": "organization",
-    "currentStatus": "under_review",
-    "eligible": true,
-    "blockingReasons": [],
-    "inheritedBlockingReasons": [],
+    "currentStatus": "verified_basic",
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "SOURCE_NOT_ELIGIBLE",
+        "dependencyEntityId": "src_sesa_ce",
+        "dependencyType": "source",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [
       {
         "code": "EXPIRY_NOT_EXPLICIT",
@@ -402,19 +461,29 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-18T10:37:16Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-18T10:37:16Z"
   },
   {
     "entityId": "org_hsj_ce",
     "entityType": "organization",
-    "currentStatus": "under_review",
-    "eligible": true,
-    "blockingReasons": [],
-    "inheritedBlockingReasons": [],
+    "currentStatus": "verified_basic",
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "SOURCE_NOT_ELIGIBLE",
+        "dependencyEntityId": "src_hsj_ce",
+        "dependencyType": "source",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [
       {
         "code": "EXPIRY_NOT_EXPLICIT",
@@ -432,19 +501,29 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-18T11:44:20Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-18T11:44:20Z"
   },
   {
     "entityId": "org_dpe_ce",
     "entityType": "organization",
-    "currentStatus": "under_review",
-    "eligible": true,
-    "blockingReasons": [],
-    "inheritedBlockingReasons": [],
+    "currentStatus": "verified_basic",
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "SOURCE_NOT_ELIGIBLE",
+        "dependencyEntityId": "src_dpe_ce",
+        "dependencyType": "source",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [
       {
         "code": "EXPIRY_NOT_EXPLICIT",
@@ -462,19 +541,29 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-18T10:56:29Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-18T10:56:29Z"
   },
   {
     "entityId": "org_huwc_ce",
     "entityType": "organization",
-    "currentStatus": "under_review",
-    "eligible": true,
-    "blockingReasons": [],
-    "inheritedBlockingReasons": [],
+    "currentStatus": "verified_basic",
+    "eligible": false,
+    "blockingReasons": [
+      "STALE_REVIEW_PACKET"
+    ],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "SOURCE_NOT_ELIGIBLE",
+        "dependencyEntityId": "src_huwc_ce",
+        "dependencyType": "source",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [
       {
         "code": "EXPIRY_NOT_EXPLICIT",
@@ -492,11 +581,10 @@
     ],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
-    "validUntil": "2027-07-18T11:12:19Z",
-    "proposedStatus": "verified_basic"
+    "validUntil": "2027-07-18T11:12:19Z"
   },
   {
     "entityId": "org_casa_transformar",
@@ -545,7 +633,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T11:54:46Z"
@@ -559,7 +647,16 @@
       "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
-    "inheritedBlockingReasons": [],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "ORGANIZATION_NOT_ELIGIBLE",
+        "dependencyEntityId": "org_sec_div_ce",
+        "dependencyType": "organization",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [
       {
         "code": "LEGACY_FINGERPRINT_VERSION",
@@ -581,7 +678,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T00:00:00Z"
@@ -595,7 +692,16 @@
       "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
-    "inheritedBlockingReasons": [],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "ORGANIZATION_NOT_ELIGIBLE",
+        "dependencyEntityId": "org_smdhds_fortaleza",
+        "dependencyType": "organization",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [
       {
         "code": "LEGACY_FINGERPRINT_VERSION",
@@ -622,7 +728,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T12:09:33Z"
@@ -642,7 +748,7 @@
     "dependencyEntityIds": [],
     "requiresSecondReview": false,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "canonicalEntityId": "srv_teleprep_telepep"
   },
@@ -655,7 +761,16 @@
       "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
-    "inheritedBlockingReasons": [],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "ORGANIZATION_NOT_ELIGIBLE",
+        "dependencyEntityId": "org_sesa_ce",
+        "dependencyType": "organization",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [
       {
         "code": "LEGACY_FINGERPRINT_VERSION",
@@ -677,7 +792,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T12:29:52Z"
@@ -691,7 +806,16 @@
       "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
-    "inheritedBlockingReasons": [],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "ORGANIZATION_NOT_ELIGIBLE",
+        "dependencyEntityId": "org_dpe_ce",
+        "dependencyType": "organization",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [
       {
         "code": "LEGACY_FINGERPRINT_VERSION",
@@ -718,7 +842,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T12:09:33Z"
@@ -732,7 +856,16 @@
       "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
-    "inheritedBlockingReasons": [],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "ORGANIZATION_NOT_ELIGIBLE",
+        "dependencyEntityId": "org_hsj_ce",
+        "dependencyType": "organization",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [
       {
         "code": "LEGACY_FINGERPRINT_VERSION",
@@ -754,7 +887,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T12:47:28Z"
@@ -768,7 +901,16 @@
       "V2_REATTESTATION_REQUIRED",
       "SECOND_REVIEW_MISSING"
     ],
-    "inheritedBlockingReasons": [],
+    "inheritedBlockingReasons": [
+      {
+        "reason": "ORGANIZATION_NOT_ELIGIBLE",
+        "dependencyEntityId": "org_sesa_ce",
+        "dependencyType": "organization",
+        "rootBlockingReasons": [
+          "STALE_REVIEW_PACKET"
+        ]
+      }
+    ],
     "warnings": [
       {
         "code": "LEGACY_FINGERPRINT_VERSION",
@@ -790,7 +932,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "approved_basic",
     "validUntil": "2027-01-18T12:59:20Z"
@@ -839,7 +981,7 @@
     ],
     "requiresSecondReview": true,
     "secondReviewSatisfied": false,
-    "evaluatedAt": "2026-07-18T23:38:00.000Z",
+    "evaluatedAt": "2026-07-19T10:00:00.000Z",
     "policyVersion": "1.0.0",
     "decision": "needs_more_evidence",
     "validUntil": "2027-01-18T11:54:46Z"

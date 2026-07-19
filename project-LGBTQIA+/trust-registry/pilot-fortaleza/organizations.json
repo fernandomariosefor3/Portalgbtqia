@@ -3,105 +3,121 @@
     "id": "org_gov_ce",
     "name": "Governo do Estado do Ceará",
     "type": "public",
-    "status": "under_review",
+    "status": "verified_basic",
     "contact": {
       "website": "https://www.ce.gov.br",
       "publicAddressAllowed": true
     },
     "created_at": "2026-07-17T18:00:00Z",
     "updated_at": "2026-07-17T18:00:00Z",
-    "source_id": "src_gov_ce"
+    "source_id": "src_gov_ce",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "org_sec_div_ce",
     "name": "Secretaria da Diversidade do Ceará",
     "type": "public",
-    "status": "under_review",
+    "status": "verified_basic",
     "contact": {
       "website": "https://www.diversidade.ce.gov.br",
       "publicAddressAllowed": true
     },
     "created_at": "2026-07-17T18:00:00Z",
     "updated_at": "2026-07-17T18:00:00Z",
-    "source_id": "src_sec_div_ce"
+    "source_id": "src_sec_div_ce",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "org_pref_fortaleza",
     "name": "Prefeitura de Fortaleza",
     "type": "public",
-    "status": "under_review",
+    "status": "verified_basic",
     "contact": {
       "website": "https://www.fortaleza.ce.gov.br",
       "publicAddressAllowed": true
     },
     "created_at": "2026-07-17T18:00:00Z",
     "updated_at": "2026-07-17T18:00:00Z",
-    "source_id": "src_pref_fortaleza"
+    "source_id": "src_pref_fortaleza",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "org_smdhds_fortaleza",
     "name": "Secretaria Municipal dos Direitos Humanos e Desenvolvimento Social",
     "type": "public",
-    "status": "under_review",
+    "status": "verified_basic",
     "contact": {
       "website": "https://direitoshumanos.fortaleza.ce.gov.br",
       "publicAddressAllowed": true
     },
     "created_at": "2026-07-17T18:00:00Z",
     "updated_at": "2026-07-17T18:00:00Z",
-    "source_id": "src_smdhds_fortaleza"
+    "source_id": "src_smdhds_fortaleza",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "org_sesa_ce",
     "name": "Secretaria da Saúde do Ceará",
     "type": "public",
-    "status": "under_review",
+    "status": "verified_basic",
     "contact": {
       "website": "https://www.saude.ce.gov.br",
       "publicAddressAllowed": true
     },
     "created_at": "2026-07-17T18:00:00Z",
     "updated_at": "2026-07-17T18:00:00Z",
-    "source_id": "src_sesa_ce"
+    "source_id": "src_sesa_ce",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "org_hsj_ce",
     "name": "Hospital São José de Doenças Infecciosas",
     "type": "public",
-    "status": "under_review",
+    "status": "verified_basic",
     "contact": {
       "website": "https://www.ce.gov.br/hsj/",
       "publicAddressAllowed": true
     },
     "created_at": "2026-07-17T18:00:00Z",
     "updated_at": "2026-07-17T18:00:00Z",
-    "source_id": "src_hsj_ce"
+    "source_id": "src_hsj_ce",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "org_dpe_ce",
     "name": "Defensoria Pública do Estado do Ceará",
     "type": "public",
-    "status": "under_review",
+    "status": "verified_basic",
     "contact": {
       "website": "https://www.defensoria.ce.def.br",
       "publicAddressAllowed": true
     },
     "created_at": "2026-07-17T18:00:00Z",
     "updated_at": "2026-07-17T18:00:00Z",
-    "source_id": "src_dpe_ce"
+    "source_id": "src_dpe_ce",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "org_huwc_ce",
     "name": "Complexo Hospitalar da Universidade Federal do Ceará — CH-UFC",
     "type": "public",
-    "status": "under_review",
+    "status": "verified_basic",
     "contact": {
       "website": "https://www.gov.br/hubrasil/pt-br/hospitais-universitarios/regiao-nordeste/ch-ufc",
       "publicAddressAllowed": true
     },
     "created_at": "2026-07-17T18:00:00Z",
     "updated_at": "2026-07-17T18:00:00Z",
-    "source_id": "src_huwc_ce"
+    "source_id": "src_huwc_ce",
+    "publicListingAllowed": false,
+    "publicationStatus": "not_published"
   },
   {
     "id": "org_casa_transformar",
